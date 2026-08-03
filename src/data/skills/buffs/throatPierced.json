@@ -1,0 +1,81 @@
+{
+  "id": "throatPierced",
+  "scope": "spec",
+  "variants": [
+    {
+      "specs": ["silkbind_jade"],
+      "def": {
+        "id": "throatPierced",
+        "name": "Throat-Pierced",
+        "triggers": ["Umb HeavyLight", "FanHeavyPursuit"],
+        "duration": 12,
+        "affects": null,
+        "bonus": null,
+        "maxStacks": 5,
+        "stacksPerHit": 1,
+        "enabledParam": "throatPierced",
+        "__statModByPrefix": {
+          "prefixes": ["Umb HeavyLight", "FanHeavyPursuit"],
+          "match": {
+            "physPen": 3,
+            "critDmg": 0.03
+          },
+          "default": {
+            "physPen": 2,
+            "critDmg": 0.02
+          }
+        }
+      }
+    },
+    {
+      "specs": ["stonesplit_might"],
+      "def": {
+        "id": "throatPierced",
+        "name": "Throat-Pierced",
+        "triggers": ["MoBladeVariedCombo"],
+        "duration": 12,
+        "affects": null,
+        "bonus": null,
+        "maxStacks": 5,
+        "stacksPerCast": 2,
+        "enabledParam": "throatPierced",
+        "__statModByPrefix": {
+          "prefixes": ["MoBladeVariedCombo"],
+          "match": {
+            "physPen": 3,
+            "critDmg": 0.03
+          },
+          "default": {
+            "physPen": 2,
+            "critDmg": 0.02
+          }
+        }
+      }
+    },
+    {
+      "specs": ["stonesplit_strength"],
+      "def": {
+        "id": "throatPierced",
+        "name": "Throat-Pierced",
+        "triggers": ["SnowpartingVC", "SnowpartingCharged", "AnxiSoldierHeng"],
+        "duration": 15,
+        "affects": null,
+        "bonus": null,
+        "maxStacks": 5,
+        "stacksPerHit": true,
+        "enabledParam": "throatPierced",
+        "__statModByPrefix": {
+          "prefixes": ["AnxiSoldier", "SnowpartingVC", "SnowpartingCharged"],
+          "match": {
+            "physPen": 2,
+            "critDmg": 0.02
+          },
+          "default": {
+            "physPen": 2,
+            "critDmg": 0.02
+          }
+        }
+      }
+    }
+  ]
+}

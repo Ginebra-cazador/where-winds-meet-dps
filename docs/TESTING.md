@@ -1,0 +1,73 @@
+# TESTING.md — test conventions
+
+`npm test` runs vitest (jsdom, globals on, `tests/setup.ts`). Today: **544 tests
+across 62 files**, all green. Keep it that way — a red suite on `main` is not a
+state this repo tolerates.
+
+## Class scoping — the suite is Umbra-only
+
+Only `bellstrikeUmbra` is implemented and validated (CLASSES.md). Tests that
+asserted another class's damage, skills, rotations or DoT behaviour were removed
+on 2026-08-02, because a passing sweep reads as validation those classes have
+not had.
+
+- **Do not add a `for (const classId of ALL_CLASSES)` `dps > 0` sweep.** It
+  proves nothing and it manufactures false confidence.
+- Registry / metadata tests that legitimately span all eight stay — `getSchool`,
+  inner-way slot rules, the i18n pass-through.
+- When a class is genuinely built out, add its tests back **with real anchors**
+  (a verified rotation, a known damage figure), not a smoke sweep.
+- Scoped test files carry a header comment saying so; follow the existing
+  wording (`// Scoped to Bellstrike Umbra — see CLASSES.md`).
+
+## There is no locked-DPS fixture
+
+No test asserts an absolute DPS number. `defaultInputs` (`engine/defaults.ts`)
+is the default Bamboocut-Wind build, not an anchor. Don't introduce a new
+strict-equality DPS assertion without a verified external source behind it.
+
+`tests/engine/bellstrikeUmbraParity.test.ts` compares against one verified
+live-site build. Its DPS bands are an intentionally **loose, re-centered fit
+around what the engine actually produces** — the engine still lands short of the
+site. **Do not tighten the bands to the site's numbers** until a term-by-term
+reconstruction closes the gap. The white→yellow rate-conversion assertion in
+that file *is* exact and must stay green.
+
+## Calculation rules
+
+The four unconditional rules (CALCULATION.md § "Calculation rules") have **no
+cached anchor**. Their only guard is `tests/engine/damageRules.test.ts`, which
+is **directional** — it asserts the sign and shape of a change, not a value. If
+you touch `penFrac`, `dotRules` or `rateRes`, that file is the one that has to
+be convinced.
+
+## Migration tests
+
+Every migration needs two cases (MIGRATIONS.md lists the other requirements):
+
+1. A **pre-change blob** fed through `hydrateInputs` (or the relevant loader),
+   asserting the healed result.
+2. An **already-correct blob**, asserting it round-trips unchanged — this is
+   what proves idempotence.
+
+Live in `tests/storage.test.ts` and `tests/migrations/`. Follow the header
+convention: `// Additive, no version bump — see MIGRATIONS.md`.
+
+⚠️ **Tests that construct `Inputs` literals bypass the hydrator** and will not
+catch a too-aggressive migration silently changing the default build.
+
+## Worker tests
+
+Worker compute functions get **direct-call parity tests** — call the compute
+function and the direct path, assert they agree. **Never spin up a real `Worker`
+in vitest.** `tests/engine/dpsWorkerOffload.test.ts` is the pattern.
+
+## Writing a new engine test
+
+- Prefer a behavioural assertion (this buff raises that skill's damage; this
+  cadence emits N ticks) over a magic number.
+- When a magic number is unavoidable, say in a comment where it came from.
+- Name the file after the mechanic, not the fix (`bleedCadence`, not
+  `bugfix-2026-08`).
+- No Chinese anywhere in `tests/` — CLAUDE.md § "Language" applies here exactly
+  as it does to `src/`.

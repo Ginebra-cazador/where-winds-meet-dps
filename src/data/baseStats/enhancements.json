@@ -1,0 +1,34 @@
+{
+  "95": [
+    {
+      "id": 1,
+      "stat": "maxPhys",
+      "value": 144
+    },
+    {
+      "id": 2,
+      "stat": "maxPhys",
+      "value": 144
+    },
+    {
+      "id": 3,
+      "stat": "maxPhys",
+      "value": 72
+    },
+    {
+      "id": 4,
+      "stat": "minPhys",
+      "value": 108
+    },
+    {
+      "id": 5,
+      "stat": "maxPhys",
+      "value": 72
+    },
+    {
+      "id": 6,
+      "stat": "minPhys",
+      "value": 108
+    }
+  ]
+}

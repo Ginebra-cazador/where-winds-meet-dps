@@ -1,0 +1,16 @@
+{
+  "id": "mirage",
+  "scope": "global",
+  "variants": [
+    {
+      "def": {
+        "id": "mirage",
+        "name": "Mirage",
+        "triggers": ["Ghostly Steps"],
+        "duration": 30,
+        "affects": [],
+        "bonus": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+import type { GearPiece, Inputs } from "./types"
+import { GEAR_SLOTS } from "./types"
+import { listKnownPaths, sumContributions } from "./gearStats"
+import { getConfiguredBase, getMindMethodContributions } from "../data/baseStats"
+
+export function equippedPiecesFor(inputs: Inputs): GearPiece[] {
+  const byId = new Map(inputs.inventory.map((p) => [p.id, p]))
+  const out: GearPiece[] = []
+  for (const slot of GEAR_SLOTS) {
+    const id = inputs.equipped[slot]
+    if (!id) continue
+    const piece = byId.get(id)
+    if (piece) out.push(piece)
+  }
+  return out
+}
+
+function clone(inputs: Inputs): Inputs {
+  return {
+    ...inputs,
+    phys: { ...inputs.phys },
+    bellstrike: { ...inputs.bellstrike },
+    stonesplit: { ...inputs.stonesplit },
+    silkbind: { ...inputs.silkbind },
+    bamboocut: { ...inputs.bamboocut },
+    dingYinByTag: {},
+    mindMethods: inputs.mindMethods.map((m) => ({ ...m })) as Inputs["mindMethods"],
+  }
+}
+
+function writePath(inputs: Inputs, path: string, value: number): void {
+  if (path.startsWith("dingYinByTag.")) {
+    inputs.dingYinByTag[path.slice("dingYinByTag.".length)] = value
+    return
+  }
+  const parts = path.split(".")
+  if (parts.length === 1) {
+    ;(inputs as unknown as Record<string, number>)[parts[0]] = value
+    return
+  }
+  const block = (inputs as unknown as Record<string, Record<string, number>>)[parts[0]]
+  if (block) block[parts[1]] = value
+}
+
+export function withDerivedStats(inputs: Inputs): Inputs {
+  const equipped = equippedPiecesFor(inputs)
+  const mind = getMindMethodContributions(inputs)
+  const gear = sumContributions(equipped, inputs)
+
+  const gearByPath = new Map<string, number>()
+  for (const e of gear) {
+    gearByPath.set(e.path, (gearByPath.get(e.path) ?? 0) + e.amount)
+  }
+
+  const derive = (scaleSource: Inputs): Inputs => {
+    const next = clone(inputs)
+    const base = getConfiguredBase(scaleSource, equipped)
+    for (const path of listKnownPaths()) {
+      const sum = (base[path] ?? 0) + (mind[path] ?? 0) + (gearByPath.get(path) ?? 0)
+      writePath(next, path, sum)
+    }
+    for (const e of gear) {
+      if (e.path.startsWith("dingYinByTag.")) {
+        writePath(next, e.path, e.amount)
+      }
+    }
+    return next
+  }
+
+  // Two passes: an attack-path-scaled talent (e.g. Bellstrike Penetration
+  // Scale, scales with `bellstrike.max`) must see the fully derived value, not
+  // the raw typed input — pass 1 produces the derived attack totals, pass 2
+  // re-derives talents scaled off pass 1.
+  const pass1 = derive(inputs)
+  return derive(pass1)
+}

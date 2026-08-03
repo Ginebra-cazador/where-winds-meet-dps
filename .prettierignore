@@ -1,0 +1,14 @@
+node_modules
+dist
+.tmp
+.wrangler
+.plans
+.claude
+.idea
+
+package-lock.json
+tsconfig.tsbuildinfo
+
+# Dev-only reference material, not imported by the app or the tests.
+excels
+reference

@@ -1,0 +1,100 @@
+{
+  "Unnamed Mind Method": {
+    "phys.max": 63.8,
+    "directAffinityRate": 0.023
+  },
+  "Sword Horizon": {
+    "phys.max": 70.9,
+    "directAffinityRate": 0.023
+  },
+  "Moon Above Flowers": {
+    "critRate": 0.073,
+    "critDamageBoost": 0.044
+  },
+  "Echoing Mountains": {
+    "critRate": 0.073,
+    "critDamageBoost": 0.044
+  },
+  "Forgotten River Echo": {
+    "critRate": 0.073,
+    "critDamageBoost": 0.044
+  },
+  "Thousand-Camp Call": {
+    "critRate": 0.073,
+    "physBoost": 0.028
+  },
+  "Frostwhite Night": {
+    "phys.min": 63.8,
+    "directCritRate": 0.046
+  },
+  "Mighty Song": {
+    "affinityRate": 0.033,
+    "affinityDamageBoost": 0.052
+  },
+  "Thousand Mountain Law": {
+    "primaryAttr.max": 21.7,
+    "primaryAttr.min": 10.9,
+    "primaryAttr.penetration": 0.06
+  },
+  "Wolfchaser's Art": {
+    "affinityRate": 0.037,
+    "affinityDamageBoost": 0.052
+  },
+  "Star-Picker": {
+    "phys.max": 38.3,
+    "phys.min": 19.1,
+    "phys.penetration": 0.051
+  },
+  "Mud-Fish Heart": {
+    "primaryAttr.min": 32.6,
+    "primaryAttr.penetration": 0.06
+  },
+  "Stone-Cutter": {
+    "precision": 0.059,
+    "directCritRate": 0.041
+  },
+  "Soldier's Return": {
+    "phys.min": 39.9,
+    "phys.penetration": 0.051
+  },
+  "Year-Long Lament": {
+    "precision": 0.059,
+    "physBoost": 0.025
+  },
+  "Bliss Bleeding": {
+    "phys.max": 51.1,
+    "critDamageBoost": 0.035
+  },
+  "Morale Chant": {
+    "phys.max": 47.2,
+    "phys.min": 23.6,
+    "directCritRate": 0.046
+  },
+  "Endurance Doctrine": {
+    "primaryAttr.max": 21.7,
+    "primaryAttr.min": 10.9,
+    "primaryAttr.penetration": 0.06
+  },
+  "Insightful Strike": {
+    "phys.min": 21.3,
+    "phys.max": 42.5,
+    "phys.penetration": 0.051
+  },
+  "Boat on Wood": {
+    "primaryAttr.min": 32.6,
+    "primaryAttr.penetration": 0.06
+  },
+  "Tang Anthem": {
+    "precision": 0.059,
+    "critDamageBoost": 0.04
+  },
+  "Throat-Pierce": {
+    "primaryAttr.max": 21.7,
+    "primaryAttr.min": 10.9,
+    "primaryAttr.penetration": 0.06
+  },
+  "Lone Loyalty": {
+    "critRate": 0.063,
+    "critDamageBoost": 0.04
+  }
+}

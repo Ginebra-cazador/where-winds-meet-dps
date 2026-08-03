@@ -1,0 +1,30 @@
+{
+  "id": "mountainSplitter",
+  "scope": "spec",
+  "variants": [
+    {
+      "specs": ["stonesplit_strength"],
+      "def": {
+        "id": "mountainSplitter",
+        "name": "Mountain Splitter",
+        "triggers": ["AnxiSoldierMoDown", "AnxiSoldierMoJump"],
+        "duration": 5,
+        "cooldown": 15,
+        "affects": ["PhalanxCharged", "AnxiSoldierMoDown", "AnxiSoldierMoJump"],
+        "bonus": null,
+        "statModifiers": {
+          "directCrit": 1,
+          "critDmg": 0.1
+        },
+        "enabledParam": "steadfastDevotion",
+        "minTier": 3,
+        "extendDurationToIfBuffActive": {
+          "buffId": "innerPassion",
+          "enabledParam": "steadfastDevotion",
+          "minTier": 5,
+          "targetDuration": 10
+        }
+      }
+    }
+  ]
+}

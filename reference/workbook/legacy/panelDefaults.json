@@ -1,0 +1,207 @@
+{
+  "C2": {
+    "v": "Stonesplit Balance — Pure Tang",
+    "t": "s"
+  },
+  "C4": {
+    "v": "86 — Coffin Master",
+    "t": "s"
+  },
+  "E2": {
+    "v": "Stonesplit",
+    "f": "HLOOKUP($C$2,Class!$A$1:$H$3,3,0)",
+    "t": "s"
+  },
+  "H2": {
+    "v": 34,
+    "f": "HLOOKUP($C$2,Class!$A$1:$H$5,5,0)",
+    "t": "n"
+  },
+  "E4": {
+    "v": 307,
+    "f": "VLOOKUP($C$4,TargetStat!$A$2:$E$14,2,0)",
+    "t": "n"
+  },
+  "G4": {
+    "v": 0.15,
+    "f": "VLOOKUP($C$4,TargetStat!$A$2:$E$14,3,0)",
+    "t": "n"
+  },
+  "I4": {
+    "v": 0.1,
+    "f": "VLOOKUP($C$4,TargetStat!$A$2:$E$14,4,0)",
+    "t": "n"
+  },
+  "D8": {
+    "v": 1073.8,
+    "t": "n"
+  },
+  "F8": {
+    "v": 2519.7,
+    "t": "n"
+  },
+  "H8": {
+    "v": 31.2,
+    "t": "n"
+  },
+  "D10": {
+    "v": 244,
+    "t": "n"
+  },
+  "F10": {
+    "v": 490,
+    "t": "n"
+  },
+  "H10": {
+    "v": 21.2,
+    "t": "n"
+  },
+  "D14": {
+    "v": 0.998,
+    "t": "n"
+  },
+  "D15": {
+    "v": 0.656,
+    "t": "n"
+  },
+  "F15": {
+    "v": 0.54,
+    "t": "n"
+  },
+  "D16": {
+    "v": 0.124,
+    "t": "n"
+  },
+  "F16": {
+    "v": 0.35,
+    "t": "n"
+  },
+  "D17": {
+    "v": 0.092,
+    "t": "n"
+  },
+  "F17": {
+    "v": 0.076,
+    "t": "n"
+  },
+  "F18": {
+    "v": 0,
+    "t": "n"
+  },
+  "F20": {
+    "v": 0.048,
+    "t": "n"
+  },
+  "D25": {
+    "v": 0.044,
+    "t": "n"
+  },
+  "F25": {
+    "v": 0,
+    "t": "n"
+  },
+  "F26": {
+    "v": 0.172,
+    "t": "n"
+  },
+  "F27": {
+    "v": 0,
+    "t": "n"
+  },
+  "G25": {
+    "v": "Hengdao Derivative Boost",
+    "f": "HLOOKUP($C$2,Class!$A$1:$H$9,7,0)",
+    "t": "s"
+  },
+  "G26": {
+    "v": "Modao Charge Skill Boost",
+    "f": "HLOOKUP($C$2,Class!$A$1:$H$9,8,0)",
+    "t": "s"
+  },
+  "G27": {
+    "v": "N/A",
+    "f": "HLOOKUP($C$2,Class!$A$1:$H$9,9,0)",
+    "t": "s"
+  },
+  "K8": {
+    "v": "Frostwhite Night",
+    "f": "HLOOKUP($C$2,Class!$A$1:$H$11,11,0)",
+    "t": "s"
+  },
+  "M8": {
+    "v": "Lone Loyalty",
+    "t": "s"
+  },
+  "O8": {
+    "v": "Throat-Pierce",
+    "t": "s"
+  },
+  "Q8": {
+    "v": "Morale Chant",
+    "t": "s"
+  },
+  "K10": {
+    "v": "tier 6",
+    "t": "s"
+  },
+  "M10": {
+    "v": "tier 6",
+    "t": "s"
+  },
+  "O10": {
+    "v": "tier 6",
+    "t": "s"
+  },
+  "Q10": {
+    "v": "tier 6",
+    "t": "s"
+  },
+  "K15": {
+    "v": "√",
+    "t": "s"
+  },
+  "M15": {
+    "v": "fire",
+    "t": "s"
+  },
+  "O15": {
+    "v": "Rainwhisper (no shield)",
+    "t": "s"
+  },
+  "K17": {
+    "v": "×",
+    "t": "s"
+  },
+  "M17": {
+    "v": "×",
+    "t": "s"
+  },
+  "Q15": {
+    "v": "×",
+    "t": "s"
+  },
+  "L2": {
+    "v": "Dual-Cut",
+    "t": "s"
+  },
+  "P21": {
+    "v": 28746.1338136138,
+    "f": "CalcZone!$B$8",
+    "t": "n"
+  },
+  "L24": {
+    "v": 1207337.62017178,
+    "f": "CalcZone!$B$4",
+    "t": "n"
+  },
+  "P24": {
+    "v": 1,
+    "f": "IF(OR($C$4=\"86 — Coffin Master\",$C$4=\"86 — God of Avarice (Extreme)\"),CalcZone!$B$10,\"Please select an 86 target\")",
+    "t": "n"
+  },
+  "L21": {
+    "v": 42,
+    "f": "INDEX(Rotation!A:A,MATCH($L$2,Rotation!A:A,0)+1)",
+    "t": "n"
+  }
+}

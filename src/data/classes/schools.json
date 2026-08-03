@@ -1,0 +1,152 @@
+[
+  {
+    "id": "bellstrikeRainbow",
+    "cn": "Bellstrike Rainbow",
+    "en": "Bellstrike Rainbow",
+    "displayName": "Bellstrike Rainbow",
+    "primaryAttribute": "Bellstrike",
+    "attributeMultiplier": 51.5,
+    "permanentBuffs": ["Sword Charge Boost"],
+    "classMindGroup": "Unnamed Mind Method",
+    "allowedMindMethods": ["Morale Chant", "Mighty Song", "Thousand Mountain Law", "Stone-Cutter", "Soldier's Return"],
+    "classBuffs": [],
+    "weapons": ["Sword", "Spear"],
+    "rotations": ["Qi-Surge"]
+  },
+  {
+    "id": "bellstrikeUmbra",
+    "cn": "Bellstrike Umbra",
+    "en": "Bellstrike Shadow",
+    "displayName": "Bellstrike Umbra",
+    "primaryAttribute": "Bellstrike",
+    "attributeMultiplier": 51.5,
+    "permanentBuffs": ["Bleed Boost"],
+    "classMindGroup": "Sword Horizon",
+    "allowedMindMethods": ["Wolfchaser's Art", "Insightful Strike", "Morale Chant"],
+    "classBuffs": [],
+    "weapons": ["Sword", "Spear"],
+    "rotations": ["6× Blood Burst + Dragon Whirl"]
+  },
+  {
+    "id": "silkbindJade",
+    "cn": "Silkbind Jade",
+    "en": "Silkbind Jade",
+    "displayName": "Silkbind Jade",
+    "primaryAttribute": "Silkbind",
+    "attributeMultiplier": 51.5,
+    "permanentBuffs": ["Umbrella Special Boost", "Umbrella Charge Boost", "Umbrella Martial Boost"],
+    "classMindGroup": "Moon Above Flowers",
+    "allowedMindMethods": [
+      "Morale Chant",
+      "Star-Picker",
+      "Mighty Song",
+      "Stone-Cutter",
+      "Soldier's Return",
+      "Year-Long Lament",
+      "Bliss Bleeding"
+    ],
+    "classBuffs": [],
+    "weapons": ["Umbrella", "Fan"],
+    "rotations": ["6× Fan-Fire-Fist"]
+  },
+  {
+    "id": "stonesplitPower",
+    "cn": "Stonesplit Power",
+    "en": "Stonesplit Power",
+    "displayName": "Stonesplit Power",
+    "primaryAttribute": "Stonesplit",
+    "attributeMultiplier": 51.5,
+    "permanentBuffs": ["Modao Charge Boost"],
+    "classMindGroup": "Echoing Mountains",
+    "allowedMindMethods": [
+      "Morale Chant",
+      "Mighty Song",
+      "Sutra Shift",
+      "Stone-Cutter",
+      "Soldier's Return",
+      "Endurance Doctrine"
+    ],
+    "classBuffs": [],
+    "weapons": ["Modao", "Spear"],
+    "rotations": ["6× Mountain-River Speed"]
+  },
+  {
+    "id": "stonesplitBalancePureTang",
+    "cn": "Stonesplit Balance — Pure Tang",
+    "en": "Stonesplit Balance — Pure Tang",
+    "displayName": "Stonesplit Balance — Pure Tang",
+    "primaryAttribute": "Stonesplit",
+    "attributeMultiplier": 51.5,
+    "permanentBuffs": ["Hengdao Derivative Boost", "Modao Charge Skill Boost"],
+    "classMindGroup": "Frostwhite Night",
+    "allowedMindMethods": [
+      "Morale Chant",
+      "Throat-Pierce",
+      "Lone Loyalty",
+      "Soldier's Return",
+      "Year-Long Lament",
+      "Stone-Cutter",
+      "Sutra Shift",
+      "Bliss Bleeding"
+    ],
+    "classBuffs": [],
+    "weapons": ["Hengdao", "Modao"],
+    "rotations": ["Dual-Cut"]
+  },
+  {
+    "id": "bamboocutWindTwinblade",
+    "cn": "Bamboocut Wind (Twinblade)",
+    "en": "Bamboocut Wind",
+    "displayName": "Bamboocut Wind (Twinblade)",
+    "primaryAttribute": "Bamboocut",
+    "attributeMultiplier": 51.5,
+    "permanentBuffs": ["Mouse Boost", "Strong Light-Hit Boost"],
+    "classMindGroup": "Forgotten River Echo",
+    "allowedMindMethods": [
+      "Morale Chant",
+      "Mud-Fish Heart",
+      "Bliss Bleeding",
+      "Stone-Cutter",
+      "Soldier's Return",
+      "Year-Long Lament"
+    ],
+    "classBuffs": [],
+    "weapons": ["Twin Blades", "Rope Dart"],
+    "rotations": ["Twin-Red"]
+  },
+  {
+    "id": "bamboocutDust",
+    "cn": "Bamboocut Dust",
+    "en": "Bamboocut Dust (Twinblade)",
+    "displayName": "Bamboocut Dust",
+    "primaryAttribute": "Bamboocut",
+    "attributeMultiplier": 51.5,
+    "permanentBuffs": ["Umbrella Martial Boost"],
+    "classMindGroup": "Thousand-Camp Call",
+    "allowedMindMethods": [
+      "Morale Chant",
+      "Boat on Wood",
+      "Tang Anthem",
+      "Stone-Cutter",
+      "Year-Long Lament",
+      "Soldier's Return"
+    ],
+    "classBuffs": [],
+    "weapons": ["Umbrella", "Rope Dart"],
+    "rotations": ["Twin Flute", "Umbrella Stall"]
+  },
+  {
+    "id": "stonesplitBalanceDualCut",
+    "cn": "Stonesplit Balance — Dual-cut",
+    "en": "Stonesplit Balance — Dual-cut",
+    "displayName": "Stonesplit Balance — Dual-cut",
+    "primaryAttribute": "Bamboocut",
+    "attributeMultiplier": 51.5,
+    "permanentBuffs": [],
+    "classMindGroup": "Soaring Ascent",
+    "allowedMindMethods": ["Morale Chant", "Heaven-Seizing Stance", "Threefold Insight"],
+    "classBuffs": [],
+    "weapons": ["Knuckles", "Rope Dart"],
+    "rotations": []
+  }
+]

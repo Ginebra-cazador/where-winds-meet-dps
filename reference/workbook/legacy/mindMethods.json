@@ -1,0 +1,470 @@
+{
+  "bonuses": [
+    {
+      "name": "Sword Horizon",
+      "54.8": 54.8,
+      "0.023": 0.023
+    },
+    {
+      "name": "Moon Above Flowers",
+      "undefined": 0.044
+    },
+    {
+      "name": "Echoing Mountains",
+      "undefined": 0.044
+    },
+    {
+      "name": "Forgotten River Echo",
+      "undefined": 0.044
+    },
+    {
+      "name": "Thousand-Camp Call",
+      "undefined": 0.028
+    },
+    {
+      "name": "Frostwhite Night",
+      "undefined": 0.046
+    },
+    {
+      "name": "Mighty Song",
+      "undefined": 0.052
+    },
+    {
+      "name": "Thousand Mountain Law",
+      "undefined": 6
+    },
+    {
+      "name": "Wolfchaser's Art",
+      "undefined": 0.052
+    },
+    {
+      "name": "Star-Picker",
+      "54.8": 32.9,
+      "undefined": 5.1
+    },
+    {
+      "name": "Mud-Fish Heart",
+      "undefined": 6
+    },
+    {
+      "name": "Stone-Cutter",
+      "undefined": 0.041
+    },
+    {
+      "name": "Soldier's Return",
+      "undefined": 5.1
+    },
+    {
+      "name": "Year-Long Lament",
+      "undefined": 0.025
+    },
+    {
+      "name": "Bliss Bleeding",
+      "54.8": 43.9,
+      "undefined": 0.035
+    },
+    {
+      "name": "Morale Chant",
+      "54.8": 36.5,
+      "undefined": 0.046
+    },
+    {
+      "name": "Sutra Shift"
+    },
+    {
+      "name": "Endurance Doctrine",
+      "undefined": 6
+    },
+    {
+      "name": "N/A"
+    },
+    {
+      "name": "Insightful Strike",
+      "undefined": 6
+    },
+    {
+      "name": "Boat on Wood",
+      "undefined": 6
+    },
+    {
+      "name": "Tang Anthem",
+      "undefined": 0.04
+    },
+    {
+      "name": "Throat-Pierce",
+      "undefined": 6
+    },
+    {
+      "name": "Lone Loyalty",
+      "undefined": 0.04
+    }
+  ],
+  "bonusHeaders": [
+    "Unnamed Mind Method",
+    54.8,
+    null,
+    null,
+    null,
+    null,
+    null,
+    0.023,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "slotOptions": [
+    ["tier 6", "tier 6"],
+    ["tier 6", "tier 6"],
+    ["tier 6", "tier 6"],
+    ["tier 5", "tier 6"]
+  ],
+  "raw": [
+    {
+      "row": 1,
+      "A": "mindMethodName",
+      "B": "Mind Method Available Tiers",
+      "G": "Mind Method 1",
+      "H": "tier 6",
+      "I": "tier 6"
+    },
+    {
+      "row": 2,
+      "A": "Unnamed Mind Method",
+      "B": "tier 6",
+      "C": "tier 6",
+      "G": "Mind Method 2",
+      "H": "tier 6",
+      "I": "tier 6"
+    },
+    {
+      "row": 3,
+      "A": "Sword Horizon",
+      "B": "tier 5",
+      "C": "tier 6",
+      "G": "Mind Method 3",
+      "H": "tier 6",
+      "I": "tier 6"
+    },
+    {
+      "row": 4,
+      "A": "Moon Above Flowers",
+      "B": "tier 5",
+      "C": "tier 6",
+      "G": "Mind Method 4",
+      "H": "tier 5",
+      "I": "tier 6"
+    },
+    {
+      "row": 5,
+      "A": "Echoing Mountains",
+      "B": "tier 5",
+      "C": "tier 6"
+    },
+    {
+      "row": 6,
+      "A": "Forgotten River Echo",
+      "B": "tier 5",
+      "C": "tier 6"
+    },
+    {
+      "row": 7,
+      "A": "Thousand-Camp Call",
+      "B": "tier 6",
+      "C": "tier 6"
+    },
+    {
+      "row": 8,
+      "A": "Frostwhite Night",
+      "B": "tier 6",
+      "C": "tier 6"
+    },
+    {
+      "row": 10,
+      "A": "Insightful Strike",
+      "B": "tier 5",
+      "C": "tier 6"
+    },
+    {
+      "row": 11,
+      "A": "Mighty Song",
+      "B": "tier 5",
+      "C": "tier 6"
+    },
+    {
+      "row": 12,
+      "A": "Thousand Mountain Law",
+      "B": "tier 5",
+      "C": "tier 6"
+    },
+    {
+      "row": 13,
+      "A": "Wolfchaser's Art",
+      "B": "tier 5",
+      "C": "tier 6"
+    },
+    {
+      "row": 14,
+      "A": "Star-Picker",
+      "B": "tier 5",
+      "C": "tier 6"
+    },
+    {
+      "row": 15,
+      "A": "Mud-Fish Heart",
+      "B": "tier 5",
+      "C": "tier 6"
+    },
+    {
+      "row": 16,
+      "A": "Stone-Cutter",
+      "B": "tier 5",
+      "C": "tier 6"
+    },
+    {
+      "row": 17,
+      "A": "Soldier's Return",
+      "B": "tier 6",
+      "C": "tier 6"
+    },
+    {
+      "row": 18,
+      "A": "Year-Long Lament",
+      "B": "tier 5",
+      "C": "tier 6"
+    },
+    {
+      "row": 19,
+      "A": "Bliss Bleeding",
+      "B": "tier 6",
+      "C": "tier 6"
+    },
+    {
+      "row": 20,
+      "A": "Morale Chant",
+      "B": "tier 5",
+      "C": "tier 6"
+    },
+    {
+      "row": 21,
+      "A": "Sutra Shift",
+      "B": "tier 0",
+      "C": "tier 0"
+    },
+    {
+      "row": 22,
+      "A": "Endurance Doctrine",
+      "B": "tier 6",
+      "C": "tier 6"
+    },
+    {
+      "row": 23,
+      "A": "Boat on Wood",
+      "B": "tier 5",
+      "C": "tier 6"
+    },
+    {
+      "row": 24,
+      "A": "Tang Anthem",
+      "B": "tier 5",
+      "C": "tier 6"
+    },
+    {
+      "row": 25,
+      "A": "Throat-Pierce",
+      "B": "tier 6",
+      "C": "tier 6"
+    },
+    {
+      "row": 26,
+      "A": "Lone Loyalty",
+      "B": "tier 6",
+      "C": "tier 6"
+    },
+    {
+      "row": 27,
+      "A": "Prairie Fire Step",
+      "B": "tier 6",
+      "C": "tier 6"
+    },
+    {
+      "row": 28,
+      "A": "N/A",
+      "B": "N/A",
+      "C": "N/A"
+    },
+    {
+      "row": 39,
+      "A": "mindMethodModifiers",
+      "B": "Max Phys",
+      "C": "Min Phys",
+      "D": "Precision",
+      "E": "Crit",
+      "F": "Affinity",
+      "G": "Direct Crit",
+      "H": "Direct Affinity",
+      "I": "Crit Damage Boost",
+      "J": "Affinity Damage Boost",
+      "K": "Physical Damage Boost",
+      "L": "Max Attribute",
+      "M": "Min Attribute",
+      "N": "Attribute Penetration",
+      "O": "Phys Penetration"
+    },
+    {
+      "row": 40,
+      "A": "Unnamed Mind Method",
+      "B": 54.8,
+      "H": 0.023
+    },
+    {
+      "row": 41,
+      "A": "Sword Horizon",
+      "B": 54.8,
+      "H": 0.023
+    },
+    {
+      "row": 42,
+      "A": "Moon Above Flowers",
+      "E": 0.063,
+      "I": 0.044
+    },
+    {
+      "row": 43,
+      "A": "Echoing Mountains",
+      "E": 0.063,
+      "I": 0.044
+    },
+    {
+      "row": 44,
+      "A": "Forgotten River Echo",
+      "E": 0.063,
+      "I": 0.044
+    },
+    {
+      "row": 45,
+      "A": "Thousand-Camp Call",
+      "E": 0.063,
+      "K": 0.028
+    },
+    {
+      "row": 46,
+      "A": "Frostwhite Night",
+      "C": 54.8,
+      "G": 0.046
+    },
+    {
+      "row": 47,
+      "A": "Mighty Song",
+      "F": 0.027,
+      "J": 0.052
+    },
+    {
+      "row": 48,
+      "A": "Thousand Mountain Law",
+      "L": 18.7,
+      "M": 9.3,
+      "N": 6
+    },
+    {
+      "row": 49,
+      "A": "Wolfchaser's Art",
+      "F": 0.027,
+      "J": 0.052
+    },
+    {
+      "row": 50,
+      "A": "Star-Picker",
+      "B": 32.9,
+      "C": 16.5,
+      "O": 5.1
+    },
+    {
+      "row": 51,
+      "A": "Mud-Fish Heart",
+      "M": 28,
+      "N": 6
+    },
+    {
+      "row": 52,
+      "A": "Stone-Cutter",
+      "D": 0.051,
+      "G": 0.041
+    },
+    {
+      "row": 53,
+      "A": "Soldier's Return",
+      "C": 39.9,
+      "O": 5.1
+    },
+    {
+      "row": 54,
+      "A": "Year-Long Lament",
+      "D": 0.051,
+      "K": 0.025
+    },
+    {
+      "row": 55,
+      "A": "Bliss Bleeding",
+      "B": 43.9,
+      "I": 0.035
+    },
+    {
+      "row": 56,
+      "A": "Morale Chant",
+      "B": 36.5,
+      "C": 18.3,
+      "G": 0.046
+    },
+    {
+      "row": 57,
+      "A": "Sutra Shift"
+    },
+    {
+      "row": 58,
+      "A": "Endurance Doctrine",
+      "L": 18.7,
+      "M": 9.3,
+      "N": 6
+    },
+    {
+      "row": 59,
+      "A": "N/A"
+    },
+    {
+      "row": 60,
+      "A": "Insightful Strike",
+      "L": 18.7,
+      "M": 9.3,
+      "N": 6
+    },
+    {
+      "row": 61,
+      "A": "Boat on Wood",
+      "M": 28,
+      "N": 6
+    },
+    {
+      "row": 62,
+      "A": "Tang Anthem",
+      "D": 0.051,
+      "I": 0.04
+    },
+    {
+      "row": 63,
+      "A": "Throat-Pierce",
+      "L": 18.7,
+      "M": 9.3,
+      "N": 6
+    },
+    {
+      "row": 64,
+      "A": "Lone Loyalty",
+      "E": 0.054,
+      "I": 0.04
+    }
+  ]
+}

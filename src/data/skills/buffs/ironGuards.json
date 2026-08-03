@@ -1,0 +1,21 @@
+{
+  "id": "ironGuards",
+  "scope": "spec",
+  "variants": [
+    {
+      "specs": ["stonesplit_strength"],
+      "def": {
+        "id": "ironGuards",
+        "name": "Iron Guards",
+        "triggers": ["PhalanxSpecial"],
+        "duration": 40,
+        "cooldown": 20,
+        "affects": null,
+        "bonus": {
+          "type": "buffBonus",
+          "value": 0.08
+        }
+      }
+    }
+  ]
+}

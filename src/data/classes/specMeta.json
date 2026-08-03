@@ -1,0 +1,355 @@
+{
+  "specIds": [
+    "silkbind_jade",
+    "bellstrike_umbra",
+    "bellstrike_splendor",
+    "stonesplit_might",
+    "stonesplit_strength",
+    "silkbind_deluge",
+    "silkbind_deluge_dps",
+    "bamboocut_dust"
+  ],
+  "defaultSpec": "silkbind_jade",
+  "onApplyHandlers": ["lingeringBone", "throatPiercedDeflect", "throatPiercedAnxiT6"],
+  "innerWays": {
+    "vernal_umbrella": {
+      "id": "vernal_umbrella",
+      "name": "Vernal Umbrella",
+      "weaponType": "Umbrella",
+      "martialArt": "Vernal Umbrella",
+      "damageStatKey": "umbrellaDmg",
+      "specIds": ["silkbind_jade"],
+      "slot": "left",
+      "pamBonuses": {
+        "__fn": true,
+        "src": "_0x2cf81f => ({\n      crit: Math.min(_0x2cf81f?.agility ?? 0, 225) * 0.000302857\n    })"
+      },
+      "grantsCritBoost": true,
+      "innateStats": {
+        "silkbindPen": 18
+      }
+    },
+    "inkwell_fan": {
+      "id": "inkwell_fan",
+      "name": "Inkwell Fan",
+      "weaponType": "Fan",
+      "martialArt": "Inkwell Fan",
+      "damageStatKey": "fanDmg",
+      "specIds": ["silkbind_jade"],
+      "slot": "right",
+      "pamBonuses": {
+        "__fn": true,
+        "src": "_0x33ba45 => ({\n      minPhys: Math.min(_0x33ba45?.agility ?? 0, 225) * 0.264\n    })"
+      },
+      "grantsCritBoost": true,
+      "innateStats": {
+        "attrDmgBonus": 0.09
+      }
+    },
+    "soulshade_umbrella": {
+      "id": "soulshade_umbrella",
+      "name": "Soulshade Umbrella",
+      "weaponType": "Umbrella",
+      "martialArt": "Soulshade Umbrella",
+      "damageStatKey": "umbrellaDmg",
+      "specIds": ["silkbind_jade", "silkbind_deluge", "silkbind_deluge_dps"],
+      "slot": "right",
+      "pamBonuses": {
+        "__fn": true,
+        "src": "_0x3db150 => {\n      let _0x1efaf7 = Math.min(_0x3db150?.agility ?? 0, 225);\n      let _0xee80e3 = Math.min(_0x3db150?.minSilkbind ?? 0, 268);\n      const _0x53082e = {\n        minPhys: _0x1efaf7 * 0.264,\n        silkbindPen: _0xee80e3 * 0.06716417910447761\n      };\n      return _0x53082e;\n    }"
+      },
+      "grantsCritBoost": false,
+      "innateStats": {
+        "minSilkbind": 80,
+        "maxSilkbind": 160
+      }
+    },
+    "panacea_fan": {
+      "id": "panacea_fan",
+      "name": "Panacea Fan",
+      "weaponType": "Fan",
+      "martialArt": "Panacea Fan",
+      "damageStatKey": "fanDmg",
+      "specIds": ["silkbind_deluge", "silkbind_deluge_dps"],
+      "slot": "left",
+      "pamBonuses": {
+        "__fn": true,
+        "src": "_0x3c0576 => {\n      let _0x59dc12 = Math.min(_0x3c0576?.agility ?? 0, 225);\n      let _0x3581cb = Math.min(_0x3c0576?.minSilkbind ?? 0, 268);\n      const _0x1a788a = {\n        crit: _0x59dc12 * 0.000302857,\n        attrDmgBonus: _0x3581cb * 0.00033582089552238804\n      };\n      return _0x1a788a;\n    }"
+      },
+      "grantsCritBoost": false,
+      "innateStats": {
+        "minSilkbind": 80,
+        "maxSilkbind": 160
+      }
+    },
+    "mo_blade": {
+      "id": "mo_blade",
+      "name": "Mo Blade",
+      "weaponType": "Mo Blade",
+      "martialArt": "Thundercry Blade",
+      "damageStatKey": "moBladeDmg",
+      "specIds": ["stonesplit_might"],
+      "slot": "left",
+      "pamBonuses": {
+        "__fn": true,
+        "src": "_0x835000 => {\n      let _0x527014 = Math.min(Math.max(_0x835000?.body ?? 0, _0x835000?.power ?? 0), 225);\n      let _0x44564e = Math.min(_0x835000?.minStonesplit ?? 0, 268);\n      const _0x48c8e = {\n        crit: _0x527014 * 0.000302857,\n        stonesplitPen: _0x44564e * 0.06716417910447761\n      };\n      return _0x48c8e;\n    }"
+      },
+      "grantsCritBoost": false,
+      "innateStats": {}
+    },
+    "stormbreaker_spear": {
+      "id": "stormbreaker_spear",
+      "name": "Stormbreaker Spear",
+      "weaponType": "Spear",
+      "martialArt": "Stormbreaker Spear",
+      "damageStatKey": "spearDmg",
+      "specIds": ["stonesplit_might", "silkbind_jade"],
+      "slot": "right",
+      "pamBonuses": {
+        "__fn": true,
+        "src": "_0x29a7b4 => {\n      let _0x18f435 = Math.min(Math.max(_0x29a7b4?.body ?? 0, _0x29a7b4?.power ?? 0), 225);\n      let _0x360419 = Math.min(_0x29a7b4?.minStonesplit ?? 0, 268);\n      return {\n        maxHp: _0x18f435 * 10,\n        attrDmgBonus: _0x360419 * 0.00033582089552238804\n      };\n    }"
+      },
+      "grantsCritBoost": false,
+      "innateStats": {}
+    },
+    "strategic_sword": {
+      "id": "strategic_sword",
+      "name": "Strategic Sword",
+      "weaponType": "Sword",
+      "martialArt": "Strategic Sword",
+      "damageStatKey": "swordDmg",
+      "specIds": ["bellstrike_umbra"],
+      "slot": "left",
+      "pamBonuses": {
+        "__fn": true,
+        "src": "_0x146360 => {\n      let _0x5a6d23 = Math.min(_0x146360?.power ?? 0, 225);\n      let _0x1af3b6 = Math.min(_0x146360?.maxBellstrike ?? 0, 563);\n      return {\n        affinity: _0x5a6d23 * 0.00015,\n        bellstrikePen: _0x1af3b6 * 0.03197158081705151\n      };\n    }"
+      },
+      "grantsCritBoost": false,
+      "innateStats": {}
+    },
+    "heavenquaker_spear": {
+      "id": "heavenquaker_spear",
+      "name": "Heavenquaker Spear",
+      "weaponType": "Spear",
+      "martialArt": "Heavenquaker Spear",
+      "damageStatKey": "spearDmg",
+      "specIds": ["bellstrike_umbra"],
+      "slot": "right",
+      "pamBonuses": {
+        "__fn": true,
+        "src": "_0x4839d8 => {\n      let _0x71d038 = Math.min(_0x4839d8?.power ?? 0, 225);\n      let _0x4ee13f = Math.min(_0x4839d8?.maxBellstrike ?? 0, 536);\n      const _0x8dc74f = {\n        maxPhys: _0x71d038 * 0.264,\n        attrDmgBonus: _0x4ee13f * 0.00016791044776119402\n      };\n      return _0x8dc74f;\n    }"
+      },
+      "grantsCritBoost": false,
+      "innateStats": {}
+    },
+    "nameless_sword": {
+      "id": "nameless_sword",
+      "name": "Nameless Sword",
+      "weaponType": "Sword",
+      "martialArt": "Nameless Sword",
+      "damageStatKey": "swordDmg",
+      "specIds": ["bellstrike_splendor"],
+      "slot": "left",
+      "pamBonuses": {
+        "__fn": true,
+        "src": "_0x541d77 => {\n      let _0xb4f9f1 = Math.min(_0x541d77?.momentum ?? 0, 225);\n      let _0x2126be = Math.min(_0x541d77?.maxBellstrike ?? 0, 563);\n      const _0xa8097e = {\n        maxPhys: _0xb4f9f1 * 0.264,\n        bellstrikePen: _0x2126be * 0.03197158081705151\n      };\n      return _0xa8097e;\n    }"
+      },
+      "grantsCritBoost": false,
+      "innateStats": {}
+    },
+    "nameless_spear": {
+      "id": "nameless_spear",
+      "name": "Nameless Spear",
+      "weaponType": "Spear",
+      "martialArt": "Nameless Spear",
+      "damageStatKey": "spearDmg",
+      "specIds": ["bellstrike_splendor"],
+      "slot": "right",
+      "pamBonuses": {
+        "__fn": true,
+        "src": "_0x5498f6 => {\n      let _0x3bb6bd = Math.min(_0x5498f6?.momentum ?? 0, 225);\n      let _0x3e6347 = Math.min(_0x5498f6?.maxBellstrike ?? 0, 536);\n      const _0x5c7d63 = {\n        affinity: _0x3bb6bd * 0.00015,\n        attrDmgBonus: _0x3e6347 * 0.00016791044776119402\n      };\n      return _0x5c7d63;\n    }"
+      },
+      "grantsCritBoost": false,
+      "innateStats": {}
+    },
+    "snowparting_blade": {
+      "id": "snowparting_blade",
+      "name": "Snowparting Blade",
+      "weaponType": "Heng Blade",
+      "martialArt": "Snowparting Blade",
+      "damageStatKey": "hengBladeDmg",
+      "specIds": ["stonesplit_strength"],
+      "slot": "left",
+      "pamBonuses": {
+        "__fn": true,
+        "src": "_0x3e8087 => {\n      let _0x11497b = Math.min(_0x3e8087?.agility ?? 0, 225);\n      let _0xa1166 = Math.min(_0x3e8087?.minStonesplit ?? 0, 268);\n      return {\n        minPhys: _0x11497b * 0.264,\n        attrDmgBonus: _0xa1166 * 0.00033582089552238804\n      };\n    }"
+      },
+      "grantsCritBoost": false,
+      "innateStats": {}
+    },
+    "phalanxbane_blade": {
+      "id": "phalanxbane_blade",
+      "name": "Phalanxbane Blade",
+      "weaponType": "Mo Blade",
+      "martialArt": "Phalanxbane Blade",
+      "damageStatKey": "moBladeDmg",
+      "specIds": ["stonesplit_strength"],
+      "slot": "right",
+      "pamBonuses": {
+        "__fn": true,
+        "src": "_0x5e8bbe => {\n      let _0x3009a0 = Math.min(_0x5e8bbe?.agility ?? 0, 225);\n      let _0x9e8026 = Math.min(_0x5e8bbe?.minStonesplit ?? 0, 268);\n      return {\n        crit: _0x3009a0 * 0.000302857,\n        stonesplitPen: _0x9e8026 * 0.06716417910447761\n      };\n    }"
+      },
+      "grantsCritBoost": false,
+      "innateStats": {}
+    },
+    "everspring_umbrella": {
+      "id": "everspring_umbrella",
+      "name": "Everspring Umbrella",
+      "weaponType": "Umbrella",
+      "martialArt": "Everspring Umbrella",
+      "damageStatKey": "umbrellaDmg",
+      "specIds": ["bamboocut_dust"],
+      "slot": "left",
+      "pamBonuses": {
+        "__fn": true,
+        "src": "_0xc84c0f => ({\n      minPhys: Math.min(_0xc84c0f?.agility ?? 0, 225) * 0.264\n    })"
+      },
+      "grantsCritBoost": false,
+      "innateStats": {
+        "bamboocutPen": 18
+      }
+    },
+    "unfettered_rope_dart": {
+      "id": "unfettered_rope_dart",
+      "name": "Unfettered Rope Dart",
+      "weaponType": "RopeDart",
+      "martialArt": "Unfettered Rope Dart",
+      "damageStatKey": "ropeDartDmg",
+      "specIds": ["bamboocut_dust"],
+      "slot": "right",
+      "pamBonuses": {
+        "__fn": true,
+        "src": "_0x132095 => ({\n      crit: Math.min(_0x132095?.agility ?? 0, 225) * 0.0003022222222222222\n    })"
+      },
+      "grantsCritBoost": false,
+      "innateStats": {
+        "attrDmgBonus": 0.09
+      }
+    }
+  },
+  "weaponsBySpec": {
+    "silkbind_jade": [
+      {
+        "key": "Umbrella",
+        "name": "Umbrella",
+        "martialArt": "Vernal Umbrella",
+        "damageStatKey": "umbrellaDmg"
+      },
+      {
+        "key": "Fan",
+        "name": "Fan",
+        "martialArt": "Inkwell Fan",
+        "damageStatKey": "fanDmg"
+      }
+    ],
+    "bellstrike_umbra": [
+      {
+        "key": "Sword",
+        "name": "Sword",
+        "martialArt": "Strategic Sword",
+        "damageStatKey": "swordDmg"
+      },
+      {
+        "key": "Spear",
+        "name": "Spear",
+        "martialArt": "Heavenquaker Spear",
+        "damageStatKey": "spearDmg"
+      }
+    ],
+    "bellstrike_splendor": [
+      {
+        "key": "Sword",
+        "name": "Sword",
+        "martialArt": "Nameless Sword",
+        "damageStatKey": "swordDmg"
+      },
+      {
+        "key": "Spear",
+        "name": "Spear",
+        "martialArt": "Nameless Spear",
+        "damageStatKey": "spearDmg"
+      }
+    ],
+    "stonesplit_might": [
+      {
+        "key": "Mo Blade",
+        "name": "Mo Blade",
+        "martialArt": "Thundercry Blade",
+        "damageStatKey": "moBladeDmg"
+      },
+      {
+        "key": "Stormbreaker Spear",
+        "name": "Stormbreaker Spear",
+        "martialArt": "Stormbreaker Spear",
+        "damageStatKey": "spearDmg"
+      }
+    ],
+    "stonesplit_strength": [
+      {
+        "key": "Heng Blade",
+        "name": "Heng Blade",
+        "martialArt": "Snowparting Blade",
+        "damageStatKey": "hengBladeDmg"
+      },
+      {
+        "key": "Mo Blade",
+        "name": "Mo Blade",
+        "martialArt": "Phalanxbane Blade",
+        "damageStatKey": "moBladeDmg"
+      }
+    ],
+    "silkbind_deluge": [
+      {
+        "key": "Umbrella",
+        "name": "Umbrella",
+        "martialArt": "Soulshade Umbrella",
+        "damageStatKey": "umbrellaDmg"
+      },
+      {
+        "key": "Fan",
+        "name": "Fan",
+        "martialArt": "Panacea Fan",
+        "damageStatKey": "fanDmg"
+      }
+    ],
+    "silkbind_deluge_dps": [
+      {
+        "key": "Umbrella",
+        "name": "Umbrella",
+        "martialArt": "Soulshade Umbrella",
+        "damageStatKey": "umbrellaDmg"
+      },
+      {
+        "key": "Fan",
+        "name": "Fan",
+        "martialArt": "Panacea Fan",
+        "damageStatKey": "fanDmg"
+      }
+    ],
+    "bamboocut_dust": [
+      {
+        "key": "Umbrella",
+        "name": "Umbrella",
+        "martialArt": "Everspring Umbrella",
+        "damageStatKey": "umbrellaDmg"
+      },
+      {
+        "key": "RopeDart",
+        "name": "Rope Dart",
+        "martialArt": "Unfettered Rope Dart",
+        "damageStatKey": "ropeDartDmg"
+      }
+    ]
+  },
+  "activeInnerWays": ["vernal_umbrella", "inkwell_fan"]
+}

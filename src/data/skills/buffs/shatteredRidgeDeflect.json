@@ -1,0 +1,38 @@
+{
+  "id": "shatteredRidgeDeflect",
+  "scope": "spec",
+  "variants": [
+    {
+      "specs": ["stonesplit_might"],
+      "def": {
+        "id": "shatteredRidgeDeflect",
+        "name": "Shattered Ridge (Deflect Max Stacks)",
+        "triggers": ["Deflect"],
+        "exactMatch": true,
+        "duration": 8,
+        "affects": ["MoBladeVariedCombo"],
+        "bonus": {
+          "type": "buffBonus",
+          "value": 0.06
+        },
+        "requiresSet": "shatteredridge"
+      }
+    },
+    {
+      "specs": ["stonesplit_strength"],
+      "def": {
+        "id": "shatteredRidgeDeflect",
+        "name": "Shattered Ridge (Deflect Max Stacks)",
+        "triggers": ["Deflect"],
+        "exactMatch": true,
+        "duration": 8,
+        "affects": ["SnowpartingVC", "PhalanxQ", "PhalanxCharged", "SnowpartingQ-Stab", "AnxiSoldier"],
+        "bonus": {
+          "type": "buffBonus",
+          "value": 0.06
+        },
+        "requiresSet": "shatteredridge"
+      }
+    }
+  ]
+}

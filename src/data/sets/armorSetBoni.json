@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Hawking",
+    "setKey": "Hawking",
+    "stat": "affinityRate",
+    "value": 0.045
+  },
+  {
+    "name": "Jadeware",
+    "setKey": "Jadeware",
+    "stat": "maxPhys",
+    "value": 64
+  },
+  {
+    "name": "Ivorybloom",
+    "setKey": "Ivorybloom",
+    "stat": "critRate",
+    "value": 0.074
+  },
+  {
+    "name": "Rainwhisper",
+    "setKey": "Rainwhisper",
+    "stat": "precisionRate",
+    "value": 0.066
+  }
+]

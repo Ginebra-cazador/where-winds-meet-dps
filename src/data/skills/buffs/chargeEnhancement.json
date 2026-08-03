@@ -1,0 +1,28 @@
+{
+  "id": "chargeEnhancement",
+  "scope": "spec",
+  "variants": [
+    {
+      "specs": ["stonesplit_strength"],
+      "def": {
+        "id": "chargeEnhancement",
+        "name": "Charge Enhancement",
+        "triggers": ["PhalanxCharged"],
+        "exactMatch": false,
+        "duration": 3,
+        "maxStacks": 3,
+        "affects": null,
+        "bonus": null,
+        "enabledParam": "steadfastDevotion",
+        "minTier": 6,
+        "rateLimit": {
+          "count": 3,
+          "window": 30
+        },
+        "triggerPhaseGate": "exhausted",
+        "buffAppliesOnCastEnd": true,
+        "onApply": ["mountainSplitter"]
+      }
+    }
+  ]
+}
