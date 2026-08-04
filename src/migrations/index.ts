@@ -1,6 +1,7 @@
 // See docs/PROFILE-MIGRATIONS.md.
 import type { Migration, MigrationRunResult, RawProfilesBlob } from "./types"
 import { V5__englishIdsWithoutSitePrefix } from "./V5__englishIdsWithoutSitePrefix"
+import { V6__dropDerivedStats } from "./V6__dropDerivedStats"
 
 export type { Migration, MigrationRunResult, RawProfilesBlob } from "./types"
 export {
@@ -9,7 +10,10 @@ export {
   LEGACY_CLASS_IDS,
 } from "./V5__englishIdsWithoutSitePrefix"
 
-export const PROFILE_MIGRATIONS: readonly Migration[] = [V5__englishIdsWithoutSitePrefix]
+export const PROFILE_MIGRATIONS: readonly Migration[] = [
+  V5__englishIdsWithoutSitePrefix,
+  V6__dropDerivedStats,
+]
 
 const VERSION_BEFORE_THIS_FOLDER = 4
 

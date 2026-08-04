@@ -4,13 +4,15 @@ import { beforeEach, describe, expect, it } from "vitest"
 import { loadProfiles, loadCustomRotations } from "../../src/storage"
 import { builtinSkillsForClass, defaultRotationForClass } from "../../src/engine/builtinLibrary"
 import { runEngine } from "../../src/engine/dps"
+import { applyArmorSet, applyBowSet } from "../../src/engine/panel"
+import { withDerivedStats, DERIVED_STAT_FIELDS } from "../../src/engine/derivedInputs"
 import {
   LATEST_PROFILES_VERSION,
   runProfileMigrations,
   type RawProfilesBlob,
 } from "../../src/migrations"
 import { V5__englishIdsWithoutSitePrefix } from "../../src/migrations/V5__englishIdsWithoutSitePrefix"
-import type { StoredProfile } from "../../src/engine/types"
+import type { Inputs, StoredProfile } from "../../src/engine/types"
 import legacyProfileFile from "./testProfiles/profile-v4.json"
 
 const PROFILES_KEY = "wwm.profiles"
@@ -50,10 +52,9 @@ describe("profile-v4 fixture — the stored blob is genuinely pre-rename", () =>
 // `hydrateInputs` repairs ids too, so asserting only the loaded result would
 // still pass with V5 unregistered. These pin the step itself.
 describe("V5 step — v4 → v5 in isolation", () => {
-  it("is registered, and the chain reports it for a v4 blob", () => {
+  it("is registered, and the chain walks a v4 blob to the latest version", () => {
     const result = runProfileMigrations(blobOf(clone(LEGACY.profile)))!
-    expect(result.applied).toEqual(["V5__englishIdsWithoutSitePrefix"])
-    expect(result.blob.v).toBe(5)
+    expect(result.applied).toEqual(["V5__englishIdsWithoutSitePrefix", "V6__dropDerivedStats"])
     expect(result.blob.v).toBe(LATEST_PROFILES_VERSION)
   })
 
@@ -73,11 +74,11 @@ describe("V5 step — v4 → v5 in isolation", () => {
     expect(after.oddities).toEqual(before.oddities)
   })
 
-  it("the stored blob is rewritten to v5 on load", () => {
+  it("the stored blob is rewritten to the latest version on load", () => {
     localStorage.clear()
     writeProfilesBlob(clone(LEGACY.profile))
     loadProfiles()
-    expect(JSON.parse(localStorage.getItem(PROFILES_KEY)!).v).toBe(5)
+    expect(JSON.parse(localStorage.getItem(PROFILES_KEY)!).v).toBe(LATEST_PROFILES_VERSION)
   })
 })
 
@@ -89,7 +90,7 @@ describe("v4 profile → current id scheme", () => {
     expect(loadOne().inputs.classId).toBe("bellstrikeUmbra")
   })
 
-  it("keeps the user's build intact — name, breakthrough, gear, panel stats", () => {
+  it("keeps the user's build intact — name, breakthrough, gear; stats now derived, not stored", () => {
     const before = clone(LEGACY.profile)
     writeProfilesBlob(clone(before))
     const after = loadOne()
@@ -100,11 +101,17 @@ describe("v4 profile → current id scheme", () => {
     expect(after.inputs.arsenal).toBe(before.inputs.arsenal)
     expect(after.inputs.inventory).toHaveLength(before.inputs.inventory.length)
     expect(after.inputs.equipped).toEqual(before.inputs.equipped)
-    expect(after.inputs.phys).toEqual(before.inputs.phys)
-    expect(after.inputs.bellstrike).toEqual(before.inputs.bellstrike)
-    expect(after.inputs.precision).toBe(before.inputs.precision)
-    expect(after.inputs.critRate).toBe(before.inputs.critRate)
-    expect(after.inputs.affinityRate).toBe(before.inputs.affinityRate)
+    expect(after.inputs.phys).toEqual({ min: 0, max: 0, penetration: 0 })
+    expect(after.inputs.bellstrike).toEqual({ min: 0, max: 0, penetration: 0 })
+    expect(after.inputs.precision).toBe(0)
+    expect(after.inputs.critRate).toBe(0)
+    expect(after.inputs.affinityRate).toBe(0)
+
+    const persisted = JSON.parse(localStorage.getItem(PROFILES_KEY)!)
+    const persistedInputs = persisted.profiles[0].inputs as Record<string, unknown>
+    for (const field of DERIVED_STAT_FIELDS) {
+      expect(field in persistedInputs, `${field} leaked into the persisted blob`).toBe(false)
+    }
   })
 
   it("keeps every selected inner way (none dropped by the class allowlist)", () => {
@@ -118,7 +125,8 @@ describe("v4 profile → current id scheme", () => {
 
   it("the healed profile still computes positive DPS", () => {
     writeProfilesBlob(clone(LEGACY.profile))
-    const result = runEngine(loadOne().inputs)
+    const loaded: Inputs = loadOne().inputs
+    const result = runEngine(applyBowSet(applyArmorSet(withDerivedStats(loaded))))
     expect(result.dps).toBeGreaterThan(0)
     expect(result.warnings.some((w) => /no default rotation/i.test(w))).toBe(false)
   })

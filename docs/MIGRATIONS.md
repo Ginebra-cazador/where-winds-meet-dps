@@ -37,6 +37,10 @@ Much wider than adding a field. Any of these needs a migration:
 - **An id scheme changed** — see `migrateSeededSkillIds`,
   `migrateDotStandinOverrides`, `migrateEntityId` / `migrateClassId` for
   value-level repair precedents.
+- **A field became derived** — it must stop being persisted, and any stored
+  blob still carrying it needs the stale copy stripped. Precedent:
+  `V6__dropDerivedStats` / `withoutDerivedStats` dropping the resolved stat
+  fields off `Inputs` once `withDerivedStats` started recomputing all of them.
 
 ## Two kinds of change — pick the right one
 
@@ -56,11 +60,14 @@ keep working, and the hydrator must be idempotent so it can run on every load.
 
 **2. Incompatible** (renaming a field, changing a unit, removing a load-bearing
 field, switching a stat from yellow → white, …) — bump the version constant
-(`PROFILES_VERSION` / `CUSTOM_VERSION` / `VERSION`) and add a one-line entry to
-the version-history comment block at the top of `storage.ts`. Older blobs are
-dropped on load and the user falls back to defaults. Don't try to silently
-auto-convert across an incompatible shape change — better to lose stale data
-than to corrupt it.
+(`CUSTOM_VERSION` / `VERSION`) and add a one-line entry to the version-history
+comment block at the top of `storage.ts`. Older blobs are dropped on load and
+the user falls back to defaults. For `wwm.profiles` there is no
+version-history comment block to edit and no dropping — `PROFILES_VERSION` is
+derived from the `src/migrations/` registry, so add a `V<n>__…` step there
+instead (see `PROFILE-MIGRATIONS.md`); the chain never deletes a profile.
+Don't try to silently auto-convert across an incompatible shape change in the
+other two stores — better to lose stale data than to corrupt it.
 
 **Rule of thumb:** if a single-line default makes existing blobs behave
 correctly under the new code (e.g. `relayed: false` on legacy gear pieces),

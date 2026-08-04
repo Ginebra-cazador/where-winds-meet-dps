@@ -20,7 +20,9 @@ replaced it.
 ## Pipeline at a glance
 
 ```
-Inputs (panel state, from the UI / a saved profile)
+Inputs (panel state — selections and user-authored data only; a saved profile
+holds none of the resolved stat fields below, `withDerivedStats` recomputes
+them fresh on every load)
   │
   ├─► withDerivedStats(inputs)                     → derivedInputs.ts
   │     Two passes over every known stat path:
@@ -91,8 +93,10 @@ category-1 "base-stat" buffs belong.
 - **Inner ways** — `mindMethodPanelStats.json` carries each inner way's flat
   tier stats. These are plain stat adds; the *conditional* inner-way effects
   live in three other layers (see "Mind-method layers" below).
-- **Arsenal** — `ARSENAL_BONUS = {min: 131, max: 263}` moves between attack
-  blocks when the user swaps arsenal (`swapArsenal`).
+- **Arsenal** — a stored *selection* (`Inputs.arsenal`); `swapArsenal` only
+  changes which arsenal is selected. `getConfiguredBase` adds
+  `ARSENAL_BONUS = {min: 131, max: 263}` to the selected block during the
+  derive, so the bonus itself is never stored.
 - **Food** is the exception: it is **not** applied in the stat layer.
   `FOOD_MIN_PHYS_BONUS = 120` / `FOOD_MAX_PHYS_BONUS = 240` are added inside
   `formula.ts` at the AE/AG step, and re-shown read-only as the yellow

@@ -7,7 +7,6 @@ import type {
   StoredProfile,
 } from "../../../../engine/types"
 import { GEAR_SLOTS } from "../../../../engine/types"
-import { applyPieceContribution } from "../../../../engine/gearStats"
 import { newGearPieceId } from "../../../../storage"
 import { useI18n } from "../../../../i18n/I18nContext"
 import { useConfirm } from "../../../components/confirm-dialog/ConfirmDialog"
@@ -93,21 +92,8 @@ export function GearTab({
   const wordMax = useWordMaxAnalysis(engineInputs, wordMaxPiece)
   const wordMaxRowsMatch = wordMax.forPieceId === (wordMaxPiece?.id ?? null)
 
-  // Gear-word deltas are applied directly to white stats (per CLAUDE.md), so
-  // each equip is +contribution and each unequip is −contribution.
   function commitGearChange(nextInventory: GearPiece[], nextEquipped: EquippedSlots): void {
-    let nextInputs: Inputs = inputs
-    for (const slot of GEAR_SLOTS) {
-      const oldId = equipped[slot]
-      const newId = nextEquipped[slot]
-      const oldPiece = oldId ? (inventory.find((piece) => piece.id === oldId) ?? null) : null
-      const newPiece = newId ? (nextInventory.find((piece) => piece.id === newId) ?? null) : null
-      if (!oldPiece && !newPiece) continue
-      if (oldPiece && newPiece && JSON.stringify(oldPiece) === JSON.stringify(newPiece)) continue
-      if (oldPiece) nextInputs = applyPieceContribution(nextInputs, oldPiece, -1)
-      if (newPiece) nextInputs = applyPieceContribution(nextInputs, newPiece, +1)
-    }
-    onChange({ ...nextInputs, inventory: nextInventory, equipped: nextEquipped })
+    onChange({ ...inputs, inventory: nextInventory, equipped: nextEquipped })
   }
 
   function updatePiece(updated: GearPiece): void {

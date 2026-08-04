@@ -2,6 +2,7 @@ import type { Inputs, OddityNode, OddityRegions, StoredProfile } from "./engine/
 import { EMPTY_EQUIPPED, defaultCombatSettings } from "./engine/types"
 import { defaultInputs } from "./engine/defaults"
 import { allowedInnerWaysForClass, defaultArsenalForClass } from "./engine/panel"
+import { withoutDerivedStats, withZeroedDerivedStats } from "./engine/derivedInputs"
 import { getDefaultTalentsForClass, DEFAULT_ODDITIES } from "./data/baseStats"
 import type { Rotation, RotationStep } from "./engine/rotation"
 import { newRotationId, newStepId, isRotation } from "./engine/rotation"
@@ -173,13 +174,6 @@ function hydrateInputs(inputs: Inputs): Inputs {
   delete (next as unknown as Record<string, unknown>).shareDebuff5JingShen
   if (typeof next.dummyMode !== "boolean") next.dummyMode = false
   if (typeof next.allDamageBoost !== "number") next.allDamageBoost = 0
-  const legacyBurst = (inputs as Inputs & { singleBurstBoost?: number }).singleBurstBoost
-  const legacyControl = (inputs as Inputs & { singleControlBoost?: number }).singleControlBoost
-  if (typeof next.singleMysticBoost !== "number") {
-    next.singleMysticBoost =
-      (typeof legacyBurst === "number" ? legacyBurst : 0) +
-      (typeof legacyControl === "number" ? legacyControl : 0)
-  }
   delete (next as unknown as Record<string, unknown>).singleBurstBoost
   delete (next as unknown as Record<string, unknown>).singleControlBoost
   if ("customSkills" in next) next.customSkills = undefined
@@ -313,7 +307,7 @@ function hydrateInputs(inputs: Inputs): Inputs {
       revelryScript: typeof r.revelryScript === "boolean" ? r.revelryScript : def.revelryScript,
     }
   }
-  return next
+  return withZeroedDerivedStats(next)
 }
 
 function makeDefaultProfile(name: string, inputs: Inputs): StoredProfile {
@@ -363,7 +357,10 @@ export function saveProfiles(state: ProfilesState): void {
   try {
     const blob: ProfilesBlob = {
       v: PROFILES_VERSION,
-      profiles: state.profiles,
+      profiles: state.profiles.map((profile) => ({
+        ...profile,
+        inputs: withoutDerivedStats(profile.inputs),
+      })),
       activeId: state.activeId,
     }
     kvStore.set(PROFILES_KEY, JSON.stringify(blob))
@@ -371,7 +368,10 @@ export function saveProfiles(state: ProfilesState): void {
 }
 
 export function exportProfile(profile: StoredProfile): string {
-  const blob = { v: PROFILES_VERSION, profile }
+  const blob = {
+    v: PROFILES_VERSION,
+    profile: { ...profile, inputs: withoutDerivedStats(profile.inputs) },
+  }
   return JSON.stringify(blob, null, 2)
 }
 
@@ -387,12 +387,19 @@ export function importProfile(text: string): StoredProfile {
     maybeWrapper.profile &&
     typeof maybeWrapper.profile === "object"
   ) {
-    if (maybeWrapper.v !== PROFILES_VERSION) {
+    if (maybeWrapper.v > PROFILES_VERSION) {
       throw new Error(
         `Profile version ${maybeWrapper.v} is incompatible with this build (expected ${PROFILES_VERSION})`,
       )
     }
-    candidate = maybeWrapper.profile
+    const wrapperProfile = maybeWrapper.profile as { id?: unknown }
+    const activeId = typeof wrapperProfile.id === "string" ? wrapperProfile.id : ""
+    const result = runProfileMigrations({
+      v: maybeWrapper.v,
+      profiles: [maybeWrapper.profile],
+      activeId,
+    })
+    candidate = result?.blob.profiles[0] ?? maybeWrapper.profile
   }
   if (!isStoredProfile(candidate)) {
     throw new Error("Imported profile failed validation (missing or invalid fields)")

@@ -129,16 +129,6 @@ export function applyArmorSet(inputs: Inputs): Inputs {
 
 export const ARSENAL_BONUS = { min: 131, max: 263 } as const
 
-type ArsenalBlock = "phys" | "bellstrike" | "stonesplit" | "silkbind" | "bamboocut"
-
-const ARSENAL_TO_BLOCK: Readonly<Record<Arsenal, ArsenalBlock>> = {
-  general: "phys",
-  bellstrike: "bellstrike",
-  stonesplit: "stonesplit",
-  silkbind: "silkbind",
-  bamboocut: "bamboocut",
-}
-
 const PRIMARY_TO_ARSENAL: Readonly<Record<AttributeKey, Arsenal>> = {
   Bellstrike: "bellstrike",
   Stonesplit: "stonesplit",
@@ -152,22 +142,7 @@ export function defaultArsenalForClass(classId: string): Arsenal {
 
 export function swapArsenal(inputs: Inputs, next: Arsenal): Inputs {
   if (inputs.arsenal === next) return inputs
-  const fromKey = ARSENAL_TO_BLOCK[inputs.arsenal]
-  const toKey = ARSENAL_TO_BLOCK[next]
-  const out: Inputs = { ...inputs, arsenal: next }
-  const from = inputs[fromKey]
-  out[fromKey] = {
-    ...from,
-    min: from.min - ARSENAL_BONUS.min,
-    max: from.max - ARSENAL_BONUS.max,
-  }
-  const to = out[toKey]
-  out[toKey] = {
-    ...to,
-    min: to.min + ARSENAL_BONUS.min,
-    max: to.max + ARSENAL_BONUS.max,
-  }
-  return out
+  return { ...inputs, arsenal: next }
 }
 
 export function applyBowSet(inputs: Inputs): Inputs {

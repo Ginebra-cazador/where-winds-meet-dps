@@ -3,6 +3,37 @@ import { GEAR_SLOTS } from "./types"
 import { listKnownPaths, sumContributions } from "./gearStats"
 import { getConfiguredBase, getMindMethodContributions } from "../data/baseStats"
 
+export const DERIVED_STAT_FIELDS: readonly string[] = [
+  ...new Set(listKnownPaths().map((path) => path.split(".")[0])),
+  "dingYinByTag",
+]
+
+export function withoutDerivedStats<T extends object>(value: T): T {
+  const next = { ...value } as Record<string, unknown>
+  for (const field of DERIVED_STAT_FIELDS) delete next[field]
+  return next as T
+}
+
+const ZERO_ATTACK_BLOCK = { min: 0, max: 0, penetration: 0 }
+
+export function withZeroedDerivedStats(inputs: Inputs): Inputs {
+  const next: Record<string, unknown> = { ...inputs }
+  for (const path of listKnownPaths()) {
+    const [head, tail] = path.split(".")
+    if (tail === undefined) {
+      next[head] = 0
+      continue
+    }
+    const block = next[head]
+    next[head] =
+      block && typeof block === "object" && !Array.isArray(block)
+        ? { ...(block as Record<string, number>), [tail]: 0 }
+        : { ...ZERO_ATTACK_BLOCK }
+  }
+  next.dingYinByTag = {}
+  return next as unknown as Inputs
+}
+
 export function equippedPiecesFor(inputs: Inputs): GearPiece[] {
   const byId = new Map(inputs.inventory.map((p) => [p.id, p]))
   const out: GearPiece[] = []

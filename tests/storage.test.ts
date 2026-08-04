@@ -11,14 +11,24 @@ import {
   loadCustomRotations,
   loadProfiles,
   loadCustomBuffs,
+  saveProfiles,
+  exportProfile,
+  importProfile,
 } from "../src/storage"
 import { defaultInputs } from "../src/engine/defaults"
 import { builtinSkillsForClass } from "../src/engine/builtinLibrary"
 import { makeSkill } from "../src/engine/skill"
 import { makeRotation, makeStep } from "../src/engine/rotation"
 import { computeGearContribution } from "../src/engine/gearStats"
+import {
+  DERIVED_STAT_FIELDS,
+  withDerivedStats,
+  withZeroedDerivedStats,
+} from "../src/engine/derivedInputs"
+import { LATEST_PROFILES_VERSION } from "../src/migrations"
 import { kvStore } from "../src/kvStore"
-import type { GearPiece, Inputs } from "../src/engine/types"
+import { EMPTY_EQUIPPED } from "../src/engine/types"
+import type { GearPiece, Inputs, StoredProfile } from "../src/engine/types"
 
 describe("storage", () => {
   beforeEach(() => {
@@ -75,6 +85,122 @@ describe("storage", () => {
   it("loadInputs is null when the saved version doesn't match", () => {
     localStorage.setItem("wwm.inputs", JSON.stringify({ v: 999, inputs: defaultInputs }))
     expect(loadInputs()).toBeNull()
+  })
+})
+
+describe("profiles carry selections only — derived stats are never persisted", () => {
+  const PROFILES_KEY = "wwm.profiles"
+
+  beforeEach(() => localStorage.clear())
+  afterEach(() => localStorage.clear())
+
+  function makeProfile(id: string, inputs: Inputs): StoredProfile {
+    return { id, name: "Test", inputs }
+  }
+
+  it("saveProfiles writes selections but none of the derived stat fields", () => {
+    const profile = makeProfile("p1", withDerivedStats(defaultInputs))
+    saveProfiles({ profiles: [profile], activeId: profile.id })
+
+    const persisted = JSON.parse(localStorage.getItem(PROFILES_KEY)!)
+    const persistedInputs = persisted.profiles[0].inputs as Record<string, unknown>
+    for (const field of DERIVED_STAT_FIELDS) {
+      expect(field in persistedInputs, `${field} leaked into the saved blob`).toBe(false)
+    }
+    expect(persistedInputs.classId).toBe(defaultInputs.classId)
+    expect(persistedInputs.breakthrough).toBe(defaultInputs.breakthrough)
+    expect(persistedInputs.arsenal).toBe(defaultInputs.arsenal)
+    expect(persistedInputs.set).toBe(defaultInputs.set)
+    expect(persistedInputs.bowSet).toBe(defaultInputs.bowSet)
+    expect(persistedInputs.food).toBe(defaultInputs.food)
+    expect(persistedInputs.mindMethods).toEqual(defaultInputs.mindMethods)
+    expect(persistedInputs.inventory).toEqual(defaultInputs.inventory)
+    expect(persistedInputs.equipped).toEqual(defaultInputs.equipped)
+    expect(persistedInputs.martialArtsTalents).toEqual(defaultInputs.martialArtsTalents)
+    expect(persistedInputs.oddities).toEqual(defaultInputs.oddities)
+    expect(persistedInputs.combatSettings).toEqual(defaultInputs.combatSettings)
+  })
+
+  it("exportProfile output parses to a wrapper whose profile.inputs has none of the derived keys", () => {
+    const profile = makeProfile("p1", withDerivedStats(defaultInputs))
+    const exported = JSON.parse(exportProfile(profile))
+    const exportedInputs = exported.profile.inputs as Record<string, unknown>
+    for (const field of DERIVED_STAT_FIELDS) {
+      expect(field in exportedInputs, `${field} leaked into the export`).toBe(false)
+    }
+  })
+
+  it("importProfile walks a wrapper at the previous version through the chain and zeroes its stats", () => {
+    const piece: GearPiece = {
+      id: "gp-old-1",
+      slot: "helm",
+      level: 91,
+      rarity: "legendary",
+      minPhys: 0,
+      maxPhys: 0,
+      hp: 4614,
+      physDef: 18,
+      words: [
+        { word: "", value: 0, retuned: false },
+        { word: "", value: 0, retuned: false },
+        { word: "", value: 0, retuned: false },
+        { word: "", value: 0, retuned: false },
+        { word: "", value: 0, retuned: false },
+      ],
+      attunement: "",
+      attunementValue: 0,
+      relayed: false,
+    }
+    const oldProfile: StoredProfile = {
+      id: "pr-old",
+      name: "OldProfile",
+      inputs: {
+        ...withDerivedStats(defaultInputs),
+        inventory: [piece],
+        equipped: { ...EMPTY_EQUIPPED, helm: piece.id },
+      },
+    }
+    const wrapper = { v: LATEST_PROFILES_VERSION - 1, profile: oldProfile }
+
+    const imported = importProfile(JSON.stringify(wrapper))
+
+    expect(imported.name).toBe("OldProfile")
+    expect(imported.inputs.critRate).toBe(0)
+    expect(imported.inputs.phys).toEqual({ min: 0, max: 0, penetration: 0 })
+    expect(imported.inputs.inventory).toHaveLength(1)
+    const newPieceId = imported.inputs.inventory[0].id
+    expect(newPieceId).not.toBe(piece.id)
+    expect(imported.inputs.equipped.helm).toBe(newPieceId)
+  })
+
+  it("importProfile rejects a wrapper newer than this build", () => {
+    const profile = makeProfile("p1", withDerivedStats(defaultInputs))
+    const wrapper = { v: LATEST_PROFILES_VERSION + 1, profile }
+    expect(() => importProfile(JSON.stringify(wrapper))).toThrow()
+  })
+
+  it("loadProfiles heals a stored v6 blob whose stat fields hold garbage", () => {
+    const garbageInputs: Inputs = {
+      ...defaultInputs,
+      bamboocut: { min: -131, max: -226.8, penetration: 0 },
+    }
+    localStorage.setItem(
+      PROFILES_KEY,
+      JSON.stringify({
+        v: LATEST_PROFILES_VERSION,
+        profiles: [{ id: "p1", name: "Garbage", inputs: garbageInputs }],
+        activeId: "p1",
+      }),
+    )
+
+    const { profiles } = loadProfiles()
+    expect(profiles[0].inputs.bamboocut).toEqual({ min: 0, max: 0, penetration: 0 })
+  })
+
+  it("the default build's derived output is unaffected by zeroing the derived fields first", () => {
+    expect(withDerivedStats(defaultInputs)).toEqual(
+      withDerivedStats(withZeroedDerivedStats(defaultInputs)),
+    )
   })
 })
 
@@ -168,7 +294,7 @@ describe("singleMysticBoost migration (field/gear-word/buff-stat-key merge, no v
     } catch {}
   })
 
-  it("sums a legacy singleBurstBoost + singleControlBoost into singleMysticBoost, dropping the legacy keys", () => {
+  it("drops the legacy singleBurstBoost/singleControlBoost keys and recomputes singleMysticBoost from gear", () => {
     const legacyInputs = {
       ...defaultInputs,
       singleBurstBoost: 0.07,
@@ -185,7 +311,7 @@ describe("singleMysticBoost migration (field/gear-word/buff-stat-key merge, no v
     )
 
     const { profiles } = loadProfiles()
-    expect(profiles[0].inputs.singleMysticBoost).toBeCloseTo(0.1, 10)
+    expect(profiles[0].inputs.singleMysticBoost).toBe(0)
     expect(
       (profiles[0].inputs as unknown as Record<string, unknown>).singleBurstBoost,
     ).toBeUndefined()
