@@ -54,12 +54,6 @@ export function MetricsCard({ result }: { result: Result }) {
         <span className="label">{t("Duration")}</span>
         <span className="value">{fmt(result.rotationDuration, 0)}s</span>
       </div>
-      <div className="stat">
-        <span className="label">{t("Graduation %")}</span>
-        <span className="value">
-          {result.graduationRate == null ? "—" : (result.graduationRate * 100).toFixed(1) + " %"}
-        </span>
-      </div>
     </div>
   )
 }

@@ -559,10 +559,13 @@ h1 {
 }
 
 /* ── Stats / metrics card ─────────────────────────────── */
+/* Flex rather than a fixed track list: the stat tiles are pushed right by the
+ * growing .dps cell, so adding or removing one can't leave a dead column
+ * stranded at the right edge. */
 .metrics-card {
-  display: grid;
-  grid-template-columns: minmax(220px, 1fr) repeat(3, minmax(120px, auto));
-  gap: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
   align-items: center;
   background: #232323;
   border: 1px solid #333;
@@ -572,6 +575,7 @@ h1 {
 }
 
 .metrics-card .dps {
+  flex: 1 1 220px;
   display: flex;
   flex-direction: column;
   border-right: 1px solid #2a2a2a;
@@ -593,6 +597,7 @@ h1 {
 }
 
 .metrics-card .stat {
+  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -613,7 +618,7 @@ h1 {
 }
 
 @media (max-width: 720px) {
-  .metrics-card { grid-template-columns: 1fr 1fr; }
+  .metrics-card { gap: 12px 24px; }
   .metrics-card .dps { border-right: none; }
 }
 
