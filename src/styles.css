@@ -69,8 +69,26 @@ body {
 }
 
 h1 {
-  margin: 0 0 12px 0;
+  margin: 0;
   font-size: 1.3em;
+}
+
+/* The row's bottom spacing lives here, not on the h1: a margin on the h1 would
+ * be part of its margin box, which `align-items: center` centers — pushing the
+ * title text off-centre relative to the buttons. */
+.app-titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.app-titlebar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .save-btn,
@@ -107,6 +125,34 @@ h1 {
 .save-btn.dirty:hover {
   background: #d8b070;
   border-color: #d8b070;
+}
+
+/* ── contribute link ─────────────────────────────── */
+.contribute-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #888;
+  font-size: 0.8em;
+  white-space: nowrap;
+}
+
+.github-link {
+  display: inline-flex;
+  align-items: center;
+  color: #aaa;
+  text-decoration: none;
+  transition: color 0.1s;
+}
+
+.github-link:hover {
+  color: #e8e8e8;
+}
+
+.github-link svg {
+  width: 20px;
+  height: 20px;
+  display: block;
 }
 
 /* ── tabs ─────────────────────────────────────────────── */

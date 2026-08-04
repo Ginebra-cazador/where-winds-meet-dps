@@ -6,6 +6,7 @@ import { withDerivedStats } from "./engine/derivedInputs"
 import type { Inputs, StoredProfile } from "./engine/types"
 import { OverviewTab } from "./ui/features/overview/OverviewTab"
 import { MetricsCard, WarningsList } from "./ui/layout/OutputPanel"
+import { GithubLink } from "./ui/layout/GithubLink"
 import { RotationTab } from "./ui/features/rotation/RotationTab"
 import { ProfilePanel } from "./ui/features/profile/ProfilePanel"
 import { GearTab } from "./ui/features/gear/GearTab"
@@ -231,17 +232,10 @@ function AppInner() {
         />
       )}
       <div className="app-header">
-        <header
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            gap: 12,
-            flexWrap: "wrap",
-          }}
-        >
+        <header className="app-titlebar">
           <h1>{t("Where Winds Meet DPS")}</h1>
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <div className="app-titlebar-actions">
+            <GithubLink />
             <button
               type="button"
               className={"save-btn" + (isDirty ? " dirty" : "")}
