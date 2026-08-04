@@ -1509,19 +1509,17 @@ h1 {
   cursor: not-allowed;
 }
 
+/* Portaled to <body> and fixed-positioned so it never gets clipped by a
+   scrolling ancestor (e.g. the gear dialog body). Geometry comes from JS. */
 .combobox-dropdown {
-  position: absolute;
-  top: calc(100% + 2px);
-  left: 0;
-  right: 0;
-  z-index: 30;
+  position: fixed;
+  z-index: 1300;
   margin: 0;
   padding: 2px 0;
   list-style: none;
   background: #1f1f1f;
   border: 1px solid #555;
   border-radius: 4px;
-  max-height: 240px;
   overflow-y: auto;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }

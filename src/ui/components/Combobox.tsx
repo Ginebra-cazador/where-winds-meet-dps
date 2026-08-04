@@ -1,8 +1,34 @@
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
+import { createPortal } from "react-dom"
 
 export interface ComboboxOption {
   value: string
   label: string
+}
+
+const DROPDOWN_MAX_HEIGHT = 240
+const VIEWPORT_MARGIN = 8
+
+interface DropdownPos {
+  left: number
+  width: number
+  top?: number
+  bottom?: number
+  maxHeight: number
+}
+
+function measure(anchor: HTMLElement): DropdownPos {
+  const r = anchor.getBoundingClientRect()
+  const spaceBelow = window.innerHeight - r.bottom - VIEWPORT_MARGIN
+  const spaceAbove = r.top - VIEWPORT_MARGIN
+  const openUp = spaceBelow < Math.min(DROPDOWN_MAX_HEIGHT, spaceAbove) && spaceAbove > spaceBelow
+  return {
+    left: r.left,
+    width: r.width,
+    top: openUp ? undefined : r.bottom + 2,
+    bottom: openUp ? window.innerHeight - r.top + 2 : undefined,
+    maxHeight: Math.max(80, Math.min(DROPDOWN_MAX_HEIGHT, openUp ? spaceAbove : spaceBelow)),
+  }
 }
 
 interface Props {
@@ -18,8 +44,10 @@ export function Combobox({ value, options, onChange, placeholder, disabled, clas
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState("")
   const [highlight, setHighlight] = useState(0)
+  const [pos, setPos] = useState<DropdownPos | null>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const dropdownRef = useRef<HTMLUListElement>(null)
 
   const selected = options.find((o) => o.value === value)
   const displayText = open ? query : (selected?.label ?? "")
@@ -34,13 +62,32 @@ export function Combobox({ value, options, onChange, placeholder, disabled, clas
   useEffect(() => {
     if (!open) return
     function onMouseDown(e: MouseEvent) {
-      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
-        setOpen(false)
-      }
+      const target = e.target as Node
+      if (wrapperRef.current?.contains(target)) return
+      if (dropdownRef.current?.contains(target)) return
+      setOpen(false)
     }
     document.addEventListener("mousedown", onMouseDown)
     return () => document.removeEventListener("mousedown", onMouseDown)
   }, [open])
+
+  const reposition = useCallback(() => {
+    if (wrapperRef.current) setPos(measure(wrapperRef.current))
+  }, [])
+
+  useLayoutEffect(() => {
+    if (!open) {
+      setPos(null)
+      return
+    }
+    reposition()
+    window.addEventListener("scroll", reposition, true)
+    window.addEventListener("resize", reposition)
+    return () => {
+      window.removeEventListener("scroll", reposition, true)
+      window.removeEventListener("resize", reposition)
+    }
+  }, [open, reposition])
 
   useEffect(() => {
     if (highlight >= filtered.length) setHighlight(Math.max(0, filtered.length - 1))
@@ -109,35 +156,48 @@ export function Combobox({ value, options, onChange, placeholder, disabled, clas
           }
         }}
       />
-      {open && filtered.length > 0 && (
-        <ul className="combobox-dropdown" role="listbox">
-          {filtered.map((opt, i) => (
-            <li
-              key={opt.value}
-              role="option"
-              aria-selected={opt.value === value}
-              title={opt.label}
-              className={
-                "combobox-option" +
-                (i === highlight ? " is-highlight" : "") +
-                (opt.value === value ? " is-selected" : "")
-              }
-              onMouseDown={(e) => {
-                e.preventDefault()
-                commit(opt)
-              }}
-              onMouseEnter={() => setHighlight(i)}
-            >
-              {opt.label}
-            </li>
-          ))}
-        </ul>
-      )}
-      {open && filtered.length === 0 && (
-        <ul className="combobox-dropdown" role="listbox">
-          <li className="combobox-empty">—</li>
-        </ul>
-      )}
+      {open &&
+        pos &&
+        createPortal(
+          <ul
+            ref={dropdownRef}
+            className="combobox-dropdown"
+            role="listbox"
+            style={{
+              left: pos.left,
+              width: pos.width,
+              top: pos.top,
+              bottom: pos.bottom,
+              maxHeight: pos.maxHeight,
+            }}
+          >
+            {filtered.length === 0 ? (
+              <li className="combobox-empty">—</li>
+            ) : (
+              filtered.map((opt, i) => (
+                <li
+                  key={opt.value}
+                  role="option"
+                  aria-selected={opt.value === value}
+                  title={opt.label}
+                  className={
+                    "combobox-option" +
+                    (i === highlight ? " is-highlight" : "") +
+                    (opt.value === value ? " is-selected" : "")
+                  }
+                  onMouseDown={(e) => {
+                    e.preventDefault()
+                    commit(opt)
+                  }}
+                  onMouseEnter={() => setHighlight(i)}
+                >
+                  {opt.label}
+                </li>
+              ))
+            )}
+          </ul>,
+          document.body,
+        )}
     </div>
   )
 }
