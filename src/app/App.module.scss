@@ -1,0 +1,100 @@
+.app {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* Negative margins offset body's 16px/24px padding so the sticky background
+ * covers the full width as content scrolls underneath. */
+.appHeader {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--color-bg);
+  margin: -16px -24px 0;
+  padding: 12px 24px 0;
+}
+
+.appHeader > .tabs {
+  margin-bottom: 0;
+}
+
+.headerMetrics {
+  margin-bottom: 10px;
+}
+
+/* No border-top, paired with .tab.active's no border-bottom, so the two merge
+ * into one 3-sided container. */
+.tabPanel {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  border: 1px solid var(--color-border);
+  border-top: none;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  padding: 12px;
+}
+
+/* Margin on the h1 itself would get centered by align-items, offsetting the
+ * title relative to the buttons — so the spacing lives on the row instead. */
+.appTitlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.appTitlebarActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tabs {
+  display: flex;
+  gap: 2px;
+  border-bottom: 1px solid var(--color-border);
+  margin: 0 0 12px 0;
+}
+
+.tab {
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  color: var(--color-text-muted);
+  padding: 8px 18px;
+  font-size: 0.9em;
+  cursor: pointer;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  letter-spacing: 0.04em;
+  transition:
+    color 0.1s,
+    background 0.1s,
+    border-color 0.1s;
+  position: relative;
+  top: 1px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.tab:hover {
+  color: #d8d8d8;
+}
+
+.tab.active {
+  color: var(--color-accent);
+  background: var(--color-surface);
+  border-color: var(--color-border);
+  font-weight: 600;
+}
+
+.tabRight {
+  margin-left: auto;
+}

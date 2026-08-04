@@ -1,0 +1,26 @@
+@use "breakpoints";
+
+.overviewGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+
+@include breakpoints.below(breakpoints.$bp-1500) {
+  .overviewGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@include breakpoints.below(breakpoints.$bp-1100) {
+  .overviewGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@include breakpoints.below(breakpoints.$bp-720) {
+  .overviewGrid {
+    grid-template-columns: 1fr;
+  }
+}

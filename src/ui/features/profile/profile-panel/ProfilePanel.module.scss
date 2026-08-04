@@ -1,0 +1,90 @@
+@use "breakpoints";
+
+.profilePanel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.profileList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.profileRow {
+  display: grid;
+  grid-template-columns: 1fr 140px auto;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: #1d1d1d;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+}
+
+.profileRow.isActive {
+  border-color: var(--color-accent);
+  background: #221e15;
+}
+
+.profileName {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.profileNameText {
+  color: var(--color-text);
+  font-size: 0.95em;
+  cursor: text;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profileName input[type="text"] {
+  background: #111;
+  border: 1px solid var(--color-accent);
+  border-radius: 4px;
+  color: var(--color-text);
+  padding: 4px 8px;
+  font-size: 0.9em;
+  width: 100%;
+  max-width: 260px;
+}
+
+.profileActiveBadge {
+  font-size: 0.7em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-bg);
+  background: var(--color-accent);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+.profileClass {
+  color: var(--color-text-muted);
+  font-size: 0.82em;
+  letter-spacing: 0.04em;
+}
+
+.profileActions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+@include breakpoints.below(breakpoints.$bp-720) {
+  .profileRow {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .profileActions {
+    justify-content: flex-start;
+  }
+}

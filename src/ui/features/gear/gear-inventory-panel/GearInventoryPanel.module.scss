@@ -1,0 +1,194 @@
+.gearInventory {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gearToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82em;
+  color: var(--color-text-dim);
+  cursor: pointer;
+  user-select: none;
+}
+
+.gearToggle input {
+  accent-color: var(--color-accent);
+}
+
+.gearInvFilter {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.78em;
+  color: #b89865;
+  background: #262019;
+  border: 1px solid #4a3f2a;
+  border-radius: 10px;
+  padding: 2px 4px 2px 9px;
+}
+
+.gearInvFilterClear {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 1.05em;
+  line-height: 1;
+  padding: 0 4px;
+}
+
+.gearInvFilterClear:hover {
+  color: var(--color-text);
+}
+
+.gearInvGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.gearInvTile {
+  position: relative;
+  background: var(--color-surface-alt);
+  border: 2px solid #2e2e2e;
+  border-radius: 6px;
+  padding: 10px 12px;
+  color: var(--color-text);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 4px;
+  transition:
+    background 0.1s,
+    border-color 0.1s,
+    transform 0.05s;
+}
+
+.gearInvTileNew {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  font-size: 0.6em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 1px 6px;
+  border-radius: 8px;
+  border: 1px solid var(--color-bg);
+  z-index: 1;
+}
+
+.gearInvTile:hover {
+  background: #262626;
+}
+
+.gearInvTile.isSelected {
+  background: #2a2419;
+  box-shadow: 0 0 0 2px var(--color-accent) inset;
+}
+
+.gearInvTile.isForeign {
+  border-style: dashed;
+  opacity: 0.85;
+}
+
+.gearInvTile.rarityLegendary {
+  border-color: #8e7330;
+}
+.gearInvTile.rarityEpic {
+  border-color: #6a4a98;
+}
+
+.gearInvTileHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #2e2e2e;
+  margin-bottom: 4px;
+}
+
+.gearInvTileSlot {
+  font-size: 0.84em;
+  font-weight: 600;
+  color: #b89865;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.02em;
+}
+
+.gearInvTile.rarityEpic .gearInvTileSlot {
+  color: #a890c4;
+}
+
+.gearInvTileMeta {
+  font-size: 0.7em;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.gearInvTileStats {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  row-gap: 2px;
+  column-gap: 8px;
+  font-variant-numeric: tabular-nums;
+}
+
+.gearInvTileStat {
+  display: contents;
+}
+
+.gearInvTileStatLabel {
+  font-size: 0.7em;
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  align-self: center;
+  justify-self: start;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.gearInvTileStatValue {
+  font-size: 0.85em;
+  font-weight: 600;
+  text-align: right;
+  line-height: 1.2;
+}
+
+.gearInvTileStat:global(.is-positive) .gearInvTileStatValue {
+  color: var(--color-positive);
+}
+.gearInvTileStat:global(.is-negative) .gearInvTileStatValue {
+  color: var(--color-negative);
+}
+.gearInvTileStat:global(.is-zero) .gearInvTileStatValue {
+  color: var(--color-text-muted);
+}
+.gearInvTileStat:global(.is-pending) .gearInvTileStatValue {
+  color: #555;
+}
+
+.gearInvTileOwner {
+  font-size: 0.65em;
+  color: #6a8aa0;
+  font-style: italic;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px dashed var(--color-border);
+}

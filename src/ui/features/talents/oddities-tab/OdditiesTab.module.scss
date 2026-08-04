@@ -1,0 +1,135 @@
+.talentsCell {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--color-surface-raised);
+  color: var(--color-text);
+}
+
+.talentsCell input[type="text"],
+.talentsCell input[type="number"],
+.talentsCell select {
+  width: 100%;
+  background: var(--color-bg);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  padding: 3px 6px;
+  font-size: 0.95em;
+}
+
+.talentsCell input[type="checkbox"] {
+  margin: 0;
+}
+
+.talentsUnit {
+  color: var(--color-text-muted);
+  font-size: 0.85em;
+}
+
+.btnDanger {
+  color: #c66;
+  border-color: #4a2a2a;
+}
+
+.btnDanger:hover:not(:disabled) {
+  background: #2a1010;
+  border-color: #6a3a3a;
+}
+
+.odditiesCanvasWrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+  border: 1px solid var(--color-surface-raised);
+  border-radius: 6px;
+  background: #141414;
+  margin-top: 8px;
+}
+
+.odditiesCanvasWrap canvas {
+  display: block;
+  cursor: grab;
+}
+
+.oddityTooltip {
+  position: absolute;
+  pointer-events: none;
+  z-index: 5;
+  background: #1f1c14;
+  border: 1px solid var(--color-accent);
+  border-radius: 4px;
+  padding: 7px 11px;
+  font-size: 0.9em;
+  line-height: 1.5;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  white-space: nowrap;
+}
+
+.oddityTooltipTitle {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+.oddityTooltipState {
+  color: var(--color-text-muted);
+}
+
+.oddityContextMenu {
+  position: absolute;
+  z-index: 6;
+  min-width: 120px;
+  background: #1f1c14;
+  border: 1px solid var(--color-accent);
+  border-radius: 4px;
+  padding: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.oddityContextMenu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  border-radius: 3px;
+  padding: 6px 10px;
+  color: var(--color-text);
+  font-size: 0.85em;
+  cursor: pointer;
+}
+
+.oddityContextMenu button:hover {
+  background: rgba(192, 160, 96, 0.2);
+}
+.oddityContextMenu button.danger {
+  color: #e57373;
+}
+.oddityContextMenu button.danger:hover {
+  background: rgba(229, 115, 115, 0.15);
+}
+
+.oddityEditor {
+  margin-top: 10px;
+}
+
+.oddityEditor h3 {
+  margin-top: 0;
+  font-size: 0.95em;
+  color: var(--color-accent);
+}
+
+.oddityEditor .talentsCell {
+  border-bottom: none;
+  padding: 4px 0;
+}
+
+.oddityEditor .talentsCell label {
+  min-width: 80px;
+  color: var(--color-text-dim);
+  font-size: 0.85em;
+}

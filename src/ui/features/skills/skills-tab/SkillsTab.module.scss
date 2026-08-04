@@ -1,0 +1,514 @@
+@use "breakpoints";
+
+.skillsLayout {
+  display: grid;
+  grid-template-columns: minmax(220px, 320px) 1fr;
+  gap: 16px;
+  align-items: start;
+}
+@include breakpoints.below(breakpoints.$bp-760) {
+  .skillsLayout {
+    grid-template-columns: 1fr;
+  }
+}
+.skillsListPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.skillsListHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.skillsListHead h3 {
+  margin: 0;
+  font-size: 0.95em;
+}
+.skillsSearch {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 4px;
+  color: #eee;
+  padding: 6px 9px;
+  width: 100%;
+  font-size: 0.85em;
+  margin-bottom: 2px;
+}
+.skillsSearch:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+.skillsList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 70vh;
+  overflow-y: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-bg);
+}
+.skillsListItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.88em;
+}
+.skillsListItem:hover {
+  background: var(--color-surface);
+}
+.skillsListItem.active {
+  background: #2c2820;
+  box-shadow: inset 2px 0 0 var(--color-accent);
+}
+.skillsListName {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.skillsListGroup {
+  padding: 6px 10px 2px;
+  font-size: 0.72em;
+  letter-spacing: 0.04em;
+  color: #777;
+  text-transform: uppercase;
+  cursor: default;
+}
+.skillsTag {
+  font-size: 0.72em;
+  padding: 1px 6px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-text-dim);
+  white-space: nowrap;
+}
+.skillsTag.isNew {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+.skillsTag.isEdit {
+  color: var(--color-positive);
+  border-color: #3d7a47;
+}
+.skillsEmpty {
+  padding: 14px;
+  color: var(--color-text-muted);
+  font-size: 0.88em;
+}
+
+.skillsDetailPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.skillsPreview {
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: #161616;
+  padding: 12px;
+}
+.skillsPreviewHead {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.skillsPreviewGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+@include breakpoints.below(breakpoints.$bp-560) {
+  .skillsPreviewGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.skillsPreviewCard {
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 8px 10px;
+  text-align: center;
+}
+.skillsPreviewLabel {
+  font-size: 0.72em;
+  letter-spacing: 0.04em;
+  color: #999;
+  text-transform: uppercase;
+}
+.skillsPreviewValue {
+  font-variant-numeric: tabular-nums;
+  font-size: 1em;
+  margin-top: 4px;
+  color: #ddd;
+}
+.skillsPreviewValue.isPositive {
+  color: var(--color-positive);
+}
+.skillsPreviewValue.isAffinity {
+  color: #d8b552;
+}
+.skillsPreviewValue.isZero {
+  color: var(--color-text-muted);
+}
+
+.skillsSection {
+  border: 1px solid #2b2b2b;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.skillsSectionTitle {
+  font-weight: 600;
+  font-size: 0.9em;
+  margin-bottom: 8px;
+  color: var(--color-accent);
+}
+.skillsFields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 16px;
+}
+.skillsField {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 0.82em;
+}
+.skillsFieldLabel {
+  color: var(--color-text-dim);
+}
+.skillsFieldInput {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.skillsFieldInput input,
+.fieldCombobox {
+  flex: 1;
+  min-width: 0;
+}
+.skillsFieldInput input {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 4px;
+  color: #eee;
+  padding: 5px 7px;
+  width: 100%;
+}
+.skillsFieldInput input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+.skillsFieldUnit {
+  color: var(--color-text-muted);
+  font-size: 0.9em;
+}
+
+.skillsCheck {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82em;
+  color: #ccc;
+}
+
+.skillsActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.skillsHint {
+  grid-column: 1 / -1;
+  font-size: 0.78em;
+  color: var(--color-text-muted);
+}
+
+.skillsHit {
+  border: 1px solid #2b2b2b;
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  background: #181818;
+}
+.skillsHit.active {
+  border-color: var(--color-accent);
+  background: #201c14;
+}
+.skillsHitHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.skillsHitIndex {
+  font-variant-numeric: tabular-nums;
+  color: var(--color-accent);
+  font-size: 0.85em;
+  font-weight: 600;
+}
+.skillsHitFrame {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+.skillsHitFrame input {
+  width: 80px;
+}
+.skillsHitDel {
+  margin-left: auto;
+  padding: 3px 8px;
+  font-size: 0.78em;
+}
+.skillsHitFields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 8px 16px;
+}
+.skillsAddHit {
+  align-self: flex-start;
+  background: transparent;
+  border: 1px dashed var(--color-border-strong);
+  color: var(--color-text-muted);
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.82em;
+  transition:
+    color 0.1s,
+    border-color 0.1s,
+    background 0.1s;
+}
+.skillsAddHit:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  background: var(--color-bg);
+}
+
+.skillsHitVariant {
+  margin-top: 8px;
+  padding: 6px 10px 8px 10px;
+  border-radius: 4px;
+  border-left: 3px solid var(--color-positive);
+  background: #151515;
+  cursor: pointer;
+}
+.skillsHitVariant.active {
+  border-left-color: var(--color-accent);
+  background: #1c1912;
+}
+.skillsHitVariantHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+  font-size: 0.82em;
+}
+.skillsHitVariantName {
+  color: #7fce8a;
+  font-weight: 600;
+}
+.skillsHitVariant.active .skillsHitVariantName {
+  color: #d3b57e;
+}
+.skillsHitVariantCond {
+  color: var(--color-text-muted);
+  font-size: 0.95em;
+}
+
+.skillsChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+.skillsChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border-strong);
+  background: #1d1d1d;
+  color: #cfc19a;
+  font-size: 0.78em;
+  white-space: nowrap;
+}
+.skillsChip button {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: 0;
+  font-size: 0.95em;
+  line-height: 1;
+}
+.skillsChip button:hover {
+  color: #d9736a;
+}
+.skillsChip.isReadonly {
+  color: #999;
+  border-style: dashed;
+}
+
+.skillsEffectsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.skillsEffectsToggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+}
+.skillsEffectsCaret {
+  color: var(--color-text-muted);
+  font-size: 0.8em;
+}
+.skillsEffectsTags {
+  border-bottom: 1px dashed #2b2b2b;
+  padding-bottom: 10px;
+  margin-bottom: 2px;
+}
+.skillsEffects {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 4px;
+}
+@include breakpoints.below(breakpoints.$bp-760) {
+  .skillsEffects {
+    grid-template-columns: 1fr;
+  }
+}
+.skillsEffectsCol {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  border: 1px solid #2b2b2b;
+  border-radius: 6px;
+  padding: 10px;
+  background: #161616;
+}
+.skillsEffectsColHead {
+  font-size: 0.76em;
+  letter-spacing: 0.03em;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  border-bottom: 1px solid #2b2b2b;
+  padding-bottom: 6px;
+  margin-bottom: 2px;
+}
+.skillsEffectsSubhead {
+  font-size: 0.72em;
+  letter-spacing: 0.02em;
+  color: #777;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+.skillsEffectsRow {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.82em;
+}
+.skillsEffectsRowName {
+  color: #cfc19a;
+}
+.skillsEffectsRowDetail {
+  color: #999;
+  font-size: 0.92em;
+}
+.skillsEffectsRowRequires {
+  color: #a0784a;
+  font-size: 0.9em;
+}
+.skillsEffectsRowTriggered {
+  color: #7d94a3;
+  font-size: 0.85em;
+  font-style: italic;
+}
+.skillsEffectsEmpty {
+  color: #666;
+  font-size: 0.82em;
+}
+.skillsEffectsFlags {
+  margin-top: 2px;
+}
+.skillsEffectsFlags strong {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+.skillsEffectsMore {
+  background: none;
+  border: 1px dashed #3a3a3a;
+  color: var(--color-text-muted);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.78em;
+  cursor: pointer;
+  margin-top: 4px;
+  align-self: flex-start;
+}
+.skillsEffectsMore:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.skillsEffectsRow.isBuff {
+  border-left: 3px solid var(--color-positive);
+  padding-left: 8px;
+}
+.skillsEffectsRow.isBuff .skillsEffectsRowName {
+  color: #7fce8a;
+}
+.skillsEffectsRow.isDebuff {
+  border-left: 3px solid #d9736a;
+  padding-left: 8px;
+}
+.skillsEffectsRow.isDebuff .skillsEffectsRowName {
+  color: #e18f87;
+}
+.skillsEffectsRow.isCast {
+  border-left: 3px solid #b58ad9;
+  padding-left: 8px;
+}
+.skillsEffectsRow.isCast .skillsEffectsRowName {
+  color: #c6a4e3;
+}
+.skillsEffectsRow.isSite {
+  border-left: 3px solid #5fb0c8;
+  padding-left: 8px;
+}
+.skillsEffectsRow.isSite .skillsEffectsRowName {
+  color: #7fc4d8;
+}
+.skillsEffectsRow.isSpec {
+  border-left: 3px solid var(--color-accent);
+  padding-left: 8px;
+}
+.skillsEffectsRow.isSpec .skillsEffectsRowName {
+  color: #d3b57e;
+}
+.skillsEffectsRow.isOff {
+  opacity: 0.5;
+}

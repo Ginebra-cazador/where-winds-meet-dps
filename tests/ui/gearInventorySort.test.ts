@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest"
 import {
   sortInventoryRowsByDps,
   type InventoryRow,
-} from "../../src/ui/features/gear/GearInventoryPanel"
+} from "../../src/ui/features/gear/gear-inventory-panel/GearInventoryPanel"
 import type { DpsDelta } from "../../src/engine/dpsWorker"
 import type { DpsDeltaMap } from "../../src/ui/hooks/useDpsDeltas"
 import type { GearPiece } from "../../src/engine/types"

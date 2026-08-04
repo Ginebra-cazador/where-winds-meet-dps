@@ -1,0 +1,20 @@
+@use "breakpoints";
+
+.gearSplit {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+@include breakpoints.below(breakpoints.$bp-900) {
+  .gearSplit {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gearAnalyzerStack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

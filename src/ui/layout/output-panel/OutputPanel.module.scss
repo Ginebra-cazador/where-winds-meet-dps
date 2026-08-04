@@ -1,0 +1,66 @@
+@use "breakpoints";
+
+/* Flex, not a fixed track list: adding/removing a stat can't leave a dead grid column. */
+.metricsCard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  align-items: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 12px 18px;
+  margin-bottom: 10px;
+}
+
+.dps {
+  flex: 1 1 220px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--color-surface-raised);
+  padding-right: 16px;
+}
+
+.dps .label {
+  font-size: 0.75em;
+  color: var(--color-text-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.dps .value {
+  font-size: 1.9em;
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.stat {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  white-space: nowrap;
+}
+
+.stat .label {
+  font-size: 0.72em;
+  color: var(--color-text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.stat .value {
+  font-size: 1em;
+  color: var(--color-accent-bright);
+  font-variant-numeric: tabular-nums;
+}
+
+@include breakpoints.below(breakpoints.$bp-720) {
+  .metricsCard {
+    gap: 12px 24px;
+  }
+  .dps {
+    border-right: none;
+  }
+}

@@ -1,0 +1,42 @@
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  color-scheme: light dark;
+  background: #1a1a1a;
+  color: #e8e8e8;
+
+  --color-accent: #c0a060;
+  --color-text-muted: #888;
+  --color-text: #e8e8e8;
+  --color-bg: #1a1a1a;
+  --color-border: #333;
+  --color-border-strong: #444;
+  --color-text-dim: #aaa;
+  --color-surface-raised: #2a2a2a;
+  --color-accent-bright: #d8b070;
+  --color-positive: #5fb86b;
+  --color-border-hover: #666;
+  --color-negative: #d05a5a;
+  --color-surface-alt: #1f1f1f;
+  --color-surface: #232323;
+  --color-overlay: rgba(0, 0, 0, 0.6);
+}
+
+body {
+  margin: 0;
+  padding: 16px 24px;
+  height: 100vh;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Without an explicit height, #root collapses to its content size, which
+ * breaks App.module.scss's .app height: 100% and, downstream, .tabPanel's
+ * overflow-y: auto. */
+#root {
+  height: 100%;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.3em;
+}

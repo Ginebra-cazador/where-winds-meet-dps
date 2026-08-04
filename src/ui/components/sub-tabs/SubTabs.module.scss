@@ -1,0 +1,36 @@
+.subtabs {
+  display: flex;
+  gap: 2px;
+  border-bottom: 1px solid #2a2a2a;
+  margin: 0 0 12px 0;
+}
+
+.subtab {
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  color: var(--color-text-muted);
+  padding: 6px 14px;
+  font-size: 0.85em;
+  cursor: pointer;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  letter-spacing: 0.03em;
+  transition:
+    color 0.1s,
+    background 0.1s,
+    border-color 0.1s;
+  position: relative;
+  top: 1px;
+}
+
+.subtab:hover {
+  color: #d8d8d8;
+}
+
+.subtab.active {
+  color: var(--color-accent);
+  background: var(--color-surface);
+  border-color: #2a2a2a;
+  font-weight: 600;
+}

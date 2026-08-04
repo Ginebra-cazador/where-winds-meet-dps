@@ -1,0 +1,26 @@
+.contributeNote {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-muted);
+  font-size: 0.8em;
+  white-space: nowrap;
+}
+
+.githubLink {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-text-dim);
+  text-decoration: none;
+  transition: color 0.1s;
+}
+
+.githubLink:hover {
+  color: var(--color-text);
+}
+
+.githubLink svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}

@@ -1,0 +1,111 @@
+import { useI18n } from "../../../../i18n/I18nContext"
+import { resistanceForInputs } from "../../../../engine/panel"
+import type { Inputs, Result } from "../../../../engine/types"
+import { syncClassPermanent } from "../../../utils/classSetup"
+import { useItemRanking } from "../../../hooks/useItemRanking"
+import { useSetTileDps } from "../../../hooks/useSetTileDps"
+import { ClassSelect } from "../class-select/ClassSelect"
+import { BreakthroughSelect } from "../breakthrough-select/BreakthroughSelect"
+import { MindMethodsPanel } from "../mind-methods-panel/MindMethodsPanel"
+import { EncounterSettingsPanel } from "../encounter-settings-panel/EncounterSettingsPanel"
+import { BowSetPanel } from "../bow-set-panel/BowSetPanel"
+import { ArsenalPanel } from "../arsenal-panel/ArsenalPanel"
+import { StatsOverviewPanel } from "../stats-overview-panel/StatsOverviewPanel"
+import { ItemRankingTable } from "../item-ranking-table/ItemRankingTable"
+import styles from "./OverviewTab.module.scss"
+
+export function OverviewTab({
+  inputs,
+  engineInputs,
+  onChange,
+  result,
+}: {
+  inputs: Inputs
+  engineInputs: Inputs
+  onChange: (next: Inputs) => void
+  result: Result
+}) {
+  const { t } = useI18n()
+  const { rows: rankingRows, isPending: rankingPending } = useItemRanking(engineInputs, result.dps)
+  const { data: tileDps, isPending: tilesPending } = useSetTileDps(inputs)
+  return (
+    <>
+      <div className={styles.overviewGrid}>
+        <div>
+          <div className="panel">
+            <h2>{t("Class & Breakthrough")}</h2>
+            <ClassSelect
+              value={inputs.classId}
+              onChange={(classId) => onChange(syncClassPermanent(inputs, classId))}
+            />
+            <BreakthroughSelect
+              value={inputs.breakthrough}
+              onChange={(breakthrough) => onChange({ ...inputs, breakthrough })}
+            />
+            <div className="row">
+              <label>{t("Enable Dummy")}</label>
+              <input
+                type="checkbox"
+                checked={inputs.dummyMode}
+                onChange={(e) => onChange({ ...inputs, dummyMode: e.target.checked })}
+              />
+            </div>
+          </div>
+          <div className="panel">
+            <h2>{t("Inner Ways")}</h2>
+            <MindMethodsPanel inputs={inputs} onChange={onChange} />
+          </div>
+          <div className="panel">
+            <h2>{t("Encounter Settings")}</h2>
+            <EncounterSettingsPanel inputs={inputs} onChange={onChange} />
+          </div>
+        </div>
+
+        <div>
+          <div className="panel">
+            <h2>{t("Set Bonuses")}</h2>
+            <BowSetPanel
+              inputs={inputs}
+              onChange={onChange}
+              armorDpsByKey={tileDps?.armorDpsByKey}
+              bowDpsByChoice={tileDps?.bowDpsByChoice}
+              isPending={tilesPending}
+            />
+            <div className="section-label">{t("Arsenal")}</div>
+            <ArsenalPanel
+              inputs={inputs}
+              onChange={onChange}
+              arsenalDpsByChoice={tileDps?.arsenalDpsByChoice}
+              isPending={tilesPending}
+            />
+          </div>
+        </div>
+
+        <div>
+          <div className="panel">
+            <div className="panel-head">
+              <h2>{t("Panel Stats")}</h2>
+              <span className="panel-head-meta">
+                {t("Resistance")}:{" "}
+                <span className="panel-head-meta-value">{resistanceForInputs(inputs)}%</span>
+              </span>
+            </div>
+            <StatsOverviewPanel inputs={inputs} />
+          </div>
+        </div>
+
+        <div>
+          <div className="panel">
+            <div className="panel-head">
+              <h2>{t("Gear-Stat Lift")}</h2>
+              <span className="panel-head-meta">{rankingRows.length}</span>
+            </div>
+            <div style={{ opacity: rankingPending ? 0.6 : 1 }}>
+              <ItemRankingTable rows={rankingRows} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  )
+}

@@ -1,0 +1,323 @@
+@use "breakpoints";
+
+.customRotationPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+:global(.toolbar) select.activeSelect {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 4px;
+  color: var(--color-text);
+  padding: 5px 8px;
+  font-size: 0.88em;
+  min-width: 220px;
+}
+
+:global(.toolbar) select.activeSelect:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+:global(.toolbar) select.activeSelect.isActive {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.builtinHint {
+  font-size: 0.8em;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.editor {
+  background: var(--color-surface-alt);
+  border: 1px solid #2e2e2e;
+  border-radius: 6px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+
+.meta .field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.meta .field > span {
+  font-size: 0.7em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.meta input[type="text"],
+.meta input[type="number"] {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 4px;
+  color: var(--color-text);
+  padding: 5px 8px;
+  font-size: 0.9em;
+  box-sizing: border-box;
+}
+
+.meta input[type="text"] {
+  min-width: 220px;
+}
+.meta input[type="number"] {
+  width: 90px;
+}
+
+.meta input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.meta .actions {
+  margin-left: auto;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.divider {
+  height: 1px;
+  background: #2e2e2e;
+  margin: 2px 0;
+}
+
+.entries {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 28px 64px minmax(120px, 1fr) 70px 70px minmax(160px, 1.6fr) auto;
+  gap: 10px;
+  align-items: center;
+  padding: 5px 8px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.entry:hover {
+  background: var(--color-bg);
+  border-color: #2e2e2e;
+}
+
+.entryReadonly {
+  opacity: 0.85;
+}
+
+.skillStatic {
+  color: #ddd;
+  font-size: 0.88em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.buffsCell {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  align-items: center;
+}
+
+.entry .idx {
+  font-variant-numeric: tabular-nums;
+  color: #666;
+  text-align: right;
+  font-size: 0.82em;
+}
+
+.entry input[type="number"] {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 4px;
+  color: var(--color-text);
+  padding: 4px 6px;
+  font-size: 0.85em;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.entry input[type="number"]:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.entry .rowActions {
+  display: flex;
+  gap: 4px;
+}
+
+.entriesEmpty {
+  padding: 24px 12px;
+  text-align: center;
+  color: #555;
+  font-size: 0.88em;
+  border: 1px dashed #2e2e2e;
+  border-radius: 4px;
+}
+
+.add {
+  align-self: flex-start;
+  background: transparent;
+  border: 1px dashed var(--color-border-strong);
+  color: var(--color-text-muted);
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.82em;
+  transition:
+    color 0.1s,
+    border-color 0.1s,
+    background 0.1s;
+}
+
+.add:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  background: var(--color-bg);
+}
+
+@include breakpoints.below(breakpoints.$bp-720) {
+  .entry {
+    grid-template-columns: 1fr;
+  }
+  .meta input[type="text"] {
+    min-width: 160px;
+  }
+}
+
+/* Hue comes from `src/ui/features/rotation/buffChips.ts`'s `buffChipHue`
+   (pinned or hashed per buff name), set as `--buff-hue` on the chip itself. */
+.castBuffTag {
+  --buff-hue: 42;
+  display: inline-block;
+  position: relative;
+  margin: 1px 4px 1px 0;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: hsla(var(--buff-hue), 60%, 42%, 0.2);
+  border: 1px solid hsla(var(--buff-hue), 55%, 58%, 0.45);
+  font-size: 0.78em;
+  color: hsl(var(--buff-hue), 65%, 74%);
+  cursor: default;
+  white-space: nowrap;
+}
+
+.castBuffTooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 0;
+  z-index: 20;
+  min-width: 160px;
+  max-width: 280px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  background: #1c1c1c;
+  border: 1px solid #3a3a3a;
+  border-left: 3px solid hsla(var(--buff-hue), 55%, 58%, 0.7);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  font-size: 0.82em;
+  color: #ddd;
+  white-space: normal;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.castBuffTag:hover .castBuffTooltip {
+  display: block;
+}
+
+.timelineToggle {
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+}
+.durationDisplay {
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+  padding: 5px 0;
+}
+.castReadonly {
+  color: var(--color-text-muted);
+  font-size: 0.85em;
+  text-align: right;
+}
+.time {
+  color: var(--color-text-muted);
+  font-size: 0.85em;
+  font-variant-numeric: tabular-nums;
+}
+.prepull {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.85em;
+  color: #ccc;
+}
+.permanentBuffs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+.permanentLabel {
+  color: var(--color-text-dim);
+  font-size: 0.85em;
+}
+.buffSelect {
+  position: relative;
+  display: inline-block;
+}
+.buffDropdown {
+  position: absolute;
+  z-index: 20;
+  top: 100%;
+  left: 0;
+  margin-top: 2px;
+  background: #1e1e1e;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 4px;
+  padding: 4px;
+  min-width: 160px;
+  max-height: 220px;
+  overflow-y: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+.buffOption {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 4px;
+  font-size: 0.85em;
+  cursor: pointer;
+}
+.buffOption:hover {
+  background: var(--color-surface-raised);
+}
+.buffEmpty {
+  color: #777;
+  padding: 4px;
+  font-size: 0.85em;
+}

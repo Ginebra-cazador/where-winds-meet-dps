@@ -19,6 +19,40 @@ The sections below are the rules that apply *before* you know which topic you're
 in — they stay here on purpose, because a pointer you don't know to follow isn't
 a guardrail.
 
+## Comments and names — write the code, not a narration
+
+> **This has been asked for repeatedly. Treat a violation as a defect, not a
+> style nit.**
+
+1. **A comment must carry what the code cannot** — a rejected alternative, an
+   ordering constraint that would otherwise get re-broken, a constraint from
+   outside the file, an external-source citation, a unit on a bare number. The
+   test is: *could the next reader reconstruct this from the code and the topic
+   docs?* If yes, it is noise:
+
+   ```
+   // Sort the entries by name.     ← delete, the call already says it
+   // Bump the retry counter.       ← delete
+   // Holds the parsed profiles.    ← delete, the name says it
+   ```
+
+   This applies to **every file that ships** — source, stylesheets, config,
+   tests, data — not only the ones where you think of yourself as "writing
+   code". Whole files ending up with no comments at all is the normal outcome,
+   not a warning sign. Moving code does not move its comments with it: re-judge
+   each one against this bar and drop it if it fails, even when you were told to
+   preserve it. No tombstones either — when you delete something, delete the
+   lines that referenced it rather than noting it is gone.
+2. **Names say what they hold at their point of use.** No `a`, `b`, `x`, `tmp`,
+   no one-letter stand-in for a longer word — locals, parameters, or imports.
+   `const a = loadProfiles()` is `const profiles = loadProfiles()`. A name that
+   needs its surrounding line to be understood is a name to replace, and this
+   outranks any external convention that prefers brevity.
+
+If you find yourself writing a comment to explain an identifier, fix the
+identifier instead. Before calling any task done, re-read your own diff and
+delete every comment a reader of the code would not miss.
+
 ## Language: English-first — no Chinese in code
 
 The app is **English-only**. There is **no Chinese in `src/` or `tests/`** — not

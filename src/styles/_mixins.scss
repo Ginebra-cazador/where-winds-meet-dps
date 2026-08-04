@@ -1,0 +1,15 @@
+@mixin field-input {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 4px;
+  color: var(--color-text);
+  padding: 3px 6px;
+  font-size: 0.85em;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@mixin field-focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
