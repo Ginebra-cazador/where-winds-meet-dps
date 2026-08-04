@@ -43,8 +43,7 @@ export function concentrationActiveProbSchedule(
         }
         if (rng() < p) {
           lastAffinityHitTime = hitTime
-          if (active) {
-          } else {
+          if (!active) {
             counter += 1
             if (counter >= REQUIRED_HITS) active = true
           }

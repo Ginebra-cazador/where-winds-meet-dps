@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Prettier
+        run: npm run format:check
+      - name: ESLint
+        run: npm run lint
+      - name: English-only guard
+        env:
+          LC_ALL: C.UTF-8
+          LANG: C.UTF-8
+        run: |
+          hits=$(grep -rlP '[\x{4e00}-\x{9fff}]' src tests || true)
+          if [ -n "$hits" ]; then
+            echo "Chinese characters found in src/ or tests/ (English-only repo):" >&2
+            echo "$hits" >&2
+            exit 1
+          fi
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Build
+        run: npm run build
+      - name: Tests
+        run: npm run test

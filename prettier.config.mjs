@@ -19,4 +19,4 @@ export default {
       options: { printWidth: 120 },
     },
   ],
-};
+}

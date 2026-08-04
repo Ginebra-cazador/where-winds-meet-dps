@@ -71,3 +71,32 @@ in vitest.** `tests/engine/dpsWorkerOffload.test.ts` is the pattern.
   `bugfix-2026-08`).
 - No Chinese anywhere in `tests/` — CLAUDE.md § "Language" applies here exactly
   as it does to `src/`.
+
+## CI and lint
+
+`.github/workflows/ci.yml` runs on every push to `main` and on every pull
+request. It gates, in order: `format:check`, `lint`, the English-only grep
+guard, `typecheck`, `build`, `test`. There is no deploy job — `npm run deploy`
+stays manual and local.
+
+`npm run lint` is `eslint .` against a flat config
+(`eslint.config.mjs`): `@eslint/js` recommended, `typescript-eslint`
+recommended (non-type-checked), `eslint-plugin-react-hooks`
+recommended-latest, `eslint-plugin-react-refresh` vite. Lint must stay
+**error-free**. Three rules are deliberately set to `warn`, with the counts as
+of this change: `react-hooks/set-state-in-effect` (10),
+`react-refresh/only-export-components` (3),
+`react-hooks/preserve-manual-memoization` (2) — plus
+`react-hooks/exhaustive-deps` (2), which the plugin itself ships as `warn`.
+Each is a pre-existing structural pattern (state resets inside worker-offload
+effects, provider modules that also export a hook, React Compiler bailouts),
+not something to silence file-by-file.
+
+`--max-warnings 0` is intentionally not enabled yet. Turning the lint
+warnings into a hard gate is a follow-up that starts by clearing those sites,
+not by adding disable directives.
+
+`typecheck` and `build` still type-check with TypeScript **7** via the `tsc`
+binary. `typescript` in `node_modules` resolves to the TS 6 API package
+because `typescript-eslint` cannot load against TS 7 yet; `tsc` itself comes
+from the `@typescript/native` alias.

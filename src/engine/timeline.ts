@@ -549,15 +549,11 @@ export function simulateTimeline(inputs: Inputs): Result {
 
   let totalDamage = 0
   let processed = 0
-  let cappedWarned = false
   while (queue.size > 0) {
     if (processed >= EVENT_CAP) {
-      if (!cappedWarned) {
-        warnings.push(
-          `Timeline exceeded ${EVENT_CAP} events — a trigger chain may be unbounded; simulation was truncated.`,
-        )
-        cappedWarned = true
-      }
+      warnings.push(
+        `Timeline exceeded ${EVENT_CAP} events — a trigger chain may be unbounded; simulation was truncated.`,
+      )
       break
     }
     const ev = queue.pop()!
