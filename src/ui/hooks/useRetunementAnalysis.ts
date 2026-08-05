@@ -13,6 +13,13 @@ export interface RetunementAnalysisResult {
   forPieceId: string | null
 }
 
+const NO_SELECTION_RESULT: RetunementAnalysisResult = {
+  rows: [],
+  reason: "no-selection",
+  forPieceId: null,
+  isPending: false,
+}
+
 export function useRetunementAnalysis(
   inputs: Inputs,
   selectedPieceId: string | null,
@@ -46,14 +53,7 @@ export function useRetunementAnalysis(
 
   useEffect(() => {
     const w = workerRef.current
-    if (!w) return
-    if (!selectedPieceId) {
-      setRows([])
-      setReason("no-selection")
-      setForPieceId(null)
-      setIsPending(false)
-      return
-    }
+    if (!w || !selectedPieceId) return
     const reqId = ++reqIdRef.current
     setIsPending(true)
     const handle = setTimeout(() => {
@@ -68,5 +68,6 @@ export function useRetunementAnalysis(
     return () => clearTimeout(handle)
   }, [inputs, selectedPieceId])
 
+  if (!selectedPieceId) return NO_SELECTION_RESULT
   return { rows, reason, isPending, forPieceId }
 }

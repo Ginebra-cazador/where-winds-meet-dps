@@ -14,8 +14,10 @@ import { TalentsOdditiesTab } from "../ui/features/talents/talents-oddities-tab/
 import { SkillsTab } from "../ui/features/skills/skills-tab/SkillsTab"
 import { useDpsDeltas } from "../ui/hooks/useDpsDeltas"
 import { SetupWizard, type SetupMode } from "../ui/features/setup/setup-wizard/SetupWizard"
-import { I18nProvider, useI18n } from "../i18n/I18nContext"
-import { ConfirmProvider, useConfirm } from "../ui/components/confirm-dialog/ConfirmDialog"
+import { useI18n } from "../i18n/i18nContext"
+import { I18nProvider } from "../i18n/I18nProvider"
+import { ConfirmProvider } from "../ui/components/confirm-dialog/ConfirmDialog"
+import { useConfirm } from "../ui/components/confirm-dialog/confirmContext"
 import {
   loadProfiles,
   saveProfiles,

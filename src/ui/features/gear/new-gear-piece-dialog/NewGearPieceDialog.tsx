@@ -3,7 +3,7 @@ import type { GearLevel, GearPiece, GearRarity, GearSlot, Inputs } from "../../.
 import { emptyGearWords } from "../../../../engine/types"
 import { gearBaseStatsFor } from "../../../../engine/gearStats"
 import { newGearPieceId } from "../../../../storage"
-import { useI18n } from "../../../../i18n/I18nContext"
+import { useI18n } from "../../../../i18n/i18nContext"
 import { GearPieceForm } from "../gear-piece-form/GearPieceForm"
 import styles from "./NewGearPieceDialog.module.scss"
 

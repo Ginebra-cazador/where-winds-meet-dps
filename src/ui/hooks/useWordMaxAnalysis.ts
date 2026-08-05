@@ -10,6 +10,12 @@ export interface WordMaxAnalysisResult {
   forPieceId: string | null
 }
 
+const NO_SELECTION_RESULT: WordMaxAnalysisResult = {
+  rows: [],
+  isPending: false,
+  forPieceId: null,
+}
+
 export function useWordMaxAnalysis(inputs: Inputs, piece: GearPiece | null): WordMaxAnalysisResult {
   const workerRef = useRef<Worker | null>(null)
   const reqIdRef = useRef(0)
@@ -38,13 +44,7 @@ export function useWordMaxAnalysis(inputs: Inputs, piece: GearPiece | null): Wor
 
   useEffect(() => {
     const w = workerRef.current
-    if (!w) return
-    if (!piece) {
-      setRows([])
-      setForPieceId(null)
-      setIsPending(false)
-      return
-    }
+    if (!w || !piece) return
     const reqId = ++reqIdRef.current
     setIsPending(true)
     const handle = setTimeout(() => {
@@ -59,5 +59,6 @@ export function useWordMaxAnalysis(inputs: Inputs, piece: GearPiece | null): Wor
     return () => clearTimeout(handle)
   }, [inputs, piece])
 
+  if (!piece) return NO_SELECTION_RESULT
   return { rows, isPending, forPieceId }
 }

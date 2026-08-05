@@ -1,18 +1,7 @@
-import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react"
-import { useI18n } from "../../../i18n/I18nContext"
+import { useCallback, useEffect, useRef, useState } from "react"
+import { useI18n } from "../../../i18n/i18nContext"
+import { ConfirmContext, type ConfirmFn } from "./confirmContext"
 import styles from "./ConfirmDialog.module.scss"
-
-type ConfirmFn = (message: string) => Promise<boolean>
-
-const ConfirmContext = createContext<ConfirmFn | null>(null)
-
-export function useConfirm(): ConfirmFn {
-  const ctx = useContext(ConfirmContext)
-  if (!ctx) {
-    throw new Error("useConfirm must be used within <ConfirmProvider>")
-  }
-  return ctx
-}
 
 interface PendingState {
   message: string

@@ -1,6 +1,6 @@
 import type { Arsenal, Inputs } from "../../../../engine/types"
 import { ARSENAL_BONUS, swapArsenal } from "../../../../engine/panel"
-import { useI18n } from "../../../../i18n/I18nContext"
+import { useI18n } from "../../../../i18n/i18nContext"
 import setTiles from "../shared/setTiles.module.scss"
 import styles from "./ArsenalPanel.module.scss"
 

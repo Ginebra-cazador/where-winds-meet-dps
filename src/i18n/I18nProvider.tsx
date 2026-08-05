@@ -1,20 +1,9 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
+import { useEffect, useState, type ReactNode } from "react"
 import { translate, type Locale } from "./translations"
 import { kvStore } from "../kvStore"
-
-interface I18nValue {
-  locale: Locale
-  setLocale(l: Locale): void
-  t(s: string): string
-}
+import { I18nContext, useI18n, type I18nValue } from "./i18nContext"
 
 const STORAGE_KEY = "wwm.locale"
-
-const Ctx = createContext<I18nValue>({
-  locale: "en",
-  setLocale: () => {},
-  t: (s) => s,
-})
 
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>(() => {
@@ -29,11 +18,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     setLocale: setLocaleState,
     t: (s) => translate(s, locale),
   }
-  return <Ctx.Provider value={value}>{children}</Ctx.Provider>
-}
-
-export function useI18n(): I18nValue {
-  return useContext(Ctx)
+  return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>
 }
 
 export function T({ children }: { children: string }) {

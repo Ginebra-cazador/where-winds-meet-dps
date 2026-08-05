@@ -79,22 +79,24 @@ request. It gates, in order: `format:check`, `lint`, the English-only grep
 guard, `typecheck`, `build`, `test`. There is no deploy job — `npm run deploy`
 stays manual and local.
 
-`npm run lint` is `eslint .` against a flat config
+`npm run lint` is `eslint . --max-warnings 0` against a flat config
 (`eslint.config.mjs`): `@eslint/js` recommended, `typescript-eslint`
 recommended (non-type-checked), `eslint-plugin-react-hooks`
-recommended-latest, `eslint-plugin-react-refresh` vite. Lint must stay
-**error-free**. Three rules are deliberately set to `warn`, with the counts as
-of this change: `react-hooks/set-state-in-effect` (10),
-`react-refresh/only-export-components` (3),
-`react-hooks/preserve-manual-memoization` (2) — plus
-`react-hooks/exhaustive-deps` (2), which the plugin itself ships as `warn`.
-Each is a pre-existing structural pattern (state resets inside worker-offload
-effects, provider modules that also export a hook, React Compiler bailouts),
-not something to silence file-by-file.
+recommended-latest, `eslint-plugin-react-refresh` vite. The config carries **no
+severity overrides** for the react-hooks / react-refresh rules, so
+`react-hooks/set-state-in-effect`, `react-hooks/preserve-manual-memoization`
+and `react-refresh/only-export-components` run at the plugins' preset
+`error`, and `react-hooks/exhaustive-deps` at the plugin's preset `warn`.
 
-`--max-warnings 0` is intentionally not enabled yet. Turning the lint
-warnings into a hard gate is a follow-up that starts by clearing those sites,
-not by adding disable directives.
+**Zero warnings** is the gate — that includes unused `eslint-disable`
+directives, which ESLint reports as warnings under this flat config. The
+patterns that used to warn (state resets inside worker-offload effects,
+provider modules that also export a hook, React Compiler bailouts from
+out-of-order `useMemo` declarations) were removed structurally: derived render
+values instead of state resets in effects, context/hook modules split out of
+provider modules, memo declarations ordered before their readers. Reintroducing
+one of these must be fixed the same way — not with a disable directive and not
+with a suppressions baseline.
 
 `typecheck` and `build` still type-check with TypeScript **7** via the `tsc`
 binary. `typescript` in `node_modules` resolves to the TS 6 API package

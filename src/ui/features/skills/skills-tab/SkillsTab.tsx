@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useMemo, useRef, useState } from "react"
 import type { Inputs } from "../../../../engine/types"
 import type { Skill, SkillHit, HitTrigger, HitVariant, TriggerKind } from "../../../../engine/skill"
 import {
@@ -29,8 +29,8 @@ import {
   exportCustomSkill,
   importCustomSkill,
 } from "../../../../storage"
-import { useI18n } from "../../../../i18n/I18nContext"
-import { useConfirm } from "../../../components/confirm-dialog/ConfirmDialog"
+import { useI18n } from "../../../../i18n/i18nContext"
+import { useConfirm } from "../../../components/confirm-dialog/confirmContext"
 import { NumInput, PercentInput } from "../../../components/number-inputs/NumberInputs"
 import { Combobox, type ComboboxOption } from "../../../components/combobox/Combobox"
 import { FPS } from "../../../../engine/timeline"
@@ -190,6 +190,10 @@ export function SkillsTab({
     [customDebuffs, classId],
   )
 
+  const builtinSkills = useMemo(() => builtinSkillsForClass(classId), [classId])
+  const builtinDebuffs = useMemo(() => builtinDebuffsForClass(classId), [classId])
+  const builtinBuffs = useMemo(() => builtinBuffsForClass(classId), [classId])
+
   function effectiveTriggerKind(trig: HitTrigger): TriggerKind {
     const isBuffId = (id: string) =>
       classBuffs.some((buff) => buff.id === id) || builtinBuffs.some((buff) => buff.id === id)
@@ -204,10 +208,6 @@ export function SkillsTab({
     }
     return trig.kind
   }
-
-  const builtinSkills = useMemo(() => builtinSkillsForClass(classId), [classId])
-  const builtinDebuffs = useMemo(() => builtinDebuffsForClass(classId), [classId])
-  const builtinBuffs = useMemo(() => builtinBuffsForClass(classId), [classId])
 
   const [search, setSearch] = useState("")
   const searchLower = search.trim().toLowerCase()
@@ -385,13 +385,20 @@ export function SkillsTab({
     }
   }
 
+  const effectiveHitIndex = draft && activeHitIndex < draft.hits.length ? activeHitIndex : 0
+  const effectiveHit = draft?.hits[effectiveHitIndex]
+  const effectiveVariantId =
+    activeVariantId && effectiveHit?.variants?.some((variant) => variant.id === activeVariantId)
+      ? activeVariantId
+      : null
+
   const preview = useMemo(() => {
     if (!draft || !draft.name.trim()) return null
 
-    const hit = draft.hits[activeHitIndex]
+    const hit = draft.hits[effectiveHitIndex]
     if (!hit) return null
-    const variant = activeVariantId
-      ? hit.variants?.find((candidate) => candidate.id === activeVariantId)
+    const variant = effectiveVariantId
+      ? hit.variants?.find((candidate) => candidate.id === effectiveVariantId)
       : undefined
     const livePatch: ArtPatch = {
       name: draft.name.trim(),
@@ -408,17 +415,7 @@ export function SkillsTab({
       (draft.tags ?? []).find((tag) => tag.startsWith("mystic:"))?.slice("mystic:".length) ?? ""
     if (mysticFlag) livePatch.mysticCategory = mysticFlag
     return computeSkillPreview(draft.name.trim(), engineInputs, livePatch)
-  }, [draft, activeHitIndex, activeVariantId, engineInputs])
-
-  useEffect(() => {
-    if (draft && activeHitIndex >= draft.hits.length) setActiveHitIndex(0)
-  }, [draft, activeHitIndex])
-
-  useEffect(() => {
-    if (!draft || !activeVariantId) return
-    const hit = draft.hits[activeHitIndex]
-    if (!hit?.variants?.some((variant) => variant.id === activeVariantId)) setActiveVariantId(null)
-  }, [draft, activeHitIndex, activeVariantId])
+  }, [draft, effectiveHitIndex, effectiveVariantId, engineInputs])
 
   const opts = (vals: string[], labelFn?: (value: string) => string): ComboboxOption[] =>
     vals.map((value) => ({
@@ -683,7 +680,7 @@ export function SkillsTab({
             <>
               <div className={styles.skillsPreview}>
                 <div className={styles.skillsPreviewHead}>
-                  {t("Damage Preview (per hit)")} — {t("Slot ")} {activeHitIndex + 1} {t("hits")}
+                  {t("Damage Preview (per hit)")} — {t("Slot ")} {effectiveHitIndex + 1} {t("hits")}
                 </div>
                 <div className={styles.skillsPreviewGrid}>
                   <PreviewCard
@@ -794,7 +791,7 @@ export function SkillsTab({
                   <div
                     key={hit.id}
                     className={
-                      styles.skillsHit + (idx === activeHitIndex ? ` ${styles.active}` : "")
+                      styles.skillsHit + (idx === effectiveHitIndex ? ` ${styles.active}` : "")
                     }
                     onClick={() => {
                       setActiveHitIndex(idx)
@@ -861,7 +858,8 @@ export function SkillsTab({
                       const gateStatus = variant.conditions[0]
                         ? resolveStatus(variant.conditions[0].buffId)
                         : undefined
-                      const isActive = idx === activeHitIndex && activeVariantId === variant.id
+                      const isActive =
+                        idx === effectiveHitIndex && effectiveVariantId === variant.id
                       return (
                         <div
                           key={variant.id}

@@ -1,6 +1,6 @@
 import { useMemo } from "react"
 import type { Result, SkillTickResult } from "../../../../engine/types"
-import { useI18n } from "../../../../i18n/I18nContext"
+import { useI18n } from "../../../../i18n/i18nContext"
 import styles from "./RotationBreakdownPanel.module.scss"
 
 function groupKey(name: string): string {

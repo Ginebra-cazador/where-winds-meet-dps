@@ -1,7 +1,8 @@
 import type { GearPiece, GearSlot } from "../../../../engine/types"
-import { useI18n } from "../../../../i18n/I18nContext"
+import { useI18n } from "../../../../i18n/i18nContext"
 import type { DpsDelta } from "../../../../engine/dpsWorker"
 import type { DpsDeltaMap } from "../../../hooks/useDpsDeltas"
+import { sortInventoryRowsByDps, type InventoryRow } from "./inventoryRows"
 import styles from "./GearInventoryPanel.module.scss"
 
 const SLOT_LABEL_KEYS: Record<GearSlot, string> = {
@@ -13,13 +14,6 @@ const SLOT_LABEL_KEYS: Record<GearSlot, string> = {
   armor: "Armor",
   greaves: "Greaves",
   bracer: "Bracer",
-}
-
-export interface InventoryRow {
-  piece: GearPiece
-  ownerProfileId: string
-  ownerProfileName: string
-  isEquipped: boolean
 }
 
 interface Props {
@@ -54,21 +48,6 @@ function signClass(delta: number): string {
   if (rounded > 0) return "is-positive"
   if (rounded < 0) return "is-negative"
   return "is-zero"
-}
-
-export function sortInventoryRowsByDps(
-  rows: InventoryRow[],
-  dpsDeltas: DpsDeltaMap,
-): InventoryRow[] {
-  return [...rows].sort((rowA, rowB) => {
-    const deltaA = dpsDeltas[rowA.piece.id]
-    const deltaB = dpsDeltas[rowB.piece.id]
-    if (deltaA === undefined && deltaB === undefined) return 0
-    if (deltaA === undefined) return 1
-    if (deltaB === undefined) return -1
-    if (deltaB.upgraded !== deltaA.upgraded) return deltaB.upgraded - deltaA.upgraded
-    return deltaB.fullPotential - deltaA.fullPotential
-  })
 }
 
 export function GearInventoryPanel({

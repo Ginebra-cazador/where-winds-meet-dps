@@ -32,8 +32,8 @@ import {
   loadCustomBuffsForClass,
   loadCustomDebuffsForClass,
 } from "../../../../storage"
-import { useI18n } from "../../../../i18n/I18nContext"
-import { useConfirm } from "../../../components/confirm-dialog/ConfirmDialog"
+import { useI18n } from "../../../../i18n/i18nContext"
+import { useConfirm } from "../../../components/confirm-dialog/confirmContext"
 import styles from "./RotationEditorPanel.module.scss"
 
 interface Props {
@@ -109,7 +109,9 @@ export function RotationEditorPanel({ inputs, onChange, result }: Props) {
 
   const [saved, setSaved] = useState<Rotation[]>(() => loadCustomRotations())
   const [expanded, setExpanded] = useState(true)
-  const [nameDraft, setNameDraft] = useState("")
+  const [nameDraft, setNameDraft] = useState<{ rotationId: string | null; value: string } | null>(
+    null,
+  )
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const savedForClass = useMemo(
@@ -147,6 +149,11 @@ export function RotationEditorPanel({ inputs, onChange, result }: Props) {
   )
 
   const activeRotation = useMemo(() => activeRotationForInputs(inputs), [inputs])
+  const activeRotationId = activeRotation?.id ?? null
+  const effectiveName =
+    nameDraft && nameDraft.rotationId === activeRotationId
+      ? nameDraft.value
+      : (activeRotation?.name ?? "")
   const isCustom =
     !!inputs.activeCustomRotation && inputs.activeCustomRotation.classId === inputs.classId
   const isPersisted =
@@ -157,10 +164,6 @@ export function RotationEditorPanel({ inputs, onChange, result }: Props) {
   const selectedBuiltin = !isCustom
     ? builtinRotations.find((rotation) => rotation.id === inputs.selectedBuiltinRotationId)
     : undefined
-
-  useEffect(() => {
-    setNameDraft(activeRotation?.name ?? "")
-  }, [activeRotation?.id])
 
   useEffect(() => {
     if (!isCustom || !activeRotation) return
@@ -321,23 +324,23 @@ export function RotationEditorPanel({ inputs, onChange, result }: Props) {
 
   function handleSave() {
     if (!activeRotation || !isCustom) return
-    if (!nameDraft.trim()) {
+    if (!effectiveName.trim()) {
       alert(t("Please enter a name"))
       return
     }
-    const persisted = saveCustomRotation({ ...activeRotation, name: nameDraft })
+    const persisted = saveCustomRotation({ ...activeRotation, name: effectiveName })
     setSaved(loadCustomRotations())
     onChange({ ...inputs, activeCustomRotation: persisted })
   }
 
   function handleSaveAs() {
     if (!activeRotation || !isCustom) return
-    if (!nameDraft.trim()) {
+    if (!effectiveName.trim()) {
       alert(t("Please enter a name"))
       return
     }
     const id = newRotationId()
-    const persisted = saveCustomRotation({ ...activeRotation, id, name: nameDraft })
+    const persisted = saveCustomRotation({ ...activeRotation, id, name: effectiveName })
     setSaved(loadCustomRotations())
     onChange({ ...inputs, activeCustomRotation: persisted, selectedBuiltinRotationId: null })
   }
@@ -353,11 +356,11 @@ export function RotationEditorPanel({ inputs, onChange, result }: Props) {
   function handleExport() {
     if (!activeRotation) return
     const text = exportCustomRotation(
-      isCustom ? { ...activeRotation, name: nameDraft } : activeRotation,
+      isCustom ? { ...activeRotation, name: effectiveName } : activeRotation,
     )
     const blob = new Blob([text], { type: "application/json" })
     const url = URL.createObjectURL(blob)
-    const safeName = ((isCustom ? nameDraft : activeRotation.name) || "rotation").replace(
+    const safeName = ((isCustom ? effectiveName : activeRotation.name) || "rotation").replace(
       /[^\w\-.]+/g,
       "_",
     )
@@ -445,10 +448,12 @@ export function RotationEditorPanel({ inputs, onChange, result }: Props) {
               <span>{t("Name")}</span>
               <input
                 type="text"
-                value={isCustom ? nameDraft : activeRotation.name}
+                value={isCustom ? effectiveName : activeRotation.name}
                 placeholder={t("(unnamed)")}
                 disabled={!isCustom}
-                onChange={(e) => setNameDraft(e.target.value)}
+                onChange={(e) =>
+                  setNameDraft({ rotationId: activeRotationId, value: e.target.value })
+                }
               />
             </label>
             <label className={styles.field}>

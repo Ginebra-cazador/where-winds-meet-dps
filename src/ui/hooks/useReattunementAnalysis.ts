@@ -14,6 +14,14 @@ export interface ReattunementAnalysisResult {
   forPieceId: string | null
 }
 
+const NO_SELECTION_RESULT: ReattunementAnalysisResult = {
+  options: [],
+  probImproveOverall: 0,
+  reason: "no-selection",
+  forPieceId: null,
+  isPending: false,
+}
+
 export function useReattunementAnalysis(
   inputs: Inputs,
   selectedPieceId: string | null,
@@ -55,15 +63,7 @@ export function useReattunementAnalysis(
 
   useEffect(() => {
     const w = workerRef.current
-    if (!w) return
-    if (!selectedPieceId) {
-      setOptions([])
-      setProbImproveOverall(0)
-      setReason("no-selection")
-      setForPieceId(null)
-      setIsPending(false)
-      return
-    }
+    if (!w || !selectedPieceId) return
     const reqId = ++reqIdRef.current
     setIsPending(true)
     const handle = setTimeout(() => {
@@ -78,5 +78,6 @@ export function useReattunementAnalysis(
     return () => clearTimeout(handle)
   }, [inputs, selectedPieceId])
 
+  if (!selectedPieceId) return NO_SELECTION_RESULT
   return { options, probImproveOverall, reason, isPending, forPieceId }
 }

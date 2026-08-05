@@ -1,7 +1,7 @@
 import type { Inputs } from "../../../../engine/types"
 import { defaultCombatSettings } from "../../../../engine/types"
 import { NumInput } from "../../../components/number-inputs/NumberInputs"
-import { useI18n } from "../../../../i18n/I18nContext"
+import { useI18n } from "../../../../i18n/i18nContext"
 import styles from "./EncounterSettingsPanel.module.scss"
 
 interface Props {

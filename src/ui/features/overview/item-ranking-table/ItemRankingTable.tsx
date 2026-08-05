@@ -1,5 +1,5 @@
 import type { ItemRankingRow } from "../../../../engine/types"
-import { useI18n } from "../../../../i18n/I18nContext"
+import { useI18n } from "../../../../i18n/i18nContext"
 
 interface Props {
   rows: ItemRankingRow[]

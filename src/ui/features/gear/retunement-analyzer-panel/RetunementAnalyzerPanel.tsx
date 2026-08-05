@@ -2,7 +2,7 @@ import { useMemo } from "react"
 import type { GearPiece } from "../../../../engine/types"
 import type { RetunementRow } from "../../../../engine/dpsWorker"
 import type { RetunementReason } from "../../../hooks/useRetunementAnalysis"
-import { useI18n } from "../../../../i18n/I18nContext"
+import { useI18n } from "../../../../i18n/i18nContext"
 import retunement from "../shared/retunement.module.scss"
 
 interface Props {

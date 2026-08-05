@@ -1,4 +1,4 @@
-import { useI18n } from "../../../../i18n/I18nContext"
+import { useI18n } from "../../../../i18n/i18nContext"
 import type { Inputs, Result } from "../../../../engine/types"
 import { RotationEditorPanel } from "../rotation-editor-panel/RotationEditorPanel"
 import { RotationBreakdownPanel } from "../rotation-breakdown-panel/RotationBreakdownPanel"

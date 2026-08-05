@@ -2,7 +2,7 @@ import { useMemo } from "react"
 import type { GearPiece, Inputs } from "../../../../engine/types"
 import { applyPieceContribution, listKnownPaths } from "../../../../engine/gearStats"
 import { effectiveRates } from "../../../../engine/panel"
-import { useI18n } from "../../../../i18n/I18nContext"
+import { useI18n } from "../../../../i18n/i18nContext"
 import type { DpsDelta } from "../../../../engine/dpsWorker"
 import {
   PATH_LABELS,

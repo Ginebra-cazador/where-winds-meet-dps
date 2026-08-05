@@ -27,9 +27,6 @@ export default defineConfig([
           ignoreRestSiblings: true,
         },
       ],
-      "react-hooks/set-state-in-effect": "warn",
-      "react-hooks/preserve-manual-memoization": "warn",
-      "react-refresh/only-export-components": "warn",
     },
   },
   {

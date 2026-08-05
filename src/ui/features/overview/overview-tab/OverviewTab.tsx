@@ -1,4 +1,4 @@
-import { useI18n } from "../../../../i18n/I18nContext"
+import { useI18n } from "../../../../i18n/i18nContext"
 import { resistanceForInputs } from "../../../../engine/panel"
 import type { Inputs, Result } from "../../../../engine/types"
 import { syncClassPermanent } from "../../../utils/classSetup"

@@ -77,10 +77,7 @@ export function Combobox({ value, options, onChange, placeholder, disabled, clas
   }, [])
 
   useLayoutEffect(() => {
-    if (!open) {
-      setPos(null)
-      return
-    }
+    if (!open) return
     reposition()
     window.addEventListener("scroll", reposition, true)
     window.addEventListener("resize", reposition)
@@ -90,9 +87,8 @@ export function Combobox({ value, options, onChange, placeholder, disabled, clas
     }
   }, [open, reposition])
 
-  useEffect(() => {
-    if (highlight >= filtered.length) setHighlight(Math.max(0, filtered.length - 1))
-  }, [filtered.length, highlight])
+  const maxFilteredIndex = Math.max(0, filtered.length - 1)
+  const clampedHighlight = Math.min(highlight, maxFilteredIndex)
 
   function commit(opt: ComboboxOption) {
     onChange(opt.value)
@@ -136,14 +132,14 @@ export function Combobox({ value, options, onChange, placeholder, disabled, clas
               openWithReset()
               return
             }
-            setHighlight((prev) => Math.min(prev + 1, Math.max(0, filtered.length - 1)))
+            setHighlight(Math.min(clampedHighlight + 1, maxFilteredIndex))
           } else if (e.key === "ArrowUp") {
             e.preventDefault()
-            setHighlight((prev) => Math.max(prev - 1, 0))
+            setHighlight(Math.max(clampedHighlight - 1, 0))
           } else if (e.key === "Enter") {
-            if (open && filtered[highlight]) {
+            if (open && filtered[clampedHighlight]) {
               e.preventDefault()
-              commit(filtered[highlight])
+              commit(filtered[clampedHighlight])
             }
           } else if (e.key === "Escape") {
             if (open) {
@@ -183,7 +179,7 @@ export function Combobox({ value, options, onChange, placeholder, disabled, clas
                   title={opt.label}
                   className={
                     styles.comboboxOption +
-                    (index === highlight ? ` ${styles.isHighlight}` : "") +
+                    (index === clampedHighlight ? ` ${styles.isHighlight}` : "") +
                     (opt.value === value ? ` ${styles.isSelected}` : "")
                   }
                   onMouseDown={(e) => {

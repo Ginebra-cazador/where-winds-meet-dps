@@ -15,7 +15,10 @@ thread.
    analyses) goes through the shared web worker `src/engine/dpsWorker.ts`: add a
    request kind + compute function there, and drive it from a hook modeled on
    `src/ui/hooks/useDpsDeltas.ts` — own worker instance, monotonic `reqId`,
-   stale-response discard, `isPending`, terminate on unmount. **Never** call
+   stale-response discard, `isPending`, terminate on unmount, and an
+   empty / no-selection result **derived at the hook's return** from a
+   module-level constant, never written back by a `setState` inside the effect
+   (`react-hooks/set-state-in-effect` is error-level). **Never** call
    `runEngine` in a render-path `useMemo` outside that one baseline pass.
 2. **Debounce every worker post** with `WORKER_DEBOUNCE_MS` from
    `src/ui/hooks/workerDebounce.ts`. Each `postMessage` structured-clones the

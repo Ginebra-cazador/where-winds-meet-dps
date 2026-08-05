@@ -1,4 +1,4 @@
-import { useI18n } from "../../../i18n/I18nContext"
+import { useI18n } from "../../../i18n/i18nContext"
 import styles from "./GithubLink.module.scss"
 
 export const GITHUB_REPO_URL = "https://github.com/M1zuke/where-winds-meet-dps"

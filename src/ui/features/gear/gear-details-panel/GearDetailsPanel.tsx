@@ -1,7 +1,7 @@
 import type { GearPiece } from "../../../../engine/types"
 import type { Inputs } from "../../../../engine/types"
 import type { WordMaxRow } from "../../../../engine/dpsWorker"
-import { useI18n } from "../../../../i18n/I18nContext"
+import { useI18n } from "../../../../i18n/i18nContext"
 import { GearPieceForm } from "../gear-piece-form/GearPieceForm"
 import styles from "./GearDetailsPanel.module.scss"
 

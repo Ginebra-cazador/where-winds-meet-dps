@@ -1,6 +1,6 @@
 import type { BowSet, Inputs } from "../../../../engine/types"
 import { ARMOR_SET_OPTIONS, BOW_SET_BONUS } from "../../../../engine/panel"
-import { useI18n } from "../../../../i18n/I18nContext"
+import { useI18n } from "../../../../i18n/i18nContext"
 import setTiles from "../shared/setTiles.module.scss"
 
 interface Props {

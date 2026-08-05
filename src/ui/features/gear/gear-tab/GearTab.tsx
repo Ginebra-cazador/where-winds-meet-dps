@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import type {
   EquippedSlots,
   GearPiece,
@@ -8,11 +8,12 @@ import type {
 } from "../../../../engine/types"
 import { GEAR_SLOTS } from "../../../../engine/types"
 import { newGearPieceId } from "../../../../storage"
-import { useI18n } from "../../../../i18n/I18nContext"
-import { useConfirm } from "../../../components/confirm-dialog/ConfirmDialog"
+import { useI18n } from "../../../../i18n/i18nContext"
+import { useConfirm } from "../../../components/confirm-dialog/confirmContext"
 import { GearSlotTiles } from "../gear-slot-tiles/GearSlotTiles"
 import { GearDetailsPanel } from "../gear-details-panel/GearDetailsPanel"
-import { GearInventoryPanel, type InventoryRow } from "../gear-inventory-panel/GearInventoryPanel"
+import { GearInventoryPanel } from "../gear-inventory-panel/GearInventoryPanel"
+import type { InventoryRow } from "../gear-inventory-panel/inventoryRows"
 import { GearSwapPreviewPanel } from "../gear-swap-preview-panel/GearSwapPreviewPanel"
 import { NewGearPieceDialog } from "../new-gear-piece-dialog/NewGearPieceDialog"
 import { RetunementAnalyzerPanel } from "../retunement-analyzer-panel/RetunementAnalyzerPanel"
@@ -75,10 +76,7 @@ export function GearTab({
     : null
   const selectedPiece = selectedRow?.piece ?? null
   const isForeign = selectedRow ? selectedRow.ownerProfileId !== activeProfileId : false
-
-  useEffect(() => {
-    if (selectedPieceId && !selectedRow) setSelectedPieceId(null)
-  }, [selectedPieceId, selectedRow])
+  const liveSelectedPieceId = selectedRow ? selectedPieceId : null
 
   const isEquipped =
     !!selectedPiece && !isForeign && equipped[selectedPiece.slot] === selectedPiece.id
@@ -177,7 +175,7 @@ export function GearTab({
         <GearSlotTiles
           inventory={inventory}
           equipped={equipped}
-          selectedPieceId={selectedPieceId}
+          selectedPieceId={liveSelectedPieceId}
           selectedSlot={selectedSlot}
           onSelectSlot={selectSlot}
           dpsDeltas={dpsDeltas}
@@ -204,7 +202,7 @@ export function GearTab({
           <GearInventoryPanel
             rows={visibleRows}
             activeProfileId={activeProfileId}
-            selectedPieceId={selectedPieceId}
+            selectedPieceId={liveSelectedPieceId}
             showGlobal={showGlobal}
             onToggleGlobal={() => setShowGlobal((prev) => !prev)}
             onSelect={selectInventoryRow}

@@ -1,5 +1,5 @@
 import schools from "../../../../data/classes/schools.json"
-import { useI18n } from "../../../../i18n/I18nContext"
+import { useI18n } from "../../../../i18n/i18nContext"
 
 const SCHOOLS = schools as { id: string; cn: string; en: string }[]
 

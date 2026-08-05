@@ -1,6 +1,6 @@
 import type { Inputs, MindMethodSlot } from "../../../../engine/types"
 import { allowedInnerWaysForClass } from "../../../../engine/panel"
-import { useI18n } from "../../../../i18n/I18nContext"
+import { useI18n } from "../../../../i18n/i18nContext"
 import styles from "./MindMethodsPanel.module.scss"
 
 const TIER_OPTIONS = ["tier 6", "tier 5"] as const

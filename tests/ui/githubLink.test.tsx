@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest"
 import { render, screen } from "@testing-library/react"
 import { GithubLink, GITHUB_REPO_URL } from "../../src/ui/layout/github-link/GithubLink"
-import { I18nProvider } from "../../src/i18n/I18nContext"
+import { I18nProvider } from "../../src/i18n/I18nProvider"
 
 describe("GithubLink", () => {
   it("points at the where-winds-meet-dps repository", () => {

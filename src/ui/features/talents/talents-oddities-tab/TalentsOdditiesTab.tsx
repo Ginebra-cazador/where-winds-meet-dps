@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useI18n } from "../../../../i18n/I18nContext"
+import { useI18n } from "../../../../i18n/i18nContext"
 import { getSchool } from "../../../../engine/panel"
 import type { Inputs } from "../../../../engine/types"
 import { SubTabs } from "../../../components/sub-tabs/SubTabs"

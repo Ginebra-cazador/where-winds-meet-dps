@@ -13,6 +13,8 @@ export interface DpsDeltasResult {
 
 const NO_EXTRAS: readonly GearPiece[] = []
 
+const EMPTY_DELTAS: DpsDeltaMap = {}
+
 export function useDpsDeltas(
   inputs: Inputs,
   baselineDps: number,
@@ -41,14 +43,11 @@ export function useDpsDeltas(
     }
   }, [])
 
+  const hasCandidates = inputs.inventory.length > 0 || extraCandidates.length > 0
+
   useEffect(() => {
     const w = workerRef.current
-    if (!w) return
-    if (inputs.inventory.length === 0 && extraCandidates.length === 0) {
-      setDeltas({})
-      setIsPending(false)
-      return
-    }
+    if (!w || !hasCandidates) return
     const reqId = ++reqIdRef.current
     setIsPending(true)
     const handle = setTimeout(() => {
@@ -63,7 +62,8 @@ export function useDpsDeltas(
       w.postMessage(req)
     }, WORKER_DEBOUNCE_MS)
     return () => clearTimeout(handle)
-  }, [inputs, baselineDps, extraCandidates])
+  }, [inputs, baselineDps, extraCandidates, hasCandidates])
 
+  if (!hasCandidates) return { deltas: EMPTY_DELTAS, isPending: false }
   return { deltas, isPending }
 }

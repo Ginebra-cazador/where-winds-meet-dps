@@ -1,7 +1,7 @@
 import { useMemo } from "react"
 import type { Inputs, MartialArtsTalent, ScalingSource, TalentStat } from "../../../../engine/types"
 import { alwaysActiveClassBuffs, type ClassBuffRow } from "../../../../engine/buffs/catalog"
-import { useI18n } from "../../../../i18n/I18nContext"
+import { useI18n } from "../../../../i18n/i18nContext"
 import { buildScalingSources } from "../../../../data/baseStats"
 import { withDerivedStats, equippedPiecesFor } from "../../../../engine/derivedInputs"
 import styles from "./TalentsTab.module.scss"
