@@ -49,3 +49,7 @@ The `docs/` folder holds the deep engineering docs the wiki summarizes — when 
 ## Tech stack
 
 React 19 + TypeScript + Vite · SCSS modules · Vitest · deployed on Cloudflare Pages
+
+## License
+
+[MIT](LICENSE)
