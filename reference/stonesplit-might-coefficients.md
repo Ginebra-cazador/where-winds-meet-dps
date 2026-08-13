@@ -75,23 +75,25 @@ lands nothing), but the **Spear Special** prepulls carry their counterpart's ful
 
 In-game, Varied Combo produces two damage instances back-to-back (weapon into the enemy, then into
 the ground) and reads as one action. Ground Slam is a triggered follow-up with no separate cast time.
-Add a `castSkill` trigger on the (single) hit of `mobladevariedcombo-2bw` targeting the Ground Slam
-skill, mirroring exactly how `stonesplit-strength/phalanxcharged-s3.ts` fires `anxisoldiermodown`:
+
+**This trigger already exists in the reference** — it is a faithful port, NOT a new addition. Both
+`mobladevariedcombo-2bw.json` and `mobladevariedcombo-2bw-cancel.json` carry a `castSkill → groundslam`
+trigger on `hit[0]` (the top-level `triggers` field is null; the trigger lives on the hit). Port both
+verbatim, **keeping each reference trigger's own id**:
 
 ```ts
-// import at top of mobladevariedcombo-2bw module:
-import { castSkill } from "../../../definitions/skills/triggers"
-
-// on the hit(0, { ... }) of mobladevariedcombo-2bw, add:
+// mobladevariedcombo-2bw, on hit(0, { ... }):
 triggers: [
-  castSkill({ id: "tg-moblade-varied-combo-cast", target: SKILL.<groundslam-key>, stacks: 0 }),
+  castSkill({ id: "tg-mobladevariedcombo-2bw-cast", target: SKILL.mobladevariedcombogroundslam2bw, stacks: 0 }),
+]
+// mobladevariedcombo-2bw-cancel, on hit(0, { ... }):
+triggers: [
+  castSkill({ id: "tg-mobladevariedcombo-2bw-cancel-cast", target: SKILL.mobladevariedcombogroundslam2bw, stacks: 0 }),
 ]
 ```
 
-`SKILL.<groundslam-key>` is whatever key `ids.ts` pinned for `mobladevariedcombogroundslam-2bw` (use
-the exact constant from the folder's `ids.ts`). Both reference files currently have `triggers: null`,
-so this is the **only** trigger added; the Ground Slam skill itself gets no trigger. **Show the written
-trigger for review before finalizing** — direction and timing are a judgment call, not mechanical.
+`mobladevariedcombogroundslam-2bw` carries **no** trigger. Direction: both Varied Combo variants fire
+Ground Slam; Ground Slam fires nothing. Keep the reference ids verbatim — do not mint new ones.
 
 ## §Spear cancel — why 0.4843, not 0.339
 
