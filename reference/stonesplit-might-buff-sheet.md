@@ -32,15 +32,30 @@ Both already have a `stonesplit_might` variant in `reference/classes/buffs/`. Po
 
 Might uses both weapons, so these stack to the **16%** in-game total. No changes from the reference.
 
-## B. Charged-skill damage chain — PORT, with ONE override (Section 5)
+## B. Charged-skill damage chain — Drumbeat + Breakthrough via `perCastConsume` (Section 5)
 
-| Buff | reference | override |
+The engine has no `overriddenBy`/`conditionalTrigger` support, but it does have **`perCastConsume`** —
+a cast drains one buff (via `spendStack`) and grants another. Precedent: `burningHeartIPConsume.ts`
+(strength's steadfastDevotion) consumes Inner Passion / Charge Enhancement → grants Mountain Splitter.
+Model Drumbeat→Breakthrough the same way: **Mo Blade Q consumes Drumbeat and grants Breakthrough**, so
+they never coexist (no double-count) and Breakthrough can't happen without Drumbeat (nothing to drain).
+
+| Buff | source | fields |
 |---|---|---|
-| `drumbeat` | drumbeat.json | none — +15% (`affectsProperty: isCharged`), spear-triggered, duration 6, `overriddenBy: breakthrough` |
-| `breakthrough` | breakthrough.json | **duration 14 → 12** (true base); Formbend +2 / AoR +6 applied as modeled extensions → 20s effective (see §Duration). +42% isCharged, Mo Blade Q trigger, `conditionalTrigger` refresh/upgrade-from-drumbeat stays as-is |
+| `drumbeat` | drumbeat.json | +15% (`affectsProperty: isCharged`), spear-triggered, duration 6, **maxStacks 1** (a single consumable stack) |
+| `breakthrough` | breakthrough.json | +42% isCharged, duration **12 base** (+2 Formbend +6 AoR → 20 effective, §Duration), **maxStacks 1**; **granted and refreshed by the consume** (not directly triggered) |
+| `breakthroughConsume` (NEW) | — | one consume def handling **both upgrade and refresh**, modeled on `burningHeartIPConsume`: `perCastConsume: { property: PROP.consumesDrumbeat, preferredFrom: [BUFF.breakthrough], from: BUFF.drumbeat, grants: [{ whenConsumedFrom: BUFF.drumbeat, buffIds: [BUFF.breakthrough] }, { whenConsumedFrom: BUFF.breakthrough, buffIds: [BUFF.breakthrough] }] }` |
 
-`breakthrough` and `drumbeat` are spec-scoped to `stonesplit_might`, so they're safe to edit. See
-§Duration for how the 12→20 effective duration is handled.
+On each Mo Blade Q the engine drains whichever pool has a stack (Breakthrough checked first, then
+Drumbeat) and re-grants Breakthrough: drain Drumbeat → **upgrade**; drain Breakthrough → **refresh**.
+One mechanism, no separate `refreshOnAnyCast`. Edge case to confirm against the rotation: if a spear
+skill is ever cast *during* an active Breakthrough it re-applies Drumbeat, leaving both live and a
+possible transient double-count (the consume drains only one pool per cast) — only a concern if the
+rotation casts spear inside the Breakthrough window; otherwise airtight.
+
+Also: add a `consumesDrumbeat` PROP tag to the `mobladeq` skill so the consume fires on that cast.
+Drop the reference's `overriddenBy`/`conditionalTrigger` fields (engine ignores them; the consume
+replaces them). This is all data-only — no `src/engine` edit.
 
 ## C. Charged-skill crit — NEW class buff (Section 5)
 
