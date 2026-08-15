@@ -95,15 +95,18 @@ These partly exist as shared buffs; the work is verification + one addition, not
   (`src/data/innerWays/throatPierce.ts` + `throatPierceBuffs/throatPierced.ts`). **VERIFY** the
   `stonesplit_might` variant is present there; add it if missing (triggers MoBladeVariedCombo, 2/cast,
   Deflect→5).
-- **Art of Resistance** (`src/data/skills/buffs/resistanceResolve.ts`) — while shielded, Might gets
-  **+15% all damage**, modeled as a **single instance** (`allDamageBoost 0.15`), not a 5%+10% split
-  (your call, for simplicity). The existing def has +10%; **bump it to +15%** and confirm it's the
-  while-shielded buff, not the post-shield Hardened Foe (which is out of scope — the shield isn't
-  broken in a clean rotation). Set `shieldDamageBonus` per the T6 CN buff.
-- **Rainwhisper** (`src/data/skills/buffs/rainwhisperShield.ts` = the Mo Blade Q shield; the 4pc crit
-  buff) — **+15% crit DMG while a self shield is up**. Verify the 4pc crit-DMG-while-shielded buff
-  exists and is +15% (`critDamageBoost 0.15`, gated on the shield being active).
-- Shield source `rainwhisperShield` is triggered by Mo Blade Q, base duration 8.
+- **Art of Resistance — while-shielded +10%** (corrected from 15%; translation artifact). This buff
+  **does not exist yet** — `resistanceResolve.ts` is the *post-shield Hardened Foe* (+10%,
+  `activeAfterBuffEnds` on the shield, `cancelledByReapply`), NOT the while-shielded buff. **Create a
+  new buff**: +10% `allDamageBoost`, gated `requires: { param: artOfResistance, minTier: 6 }` and
+  active while the shield is up (`requiresBuffActive: rainwhisperShield`). **Leave `resistanceResolve`
+  untouched** — it correctly models Hardened Foe, which barely fires anyway (the rotation maintains the
+  shield, so it rarely ends un-recast).
+- **Rainwhisper — +15% crit DMG while shielded.** Rainwhisper is the weapon set; the repo models its
+  effects as **buffs** (shield, Hardened Foe), not a formal set, so gate this on the shield rather than
+  a set check. **Create a new buff**: +15% `critDamageBoost`, `requiresBuffActive: rainwhisperShield`
+  (shield-active implies Rainwhisper is equipped). (The set's flat +10% crit DMG, if modeled, is
+  separate — verify; only the shield-conditional +15% is specced here.)
 
 ## E. Removals
 
@@ -118,20 +121,28 @@ These partly exist as shared buffs; the work is verification + one addition, not
   class's `classBuffDefs` — they activate when that inner way is slotted / set equipped.
 - `gateBuffs`: any gated on an inner-way param (throatPierced) go through the gate list.
 
-## §Duration — DECIDED: model the extensions
+## §Duration — conditional function duration (data-only, no baking)
 
-Model the build's duration extensions as real modifiers, so the calc stays correct across gear swaps:
+The engine has no *passive* duration-extension field, but buff `duration` accepts a **function of
+`ctx`**, and `rainwhisperShield` already uses one (12 for golden-body casts, else 8). So model the
+extensions conditionally by reading build state:
 
-- **Formbend (set): +2s**, **Art of Resistance (inner way): +6s** — both extend the **HP shield** AND
-  **Breakthrough** (AoR extends "the shield and the bonus effects of its source skill"; Breakthrough is
-  a bonus effect of the shield's source, Mo Blade Q).
-- Base durations stay at the game base: **shield 8s** (`rainwhisperShield`), **Breakthrough 12s**. With
-  Formbend + AoR the effective values become **16s** and **20s**. (The reference `breakthrough.json`'s
-  14 = 12 + Formbend only; use base 12 and let the modifiers do the rest.)
-- **Code-verify:** confirm the engine supports set/inner-way duration extension on another buff. If it
-  does, wire Formbend/AoR to extend `rainwhisperShield` and `breakthrough`. If it does NOT, fall back
-  to baking (shield 16 / Breakthrough 20) **but note the shield is shared** — a Might-scoped shield
-  variant would be needed to avoid changing other classes. Report which path before implementing.
+- **AoR +6**: `ctx.build.paramTier(PARAM.artOfResistance) >= 6` — clean.
+- **Formbend +2**: `ctx.build.armorSet === <formbend key>`. **Prerequisite:** Formbend is the armor set
+  but isn't defined as a selectable set in the repo yet (cf. migration `V8__dropRemovedArmorSets`) —
+  define/enable it as an armor set first (data work), then `armorSet` reports it.
+
+```ts
+// rainwhisperShield duration:
+duration: (ctx) => 8 + (ctx.build.paramTier(PARAM.artOfResistance) >= 6 ? 6 : 0) + (formbend ? 2 : 0)
+// breakthrough duration (Might-only, zero shared risk):
+duration: (ctx) => 12 + (ctx.build.paramTier(PARAM.artOfResistance) >= 6 ? 6 : 0) + (formbend ? 2 : 0)
+```
+
+`rainwhisperShield` is **shared** — after editing its duration function, run the buff-equivalence
+tests. The extensions are gated (a class gets them only if it runs AoR/Formbend, and no validated class
+slots AoR), so nothing should move; if it does, fall back to a Might-scoped shield. `breakthrough` is
+Might-only, so its function edit is unconditionally safe. This replaces the earlier bake plan.
 
 ## §Verify in code (small unknowns, cheap for Code to resolve)
 
