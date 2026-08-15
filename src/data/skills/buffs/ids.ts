@@ -59,6 +59,11 @@ export const BUFF = {
   windWall: "windWall",
   windWallPursuit: "windWallPursuit",
   wineGu: "wineGu",
+  breakthrough: "breakthrough",
+  drumbeat: "drumbeat",
+  stonesplitMightChargedCrit: "stonesplitMightChargedCrit",
+  vulnerability: "vulnerability",
+  vulnerabilityWeapon: "vulnerabilityWeapon",
 } as const
 
 // Harvested from every `enabledParam` / `bonus.valueFromParam` across
