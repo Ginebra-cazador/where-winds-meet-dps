@@ -1,5 +1,6 @@
 import { defineSkill, hit } from "../../../definitions/skills/skillDef"
 import { ATTACK, PROP, WEAPON } from "../ids"
+import { BUFF } from "../buffs/ids"
 import { SKILL } from "./ids"
 
 export const mobladeheavycharge1bwCancel = defineSkill({
@@ -19,6 +20,7 @@ export const mobladeheavycharge1bwCancel = defineSkill({
   castTag: "cast:moBladeHeavyCharge1BWCancel",
   castFrames: 176,
   triggerable: true,
+  receives: [BUFF.drumbeat, BUFF.breakthrough, BUFF.stonesplitMightChargedCrit],
   hits: [
     hit(0, {
       frame: 0,

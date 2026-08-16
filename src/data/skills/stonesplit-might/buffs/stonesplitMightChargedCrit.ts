@@ -5,8 +5,6 @@ import { stat } from "../../../../engine/effects/effect"
 export const stonesplitMightChargedCrit = defineClassBuff({
   id: BUFF.stonesplitMightChargedCrit,
   name: "Stonesplit Might Charged Crit",
-  triggeredBy: [],
-  affectsProperty: "isCharged",
   alwaysActive: true,
   duration: 9999,
   summary: "charged/varied: critDamageBoost +10%, directCritRate +24%",

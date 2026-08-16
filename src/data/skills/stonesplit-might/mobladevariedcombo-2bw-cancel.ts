@@ -1,6 +1,7 @@
 import { defineSkill, hit } from "../../../definitions/skills/skillDef"
 import { castSkill } from "../../../definitions/skills/triggers"
 import { ATTACK, PROP, WEAPON } from "../ids"
+import { BUFF } from "../buffs/ids"
 import { SKILL } from "./ids"
 
 export const mobladevariedcombo2bwCancel = defineSkill({
@@ -21,6 +22,7 @@ export const mobladevariedcombo2bwCancel = defineSkill({
   castTag: "cast:moBladeVariedCombo2BWCancel",
   castFrames: 37,
   triggerable: true,
+  receives: [BUFF.drumbeat, BUFF.breakthrough, BUFF.stonesplitMightChargedCrit],
   hits: [
     hit(0, {
       frame: 0,
@@ -30,7 +32,6 @@ export const mobladevariedcombo2bwCancel = defineSkill({
       attributeFixed: 397,
       triggers: [
         castSkill({
-          id: "tg-mobladevariedcombo-2bw-cancel-cast",
           target: SKILL.mobladevariedcombogroundslam2bw,
           stacks: 0,
         }),

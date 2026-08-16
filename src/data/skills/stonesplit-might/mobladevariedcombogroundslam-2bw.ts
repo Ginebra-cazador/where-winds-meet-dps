@@ -1,5 +1,6 @@
 import { defineSkill, hit } from "../../../definitions/skills/skillDef"
 import { ATTACK, PROP, WEAPON } from "../ids"
+import { BUFF } from "../buffs/ids"
 import { SKILL } from "./ids"
 
 export const mobladevariedcombogroundslam2bw = defineSkill({
@@ -20,6 +21,7 @@ export const mobladevariedcombogroundslam2bw = defineSkill({
   castTag: "cast:moBladeVariedComboGroundSlam2BW",
   castFrames: 0,
   triggerable: true,
+  receives: [BUFF.drumbeat, BUFF.breakthrough, BUFF.stonesplitMightChargedCrit],
   hits: [
     hit(0, {
       frame: 0,

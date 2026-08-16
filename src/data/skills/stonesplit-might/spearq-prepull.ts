@@ -1,5 +1,6 @@
 import { defineSkill, hit } from "../../../definitions/skills/skillDef"
 import { CAST, WEAPON } from "../ids"
+import { BUFF } from "../buffs/ids"
 import { SKILL } from "./ids"
 
 export const spearqPrepull = defineSkill({
@@ -13,6 +14,7 @@ export const spearqPrepull = defineSkill({
   castTag: CAST.spearQPrepull,
   castFrames: 0,
   triggerable: true,
+  triggersBuffs: [BUFF.drumbeat],
   hits: [
     hit(0, {
       frame: 0,
