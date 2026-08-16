@@ -46,6 +46,7 @@ export type SkillProperties = Partial<Record<SkillPropertyKey, boolean>> & {
 // silently.
 export const PROP_TO_PROPERTY: Record<(typeof PROP)[keyof typeof PROP], SkillPropertyKey> = {
   [PROP.abrasionImmune]: "abrasionImmune",
+  [PROP.consumesDrumbeat]: "consumesDrumbeat",
   [PROP.consumesInnerPassion]: "consumesInnerPassion",
   [PROP.consumesInnerPassionBurningHeart]: "consumesInnerPassionBurningHeart",
   [PROP.hasLowQiCritBoost]: "hasLowQiCritBoost",

@@ -1,5 +1,6 @@
 import { defineSkill, hit } from "../../../definitions/skills/skillDef"
 import { CAST, WEAPON } from "../ids"
+import { BUFF } from "../buffs/ids"
 import { SKILL } from "./ids"
 
 export const mobladeqPrepull = defineSkill({
@@ -13,6 +14,7 @@ export const mobladeqPrepull = defineSkill({
   castTag: CAST.moBladeQPrepull,
   castFrames: 0,
   triggerable: true,
+  triggersBuffs: [BUFF.stonesplitMightShield],
   hits: [
     hit(0, {
       frame: 0,

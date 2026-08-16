@@ -178,6 +178,7 @@ export const ATTUNE = {
 // key — both enforced by the compiler, not by convention.
 export const PROP = {
   abrasionImmune: "prop:abrasionImmune",
+  consumesDrumbeat: "prop:consumesDrumbeat",
   consumesInnerPassion: "prop:consumesInnerPassion",
   consumesInnerPassionBurningHeart: "prop:consumesInnerPassionBurningHeart",
   hasLowQiCritBoost: "prop:hasLowQiCritBoost",

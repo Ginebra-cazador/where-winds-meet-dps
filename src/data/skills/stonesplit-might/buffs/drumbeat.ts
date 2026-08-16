@@ -6,6 +6,7 @@ export const drumbeat = defineClassBuff({
   id: BUFF.drumbeat,
   name: "Drumbeat",
   duration: 6,
+  maxStacks: 1,
   summary: "charged: allDamageBoost +15%",
   effects: [stat("allDamageBoost", 0.15)],
 })

@@ -1,18 +1,20 @@
 import { defineSkill, hit } from "../../../definitions/skills/skillDef"
-import { CAST, WEAPON } from "../ids"
+import { CAST, PROP, WEAPON } from "../ids"
+import { BUFF } from "../buffs/ids"
 import { SKILL } from "./ids"
 
 export const mobladeq = defineSkill({
   id: SKILL.mobladeq,
   classId: "stonesplitMight",
   name: "MoBladeQ",
-  tags: [WEAPON.moBlade],
+  tags: [WEAPON.moBlade, PROP.consumesDrumbeat],
   skillType: "weapon",
   weaponOrAttribute: "Modao",
   attributeAttack: "Stonesplit",
   castTag: CAST.moBladeQ,
   castFrames: 60,
   triggerable: true,
+  triggersBuffs: [BUFF.stonesplitMightShield],
   hits: [
     hit(0, {
       frame: 0,
