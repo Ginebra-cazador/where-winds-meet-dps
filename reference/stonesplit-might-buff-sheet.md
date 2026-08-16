@@ -1,160 +1,102 @@
-# Stonesplit Might — buff spec sheet (source of truth for Code)
+# Stonesplit Might — buff spec sheet (v2, post-refactor model)
 
-Port-ready spec for the buffs/debuffs. Goes in `reference/` (never `docs/` — the `docsStayGeneral`
-gate). Companion to `stonesplit-might-coefficients.md` and the `-buffs-and-talents.md` working notes.
-All values lvl 100, build = Formbend + Rainwhisper sets, AoR T6.
+Rewritten for the buff-inversion refactor (upstream PR #69). Goes in `reference/`. All values lvl 100,
+build = Formbend armor + Rainwhisper weapon + AoR T6.
 
-## How Code applies this
+## The new authoring model (read first)
 
-Most of these already exist as reference JSONs under `reference/classes/buffs/` with a
-`stonesplit_might` variant — porting them is mechanical, exactly like the skills: translate the
-reference `def` into a `defineBuff`/`defineClassBuff` module, following the strength templates
-`src/data/skills/stonesplit-strength/buffs/ironGuards.ts` (a `bonus`→`effects` buff) and
-`skillCritDamage.ts` (an always-active class buff). Translation rules:
+A buff is now **effects + activation policy only**. Reach and triggering moved onto the skills:
 
-- Reference `bonus: { type: "buffBonus", value: X }` + `affects: null` → `effects: [stat("allDamageBoost", X)]`.
-- Crit-DMG bonus → `stat("critDamageBoost", X)`. Penetration → `stat("phys.penetration", X)` /
-  `stat("stonesplit.penetration", X)`.
-- Keep `triggeredBy`, `affects`, `affectsProperty`, `affectsWeaponTypes`, `conditionalTrigger`,
-  `duration`, `maxStacks`, `cooldown` from the reference **except** the explicit overrides below.
-- Pin every buff id in the buffs `ids.ts` (mirror `stonesplit-strength/buffs/ids.ts`); rewrite raw
-  `cast:` trigger strings to `CAST.*` constants.
-- Touch only `src/data/`. No `src/engine`/`src/definitions`. No Chinese.
+- **Reach:** a buff either sets `affectsAll: true` (hits every skill — "category 1") **or** sets no
+  reach field ("category 2") and the skills that receive it list it in **`receives: [BUFF.x]`**.
+- **Triggering:** the skill whose cast fires a buff lists it in **`triggersBuffs: [BUFF.x]`**. (Grants
+  via `perCastConsume` are the exception — the consume def grants directly.)
+- Removed from buff defs: `triggeredBy`, `affects`, `affectsProperty`, `affectsWeaponTypes`, `excludes`.
+  `defineRejectsUnknownKeys` enforces this — stale keys fail tests.
+- `TriggerSpec` no longer takes `id` (row index serves).
 
-## A. Debuffs on the boss — PORT from reference (Section 4)
+## Current state — Pass 1 DONE (adapted to the new model, committed)
 
-Both already have a `stonesplit_might` variant in `reference/classes/buffs/`. Port verbatim.
+Five buffs exist and are wired:
 
-| Buff | reference | key fields |
+| Buff | reach | triggered by (skill's `triggersBuffs`) |
 |---|---|---|
-| `vulnerability` | vulnerability.json | triggeredBy the 4 Spear Special casts; duration 16; `affects: null`; +8% (`allDamageBoost 0.08`) |
-| `vulnerabilityWeapon` | vulnerabilityWeapon.json | same triggers; duration 16; `affectsWeaponTypes: ["Mo Blade","Stormbreaker Spear"]`; +8% |
+| `vulnerability` | `affectsAll: true` | 4 spear-special skills |
+| `vulnerabilityWeapon` | `affectsAll: true` (Might uses both weapons ≡ all) | 4 spear-special skills |
+| `drumbeat` | category 2 → charged skills `receives` | `spearq`, `spearq-prepull` (SEE §Drumbeat) |
+| `breakthrough` | category 2 → charged skills `receives` | none yet — granted via consume (Pass 2) |
+| `stonesplitMightChargedCrit` | category 2 → charged skills `receives`, `alwaysActive` | n/a |
 
-Might uses both weapons, so these stack to the **16%** in-game total. No changes from the reference.
+Charged skills (8 heavy-charge + 2 varied-combo + ground-slam) declare
+`receives: [drumbeat, breakthrough, stonesplitMightChargedCrit]`.
 
-## B. Charged-skill damage chain — Drumbeat + Breakthrough via `perCastConsume` (Section 5)
+## §Drumbeat — which spear cast procs it (CONFIRM)
 
-The engine has no `overriddenBy`/`conditionalTrigger` support, but it does have **`perCastConsume`** —
-a cast drains one buff (via `spendStack`) and grants another. Precedent: `burningHeartIPConsume.ts`
-(strength's steadfastDevotion) consumes Inner Passion / Charge Enhancement → grants Mountain Splitter.
-Model Drumbeat→Breakthrough the same way: **Mo Blade Q consumes Drumbeat and grants Breakthrough**, so
-they never coexist (no double-count) and Breakthrough can't happen without Drumbeat (nothing to drain).
+Reference lists spear Q + spear Heavy casts (not spear Special). Only `spearQ`/`spearQPrepull` match
+Might skills, so Code wired Drumbeat to `spearq`/`spearq-prepull`. **Confirm the rotation actually
+procs Drumbeat off spear Q, not spear Special.** If Special, add `spearSpecial` to its `triggersBuffs`.
 
-| Buff | source | fields |
-|---|---|---|
-| `drumbeat` | drumbeat.json | +15% (`affectsProperty: isCharged`), spear-triggered, duration 6, **maxStacks 1** (a single consumable stack) |
-| `breakthrough` | breakthrough.json | +42% isCharged, duration **12 base** (+2 Formbend +6 AoR → 20 effective, §Duration), **maxStacks 1**; **granted and refreshed by the consume** (not directly triggered) |
-| `breakthroughConsume` (NEW) | — | one consume def handling **both upgrade and refresh**, modeled on `burningHeartIPConsume`: `perCastConsume: { property: PROP.consumesDrumbeat, preferredFrom: [BUFF.breakthrough], from: BUFF.drumbeat, grants: [{ whenConsumedFrom: BUFF.drumbeat, buffIds: [BUFF.breakthrough] }, { whenConsumedFrom: BUFF.breakthrough, buffIds: [BUFF.breakthrough] }] }` |
+## Pass 2 — remaining buff work
 
-On each Mo Blade Q the engine drains whichever pool has a stack (Breakthrough checked first, then
-Drumbeat) and re-grants Breakthrough: drain Drumbeat → **upgrade**; drain Breakthrough → **refresh**.
-One mechanism, no separate `refreshOnAnyCast`. Edge case to confirm against the rotation: if a spear
-skill is ever cast *during* an active Breakthrough it re-applies Drumbeat, leaving both live and a
-possible transient double-count (the consume drains only one pool per cast) — only a concern if the
-rotation casts spear inside the Breakthrough window; otherwise airtight.
-
-Also: add a `consumesDrumbeat` PROP tag to the `mobladeq` skill so the consume fires on that cast.
-Drop the reference's `overriddenBy`/`conditionalTrigger` fields (engine ignores them; the consume
-replaces them). This is all data-only — no `src/engine` edit.
-
-## C. Charged-skill crit — NEW class buff (Section 5)
-
-Not in the reference — build it new, patterned on strength's `skillCritDamage`, but scoped to
-charged/varied (not `affects: null`). Sources: Charge Calculation Enhancement (+10% Crit DMG) and
-Charge Critical Hit Enhancement (+9% base + up to +15% from Max HP, capped at 90k HP → **+24%** at the
-build's 145k HP). Always active, but only on Charged Skill + Varied Combo (incl. Ground Slam).
-
+### 1. Breakthrough consume (drumbeat → breakthrough, and refresh)
+Model on `innerWays/steadfastDevotionBuffs/burningHeartIPConsume.ts`. One consume def on Mo Blade Q:
 ```ts
-export const stonesplitMightChargedCrit = defineClassBuff({
-  id: BUFF.stonesplitMightChargedCrit,
-  name: "Stonesplit Might Charged Crit",
-  triggeredBy: [],
-  affects: [ /* the charged-skill + varied-combo skill ids or tags — see note */ ],
-  alwaysActive: true,
-  duration: 9999,
-  summary: "charged/varied: critDamageBoost +10%, crit rate +24%",
-  effects: [
-    stat("critDamageBoost", 0.10),
-    stat("<CRIT_RATE_STAT>", 0.24),   // TO VERIFY: exact crit-rate stat key (see §Verify)
+perCastConsume: {
+  property: PROP.consumesDrumbeat,          // add this PROP tag to the mobladeq skill
+  preferredFrom: [BUFF.breakthrough],       // check breakthrough first (refresh)
+  from: BUFF.drumbeat,                       // else drumbeat (upgrade)
+  grants: [
+    { whenConsumedFrom: BUFF.drumbeat,      buffIds: [BUFF.breakthrough] },
+    { whenConsumedFrom: BUFF.breakthrough,  buffIds: [BUFF.breakthrough] },
   ],
-})
+}
 ```
+Drain-either / re-grant handles both upgrade and refresh; no double-count. Set `drumbeat` `maxStacks: 1`.
+Edge: if a spear skill is cast during an active Breakthrough it re-adds Drumbeat — only a concern if the
+rotation casts spear inside the Breakthrough window (pending §Drumbeat answer).
 
-**Scope note:** `affects` must catch both the `isCharged` heavy-charge skills and the Varied Combo
-(+ Ground Slam). Use whatever addressing the engine supports — a tag list if `affects` accepts the
-`isCharged` property + a varied-combo tag, otherwise the explicit skill-id list. Confirm against how
-`affects` is matched.
+### 2. AoR while-shielded — +10% all damage (NEW buff)
+`resistanceResolve.ts` is the post-shield **Hardened Foe** (+10%, `activeAfterBuffEnds`), NOT this —
+leave it alone. Create a new buff: `affectsAll: true`, `allDamageBoost 0.10`,
+`requires: { param: artOfResistance, minTier: 6 }`, `requiresBuffActive: rainwhisperShield`. (AoR is +10%,
+not 15% — earlier 15% was a translation artifact.) Hardened Foe barely fires (shield is maintained) —
+out of scope.
 
-## D. Inner-way & set buffs — VERIFY existing, add the AoR +5% (Section 5)
+### 3. Rainwhisper while-shielded — +15% crit DMG (NEW buff)
+Rainwhisper is the weapon set, modeled as buffs (not a formal set), so gate on the shield:
+`critDamageBoost 0.15`, `requiresBuffActive: rainwhisperShield`. Reaches all skills → `affectsAll: true`.
 
-These partly exist as shared buffs; the work is verification + one addition, not fresh authoring.
+### 4. Throat-Pierce Might variant (NEW buff)
+The shared `throatPierceBuffs/throatPierced.ts` is strength-shaped — do NOT branch it. Create a separate
+Might-scoped buff: self physPen + crit DMG, Varied Combo enhances, Deflect maxes to 5 stacks, duration 12,
+gated on the `throatPierced` inner-way param. Self-buff (player), not a boss debuff.
 
-- **Throat-Pierced** (`reference/classes/buffs/throatPierced.json`, `throatPiercedDeflect.json`) — a
-  **self-buff**: physPen + crit DMG per stack (enhanced by Varied Combo), Deflect maxes to 5 stacks,
-  12s, gated on the `throatPierced` inner-way param. The inner way exists
-  (`src/data/innerWays/throatPierce.ts` + `throatPierceBuffs/throatPierced.ts`). **VERIFY** the
-  `stonesplit_might` variant is present there; add it if missing (triggers MoBladeVariedCombo, 2/cast,
-  Deflect→5).
-- **Art of Resistance — while-shielded +10%** (corrected from 15%; translation artifact). This buff
-  **does not exist yet** — `resistanceResolve.ts` is the *post-shield Hardened Foe* (+10%,
-  `activeAfterBuffEnds` on the shield, `cancelledByReapply`), NOT the while-shielded buff. **Create a
-  new buff**: +10% `allDamageBoost`, gated `requires: { param: artOfResistance, minTier: 6 }` and
-  active while the shield is up (`requiresBuffActive: rainwhisperShield`). **Leave `resistanceResolve`
-  untouched** — it correctly models Hardened Foe, which barely fires anyway (the rotation maintains the
-  shield, so it rarely ends un-recast).
-- **Rainwhisper — +15% crit DMG while shielded.** Rainwhisper is the weapon set; the repo models its
-  effects as **buffs** (shield, Hardened Foe), not a formal set, so gate this on the shield rather than
-  a set check. **Create a new buff**: +15% `critDamageBoost`, `requiresBuffActive: rainwhisperShield`
-  (shield-active implies Rainwhisper is equipped). (The set's flat +10% crit DMG, if modeled, is
-  separate — verify; only the shield-conditional +15% is specced here.)
-
-## E. Removals
-
-- **`shatteredRidgeDeflect`** — Might does NOT use Shattered Ridge. Do not add it to Might. (It stays
-  on strength.)
-
-## Class-def wiring (which bucket each buff lands in — Section 8)
-
-- `debuffs`: `vulnerability`, `vulnerabilityWeapon`.
-- `classBuffDefs`: `drumbeat`, `breakthrough`, `stonesplitMightChargedCrit`.
-- inner-way / set buffs (`throatPierced`, AoR, Rainwhisper) attach via their inner way / set, not the
-  class's `classBuffDefs` — they activate when that inner way is slotted / set equipped.
-- `gateBuffs`: any gated on an inner-way param (throatPierced) go through the gate list.
-
-## §Duration — conditional function duration (data-only, no baking)
-
-The engine has no *passive* duration-extension field, but buff `duration` accepts a **function of
-`ctx`**, and `rainwhisperShield` already uses one (12 for golden-body casts, else 8). So model the
-extensions conditionally by reading build state:
-
-- **AoR +6**: `ctx.build.paramTier(PARAM.artOfResistance) >= 6` — clean.
-- **Formbend +2**: `ctx.build.armorSet === <formbend key>`. **Prerequisite:** Formbend is the armor set
-  but isn't defined as a selectable set in the repo yet (cf. migration `V8__dropRemovedArmorSets`) —
-  define/enable it as an armor set first (data work), then `armorSet` reports it.
-
+### 5. Conditional durations (function duration, no baking)
+`rainwhisperShield` already uses a function duration — extend it:
 ```ts
-// rainwhisperShield duration:
-duration: (ctx) => 8 + (ctx.build.paramTier(PARAM.artOfResistance) >= 6 ? 6 : 0) + (formbend ? 2 : 0)
-// breakthrough duration (Might-only, zero shared risk):
-duration: (ctx) => 12 + (ctx.build.paramTier(PARAM.artOfResistance) >= 6 ? 6 : 0) + (formbend ? 2 : 0)
+// rainwhisperShield (shared — run buff-equivalence tests after):
+duration: (ctx) => 8 + (ctx.build.paramTier(PARAM.artOfResistance) >= 6 ? 6 : 0) + FORMBEND_2
+// breakthrough (Might-only, safe):
+duration: (ctx) => 12 + (ctx.build.paramTier(PARAM.artOfResistance) >= 6 ? 6 : 0) + FORMBEND_2
 ```
+- **AoR +6**: `ctx.build.paramTier(artOfResistance) >= 6` — clean.
+- **Formbend +2**: Formbend is the armor set. If the calc reads the armor set (`ctx.build.armorSet ===
+  <formbend>`), gate on it; **but Formbend must first exist as a selectable armor set** (Section 8). If
+  the calc doesn't distinguish set slots, **hardcode +2** (user-approved fallback) — Formbend is fixed in
+  the meta build. Keep AoR conditional either way.
 
-`rainwhisperShield` is **shared** — after editing its duration function, run the buff-equivalence
-tests. The extensions are gated (a class gets them only if it runs AoR/Formbend, and no validated class
-slots AoR), so nothing should move; if it does, fall back to a Might-scoped shield. `breakthrough` is
-Might-only, so its function edit is unconditionally safe. This replaces the earlier bake plan.
+## Class-def wiring (Section 8 — resolves the orphaned-buff test)
+- `classBuffDefs`: `drumbeat`, `breakthrough`, `stonesplitMightChargedCrit`, the AoR buff, the Rainwhisper
+  buff, the consume def. `vulnerability`/`vulnerabilityWeapon` too (they're `defineClassBuff`).
+- Throat-Pierce Might variant attaches via the `throatPierce` inner way.
+- This is what clears `classModuleBoundaries` (every class buff must be listed by a class).
 
-## §Verify in code (small unknowns, cheap for Code to resolve)
-
-- The exact **crit-rate stat key** for `stat(...)` (seen: `critDamageBoost`, `allDamageBoost`,
-  `affinityDamageBoost`, `directAffinityRate` — crit *rate* not yet spotted; grep the engine).
-- Whether `affects` accepts the `isCharged` property + a varied-combo tag, or needs explicit skill ids.
-- Whether the `throatPierced` inner-way buff already has the `stonesplit_might` variant.
-- Whether `resistanceResolve` models the while-shielded buff or Hardened Foe.
+## §Verify in code (cheap for Code)
+- Confirm `directCritRate` still the crit-rate stat post-refactor (statRegistry was reworked).
+- Confirm `affectsAll` vs `receives` for each new buff (Rainwhisper/AoR reach all; Throat-Pierce is self).
 
 ## Cross-ref: Section 8 (not buffs)
-
-Martial-arts-talent base stats (Max Phys Attack, Stonesplit atk/pen/DMG bonus, Max HP, the +50%
-attribute) → `baseStats/*.json` + `classSkillBoosts.json`; the latter scales with **Stonesplit Min**
-(PR #14 correction). `classMindGroup` for Might's dual signature (Exquisite Scenery + AoR) and the
-11-vs-8 inner-way reconciliation are also Section 8.
+Martial-arts talents → base stats (`reference/baseStats/`) + `classSkillBoosts.json` (scales with
+Stonesplit **Min**, PR #14 fix). Martial arts are now defined entities (`src/data/martialArts/`) — new
+since the refactor; Might's two weapons (Thundercry Blade, Stormbreaker Spear) need entries. Formbend as
+a selectable armor set. `classMindGroup` for Might's dual signature (Exquisite Scenery + AoR).
