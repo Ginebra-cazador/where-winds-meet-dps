@@ -22,6 +22,7 @@ export const mobladevariedcombo2bw = defineSkill({
   castTag: "cast:moBladeVariedCombo2BW",
   castFrames: 60,
   triggerable: true,
+  triggersBuffs: [BUFF.throatPiercedMight],
   receives: [BUFF.drumbeat, BUFF.breakthrough, BUFF.stonesplitMightChargedCrit],
   hits: [
     hit(0, {

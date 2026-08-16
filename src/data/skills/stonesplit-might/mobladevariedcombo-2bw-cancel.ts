@@ -22,6 +22,7 @@ export const mobladevariedcombo2bwCancel = defineSkill({
   castTag: "cast:moBladeVariedCombo2BWCancel",
   castFrames: 37,
   triggerable: true,
+  triggersBuffs: [BUFF.throatPiercedMight],
   receives: [BUFF.drumbeat, BUFF.breakthrough, BUFF.stonesplitMightChargedCrit],
   hits: [
     hit(0, {

@@ -27,6 +27,7 @@ export const BUFF = {
   shatteredRidgeDeflect: "shatteredRidgeDeflect",
   stonesplitStrengthSkillCritDamage: "stonesplitStrengthSkillCritDamage",
   throatPierced: "throatPierced",
+  throatPiercedMight: "throatPiercedMight",
   dragonHeadLowHp: "dragonHeadLowHp",
   fluteBoost: "fluteBoost",
   healerBuff: "healerBuff",
