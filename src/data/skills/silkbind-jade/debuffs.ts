@@ -6,6 +6,17 @@ import { DEBUFF } from "./ids"
 
 const CLASS_ID = "silkbindJade"
 
+// Per TICK, despite the workbook row calling itself a per-second rate: its
+// rotation spends a constant 10 units per throw against a drone that lasts
+// ~7s, so a unit is one assist attack (workbook v1.2, 2026-08-14). Every
+// variant shares these — the tick COUNT is what differs with rotation speed.
+const DRONE_TICK = {
+  physMultiplier: 1.174955,
+  physFixed: 324.3,
+  attributeMultiplier: 1.762375,
+  attributeFixed: 177.1,
+}
+
 export const toadPoison = defineDebuff({
   id: DEBUFF.toadPoison,
   classId: CLASS_ID,
@@ -94,10 +105,7 @@ export const umbdrone12Hit = defineDebuff({
   effects: [],
   dot: {
     tickIntervalFrames: 35,
-    physMultiplier: 1.0215,
-    physFixed: 236,
-    attributeMultiplier: 1.5323,
-    attributeFixed: 132,
+    ...DRONE_TICK,
     attributeAttack: "Silkbind",
     skillType: "sustain",
     attuneTag: ATTUNE.umbSpecial,
@@ -120,10 +128,7 @@ export const umbdrone16Hit = defineDebuff({
   effects: [],
   dot: {
     tickIntervalFrames: 26,
-    physMultiplier: 1.0215,
-    physFixed: 236,
-    attributeMultiplier: 1.5323,
-    attributeFixed: 132,
+    ...DRONE_TICK,
     attributeAttack: "Silkbind",
     skillType: "sustain",
     attuneTag: ATTUNE.umbSpecial,
@@ -146,10 +151,7 @@ export const umbdrone20Hit = defineDebuff({
   effects: [],
   dot: {
     tickIntervalFrames: 21,
-    physMultiplier: 1.0215,
-    physFixed: 236,
-    attributeMultiplier: 1.5323,
-    attributeFixed: 132,
+    ...DRONE_TICK,
     attributeAttack: "Silkbind",
     skillType: "sustain",
     attuneTag: ATTUNE.umbSpecial,
@@ -172,10 +174,7 @@ export const umbdrone23Hit = defineDebuff({
   effects: [],
   dot: {
     tickIntervalFrames: 18,
-    physMultiplier: 1.0215,
-    physFixed: 236,
-    attributeMultiplier: 1.5323,
-    attributeFixed: 132,
+    ...DRONE_TICK,
     attributeAttack: "Silkbind",
     skillType: "sustain",
     attuneTag: ATTUNE.umbSpecial,
@@ -198,10 +197,7 @@ export const umbdrone26Hit = defineDebuff({
   effects: [],
   dot: {
     tickIntervalFrames: 16,
-    physMultiplier: 1.0215,
-    physFixed: 236,
-    attributeMultiplier: 1.5323,
-    attributeFixed: 132,
+    ...DRONE_TICK,
     attributeAttack: "Silkbind",
     skillType: "sustain",
     attuneTag: ATTUNE.umbSpecial,
