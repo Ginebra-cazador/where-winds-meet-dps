@@ -1,5 +1,6 @@
 import { defineSkill, hit } from "../../../definitions/skills/skillDef"
 import { ATTACK, CAST, ROLE, WEAPON } from "../ids"
+import { BUFF } from "../buffs/ids"
 import { SKILL } from "./ids"
 
 const COEFFICIENTS = {
@@ -19,6 +20,7 @@ export const umbHeavylight = defineSkill({
   weaponOrAttribute: "Umbrella",
   attributeAttack: "Silkbind",
   castTag: CAST.umbHeavyLight,
+  receives: [BUFF.thunderousBloom],
   castFrames: 75,
   triggerable: true,
   hits: [

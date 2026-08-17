@@ -6,8 +6,6 @@ import { rotationPoolFor } from "../../../definitions/rotations/registry"
 import { INNER_WAY_ID } from "../../innerWays/ids"
 import { lowQiFollowUp } from "../../skills/silkbind-jade/buffs/lowQiFollowUp"
 import { trajectorySkill } from "../../skills/silkbind-jade/buffs/trajectorySkill"
-import { combo } from "../../skills/silkbind-jade/buffs/combo"
-import { comboUmbLightBonus } from "../../skills/silkbind-jade/buffs/comboUmbLightBonus"
 import { lingeringBone } from "../../skills/silkbind-jade/buffs/lingeringBone"
 import { pursuitChargedBoost } from "../../skills/silkbind-jade/buffs/pursuitChargedBoost"
 import { windWall } from "../../skills/silkbind-jade/buffs/windWall"
@@ -22,8 +20,13 @@ export const silkbindJade = defineClass({
   spec: "silkbind_jade",
   primaryAttribute: "Silkbind",
   attributeMultiplier: 50,
-  classMindGroup: "",
-  allowedMindMethods: [INNER_WAY_ID.moraleChant, INNER_WAY_ID.bitterSeason],
+  classMindGroup: INNER_WAY_ID.blossomBarrage,
+  allowedMindMethods: [
+    INNER_WAY_ID.moraleChant,
+    INNER_WAY_ID.bitterSeason,
+    INNER_WAY_ID.starReacher,
+    INNER_WAY_ID.thunderousBloom,
+  ],
   classSpecificAttunements: [
     "umbQ",
     "umbCharged",
@@ -41,8 +44,6 @@ export const silkbindJade = defineClass({
   classBuffDefs: [
     lowQiFollowUp,
     trajectorySkill,
-    combo,
-    comboUmbLightBonus,
     windWall,
     windWallPursuit,
     pursuitChargedBoost,

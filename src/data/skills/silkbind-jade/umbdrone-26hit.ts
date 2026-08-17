@@ -13,7 +13,7 @@ export const umbdrone26HitTick = defineSkill({
   weaponOrAttribute: "Umbrella",
   attributeAttack: "Silkbind",
   castTag: CAST.umbDroneTick26hit,
-  receives: [BUFF.soulShaken],
+  receives: [BUFF.soulShaken, BUFF.thunderousBloom],
   elevatedAttributeMultiplier: false,
   castFrames: 0,
   triggerable: true,

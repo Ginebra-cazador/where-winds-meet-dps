@@ -33924,7 +33924,7 @@
           "silkbindJade-umbq",
           "silkbindJade-umbq-prepull"
         ],
-        "digest": "1b91a7d50db4ab0aa46e0cd17b08cd204307b65c1d9306eae44aa4bd5363dcd1"
+        "digest": "0f498a16a5d80932bab55eea26931f71b4e736477ff73cde2e6d51fec31abef3"
       },
       "debuffs": {
         "count": 9,
@@ -33942,6 +33942,121 @@
         "digest": "4ada78f9393486e0c607dfbf60dc493458a49df393d4de1b669c562fed99dd5c"
       },
       "buffs": [
+        {
+          "id": "combo",
+          "name": "Combo",
+          "classBuff": true,
+          "requires": {
+            "param": "blossomBarrage"
+          },
+          "affectsAll": false,
+          "alwaysActive": false,
+          "buffAppliesOnCastEnd": false,
+          "cooldown": null,
+          "rateLimit": null,
+          "stackRateLimit": null,
+          "stacksPerHit": false,
+          "seedAtStart": false,
+          "refreshOnAnyCast": false,
+          "requiresBuffActive": null,
+          "activeAfterBuffEnds": null,
+          "hasStacksFn": false,
+          "duration": 15,
+          "maxStacks": null,
+          "effects": [
+            {
+              "kind": "stat",
+              "statKey": "allDamageBoost",
+              "amount": 0.2
+            }
+          ],
+          "summary": null
+        },
+        {
+          "id": "comboUmbLightBonus",
+          "name": "Combo (UmbLight)",
+          "classBuff": true,
+          "requires": {
+            "param": "blossomBarrage",
+            "minTier": 4
+          },
+          "affectsAll": false,
+          "alwaysActive": false,
+          "buffAppliesOnCastEnd": false,
+          "cooldown": null,
+          "rateLimit": null,
+          "stackRateLimit": null,
+          "stacksPerHit": false,
+          "seedAtStart": false,
+          "refreshOnAnyCast": false,
+          "requiresBuffActive": "combo",
+          "activeAfterBuffEnds": null,
+          "hasStacksFn": false,
+          "duration": 15,
+          "maxStacks": null,
+          "effects": [
+            {
+              "kind": "stat",
+              "statKey": "allDamageBoost",
+              "amount": 0.1
+            }
+          ],
+          "summary": null
+        },
+        {
+          "id": "starReacher",
+          "name": "Star Reacher",
+          "classBuff": true,
+          "requires": {
+            "param": "starReacher"
+          },
+          "affectsAll": true,
+          "alwaysActive": true,
+          "buffAppliesOnCastEnd": false,
+          "cooldown": null,
+          "rateLimit": null,
+          "stackRateLimit": null,
+          "stacksPerHit": false,
+          "seedAtStart": false,
+          "refreshOnAnyCast": false,
+          "requiresBuffActive": null,
+          "activeAfterBuffEnds": null,
+          "hasStacksFn": false,
+          "duration": 9999,
+          "maxStacks": null,
+          "effects": "[fn]",
+          "summary": "physBoost +7.5% (normal), +15% (<30% Qi), +25% (Qi exhausted)"
+        },
+        {
+          "id": "thunderousBloom",
+          "name": "Thunderous Bloom",
+          "classBuff": true,
+          "requires": {
+            "param": "thunderousBloom"
+          },
+          "affectsAll": false,
+          "alwaysActive": true,
+          "buffAppliesOnCastEnd": false,
+          "cooldown": null,
+          "rateLimit": null,
+          "stackRateLimit": null,
+          "stacksPerHit": false,
+          "seedAtStart": false,
+          "refreshOnAnyCast": false,
+          "requiresBuffActive": null,
+          "activeAfterBuffEnds": null,
+          "hasStacksFn": false,
+          "duration": 9999,
+          "maxStacks": null,
+          "effects": [
+            {
+              "kind": "stat",
+              "statKey": "allDamageBoost",
+              "amount": 0.15
+            }
+          ],
+          "summary": null
+        },
         {
           "id": "revelryScript",
           "name": "Revelry Script",
@@ -34249,62 +34364,6 @@
           "summary": "ignores 5 Physical Resistance, 20 during qi break or Lingering Bone"
         },
         {
-          "id": "combo",
-          "name": "Combo",
-          "classBuff": true,
-          "requires": null,
-          "affectsAll": false,
-          "alwaysActive": false,
-          "buffAppliesOnCastEnd": false,
-          "cooldown": null,
-          "rateLimit": null,
-          "stackRateLimit": null,
-          "stacksPerHit": false,
-          "seedAtStart": false,
-          "refreshOnAnyCast": false,
-          "requiresBuffActive": null,
-          "activeAfterBuffEnds": null,
-          "hasStacksFn": false,
-          "duration": 15,
-          "maxStacks": null,
-          "effects": [
-            {
-              "kind": "stat",
-              "statKey": "allDamageBoost",
-              "amount": 0.2
-            }
-          ],
-          "summary": null
-        },
-        {
-          "id": "comboUmbLightBonus",
-          "name": "Combo (UmbLight)",
-          "classBuff": true,
-          "requires": null,
-          "affectsAll": false,
-          "alwaysActive": false,
-          "buffAppliesOnCastEnd": false,
-          "cooldown": null,
-          "rateLimit": null,
-          "stackRateLimit": null,
-          "stacksPerHit": false,
-          "seedAtStart": false,
-          "refreshOnAnyCast": false,
-          "requiresBuffActive": "combo",
-          "activeAfterBuffEnds": null,
-          "hasStacksFn": false,
-          "duration": 15,
-          "maxStacks": null,
-          "effects": [
-            {
-              "kind": "stat",
-              "statKey": "allDamageBoost",
-              "amount": 0.1
-            }
-          ],
-          "summary": null
-        },
-        {
           "id": "windWall",
           "name": "Wind Wall",
           "classBuff": true,
@@ -34431,7 +34490,7 @@
       ]
     },
     "dynamic": {
-      "digest": "74216d5300267459230592c6444000fe22e3dc6e1afd5a5af86df77452b85203"
+      "digest": "9838365672e4ce7fde7254821342f2c8a05056c1a53d60640f783187c33df43a"
     }
   }
 }

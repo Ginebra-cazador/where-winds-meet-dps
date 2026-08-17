@@ -33,6 +33,7 @@ export const umblightcharge = defineSkill({
     BUFF.windWall,
     BUFF.pursuitChargedBoost,
     BUFF.trajectorySkill,
+    BUFF.thunderousBloom,
   ],
   castFrames: 147,
   triggerable: true,

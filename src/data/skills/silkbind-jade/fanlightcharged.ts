@@ -12,7 +12,7 @@ export const fanlightcharged = defineSkill({
   weaponOrAttribute: "Fan",
   attributeAttack: "Silkbind",
   castTag: CAST.fanLightCharged,
-  receives: [BUFF.windWall, BUFF.pursuitChargedBoost],
+  receives: [BUFF.windWall, BUFF.pursuitChargedBoost, BUFF.thunderousBloom],
   triggersBuffs: [BUFF.lingeringBone],
   castFrames: 75,
   triggerable: true,

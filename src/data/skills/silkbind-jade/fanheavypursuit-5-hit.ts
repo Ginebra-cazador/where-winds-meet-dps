@@ -29,7 +29,7 @@ export const fanheavypursuit5Hit = defineSkill({
   weaponOrAttribute: "Fan",
   attributeAttack: "Silkbind",
   castTag: CAST.fanHeavyPursuit5Hit,
-  receives: [BUFF.windWallPursuit, BUFF.lowQiFollowUp],
+  receives: [BUFF.windWallPursuit, BUFF.lowQiFollowUp, BUFF.thunderousBloom],
   triggersBuffs: [BUFF.pursuitChargedBoost],
   castFrames: 150,
   triggerable: true,
