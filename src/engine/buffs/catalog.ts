@@ -91,7 +91,6 @@ export function requiresLabel(module: BuffModule): string | null {
   if (!requires?.param) return null
   const innerWayName = innerWayForBuffParam(requires.param)?.name
   if (innerWayName) return innerWayName + (requires.minTier ? ` tier ${requires.minTier}+` : "")
-  if (requires.param === "starsAlignActive") return "Stars Align"
   return humanize(requires.param) + (requires.minTier ? ` T${requires.minTier}+` : "")
 }
 

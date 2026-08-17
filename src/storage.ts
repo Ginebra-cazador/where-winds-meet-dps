@@ -4,6 +4,7 @@ import { isGearWordId } from "./data/stats/statLines"
 import { defaultInputs } from "./engine/defaults"
 import { allowedInnerWaysForClass, defaultArsenalForClass } from "./engine/panel"
 import { CLASS_IDS } from "./definitions/classes/registry"
+import { SET_BY_ID } from "./definitions/sets/registry"
 import {
   innerWayIdForName,
   innerWayName,
@@ -174,6 +175,12 @@ function hydrateInputs(inputs: Inputs): Inputs {
   // chain of its own (V8 covers `wwm.profiles`) — idempotent, so re-running it
   // on an already-migrated id is a no-op.
   next.set = migrateSetId(next.set)
+  // `migrateSetId`'s allowlist is frozen at the ids that existed when V11 ran,
+  // so it cannot know about a set retired since. Checked against the live
+  // registry so the "must be selectable" invariant holds on the two paths that
+  // never walk the chain — a bare imported profile and the legacy `wwm.inputs`
+  // blob.
+  if (next.set !== null && SET_BY_ID[next.set] === undefined) next.set = null
   if (next.activeCustomRotation != null) {
     next.activeCustomRotation = migrateRotationIds(next.activeCustomRotation)
   }
