@@ -188,6 +188,114 @@ const CLASS_TALENT_COLUMNS: Record<string, WeaponColumnConfig[]> = {
       ],
     },
   ],
+  silkbindJade: [
+    {
+      weapon: "Vernal Umbrella",
+      cards: [
+        {
+          name: "Trajectory Skill Enhancement",
+          lines: [
+            {
+              kind: "static",
+              text: "Ballistic skills ignore 5 Physical Resistance, and 15 more during Qi break or Lingering Bone.",
+              subNote:
+                "Already applied in the damage formula, off the skill's own tag — not a stat this tab contributes.",
+            },
+          ],
+        },
+        {
+          name: "Critical Rate UP",
+          lines: [{ kind: "talent", skill: "Critical Rate UP" }],
+        },
+        {
+          name: "Trajectory Calculation Enhancement",
+          lines: [
+            {
+              kind: "static",
+              text: "Ballistic skills gain 2.4% Crit DMG per 50 Min Physical, up to 36% at 750.",
+              subNote:
+                "Already applied in the damage formula — needs the weapon to grant the min-phys crit bonus.",
+            },
+          ],
+        },
+        {
+          name: "Silkbind Attribute UP",
+          lines: [
+            {
+              kind: "talentFlatText",
+              skills: ["Umbrella Silkbind Attack Min", "Umbrella Silkbind Attack Max"],
+              text: "+98 Min / +196 Max Silkbind Attack (always)",
+            },
+            { kind: "talent", skill: "Silkbind Penetration Scale" },
+          ],
+        },
+        {
+          name: "Attr. Attack DMG UP",
+          lines: [
+            {
+              kind: "static",
+              text: "Silkbind Attack deals 50% bonus damage.",
+              subNote:
+                "Already applied in the damage formula (elevated attribute multiplier) — not a stat this tab contributes.",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      weapon: "Inkwell Fan",
+      cards: [
+        {
+          name: "Low Qi Follow-up Enhancement",
+          lines: [
+            {
+              kind: "static",
+              text: "Against targets below 30% Qi, Moon Shatter Spring gains 30% Critical Rate and 8% damage.",
+              subNote:
+                "Already applied in the damage formula, off the skill's own tags — not a stat this tab contributes.",
+            },
+          ],
+        },
+        {
+          name: "Physical Attack UP",
+          lines: [{ kind: "talent", skill: "Physical Attack UP" }],
+        },
+        {
+          name: "Heavy Attack Pursuit Enhancement",
+          lines: [
+            {
+              kind: "static",
+              text: "Moon Shatter Spring gains 2.4% Crit DMG per 50 Min Physical, up to 36% at 750.",
+              subNote:
+                "Already applied in the damage formula — needs the weapon to grant the min-phys crit bonus.",
+            },
+          ],
+        },
+        {
+          name: "Silkbind Attribute UP",
+          lines: [
+            {
+              kind: "talentFlatText",
+              skills: ["Fan Silkbind Attack Min", "Fan Silkbind Attack Max"],
+              text: "+98 Min / +196 Max Silkbind Attack (always)",
+            },
+            { kind: "talent", skill: "Attribute Damage Scale", label: "Silkbind DMG Bonus" },
+          ],
+        },
+        {
+          name: "Attr. Attack DMG UP",
+          lines: [
+            {
+              kind: "static",
+              text: "Silkbind Attack deals 50% bonus damage.",
+              subNote:
+                "Already applied in the damage formula (elevated attribute multiplier) — not a stat this tab contributes.",
+            },
+          ],
+        },
+      ],
+    },
+  ],
   bellstrikeSplendor: [
     {
       weapon: "Nameless Sword",
