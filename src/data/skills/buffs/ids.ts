@@ -38,6 +38,7 @@ export const BUFF = {
   potentRiverFlow: "potentRiverFlow",
   pursuitChargedBoost: "pursuitChargedBoost",
   qiImbalance: "qiImbalance",
+  rainwhisperCritDamage: "rainwhisperCritDamage",
   rainwhisperShield: "rainwhisperShield",
   resistanceResolve: "resistanceResolve",
   revelryScript: "revelryScript",

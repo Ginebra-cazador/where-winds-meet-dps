@@ -10,6 +10,7 @@ import { vulnerabilityTeammate } from "./vulnerabilityTeammate"
 import { jadeware } from "./jadeware"
 import { mirage } from "./mirage"
 import { mirageBonus } from "./mirageBonus"
+import { rainwhisperCritDamage } from "./rainwhisperCritDamage"
 import { rainwhisperShield } from "./rainwhisperShield"
 import { resistanceResolve } from "./resistanceResolve"
 import { surgingWaves } from "./surgingWaves"
@@ -25,6 +26,7 @@ export const GLOBAL_BUFF_DEFS: BuffModule[] = [
   jadeware,
   mirage,
   mirageBonus,
+  rainwhisperCritDamage,
   rainwhisperShield,
   resistanceResolve,
   surgingWaves,

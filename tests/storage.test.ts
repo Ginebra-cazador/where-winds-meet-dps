@@ -33,6 +33,7 @@ import {
 } from "../src/engine/derivedInputs"
 import { LATEST_PROFILES_VERSION } from "../src/migrations"
 import { SET_ID } from "../src/data/sets/ids"
+import { SET_DEFS } from "../src/data/sets"
 import { kvStore } from "../src/kvStore"
 import { EMPTY_EQUIPPED } from "../src/engine/types"
 import type { GearPiece, Inputs, StoredProfile } from "../src/engine/types"
@@ -1028,6 +1029,15 @@ describe("armor-set display name heal (wwm.inputs blob, no version bump)", () =>
     const { profiles } = loadProfiles()
     expect(profiles[0].inputs.set).toBe("jadeware")
   })
+
+  it.each([...SET_DEFS.map((set) => set.id)])(
+    "keeps %s, including a set registered after the legacy name table was frozen",
+    (setId) => {
+      saveInputs({ ...defaultInputs, set: setId })
+      const { profiles } = loadProfiles()
+      expect(profiles[0].inputs.set).toBe(setId)
+    },
+  )
 })
 
 // Additive, no version bump — see CLAUDE.md → "localStorage migrations".

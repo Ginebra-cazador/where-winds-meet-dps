@@ -157,6 +157,18 @@ function repairGearWord(entry: unknown): unknown {
   return isGearWordId(renamed) ? { ...entry, word: renamed } : { ...entry, word: "", value: 0 }
 }
 
+// The live registry is the allowlist, never `migrateSetId`'s table: that table
+// is frozen at the display names V11 knew, so it recognises neither a set
+// retired since nor one added since, and run alone it clears a legitimate
+// selection on every load. It survives here only as the pre-V11 display-name
+// hop for the two paths that never walk the chain — a bare imported profile
+// and the legacy `wwm.inputs` blob.
+function selectableSetId(stored: string | null): string | null {
+  if (stored !== null && SET_BY_ID[stored] !== undefined) return stored
+  const migrated = migrateSetId(stored)
+  return migrated !== null && SET_BY_ID[migrated] !== undefined ? migrated : null
+}
+
 // additive — see CLAUDE.md → "localStorage migrations"
 function hydrateInputs(inputs: Inputs): Inputs {
   const { resistance: _legacyResistance, ...rest } = inputs as Inputs & { resistance?: number }
@@ -171,16 +183,7 @@ function hydrateInputs(inputs: Inputs): Inputs {
   // unknown id — see CLAUDE.md → "localStorage migrations".
   if (!CLASS_IDS().includes(next.classId)) next.classId = defaultInputs.classId
   next.selectedBuiltinRotationId = migrateEntityId(next.selectedBuiltinRotationId)
-  // Value-level repair for the legacy `wwm.inputs` blob, which has no version
-  // chain of its own (V8 covers `wwm.profiles`) — idempotent, so re-running it
-  // on an already-migrated id is a no-op.
-  next.set = migrateSetId(next.set)
-  // `migrateSetId`'s allowlist is frozen at the ids that existed when V11 ran,
-  // so it cannot know about a set retired since. Checked against the live
-  // registry so the "must be selectable" invariant holds on the two paths that
-  // never walk the chain — a bare imported profile and the legacy `wwm.inputs`
-  // blob.
-  if (next.set !== null && SET_BY_ID[next.set] === undefined) next.set = null
+  next.set = selectableSetId(next.set)
   if (next.activeCustomRotation != null) {
     next.activeCustomRotation = migrateRotationIds(next.activeCustomRotation)
   }
