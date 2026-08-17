@@ -74,13 +74,13 @@ export function BowSetPanel({ inputs, onChange, armorDpsByKey, bowDpsByChoice, i
       <div className="section-label">{t("Armor Set")}</div>
       <div className={`${optionTiles.tileGrid} ${optionTiles.cols2}`}>
         {ARMOR_SET_OPTIONS.map((opt) => {
-          const statKey = STAT_TO_I18N_KEY[opt.stat] ?? opt.stat
+          const statKey = opt.stat ? (STAT_TO_I18N_KEY[opt.stat] ?? opt.stat) : ""
           const isFlat = opt.stat === "maxPhys" || opt.stat === "minPhys"
           return (
             <SetTile
               key={opt.setKey}
               label={t(opt.name)}
-              bonusLabel={bonusWithStatLabel(t, statKey, opt.value, isFlat)}
+              bonusLabel={bonusWithStatLabel(t, statKey, opt.value ?? 0, isFlat)}
               dps={armorDpsByKey?.[opt.setKey] ?? Number.NaN}
               currentDps={currentArmorDps}
               selected={armorSelectedKey === opt.setKey}
