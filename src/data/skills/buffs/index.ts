@@ -1,4 +1,8 @@
 import type { BuffModule } from "../../../engine/buffs/buffModule"
+import { windWall } from "./windWall"
+import { windWallPursuit } from "./windWallPursuit"
+import { pursuitChargedBoost } from "./pursuitChargedBoost"
+import { lingeringBone } from "./lingeringBone"
 import { healerBuff } from "./healerBuff"
 import { revelryScript } from "./revelryScript"
 import { fluteBoost } from "./fluteBoost"
@@ -25,6 +29,10 @@ export const GLOBAL_BUFF_DEFS: BuffModule[] = [
   resistanceResolve,
   surgingWaves,
   dragonHeadLowHp,
+  windWall,
+  windWallPursuit,
+  pursuitChargedBoost,
+  lingeringBone,
 ]
 
 export const GROUP_BUFF_DEFS: BuffModule[] = [healerBuff]

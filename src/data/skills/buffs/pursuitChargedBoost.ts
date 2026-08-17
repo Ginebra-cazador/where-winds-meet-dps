@@ -1,8 +1,8 @@
-import { defineClassBuff } from "../../../../definitions/skills/buffDef"
-import { BUFF } from "../../buffs/ids"
-import { stat } from "../../../../engine/effects/effect"
+import { defineBuff } from "../../../definitions/skills/buffDef"
+import { BUFF } from "./ids"
+import { stat } from "../../../engine/effects/effect"
 
-export const pursuitChargedBoost = defineClassBuff({
+export const pursuitChargedBoost = defineBuff({
   id: BUFF.pursuitChargedBoost,
   name: "Spring Shock",
   duration: 15,

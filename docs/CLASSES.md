@@ -104,15 +104,23 @@ id, so this crosses no new line.
 
 ## Buff ownership
 
-- A def reachable **purely because you are this class** — even when activation is
-  gated by a tier, a talent or a qi phase — goes on the class's own list.
+> **A class buff is a weapon-art talent, and nothing else.** The talents on a
+> weapon's Martial Arts Talents panel — the ones granting stat scaling and a
+> handful of always-on effects — are the class's own list. Every other buff is a
+> **normal buff**, even one only this class can ever produce.
+
+- A **weapon-art talent** goes on the class's own list.
+- A buff a **skill triggers** is a normal buff and goes on the global list. Being
+  reachable by one class only does **not** make it a class buff — what decides is
+  whether a skill triggers it or the talent panel grants it.
 - A def an **inner way gates** goes on that inner way.
-- A def triggered by a universal skill, or gated on a global toggle, goes on the
-  global or group list.
+- A def gated on a global toggle goes on the global or group list.
 
 This is not a filing convenience: the class's own list is what puts a row in the
 Skill Editor's spec-mechanics section instead of the general buff list, and what
-the rotation editor's chip suppression narrows further. The class or inner way
+the rotation editor's chip suppression narrows further. A skill-triggered buff
+filed on the class therefore shows up as a spec mechanic, which is wrong — it is
+a buff the skill applies, not a property of the class. The class or inner way
 that lists a module is the **only** statement of its scope; the marker on the
 module itself is inert everywhere else.
 

@@ -6,10 +6,6 @@ import { rotationPoolFor } from "../../../definitions/rotations/registry"
 import { INNER_WAY_ID } from "../../innerWays/ids"
 import { lowQiFollowUp } from "../../skills/silkbind-jade/buffs/lowQiFollowUp"
 import { trajectorySkill } from "../../skills/silkbind-jade/buffs/trajectorySkill"
-import { lingeringBone } from "../../skills/silkbind-jade/buffs/lingeringBone"
-import { pursuitChargedBoost } from "../../skills/silkbind-jade/buffs/pursuitChargedBoost"
-import { windWall } from "../../skills/silkbind-jade/buffs/windWall"
-import { windWallPursuit } from "../../skills/silkbind-jade/buffs/windWallPursuit"
 import { SILKBIND_JADE_GRADUATION_BUILD } from "./graduationBuild"
 import { MARTIAL_ART_ID } from "../../martialArts/ids"
 
@@ -41,14 +37,7 @@ export const silkbindJade = defineClass({
   debuffs: DEBUFFS,
   ...rotationPoolFor(CLASS_ID),
   graduationBuild: SILKBIND_JADE_GRADUATION_BUILD,
-  classBuffDefs: [
-    lowQiFollowUp,
-    trajectorySkill,
-    windWall,
-    windWallPursuit,
-    pursuitChargedBoost,
-    lingeringBone,
-  ],
+  classBuffDefs: [lowQiFollowUp, trajectorySkill],
   gateBuffs: [],
   mechanics: [],
   skillBehaviors: [],

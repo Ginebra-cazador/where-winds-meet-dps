@@ -108,7 +108,7 @@ describe("bellstrikeUmbra — every declared ClassDef field is wired", () => {
     ])
   })
 
-  it("buffDefsForClass('bellstrikeUmbra') is the full 16-entry composition: inner-way owned, then the reordered globals, then the class's own", () => {
+  it("buffDefsForClass('bellstrikeUmbra') is the full 20-entry composition: inner-way owned, then the reordered globals, then the class's own", () => {
     expect(buffDefsForClass("bellstrikeUmbra").map((module) => module.id)).toEqual([
       "buff-bellstrikeUmbra-zenith-bar",
       "potentRiverFlow",
@@ -124,6 +124,10 @@ describe("bellstrikeUmbra — every declared ClassDef field is wired", () => {
       "resistanceResolve",
       "surgingWaves",
       "dragonHeadLowHp",
+      "windWall",
+      "windWallPursuit",
+      "pursuitChargedBoost",
+      "lingeringBone",
       "bellstrikeUmbraBleedPen",
       "bellstrikeUmbraBleedingDamage",
     ])
