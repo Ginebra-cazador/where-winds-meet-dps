@@ -1,4 +1,5 @@
 import { defineDebuff } from "../../../definitions/skills/skillDef"
+import { ATTUNE } from "../ids"
 import { BUFF } from "../buffs/ids"
 import type { Debuff } from "../../../engine/debuff"
 import { DEBUFF } from "./ids"
@@ -99,6 +100,7 @@ export const umbdrone12Hit = defineDebuff({
     attributeFixed: 132,
     attributeAttack: "Silkbind",
     skillType: "sustain",
+    attuneTag: ATTUNE.umbSpecial,
     count: 1,
     perStackShapes: null,
   },
@@ -124,6 +126,7 @@ export const umbdrone16Hit = defineDebuff({
     attributeFixed: 132,
     attributeAttack: "Silkbind",
     skillType: "sustain",
+    attuneTag: ATTUNE.umbSpecial,
     count: 1,
     perStackShapes: null,
   },
@@ -149,6 +152,7 @@ export const umbdrone20Hit = defineDebuff({
     attributeFixed: 132,
     attributeAttack: "Silkbind",
     skillType: "sustain",
+    attuneTag: ATTUNE.umbSpecial,
     count: 1,
     perStackShapes: null,
   },
@@ -174,6 +178,7 @@ export const umbdrone23Hit = defineDebuff({
     attributeFixed: 132,
     attributeAttack: "Silkbind",
     skillType: "sustain",
+    attuneTag: ATTUNE.umbSpecial,
     count: 1,
     perStackShapes: null,
   },
@@ -199,6 +204,7 @@ export const umbdrone26Hit = defineDebuff({
     attributeFixed: 132,
     attributeAttack: "Silkbind",
     skillType: "sustain",
+    attuneTag: ATTUNE.umbSpecial,
     count: 1,
     perStackShapes: null,
   },
