@@ -8,6 +8,7 @@ export const umbdronelaunch26Hit = defineSkill({
   id: SKILL.umbdronelaunch26Hit,
   classId: "silkbindJade",
   name: "UmbDroneLaunch[26hit]",
+  breakdownName: "Umbrella Launch",
   tags: [
     PROP.hasQiBreakPhysPen,
     WEAPON.umbrella,

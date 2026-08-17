@@ -4,10 +4,10 @@ import { BUFF } from "../buffs/ids"
 import { SKILL } from "./ids"
 
 const COEFFICIENTS = {
-  physMultiplier: 2.146875,
-  attributeMultiplier: 3.22025,
-  physFixed: 592.5,
-  attributeFixed: 322.5,
+  physMultiplier: 1.7173,
+  attributeMultiplier: 2.576,
+  physFixed: 396,
+  attributeFixed: 221,
   extraCritDamage: 1,
 }
 

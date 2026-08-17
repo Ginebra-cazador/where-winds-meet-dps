@@ -8,6 +8,7 @@ export const umbdrone26HitTick = defineSkill({
   id: SKILL.umbdrone26Hit,
   classId: "silkbindJade",
   name: "UmbDrone[26hit] Tick",
+  breakdownName: "Umbrella Drone",
   tags: [WEAPON.umbrella, ATTACK.light, ATTUNE.umbSpecial, ROLE.umbDrone],
   skillType: "sustain",
   weaponOrAttribute: "Umbrella",
