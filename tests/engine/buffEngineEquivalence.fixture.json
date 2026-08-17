@@ -33872,7 +33872,7 @@
   "silkbindJade": {
     "static": {
       "skills": {
-        "count": 44,
+        "count": 49,
         "ids": [
           "silkbindJade-bitter-season-tick",
           "silkbindJade-deflect-cancel",
@@ -33910,6 +33910,11 @@
           "silkbindJade-soaring-1-hit",
           "silkbindJade-toad-cancel",
           "silkbindJade-umb-heavylight",
+          "silkbindJade-umbdrone-12hit",
+          "silkbindJade-umbdrone-16hit",
+          "silkbindJade-umbdrone-20hit",
+          "silkbindJade-umbdrone-23hit",
+          "silkbindJade-umbdrone-26hit",
           "silkbindJade-umbdronelaunch-12hit",
           "silkbindJade-umbdronelaunch-16hit",
           "silkbindJade-umbdronelaunch-20hit",
@@ -33919,7 +33924,7 @@
           "silkbindJade-umbq",
           "silkbindJade-umbq-prepull"
         ],
-        "digest": "6abbb227044fb20642d4e1a945bf7ec6049649c3c51929ccdf8ab7f14fd3e328"
+        "digest": "987d7e4ffd0bf0b4c44cd2776dcae793c58ba8cbed9d62d61c131eee49fe8ac6"
       },
       "debuffs": {
         "count": 9,
