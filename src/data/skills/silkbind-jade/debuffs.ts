@@ -6,10 +6,16 @@ import { DEBUFF } from "./ids"
 
 const CLASS_ID = "silkbindJade"
 
+// One assist attack every 0.30s whatever the drone's size (in-game,
+// 2026-08-17). The variant sets how many land, so the window follows from the
+// count instead of being authored per variant.
+const DRONE_INTERVAL_FRAMES = 18
+const droneWindowFrames = (ticks: number): number => ticks * DRONE_INTERVAL_FRAMES + 1
+
 // Per TICK, despite the workbook row calling itself a per-second rate: its
-// rotation spends a constant 10 units per throw against a drone that lasts
-// ~7s, so a unit is one assist attack (workbook v1.2, 2026-08-14). Every
-// variant shares these — the tick COUNT is what differs with rotation speed.
+// rotation spends a constant 10 units per throw against a drone lasting ~7s,
+// so a unit is one assist attack (workbook v1.2, 2026-08-14). Every variant
+// shares these — only the count differs.
 const DRONE_TICK = {
   physMultiplier: 1.174955,
   physFixed: 324.3,
@@ -101,10 +107,10 @@ export const umbdrone12Hit = defineDebuff({
   classId: CLASS_ID,
   name: "UmbDrone[12hit]",
   activation: "triggered",
-  durationFrames: 421,
+  durationFrames: droneWindowFrames(12),
   effects: [],
   dot: {
-    tickIntervalFrames: 35,
+    tickIntervalFrames: DRONE_INTERVAL_FRAMES,
     ...DRONE_TICK,
     attributeAttack: "Silkbind",
     skillType: "sustain",
@@ -124,10 +130,10 @@ export const umbdrone16Hit = defineDebuff({
   classId: CLASS_ID,
   name: "UmbDrone[16hit]",
   activation: "triggered",
-  durationFrames: 417,
+  durationFrames: droneWindowFrames(16),
   effects: [],
   dot: {
-    tickIntervalFrames: 26,
+    tickIntervalFrames: DRONE_INTERVAL_FRAMES,
     ...DRONE_TICK,
     attributeAttack: "Silkbind",
     skillType: "sustain",
@@ -147,10 +153,10 @@ export const umbdrone20Hit = defineDebuff({
   classId: CLASS_ID,
   name: "UmbDrone[20hit]",
   activation: "triggered",
-  durationFrames: 421,
+  durationFrames: droneWindowFrames(20),
   effects: [],
   dot: {
-    tickIntervalFrames: 21,
+    tickIntervalFrames: DRONE_INTERVAL_FRAMES,
     ...DRONE_TICK,
     attributeAttack: "Silkbind",
     skillType: "sustain",
@@ -170,10 +176,10 @@ export const umbdrone23Hit = defineDebuff({
   classId: CLASS_ID,
   name: "UmbDrone[23hit]",
   activation: "triggered",
-  durationFrames: 415,
+  durationFrames: droneWindowFrames(23),
   effects: [],
   dot: {
-    tickIntervalFrames: 18,
+    tickIntervalFrames: DRONE_INTERVAL_FRAMES,
     ...DRONE_TICK,
     attributeAttack: "Silkbind",
     skillType: "sustain",
@@ -193,10 +199,10 @@ export const umbdrone26Hit = defineDebuff({
   classId: CLASS_ID,
   name: "UmbDrone[26hit]",
   activation: "triggered",
-  durationFrames: 417,
+  durationFrames: droneWindowFrames(26),
   effects: [],
   dot: {
-    tickIntervalFrames: 16,
+    tickIntervalFrames: DRONE_INTERVAL_FRAMES,
     ...DRONE_TICK,
     attributeAttack: "Silkbind",
     skillType: "sustain",
