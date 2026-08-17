@@ -158,7 +158,7 @@ describe("Bitter Season inner way — widened allowlist round-trips (no version 
   // inner-way heal below runs — Bitter Season being global-allowed continues
   // to hold on the degraded class too.
   it("survives hydration with its id healed on a profile whose classId gets degraded", () => {
-    const inputs = withBitterSeasonSlot("silkbindJade")
+    const inputs = withBitterSeasonSlot("stonesplitPower")
     kvStore.set(
       PROFILES_KEY,
       JSON.stringify({

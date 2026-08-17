@@ -32,10 +32,13 @@ function receivedBuffIds(): Set<string> {
 // `mountainsMightQiImbalance` carries no stat effect either: it exists so an
 // inner way can gate which skills inflict a status the class also inflicts
 // ungated, and its only effect applies that status.
+// `lingeringBone` is authored with `effects: []` — its reference def's
+// `onApplyFn` handler carries no sourced behaviour (CLAUDE.md, no guessing).
 const RECEIVES_NOTHING_BY_DESIGN = new Set([
   "mirage",
   "rainwhisperShield",
   "mountainsMightQiImbalance",
+  "lingeringBone",
 ])
 
 describe("a skill's/debuff's buff ids are addressed by id, never by display name", () => {

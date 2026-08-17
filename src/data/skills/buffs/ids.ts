@@ -8,6 +8,8 @@ export const BUFF = {
   belowSixtyEndurance: "belowSixtyEndurance",
   bellstrikeUmbraBleedPen: "bellstrikeUmbraBleedPen",
   bellstrikeUmbraBleedingDamage: "bellstrikeUmbraBleedingDamage",
+  combo: "combo",
+  comboUmbLightBonus: "comboUmbLightBonus",
   endlessGale: "endlessGale",
   burningHeartIPConsume: "burningHeartIPConsume",
   chargeEnhancement: "chargeEnhancement",
@@ -32,6 +34,7 @@ export const BUFF = {
   mirage: "mirage",
   mirageBonus: "mirageBonus",
   potentRiverFlow: "potentRiverFlow",
+  pursuitChargedBoost: "pursuitChargedBoost",
   qiImbalance: "qiImbalance",
   rainwhisperShield: "rainwhisperShield",
   resistanceResolve: "resistanceResolve",
@@ -43,6 +46,8 @@ export const BUFF = {
   swordMorphEnduranceBoost: "swordMorphEnduranceBoost",
   swordSlashDamageBoost: "swordSlashDamageBoost",
   vulnerabilityTeammate: "vulnerabilityTeammate",
+  windWall: "windWall",
+  windWallPursuit: "windWallPursuit",
   wineGu: "wineGu",
 } as const
 

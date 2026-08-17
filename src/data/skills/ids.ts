@@ -30,12 +30,21 @@ export const CAST = {
   dragonSBreathSmolder2Hits: "cast:dragonSBreathSmolder2Hits",
   drunkenPoetPrepull: "cast:drunkenPoetPrepull",
   energySurge: "cast:energySurge",
+  fanHeavyPursuit3Hit: "cast:fanHeavyPursuit3Hit",
+  fanHeavyPursuit5Hit: "cast:fanHeavyPursuit5Hit",
+  fanLightCharged: "cast:fanLightCharged",
+  fanQ: "cast:fanQ",
+  fanQCancel: "cast:fanQCancel",
+  fanQPrepull: "cast:fanQPrepull",
+  fanSpecial: "cast:fanSpecial",
   fluteOfTheTidesCancel: "cast:fluteOfTheTidesCancel",
   fluteOfTheTidesFull: "cast:fluteOfTheTidesFull",
   fluteOfTheTidesPrepull: "cast:fluteOfTheTidesPrepull",
   ghostlySteps: "cast:ghostlySteps",
   goldenBodyCancel: "cast:goldenBodyCancel",
   goldenBodyDeflectCancel: "cast:goldenBodyDeflectCancel",
+  healerBuff: "cast:healerBuff",
+  healerExtension: "cast:healerExtension",
   perfectDodge: "cast:perfectDodge",
   perfectDodgeFull: "cast:perfectDodgeFull",
   phalanxChargedS3: "cast:phalanxChargedS3",
@@ -91,6 +100,15 @@ export const CAST = {
   swordSpecial4Hit: "cast:swordSpecial4Hit",
   swordSpecialDeflect: "cast:swordSpecialDeflect",
   toadCancel: "cast:toadCancel",
+  umbDroneLaunch12hit: "cast:umbDroneLaunch12hit",
+  umbDroneLaunch16hit: "cast:umbDroneLaunch16hit",
+  umbDroneLaunch20hit: "cast:umbDroneLaunch20hit",
+  umbDroneLaunch23hit: "cast:umbDroneLaunch23hit",
+  umbDroneLaunch26hit: "cast:umbDroneLaunch26hit",
+  umbHeavyLight: "cast:umbHeavyLight",
+  umbLightCharge: "cast:umbLightCharge",
+  umbQ: "cast:umbQ",
+  umbQPrepull: "cast:umbQPrepull",
 } as const
 
 export const ROLE = {
@@ -102,10 +120,17 @@ export const ROLE = {
   combustion: "role:combustion",
   dragonHead: "role:dragonHead",
   dragonHeadPlus: "role:dragonHeadPlus",
+  fanHeavyPursuit: "role:fanHeavyPursuit",
+  fanLightCharged: "role:fanLightCharged",
   phalanxCharged: "role:phalanxCharged",
   phalanxQ: "role:phalanxQ",
   snowpartingQStab: "role:snowpartingQStab",
   snowpartingVC: "role:snowpartingVC",
+  umbDrone: "role:umbDrone",
+  umbDroneLaunch: "role:umbDroneLaunch",
+  umbHeavyLight: "role:umbHeavyLight",
+  umbLightCharge: "role:umbLightCharge",
+  umbQ: "role:umbQ",
 } as const
 
 export const WEAPON = {
@@ -122,6 +147,9 @@ export const WEAPON = {
 
 export const ATTUNE = {
   bleed: "attune:bleed",
+  fanCharged: "attune:fanCharged",
+  fanQ: "attune:fanQ",
+  fanSpecial: "attune:fanSpecial",
   phalanxbaneCharged: "attune:phalanxbaneCharged",
   phalanxbaneQ: "attune:phalanxbaneQ",
   snowpartingCharged: "attune:snowpartingCharged",
@@ -133,6 +161,8 @@ export const ATTUNE = {
   swordCharged: "attune:swordCharged",
   swordQ: "attune:swordQ",
   swordSpecial: "attune:swordSpecial",
+  umbCharged: "attune:umbCharged",
+  umbQ: "attune:umbQ",
 } as const
 
 // `context.ts` derives `SkillProperties`'s boolean keys from these values at

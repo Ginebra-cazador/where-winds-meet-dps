@@ -20,14 +20,13 @@ Strength (`stonesplitStrength`, spec `stonesplit_strength`) are validated** — 
 holds a measured build exactly. Rely on nothing either reports beyond what its
 anchor pins.
 
-**Bellstrike Splendor (`bellstrikeSplendor`, spec `bellstrike_splendor`) is
-registered and not validated** — selectable, and carrying nothing an anchor
-defends.
+**Bellstrike Splendor (`bellstrikeSplendor`, spec `bellstrike_splendor`) and
+Silkbind Jade (`silkbindJade`, spec `silkbind_jade`) are registered and not
+validated** — selectable, and carrying nothing an anchor defends.
 
-The remaining classes — Silkbind Jade and the other Stonesplit and Bamboocut
-specs — are **not registered**. Their imported data lives under
-`reference/classes/`, unimported by the app and the tests. Treat everything
-there as provisional.
+The remaining classes — the other Stonesplit and Bamboocut specs — are **not
+registered**. Their imported data lives under `reference/classes/`, unimported
+by the app and the tests. Treat everything there as provisional.
 
 Two of them **share one spec** as a stand-in. That is not a claim they play
 alike, and it is why a trigger authored for one can silently target a skill

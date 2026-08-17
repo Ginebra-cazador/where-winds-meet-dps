@@ -3741,5 +3741,247 @@
       }
     ],
     "defaultRotationId": "builtin-bellstrikeSplendor-kaezuma-42vs-1db"
+  },
+  "silkbindJade": {
+    "rotations": [
+      {
+        "id": "builtin-silkbindJade-t5",
+        "name": "T5",
+        "classId": "silkbindJade",
+        "steps": [
+          {
+            "skillId": "silkbindJade-fanq-prepull",
+            "hitCount": 1,
+            "prePull": true
+          },
+          {
+            "skillId": "silkbindJade-umbq-prepull",
+            "hitCount": 1,
+            "prePull": true
+          },
+          {
+            "skillId": "silkbindJade-umblightcharge",
+            "hitCount": 6,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-umblightcharge",
+            "hitCount": 6,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-umblightcharge",
+            "hitCount": 6,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-umblightcharge",
+            "hitCount": 6,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-umbdronelaunch-20hit",
+            "hitCount": 1,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-fanspecial",
+            "hitCount": 2,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-soaring",
+            "hitCount": 2,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-toad-cancel",
+            "hitCount": 2,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-fanqcancel",
+            "hitCount": 1,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-fanheavypursuit-3-hit",
+            "hitCount": 3,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-umbq",
+            "hitCount": 1,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-umblightcharge",
+            "hitCount": 6,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-umblightcharge",
+            "hitCount": 6,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-umblightcharge",
+            "hitCount": 6,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-umblightcharge",
+            "hitCount": 6,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-umbdronelaunch-20hit",
+            "hitCount": 1,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-fanspecial",
+            "hitCount": 2,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-soaring",
+            "hitCount": 2,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-toad-cancel",
+            "hitCount": 2,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-fanqcancel",
+            "hitCount": 1,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-fanheavypursuit-3-hit",
+            "hitCount": 3,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-umbq",
+            "hitCount": 1,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-umblightcharge",
+            "hitCount": 6,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-umblightcharge",
+            "hitCount": 6,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-umblightcharge",
+            "hitCount": 6,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-umblightcharge",
+            "hitCount": 6,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-umbdronelaunch-20hit",
+            "hitCount": 1,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-fanspecial",
+            "hitCount": 2,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-soaring",
+            "hitCount": 2,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-toad-cancel",
+            "hitCount": 2,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-fanqcancel",
+            "hitCount": 1,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-fanheavypursuit-3-hit",
+            "hitCount": 3,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-umbq",
+            "hitCount": 1,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-umblightcharge",
+            "hitCount": 6,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-umblightcharge",
+            "hitCount": 6,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-umblightcharge",
+            "hitCount": 6,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-umblightcharge",
+            "hitCount": 6,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-umbdronelaunch-20hit",
+            "hitCount": 1,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-fanspecial",
+            "hitCount": 2,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-soaring",
+            "hitCount": 2,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-toad-cancel",
+            "hitCount": 2,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-fanqcancel",
+            "hitCount": 1,
+            "prePull": false
+          },
+          {
+            "skillId": "silkbindJade-fanheavypursuit-3-hit",
+            "hitCount": 3,
+            "prePull": false
+          }
+        ],
+        "permanentBuffIds": [],
+        "prePullHitsCount": false,
+        "createdAt": "2026-08-17T00:00:00.000Z",
+        "updatedAt": "2026-08-17T00:00:00.000Z",
+        "description": "Tier 5 rotation (reference/classes/defaultRotations.json)."
+      }
+    ],
+    "defaultRotationId": "builtin-silkbindJade-t5"
   }
 }
