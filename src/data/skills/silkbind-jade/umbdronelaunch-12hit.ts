@@ -1,13 +1,20 @@
 import { defineSkill, hit } from "../../../definitions/skills/skillDef"
 import { applyDebuff } from "../../../definitions/skills/triggers"
-import { ATTACK, CAST, PROP, ROLE, WEAPON } from "../ids"
+import { ATTACK, ATTUNE, CAST, PROP, ROLE, WEAPON } from "../ids"
 import { SKILL, DEBUFF } from "./ids"
 
 export const umbdronelaunch12Hit = defineSkill({
   id: SKILL.umbdronelaunch12Hit,
   classId: "silkbindJade",
   name: "UmbDroneLaunch[12hit]",
-  tags: [PROP.hasQiBreakPhysPen, WEAPON.umbrella, ATTACK.heavy, ROLE.umbDrone, ROLE.umbDroneLaunch],
+  tags: [
+    PROP.hasQiBreakPhysPen,
+    WEAPON.umbrella,
+    ATTACK.heavy,
+    ATTUNE.umbSpecial,
+    ROLE.umbDrone,
+    ROLE.umbDroneLaunch,
+  ],
   skillType: "weapon",
   weaponOrAttribute: "Umbrella",
   attributeAttack: "Silkbind",
