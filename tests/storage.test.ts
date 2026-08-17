@@ -87,9 +87,9 @@ describe("storage", () => {
   })
 
   it("initialInputs returns the saved blob when present", () => {
-    const next: Inputs = { ...defaultInputs, set: SET_ID.swallowcall }
+    const next: Inputs = { ...defaultInputs, set: SET_ID.jadeware }
     saveInputs(next)
-    expect(initialInputs().set).toBe(SET_ID.swallowcall)
+    expect(initialInputs().set).toBe(SET_ID.jadeware)
   })
 
   it("loadInputs is null when the saved blob is malformed", () => {

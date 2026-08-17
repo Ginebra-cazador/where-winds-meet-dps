@@ -99,7 +99,6 @@ const ARMOUR_SETS: readonly [label: string, id: string][] = [
   ["Jadeware", SET_ID.jadeware],
   ["Mistwillow", SET_ID.mistwillow],
   ["ShatteredRidge", SET_ID.shatteredRidge],
-  ["Swallowcall", SET_ID.swallowcall],
 ]
 
 const CASES: { name: string; build: () => Inputs }[] = [
