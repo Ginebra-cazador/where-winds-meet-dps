@@ -31,6 +31,8 @@ export const BUFF = {
   healerBuff: "healerBuff",
   jadeware: "jadeware",
   lingeringBone: "lingeringBone",
+  lowQiFollowUp: "lowQiFollowUp",
+  trajectorySkill: "trajectorySkill",
   mirage: "mirage",
   mirageBonus: "mirageBonus",
   potentRiverFlow: "potentRiverFlow",

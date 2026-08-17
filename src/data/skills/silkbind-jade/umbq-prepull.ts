@@ -12,7 +12,7 @@ export const umbqPrepull = defineSkill({
   weaponOrAttribute: "Umbrella",
   attributeAttack: "Silkbind",
   castTag: CAST.umbQPrepull,
-  receives: [BUFF.combo, BUFF.windWall],
+  receives: [BUFF.combo, BUFF.windWall, BUFF.trajectorySkill],
   triggersBuffs: [BUFF.jadeware, BUFF.combo, BUFF.comboUmbLightBonus],
   castFrames: 18,
   triggerable: true,

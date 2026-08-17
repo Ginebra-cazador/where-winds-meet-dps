@@ -33924,7 +33924,7 @@
           "silkbindJade-umbq",
           "silkbindJade-umbq-prepull"
         ],
-        "digest": "987d7e4ffd0bf0b4c44cd2776dcae793c58ba8cbed9d62d61c131eee49fe8ac6"
+        "digest": "1b91a7d50db4ab0aa46e0cd17b08cd204307b65c1d9306eae44aa4bd5363dcd1"
       },
       "debuffs": {
         "count": 9,
@@ -34205,6 +34205,50 @@
           "summary": null
         },
         {
+          "id": "lowQiFollowUp",
+          "name": "Low Qi Follow-up",
+          "classBuff": true,
+          "requires": null,
+          "affectsAll": false,
+          "alwaysActive": true,
+          "buffAppliesOnCastEnd": false,
+          "cooldown": null,
+          "rateLimit": null,
+          "stackRateLimit": null,
+          "stacksPerHit": false,
+          "seedAtStart": false,
+          "refreshOnAnyCast": false,
+          "requiresBuffActive": null,
+          "activeAfterBuffEnds": null,
+          "hasStacksFn": false,
+          "duration": 9999,
+          "maxStacks": null,
+          "effects": "[fn]",
+          "summary": "crit rate +30%, damage +8% — targets below 30% Qi only"
+        },
+        {
+          "id": "trajectorySkill",
+          "name": "Trajectory Skill",
+          "classBuff": true,
+          "requires": null,
+          "affectsAll": false,
+          "alwaysActive": true,
+          "buffAppliesOnCastEnd": false,
+          "cooldown": null,
+          "rateLimit": null,
+          "stackRateLimit": null,
+          "stacksPerHit": false,
+          "seedAtStart": false,
+          "refreshOnAnyCast": false,
+          "requiresBuffActive": null,
+          "activeAfterBuffEnds": null,
+          "hasStacksFn": false,
+          "duration": 9999,
+          "maxStacks": null,
+          "effects": "[fn]",
+          "summary": "ignores 5 Physical Resistance, 20 during qi break or Lingering Bone"
+        },
+        {
           "id": "combo",
           "name": "Combo",
           "classBuff": true,
@@ -34387,7 +34431,7 @@
       ]
     },
     "dynamic": {
-      "digest": "c05eedc44cfe8025a3c39c4b700bb9ba06e4991a62d983f69bd6bafd79101c3d"
+      "digest": "74216d5300267459230592c6444000fe22e3dc6e1afd5a5af86df77452b85203"
     }
   }
 }

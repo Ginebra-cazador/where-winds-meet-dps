@@ -27,7 +27,13 @@ export const umblightcharge = defineSkill({
   weaponOrAttribute: "Umbrella",
   attributeAttack: "Silkbind",
   castTag: CAST.umbLightCharge,
-  receives: [BUFF.combo, BUFF.comboUmbLightBonus, BUFF.windWall, BUFF.pursuitChargedBoost],
+  receives: [
+    BUFF.combo,
+    BUFF.comboUmbLightBonus,
+    BUFF.windWall,
+    BUFF.pursuitChargedBoost,
+    BUFF.trajectorySkill,
+  ],
   castFrames: 147,
   triggerable: true,
   hits: [

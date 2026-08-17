@@ -4,6 +4,8 @@ import { DEBUFFS } from "../../skills/silkbind-jade/debuffs"
 import { withUniversalSkills } from "../../../definitions/skills/universalSkills"
 import { rotationPoolFor } from "../../../definitions/rotations/registry"
 import { INNER_WAY_ID } from "../../innerWays/ids"
+import { lowQiFollowUp } from "../../skills/silkbind-jade/buffs/lowQiFollowUp"
+import { trajectorySkill } from "../../skills/silkbind-jade/buffs/trajectorySkill"
 import { combo } from "../../skills/silkbind-jade/buffs/combo"
 import { comboUmbLightBonus } from "../../skills/silkbind-jade/buffs/comboUmbLightBonus"
 import { lingeringBone } from "../../skills/silkbind-jade/buffs/lingeringBone"
@@ -37,6 +39,8 @@ export const silkbindJade = defineClass({
   ...rotationPoolFor(CLASS_ID),
   graduationBuild: SILKBIND_JADE_GRADUATION_BUILD,
   classBuffDefs: [
+    lowQiFollowUp,
+    trajectorySkill,
     combo,
     comboUmbLightBonus,
     windWall,

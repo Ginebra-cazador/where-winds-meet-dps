@@ -26,7 +26,7 @@ import type {
   QiPhase,
   SkillProperties,
 } from "../effects/context"
-import type { Effect } from "../effects/effect"
+import type { ArtBonusField, Effect } from "../effects/effect"
 import { applyEffect, type EffectSink } from "../effects/apply"
 import { paramOnOf, paramTierOf } from "./params"
 
@@ -54,6 +54,10 @@ export interface DamageEffectsResult {
   // stat sum — 1 when no active def contributes one.
   damageFactor: number
   conditionalFinalCrit: ConditionalFinalCrit | null
+  // Per-hit art fields a def contributes, summed across active defs. Applied
+  // onto the art row rather than into the stat sum, which is why they travel
+  // separately from `effects`.
+  artBonuses: Partial<Record<ArtBonusField, number>>
   // Per-source attribution, keyed by def id — read directly by
   // `tests/engine/buffEngineAdvanced.test.ts` and `mistwillow.test.ts` to pin
   // which def a contribution came from.
@@ -667,6 +671,7 @@ export class BuffEngine {
     let forceCrit = false
     let damageFactor = 1
     let conditionalFinalCrit: ConditionalFinalCrit | null = null
+    const artBonuses: Partial<Record<ArtBonusField, number>> = {}
     let currentId = ""
 
     const sink: EffectSink = {
@@ -679,7 +684,9 @@ export class BuffEngine {
       },
       applyBuff: () => {},
       consumeStacks: () => {},
-      artBonus: () => {},
+      artBonus(field, amount) {
+        artBonuses[field] = (artBonuses[field] ?? 0) + amount
+      },
       damageMultiplier(factor) {
         damageFactor *= factor
       },
@@ -721,6 +728,6 @@ export class BuffEngine {
       breakdown.mistwillow = (breakdown.mistwillow ?? 0) + mistwillow
     }
 
-    return { effects, forceCrit, damageFactor, conditionalFinalCrit, breakdown }
+    return { effects, forceCrit, damageFactor, conditionalFinalCrit, artBonuses, breakdown }
   }
 }

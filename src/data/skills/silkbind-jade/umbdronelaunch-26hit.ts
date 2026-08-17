@@ -1,6 +1,7 @@
 import { defineSkill, hit } from "../../../definitions/skills/skillDef"
 import { applyDebuff } from "../../../definitions/skills/triggers"
 import { ATTACK, ATTUNE, CAST, PROP, ROLE, WEAPON } from "../ids"
+import { BUFF } from "../buffs/ids"
 import { SKILL, DEBUFF } from "./ids"
 
 export const umbdronelaunch26Hit = defineSkill({
@@ -18,6 +19,7 @@ export const umbdronelaunch26Hit = defineSkill({
   skillType: "weapon",
   weaponOrAttribute: "Umbrella",
   attributeAttack: "Silkbind",
+  receives: [BUFF.trajectorySkill],
   castTag: CAST.umbDroneLaunch26hit,
   castFrames: 68,
   triggerable: true,

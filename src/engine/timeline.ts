@@ -27,6 +27,7 @@ import {
 } from "./dot"
 import { buildBehaviors, type BuildView, type HitContext, type HitInput } from "./behavior"
 import { applyEffect, type EffectSink } from "./effects/apply"
+import type { ArtBonusField } from "./effects/effect"
 import { grantsMinPhysCritBoostFor } from "../definitions/classes/registry"
 import { buildContext, effectiveRates } from "./panel"
 import { computeSkillDamage, type HitOutcome, type RolledHit } from "./formula"
@@ -397,6 +398,7 @@ export function simulateTimeline(inputs: Inputs, options?: EngineRunOptions): Re
     forceCrit: boolean
     damageFactor: number
     conditionalFinalCrit: ConditionalFinalCrit | null
+    artBonuses: Partial<Record<ArtBonusField, number>>
   } {
     const active = activeBuffsAt(frame)
     const sigParts: string[] = []
@@ -415,6 +417,7 @@ export function simulateTimeline(inputs: Inputs, options?: EngineRunOptions): Re
     let forceCritFromBuff = false
     let damageFactor = 1
     let conditionalFinalCrit: ConditionalFinalCrit | null = null
+    let artBonuses: Partial<Record<ArtBonusField, number>> = {}
     if (buffEngine && skill) {
       const scoped = castScopedBuffs.get(castScopedKey(castFrame, skill.id)) ?? []
       const site = buffEngine.calculateDamageEffects(skill, frame / FPS, scoped)
@@ -430,6 +433,8 @@ export function simulateTimeline(inputs: Inputs, options?: EngineRunOptions): Re
       if (site.forceCrit) forceCritFromBuff = true
       damageFactor = site.damageFactor
       conditionalFinalCrit = site.conditionalFinalCrit
+      artBonuses = site.artBonuses
+      for (const [field, amount] of Object.entries(artBonuses)) sig += `~${field}:${amount}`
       if (damageFactor !== 1) sig += `~x${damageFactor}`
       if (conditionalFinalCrit)
         sig += `~cfc${conditionalFinalCrit.threshold}:${conditionalFinalCrit.bonusBelowThreshold}`
@@ -500,7 +505,7 @@ export function simulateTimeline(inputs: Inputs, options?: EngineRunOptions): Re
       r = { inputs: effInputs, ctx }
       stateMemo.set(sig, r)
     }
-    return { ...r, forceCrit: forceCritFromBuff, damageFactor, conditionalFinalCrit }
+    return { ...r, forceCrit: forceCritFromBuff, damageFactor, conditionalFinalCrit, artBonuses }
   }
 
   const queue = new EventQueue()
@@ -621,6 +626,10 @@ export function simulateTimeline(inputs: Inputs, options?: EngineRunOptions): Re
       },
     }
     for (const effect of behavior.patchArt(hitInput, hitContext)) applyEffect(artSink, effect)
+    for (const [field, amount] of Object.entries(st.artBonuses)) {
+      const key = field as ArtBonusField
+      art[key] = (art[key] ?? 0) + amount
+    }
     if (st.damageFactor !== 1) art.correction = (art.correction ?? 1) * st.damageFactor
     if (st.conditionalFinalCrit) art.conditionalFinalCrit = st.conditionalFinalCrit
     const { expectedDamage, rolled } = computeSkillDamage(art, st.ctx, 1, hitRng)
