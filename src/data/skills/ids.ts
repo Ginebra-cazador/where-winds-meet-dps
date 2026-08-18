@@ -183,6 +183,7 @@ export const PROP = {
   hasQiBreakDoubleDamage: "prop:hasQiBreakDoubleDamage",
   hasQiBreakPhysPen: "prop:hasQiBreakPhysPen",
   isCharged: "prop:isCharged",
+  isDrone: "prop:isDrone",
   isExecution: "prop:isExecution",
   isMartialSkillQ: "prop:isMartialSkillQ",
   shatteredRidgeBoost: "prop:shatteredRidgeBoost",

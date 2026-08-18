@@ -159,11 +159,11 @@ export function computeSkillDamage(
     const net = pen - resPct
     return net <= 0 ? net / 100 : net / 200
   }
-  // DoT rows lose flat damage and elevated matching-path scaling (PDF §1); a
-  // sustain-tagged burst detonation (elevatedAttributeMultiplier defaults
-  // true) is NOT demoted — see docs/CALCULATION.md § "Calculation rules" rule 3.
+  // A DoT row loses the elevated matching-path multiplier (PDF §1) and nothing
+  // else; its flat damage is whatever its own data authors. A sustain-tagged
+  // burst detonation (elevatedAttributeMultiplier defaults true) is not
+  // demoted at all — docs/CALCULATION.md § "Calculation rules" rule 3.
   const getsElevatedMultiplier = art.elevatedAttributeMultiplier ?? true
-  const dotRules = !getsElevatedMultiplier
 
   const skillCritDamage = num(art.extraCritDamage)
   const X = ctx.critDmgBoostPanel + skillCritDamage
@@ -226,9 +226,8 @@ export function computeSkillDamage(
   }
   const AR = Math.max(1 - AL - AN - AP, 0)
 
-  const P_eff = dotRules ? 0 : P
-  const AS = P_eff
-  const AU = P_eff
+  const AS = P
+  const AU = P
   const AT = (AS + AU) / 2
   const AV = AH
   const AW = AI
@@ -238,9 +237,8 @@ export function computeSkillDamage(
   const BC = AU * AX * (1 + Y) * (1 + AV) * (1 + AW)
   const BE = AT * (1 + AV) * (1 + AW) * AX
 
-  const Q_eff = dotRules ? 0 : Q
-  const BG = Q_eff
-  const BI = Q_eff
+  const BG = Q
+  const BI = Q
   const BH = (BG + BI) / 2
   const attrPen =
     ctx.primaryAttribute === "Bellstrike"
@@ -270,7 +268,7 @@ export function computeSkillDamage(
     const avg = (small + large) / 2
     const penBoost = pen + extraSkillPen
     const dmgBoost = BU === attribute ? ctx.attributeDmgBoostPanel : 0
-    const mult = BU === attribute && !dotRules ? O : N
+    const mult = BU === attribute && getsElevatedMultiplier ? O : N
     const penMul = 1 + penFrac(penBoost, attrPenRes)
     const graze = small * mult * penMul * (1 + dmgBoost)
     const crit = avg * mult * penMul * (1 + dmgBoost) * (1 + X)

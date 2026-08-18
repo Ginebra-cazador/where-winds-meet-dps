@@ -199,7 +199,7 @@ const CLASS_TALENT_COLUMNS: Record<string, WeaponColumnConfig[]> = {
               kind: "static",
               text: "Ballistic skills ignore 5 Physical Resistance, and 15 more during Qi break or Lingering Bone.",
               subNote:
-                "Already applied in the damage formula, off the skill's own tag — not a stat this tab contributes.",
+                "Modelled as the trajectorySkill class buff — see it in the Skill Editor on the ballistic skills that receive it. Not a stat this tab contributes.",
             },
           ],
         },
@@ -252,7 +252,7 @@ const CLASS_TALENT_COLUMNS: Record<string, WeaponColumnConfig[]> = {
               kind: "static",
               text: "Against targets below 30% Qi, Moon Shatter Spring gains 30% Critical Rate and 8% damage.",
               subNote:
-                "Already applied in the damage formula, off the skill's own tags — not a stat this tab contributes.",
+                "Modelled as the lowQiFollowUp class buff — see it in the Skill Editor on the pursuit skills that receive it. Not a stat this tab contributes.",
             },
           ],
         },

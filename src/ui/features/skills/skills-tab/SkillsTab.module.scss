@@ -120,6 +120,12 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
+.skillsPreviewTicks {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.85em;
+}
 .skillsPreviewCard {
   background: var(--color-surface-alt);
   border: 1px solid var(--color-border);

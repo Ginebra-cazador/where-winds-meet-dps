@@ -210,6 +210,16 @@ export class BuffEngine {
     return module.duration(this.buildContext(time, event, 0, module))
   }
 
+  // What is left of the window the caller is standing in, never the def's own
+  // `duration`: an extension moves `expiresAt` and this has to follow it, and
+  // an `alwaysActive` def's duration is a stand-in for "on for the fight"
+  // rather than a countdown, so it reports none at all.
+  private displayRemainingSec(module: BuffModule | undefined, id: string, time: number) {
+    if (module?.alwaysActive) return undefined
+    const window = this.historicalApplyAt(id, time)
+    return window ? window.expiresAt - time : undefined
+  }
+
   activeBuffsForDisplay(time: number): {
     id: string
     name: string
@@ -217,6 +227,7 @@ export class BuffEngine {
     maxStacks: number
     effects: { statKey: StatKey; amount: number }[]
     requires?: string
+    remainingSec?: number
   }[] {
     const out: {
       id: string
@@ -225,6 +236,7 @@ export class BuffEngine {
       maxStacks: number
       effects: { statKey: StatKey; amount: number }[]
       requires?: string
+      remainingSec?: number
     }[] = []
     const seen = new Set<string>()
     const push = (id: string, module: BuffModule | undefined, stacks: number) => {
@@ -243,6 +255,7 @@ export class BuffEngine {
         maxStacks: module?.maxStacks ?? 1,
         effects,
         requires: module?.requires?.set ?? module?.requires?.param,
+        remainingSec: this.displayRemainingSec(module, id, time),
       })
     }
     const appliedIds = new Set(this.buffHistory.map((historyEntry) => historyEntry.buffType))
@@ -374,31 +387,30 @@ export class BuffEngine {
   isBuffActiveAtTime(id: string, time: number): boolean {
     return this.historicalApplyAt(id, time) !== null
   }
-  private historicalApplyAt(id: string, time: number): { time: number; expiresAt: number } | null {
-    for (let i = this.buffHistory.length - 1; i >= 0; i--) {
-      const historyEntry = this.buffHistory[i]
-      if (
-        historyEntry.buffType === id &&
-        historyEntry.action === "apply" &&
-        historyEntry.time <= time
-      )
-        return time < historyEntry.expiresAt
-          ? { time: historyEntry.time, expiresAt: historyEntry.expiresAt }
-          : null
+  // The latest apply at or before `time`, chosen by timestamp and NOT by array
+  // position: `buffHistory` is not in chronological order. The DoT-tick pass
+  // runs after the cast walk and appends applies stamped earlier than entries
+  // already recorded, so a backwards walk stops at whichever apply happens to
+  // sit last and reads a live window as expired.
+  private latestApplyAt(id: string, time: number): HistoryEntry | null {
+    let latest: HistoryEntry | null = null
+    for (const historyEntry of this.buffHistory) {
+      if (historyEntry.buffType !== id || historyEntry.action !== "apply") continue
+      if (historyEntry.time > time) continue
+      if (!latest || historyEntry.time >= latest.time) latest = historyEntry
     }
-    return null
+    return latest
+  }
+
+  private historicalApplyAt(id: string, time: number): { time: number; expiresAt: number } | null {
+    const latest = this.latestApplyAt(id, time)
+    return latest && time < latest.expiresAt
+      ? { time: latest.time, expiresAt: latest.expiresAt }
+      : null
   }
   getHistoricalBuffStacks(id: string, time: number): number {
-    for (let i = this.buffHistory.length - 1; i >= 0; i--) {
-      const historyEntry = this.buffHistory[i]
-      if (
-        historyEntry.buffType === id &&
-        historyEntry.action === "apply" &&
-        historyEntry.time <= time
-      )
-        return time < historyEntry.expiresAt ? (historyEntry.stacks ?? 1) : 0
-    }
-    return 0
+    const latest = this.latestApplyAt(id, time)
+    return latest && time < latest.expiresAt ? (latest.stacks ?? 1) : 0
   }
   private isActiveAfterBuffEndsActive(module: BuffModule, time: number): boolean {
     const rule = module.activeAfterBuffEnds
@@ -464,6 +476,13 @@ export class BuffEngine {
     }
   }
 
+  private triggerOnlyExtends(module: BuffModule, props: SkillProperties): boolean {
+    const tag = module.extendedOnlyByProperty
+    if (!tag) return false
+    const property = tag.startsWith(PROP_TAG) ? tag.slice(PROP_TAG.length) : tag
+    return !!props[property as keyof SkillProperties]
+  }
+
   private applyTriggeredModule(
     module: BuffModule,
     castTag: string,
@@ -479,6 +498,7 @@ export class BuffEngine {
       !this.isBuffActive(module.requiresActiveBuffOnTrigger, time)
     )
       return
+    if (this.triggerOnlyExtends(module, props) && !this.isBuffActiveAtTime(module.id, time)) return
     if (module.cooldown) {
       const last = this.activeBuffs.get(module.id)
       if (last && time - last.appliedAt < module.cooldown) return

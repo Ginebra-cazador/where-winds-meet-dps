@@ -919,6 +919,38 @@ describe("skill/debuff reach heal (receives/triggersBuffs, no version bump)", ()
     expect(healed.receives).toEqual(expectedReceives)
   })
 
+  it("gives a drone debuff seeded before Lingering Bone its extension and its doubling back", () => {
+    const seeded = {
+      ...builtinDebuffsForClass("silkbindJade").find(
+        (debuff) => debuff.id === "debuff-silkbindJade-umbdrone-20hit",
+      )!,
+      receives: ["soulShaken"],
+      triggersBuffs: undefined,
+    }
+    saveCustomDebuff(seeded)
+    const healed = loadCustomDebuffsForClass("silkbindJade").find(
+      (debuff) => debuff.id === seeded.id,
+    )!
+    expect(healed.receives).toEqual(["soulShaken", "lingeringBone"])
+    expect(healed.triggersBuffs).toEqual(["lingeringBone"])
+  })
+
+  it("leaves a drone debuff the user has actually edited alone", () => {
+    const edited = {
+      ...builtinDebuffsForClass("silkbindJade").find(
+        (debuff) => debuff.id === "debuff-silkbindJade-umbdrone-23hit",
+      )!,
+      receives: [],
+      triggersBuffs: undefined,
+    }
+    saveCustomDebuff(edited)
+    const reloaded = loadCustomDebuffsForClass("silkbindJade").find(
+      (debuff) => debuff.id === edited.id,
+    )!
+    expect(reloaded.receives).toEqual([])
+    expect(reloaded.triggersBuffs).toBeUndefined()
+  })
+
   it("leaves an already-authored debuff's receives alone, including an explicit empty one", () => {
     const builtinCombustion = builtinDebuffsForClass("bellstrikeUmbra").find(
       (debuff) => debuff.id === "debuff-bellstrikeUmbra-combustion",

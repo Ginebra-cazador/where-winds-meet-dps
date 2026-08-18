@@ -3,11 +3,22 @@ import { ATTACK, CAST, ROLE, WEAPON } from "../ids"
 import { BUFF } from "../buffs/ids"
 import { SKILL } from "./ids"
 
-const COEFFICIENTS = {
+// The authored value is the whole cast spread over its hits, not a per-hit
+// value — the reference def states it per hit. Kept as total ÷ hits so the
+// number the source actually carries stays legible.
+const CAST_HITS = 3
+const CAST_TOTAL = {
   physMultiplier: 1.7001,
   attributeMultiplier: 2.5502,
   physFixed: 471,
   attributeFixed: 256,
+}
+
+const COEFFICIENTS = {
+  physMultiplier: CAST_TOTAL.physMultiplier / CAST_HITS,
+  attributeMultiplier: CAST_TOTAL.attributeMultiplier / CAST_HITS,
+  physFixed: CAST_TOTAL.physFixed / CAST_HITS,
+  attributeFixed: CAST_TOTAL.attributeFixed / CAST_HITS,
   extraCritDamage: 0,
 }
 

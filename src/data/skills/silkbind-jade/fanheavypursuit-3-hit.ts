@@ -3,11 +3,27 @@ import { ATTACK, ATTUNE, CAST, PROP, ROLE, WEAPON } from "../ids"
 import { BUFF } from "../buffs/ids"
 import { SKILL } from "./ids"
 
-const COEFFICIENTS = {
+// The authored value is the whole cast spread over its hits, not a per-hit
+// value — the reference def states it per hit. Kept as total ÷ hits so the
+// number the source actually carries stays legible.
+const CAST_HITS = 3
+const CAST_TOTAL = {
   physMultiplier: 1.80931,
   attributeMultiplier: 2.71382,
   physFixed: 501.7,
   attributeFixed: 272.6,
+}
+
+// The cast total also carries the breakthrough-14 multiplier the engine never
+// applies (`targetMultiplier` is set in panel.ts and read nowhere) — a uniform
+// 1.450 against the reference def on all four tracks, same as FanLightCharged.
+const BREAKTHROUGH_SCALE = 1.45
+
+const COEFFICIENTS = {
+  physMultiplier: CAST_TOTAL.physMultiplier / CAST_HITS / BREAKTHROUGH_SCALE,
+  attributeMultiplier: CAST_TOTAL.attributeMultiplier / CAST_HITS / BREAKTHROUGH_SCALE,
+  physFixed: CAST_TOTAL.physFixed / CAST_HITS / BREAKTHROUGH_SCALE,
+  attributeFixed: CAST_TOTAL.attributeFixed / CAST_HITS / BREAKTHROUGH_SCALE,
   extraCritDamage: 1,
 }
 

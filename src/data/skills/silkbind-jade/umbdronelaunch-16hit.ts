@@ -20,7 +20,7 @@ export const umbdronelaunch16Hit = defineSkill({
   skillType: "weapon",
   weaponOrAttribute: "Umbrella",
   attributeAttack: "Silkbind",
-  receives: [BUFF.trajectorySkill, BUFF.thunderousBloom],
+  receives: [BUFF.thunderousBloom],
   castTag: CAST.umbDroneLaunch16hit,
   castFrames: 68,
   triggerable: true,

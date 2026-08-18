@@ -85,10 +85,19 @@ const QI_BREAK_DAMAGE_MULTIPLIER = 2
 // `floor(min(minPhys, 750) / 50) * 0.024`, capped at +0.36. Resolved here,
 // not as a `patchArt` effect: it REPLACES the hit's own coefficient, it does
 // not add to it.
-const MIN_PHYS_CRIT_BONUS_SENTINEL = 1
+export const MIN_PHYS_CRIT_BONUS_SENTINEL = 1
 const MIN_PHYS_CRIT_CAP = 750
 const MIN_PHYS_CRIT_STEP = 50
 const MIN_PHYS_CRIT_PER_STEP = 0.024
+
+// The real term the sentinel stands for. Exported because a DoT tick resolves
+// it too, and the two paths must not drift.
+export function minPhysCritBonus(smallPhys: number): number {
+  return (
+    Math.floor(Math.min(Math.max(0, smallPhys), MIN_PHYS_CRIT_CAP) / MIN_PHYS_CRIT_STEP) *
+    MIN_PHYS_CRIT_PER_STEP
+  )
+}
 
 export const DEFAULT_BEHAVIOR: SkillBehavior = {
   chooseVariant(input) {
@@ -129,9 +138,7 @@ export const DEFAULT_BEHAVIOR: SkillBehavior = {
     if (tags && tags.length > 0 && input.hit.extraCritDamage === MIN_PHYS_CRIT_BONUS_SENTINEL) {
       const weaponType = tags.find((tag) => tag.startsWith(WEAPON_TAG))?.slice(WEAPON_TAG.length)
       art.extraCritDamage = input.build.grantsMinPhysCritBoost(weaponType)
-        ? Math.floor(
-            Math.min(Math.max(0, context.smallPhys), MIN_PHYS_CRIT_CAP) / MIN_PHYS_CRIT_STEP,
-          ) * MIN_PHYS_CRIT_PER_STEP
+        ? minPhysCritBonus(context.smallPhys)
         : 0
     }
     return art

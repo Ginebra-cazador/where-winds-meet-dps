@@ -1,28 +1,30 @@
-import { defineSkill, dotTicks } from "../../../definitions/skills/skillDef"
-import { ATTACK, ATTUNE, CAST, ROLE, WEAPON } from "../ids"
+import { defineSkill, hit } from "../../../definitions/skills/skillDef"
+import { ATTACK, ATTUNE, CAST, PROP, ROLE, WEAPON } from "../ids"
 import { BUFF } from "../buffs/ids"
 import { SKILL } from "./ids"
-import { DRONE_INTERVAL_FRAMES, DRONE_TICK } from "./droneTick"
+import { DRONE_TICK } from "./droneTick"
 
 export const umbdrone12HitTick = defineSkill({
   id: SKILL.umbdrone12Hit,
   classId: "silkbindJade",
   name: "UmbDrone[12hit] Tick",
   breakdownName: "Umbrella Drone",
-  tags: [WEAPON.umbrella, ATTACK.light, ATTUNE.umbSpecial, ROLE.umbDrone],
+  tags: [PROP.isDrone, WEAPON.umbrella, ATTACK.light, ATTUNE.umbSpecial, ROLE.umbDrone],
   skillType: "sustain",
   weaponOrAttribute: "Umbrella",
   attributeAttack: "Silkbind",
   castTag: CAST.umbDroneTick12hit,
-  receives: [BUFF.soulShaken, BUFF.thunderousBloom, BUFF.combo, BUFF.windWall],
+  receives: [
+    BUFF.soulShaken,
+    BUFF.thunderousBloom,
+    BUFF.combo,
+    BUFF.windWall,
+    BUFF.trajectorySkill,
+  ],
   elevatedAttributeMultiplier: false,
   castFrames: 0,
   triggerable: true,
-  hits: dotTicks({
-    count: 12,
-    everyFrames: DRONE_INTERVAL_FRAMES,
-    ...DRONE_TICK,
-  }),
+  hits: [hit(0, { frame: 0, ...DRONE_TICK })],
   createdAt: "2026-08-17T00:00:00.000Z",
   updatedAt: "2026-08-17T00:00:00.000Z",
 })

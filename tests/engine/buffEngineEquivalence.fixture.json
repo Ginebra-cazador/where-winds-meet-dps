@@ -55,7 +55,7 @@
           "bellstrikeUmbra-swordspecial-4-hit",
           "bellstrikeUmbra-toad-cancel"
         ],
-        "digest": "82f4274703edbd3dc847297721389c1b6d83126d75c8f40f4112d8a7276377c8"
+        "digest": "8fe2241fb51870cc4014b7537639f54e2025b9b6beabdd0c195cce36997cfe33"
       },
       "debuffs": {
         "count": 7,
@@ -570,7 +570,12 @@
           "hasStacksFn": false,
           "duration": 2,
           "maxStacks": null,
-          "effects": [],
+          "effects": [
+            {
+              "kind": "damageMultiplier",
+              "factor": 2
+            }
+          ],
           "summary": null
         },
         {
@@ -45026,7 +45031,7 @@
           "stonesplitStrength-soaring-1-hit",
           "stonesplitStrength-toad-cancel"
         ],
-        "digest": "a7fe9950c6fea79635987da136d1c794b447ecd605ea53739e4ab0c8b6f2987a"
+        "digest": "b40528cd19729a79ed41a5137eaec6d4367c636843aac2d7b4c7ef20dce717b3"
       },
       "debuffs": {
         "count": 4,
@@ -45645,7 +45650,12 @@
           "hasStacksFn": false,
           "duration": 2,
           "maxStacks": null,
-          "effects": [],
+          "effects": [
+            {
+              "kind": "damageMultiplier",
+              "factor": 2
+            }
+          ],
           "summary": null
         },
         {
@@ -45812,7 +45822,7 @@
           "bellstrikeSplendor-swordspecial-deflect",
           "bellstrikeSplendor-toad-cancel"
         ],
-        "digest": "61945a404f8fa17cbe59f7476e6112e5a6cf07a5890d6d8a2506d1a19627af66"
+        "digest": "f70dd53db80f646849d1e44d1673cbbeba51cebe4727b3620921b0cb3942ca45"
       },
       "debuffs": {
         "count": 5,
@@ -46343,7 +46353,12 @@
           "hasStacksFn": false,
           "duration": 2,
           "maxStacks": null,
-          "effects": [],
+          "effects": [
+            {
+              "kind": "damageMultiplier",
+              "factor": 2
+            }
+          ],
           "summary": null
         },
         {
@@ -46571,7 +46586,7 @@
           "silkbindJade-umbq",
           "silkbindJade-umbq-prepull"
         ],
-        "digest": "857d80425d70e92b2df56f9184e6c6187ce74b501f926a25b44242a48092f8dc"
+        "digest": "7f1292a4f24a2207fafbd62467512f072d23abde1826c395e6521c6b40768641"
       },
       "debuffs": {
         "count": 9,
@@ -46586,7 +46601,7 @@
           "debuff-silkbindJade-umbdrone-23hit",
           "debuff-silkbindJade-umbdrone-26hit"
         ],
-        "digest": "95e91189da259012f2ee827263127b62f1bd6cb748a2e7a0e45273fc7ca7a35a"
+        "digest": "1d17a38b2f3455a8235d1e9f8dd4ae74b1a55a75a21cf54cd7fb69eb1e915693"
       },
       "buffs": [
         {
@@ -47087,7 +47102,12 @@
           "hasStacksFn": false,
           "duration": 2,
           "maxStacks": null,
-          "effects": [],
+          "effects": [
+            {
+              "kind": "damageMultiplier",
+              "factor": 2
+            }
+          ],
           "summary": null
         },
         {

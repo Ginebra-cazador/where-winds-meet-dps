@@ -3,11 +3,29 @@ import { ATTACK, ATTUNE, CAST, PROP, ROLE, WEAPON } from "../ids"
 import { BUFF } from "../buffs/ids"
 import { SKILL } from "./ids"
 
-const COEFFICIENTS = {
+// The reference def carries these as ONE cast total spread over six hits, not
+// as a per-hit value: every other multi-hit skill in the reference set — 31 of
+// them across five specs — has a per-hit coefficient equal to its cast total
+// divided by its hit count, and the ÷3 ones still carry the repeating decimal
+// that proves it. This is the only multi-hit def whose value was left undivided,
+// which is why its 1.7173 sits alongside SINGLE-hit skills (FanLightCharged
+// 1.9039, UmbQ 2.3389) instead of below them.
+//
+// Kept as total ÷ hits rather than six decimals, so the number the reference
+// actually states stays legible.
+const CAST_HITS = 6
+const CAST_TOTAL = {
   physMultiplier: 1.7173,
   attributeMultiplier: 2.576,
   physFixed: 396,
   attributeFixed: 221,
+}
+
+const COEFFICIENTS = {
+  physMultiplier: CAST_TOTAL.physMultiplier / CAST_HITS,
+  attributeMultiplier: CAST_TOTAL.attributeMultiplier / CAST_HITS,
+  physFixed: CAST_TOTAL.physFixed / CAST_HITS,
+  attributeFixed: CAST_TOTAL.attributeFixed / CAST_HITS,
   extraCritDamage: 1,
 }
 

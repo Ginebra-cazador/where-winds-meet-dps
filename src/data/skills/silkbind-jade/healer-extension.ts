@@ -1,4 +1,4 @@
-import { defineSkill, dotTicks } from "../../../definitions/skills/skillDef"
+import { defineSkill, evenlySpacedHits } from "../../../definitions/skills/skillDef"
 import { CAST } from "../ids"
 import { SKILL } from "./ids"
 
@@ -13,7 +13,7 @@ export const healerExtension = defineSkill({
   castTag: CAST.healerExtension,
   castFrames: 180,
   triggerable: true,
-  hits: dotTicks({
+  hits: evenlySpacedHits({
     count: 10,
     everyFrames: 18,
     physMultiplier: 0.19388,

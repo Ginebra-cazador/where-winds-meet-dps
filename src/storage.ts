@@ -1296,6 +1296,30 @@ interface CustomDebuffsBlob {
 }
 
 // additive — see CLAUDE.md → "localStorage migrations"
+// additive value-level repair — see CLAUDE.md → "localStorage migrations"
+//
+// The reach each Umbrella Drone debuff carried while its ticks neither extended
+// the Lingering Bone mark nor doubled under it. A copy seeded then keeps
+// scoring unenhanced projectiles and lets the mark lapse mid-window, with no
+// editor surface showing the gap. Only a list still identical to what was
+// seeded is rewritten: `receives` is user-editable, so a copy that differs may
+// differ on purpose.
+const DRONE_DEBUFF_RECEIVES_BEFORE_LINGERING_BONE = ["soulShaken"]
+const DRONE_DEBUFF_ID = /^debuff-silkbindJade-umbdrone-\d+hit$/
+
+function healDroneDebuffReach(d: Debuff): Pick<Debuff, "receives" | "triggersBuffs"> {
+  const receives = healDebuffReceives(d)
+  if (!DRONE_DEBUFF_ID.test(d.id)) return { receives, triggersBuffs: d.triggersBuffs }
+  const seeded =
+    receives.length === DRONE_DEBUFF_RECEIVES_BEFORE_LINGERING_BONE.length &&
+    DRONE_DEBUFF_RECEIVES_BEFORE_LINGERING_BONE.every((id, index) => receives[index] === id)
+  if (!seeded) return { receives, triggersBuffs: d.triggersBuffs }
+  return {
+    receives: [...receives, "lingeringBone"],
+    triggersBuffs: d.triggersBuffs?.length ? d.triggersBuffs : ["lingeringBone"],
+  }
+}
+
 function hydrateDebuff(d: Debuff): Debuff {
   const dot: DebuffDotSpec | null = d.dot
     ? {
@@ -1323,7 +1347,7 @@ function hydrateDebuff(d: Debuff): Debuff {
     stackScaling: d.stackScaling === "perStack" ? "perStack" : "flat",
     maxStacks: typeof d.maxStacks === "number" && d.maxStacks > 0 ? d.maxStacks : 1,
     detonation,
-    receives: healDebuffReceives(d),
+    ...healDroneDebuffReach(d),
   }
 }
 

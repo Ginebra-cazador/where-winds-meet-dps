@@ -62,6 +62,10 @@ export interface BuffMeta {
   requiresBuffActive?: string
   // Read at trigger time against the live window, not at damage time.
   requiresActiveBuffOnTrigger?: string
+  // A `PROP.*` tag naming triggers that may only EXTEND an already-open
+  // window, never open one. A trigger without the property is unaffected, so
+  // one def can have both an opening source and an extending source.
+  extendedOnlyByProperty?: string
   activeAfterBuffEnds?: ActiveAfterBuffEnds
   conditionalFinalCrit?: ConditionalFinalCrit
   perCastConsume?: PerCastConsume
