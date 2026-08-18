@@ -31,7 +31,12 @@ export const umbHeavylight = defineSkill({
   weaponOrAttribute: "Umbrella",
   attributeAttack: "Silkbind",
   castTag: CAST.umbHeavyLight,
-  receives: [BUFF.thunderousBloom],
+  receives: [
+    BUFF.thunderousBloom,
+    BUFF.mistwillowHeavyBuff,
+    BUFF.mistwillowLightBuff,
+    BUFF.mistwillowBuff,
+  ],
   castFrames: 75,
   triggerable: true,
   hits: [

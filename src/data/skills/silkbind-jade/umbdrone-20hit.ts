@@ -15,6 +15,8 @@ export const umbdrone20HitTick = defineSkill({
   attributeAttack: "Silkbind",
   castTag: CAST.umbDroneTick20hit,
   receives: [
+    BUFF.mistwillowHeavyBuff,
+    BUFF.mistwillowBuff,
     BUFF.soulShaken,
     BUFF.thunderousBloom,
     BUFF.combo,

@@ -10,6 +10,9 @@ import { vulnerabilityTeammate } from "./vulnerabilityTeammate"
 import { jadeware } from "./jadeware"
 import { mirage } from "./mirage"
 import { mirageBonus } from "./mirageBonus"
+import { mistwillowBuff } from "./mistwillowBuff"
+import { mistwillowHeavyBuff } from "./mistwillowHeavyBuff"
+import { mistwillowLightBuff } from "./mistwillowLightBuff"
 import { rainwhisperCritDamage } from "./rainwhisperCritDamage"
 import { rainwhisperShield } from "./rainwhisperShield"
 import { resistanceResolve } from "./resistanceResolve"
@@ -35,6 +38,9 @@ export const GLOBAL_BUFF_DEFS: BuffModule[] = [
   windWallPursuit,
   pursuitChargedBoost,
   lingeringBone,
+  mistwillowBuff,
+  mistwillowHeavyBuff,
+  mistwillowLightBuff,
 ]
 
 export const GROUP_BUFF_DEFS: BuffModule[] = [healerBuff]

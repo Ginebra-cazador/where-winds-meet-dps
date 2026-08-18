@@ -46,6 +46,8 @@ export const umblightcharge = defineSkill({
   attributeAttack: "Silkbind",
   castTag: CAST.umbLightCharge,
   receives: [
+    BUFF.mistwillowHeavyBuff,
+    BUFF.mistwillowBuff,
     BUFF.combo,
     BUFF.comboUmbLightBonus,
     BUFF.windWall,

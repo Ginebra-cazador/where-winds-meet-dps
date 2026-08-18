@@ -6,8 +6,8 @@ import { SET_ID } from "./ids"
 // community umbrella guide reads "+0.1%" instead — do not "correct" this value
 // down to match it; that figure does not describe the set at gear level.
 //
-// The 4-piece cross-stance mechanic lives in `buffEngine.ts`
-// (`params.armorSet === "mistwillow"`), not here.
+// The 4-piece is the three `mistwillow*` defs in `src/data/skills/buffs/`,
+// granted by `buffEngine.ts`'s `processMistwillowBuffGrant`.
 export const mistwillow = defineSet({
   id: SET_ID.mistwillow,
   name: "Mistwillow",

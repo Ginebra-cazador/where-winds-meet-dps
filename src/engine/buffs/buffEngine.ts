@@ -29,6 +29,7 @@ import type {
 import type { ArtBonusField, Effect } from "../effects/effect"
 import { applyEffect, type EffectSink } from "../effects/apply"
 import { paramOnOf, paramTierOf } from "./params"
+import { BUFF } from "../../data/skills/buffs/ids"
 
 export type BuffParams = Record<string, unknown>
 
@@ -69,18 +70,9 @@ const DEFAULT_DURATION = 15
 // default parameter, whose absent `castTime` must read back as `?? 1`, not `0`.
 const EMPTY_PROPS: SkillProperties = {}
 
-const DISPLAY_NAME_FALLBACK: Record<string, string> = {
-  mistwillowHeavyBuff: "Mistwillow (Heavy)",
-  mistwillowLightBuff: "Mistwillow (Light)",
-  mistwillowBuff: "Mistwillow",
-}
-
-const MISTWILLOW_HEAVY_BUFF = "mistwillowHeavyBuff"
-const MISTWILLOW_LIGHT_BUFF = "mistwillowLightBuff"
-const MISTWILLOW_MERGED_BUFF = "mistwillowBuff"
-const MISTWILLOW_BUFF_DURATION = 15
-const MISTWILLOW_BONUS = 0.1
-const MISTWILLOW_REFRESH_COOLDOWN = 2
+const MISTWILLOW_HEAVY_BUFF = BUFF.mistwillowHeavyBuff
+const MISTWILLOW_LIGHT_BUFF = BUFF.mistwillowLightBuff
+const MISTWILLOW_MERGED_BUFF = BUFF.mistwillowBuff
 
 // Bare, not `debuff-<classId>-…`: whichever class inflicts it names this id,
 // so the engine learns no class (docs/CLASSES.md § "One definition per class").
@@ -253,7 +245,7 @@ export class BuffEngine {
         : []
       out.push({
         id,
-        name: module?.name ?? DISPLAY_NAME_FALLBACK[id] ?? id,
+        name: module?.name ?? id,
         stacks: Math.max(1, stacks),
         maxStacks: module?.maxStacks ?? 1,
         effects,
@@ -459,7 +451,7 @@ export class BuffEngine {
         this.refreshBuff(id, time)
       }
     }
-    if (this.params.armorSet === "mistwillow") this.processMistwillowBuffGrant(time, props)
+    if (this.definitions.has(MISTWILLOW_MERGED_BUFF)) this.processMistwillowBuffGrant(time, props)
     return result
   }
 
@@ -634,15 +626,6 @@ export class BuffEngine {
     if (attackType === "mixed") return "both"
     return null
   }
-  // Deliberately INVERTED from the grant category (site's `Nl`) — the
-  // cross-stance synergy: a light hit reads the HEAVY buff's bonus and vice
-  // versa. Do not "fix" this to mirror mistwillowGrantCategory.
-  private mistwillowBonusCategory(attackType: string, isExecution: boolean): string | null {
-    if (attackType === "light") return MISTWILLOW_HEAVY_BUFF
-    if (attackType === "heavy" || isExecution) return MISTWILLOW_LIGHT_BUFF
-    if (attackType === "mixed") return "both"
-    return null
-  }
   processMistwillowBuffGrant(time: number, props: SkillProperties): void {
     const attackType = props.attackType ?? "none"
     const isExecution = !!props.isExecution
@@ -661,45 +644,22 @@ export class BuffEngine {
     if (upgradesToMerged) {
       if (heavyActive) this.endMistwillowStance(MISTWILLOW_HEAVY_BUFF, time)
       if (lightActive) this.endMistwillowStance(MISTWILLOW_LIGHT_BUFF, time)
-      this.applyBuff(MISTWILLOW_MERGED_BUFF, time, MISTWILLOW_BUFF_DURATION)
+      this.applyBuff(MISTWILLOW_MERGED_BUFF, time)
     } else if (this.isBuffActive(category, time)) {
       this.refreshMistwillowThrottled(category, time)
     } else {
-      this.applyBuff(category, time, MISTWILLOW_BUFF_DURATION)
+      this.applyBuff(category, time)
     }
   }
   private refreshMistwillowThrottled(id: string, time: number): void {
     const active = this.activeBuffs.get(id)
     if (!active || time < active.appliedAt || time >= active.expiresAt) return
-    if (time - active.appliedAt < MISTWILLOW_REFRESH_COOLDOWN) return
-    this.applyBuff(id, time, MISTWILLOW_BUFF_DURATION)
+    const cooldown = this.definitions.get(id)?.cooldown ?? 0
+    if (time - active.appliedAt < cooldown) return
+    this.applyBuff(id, time)
   }
   private endMistwillowStance(id: string, time: number): void {
     this.applyBuff(id, time, 0)
-  }
-  private mistwillowBonusValue(time: number, tagSet: Set<string>): number {
-    if (this.params.armorSet !== "mistwillow") return 0
-    let attackType = "none"
-    for (const tag of tagSet)
-      if (tag.startsWith("attack:")) {
-        attackType = tag.slice(7)
-        break
-      }
-    const isExecution = tagSet.has("prop:isExecution")
-    const category = this.mistwillowBonusCategory(attackType, isExecution)
-    if (!category) return 0
-    if (this.isBuffActiveAtTime(MISTWILLOW_MERGED_BUFF, time)) return MISTWILLOW_BONUS
-    const heavyActive = this.isBuffActiveAtTime(MISTWILLOW_HEAVY_BUFF, time)
-    const lightActive = this.isBuffActiveAtTime(MISTWILLOW_LIGHT_BUFF, time)
-    if (category === "both") {
-      let bonus = 0
-      if (heavyActive) bonus += MISTWILLOW_BONUS * 0.5
-      if (lightActive) bonus += MISTWILLOW_BONUS * 0.5
-      return bonus
-    }
-    if (category === MISTWILLOW_HEAVY_BUFF && heavyActive) return MISTWILLOW_BONUS
-    if (category === MISTWILLOW_LIGHT_BUFF && lightActive) return MISTWILLOW_BONUS
-    return 0
   }
 
   calculateDamageEffects(
@@ -764,12 +724,6 @@ export class BuffEngine {
       currentId = id
       for (const effect of resolveEffects(module, ctx)) applyEffect(sink, effect)
       if (module.conditionalFinalCrit) conditionalFinalCrit = module.conditionalFinalCrit
-    }
-
-    const mistwillow = this.mistwillowBonusValue(time, tagSet)
-    if (mistwillow > 0) {
-      effects.push({ statKey: "allDamageBoost", amount: mistwillow })
-      breakdown.mistwillow = (breakdown.mistwillow ?? 0) + mistwillow
     }
 
     return { effects, forceCrit, damageFactor, conditionalFinalCrit, artBonuses, breakdown }
