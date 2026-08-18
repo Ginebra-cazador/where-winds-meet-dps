@@ -602,8 +602,8 @@ export function SkillsTab({
   )
 
   const receivesRows = useMemo<ReceivesRow[]>(
-    () => (draft ? receivesForSkill(draft, classId, inputs) : []),
-    [draft, classId, inputs],
+    () => (draft ? receivesForSkill(draft, classId, engineInputs) : []),
+    [draft, classId, engineInputs],
   )
   const specMechanicRows = useMemo(
     () => receivesRows.filter((row) => row.isSpecMechanic),
