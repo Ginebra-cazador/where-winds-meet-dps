@@ -14,16 +14,12 @@ import { comboBuffDef, comboUmbLightBonusBuffDef } from "./blossomBarrageBuffs"
 export const blossomBarrage: InnerWayDef = defineInnerWay({
   id: INNER_WAY_ID.blossomBarrage,
   name: "Blossom Barrage",
-  selectableTiers: [6, 5, 4],
+  selectableTiers: [6, 5, 4, 2],
   buffParam: PARAM.blossomBarrage,
-  panelStats: {
-    directCritRate: 0.046,
-  },
   tiers: {
+    2: { panelStats: { critRate: 0.086 } },
     4: { nodes: [INNER_WAY_NODE.blossomBarrageSpringAwayBonus] },
+    5: { panelStats: { directCritRate: 0.046 } },
   },
-  // Not modelled: petal generation, the Q cooldown refund, the +30% cast
-  // speed, and the 3->5 target count — the sim has no resource, cooldown or
-  // target-count model.
   buffDefs: [comboBuffDef(), comboUmbLightBonusBuffDef()],
 })
