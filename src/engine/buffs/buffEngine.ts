@@ -72,12 +72,15 @@ const EMPTY_PROPS: SkillProperties = {}
 const DISPLAY_NAME_FALLBACK: Record<string, string> = {
   mistwillowHeavyBuff: "Mistwillow (Heavy)",
   mistwillowLightBuff: "Mistwillow (Light)",
+  mistwillowBuff: "Mistwillow",
 }
 
 const MISTWILLOW_HEAVY_BUFF = "mistwillowHeavyBuff"
 const MISTWILLOW_LIGHT_BUFF = "mistwillowLightBuff"
+const MISTWILLOW_MERGED_BUFF = "mistwillowBuff"
 const MISTWILLOW_BUFF_DURATION = 15
 const MISTWILLOW_BONUS = 0.1
+const MISTWILLOW_REFRESH_COOLDOWN = 2
 
 // Bare, not `debuff-<classId>-…`: whichever class inflicts it names this id,
 // so the engine learns no class (docs/CLASSES.md § "One definition per class").
@@ -645,14 +648,34 @@ export class BuffEngine {
     const isExecution = !!props.isExecution
     const category = this.mistwillowGrantCategory(attackType, isExecution)
     if (!category) return
+    if (this.isBuffActive(MISTWILLOW_MERGED_BUFF, time)) {
+      this.refreshMistwillowThrottled(MISTWILLOW_MERGED_BUFF, time)
+      return
+    }
     const heavyActive = this.isBuffActive(MISTWILLOW_HEAVY_BUFF, time)
     const lightActive = this.isBuffActive(MISTWILLOW_LIGHT_BUFF, time)
-    if (category === "both" || (heavyActive && lightActive)) {
-      this.applyBuff(MISTWILLOW_HEAVY_BUFF, time, MISTWILLOW_BUFF_DURATION)
-      this.applyBuff(MISTWILLOW_LIGHT_BUFF, time, MISTWILLOW_BUFF_DURATION)
+    const upgradesToMerged =
+      category === "both" ||
+      (category === MISTWILLOW_HEAVY_BUFF && lightActive) ||
+      (category === MISTWILLOW_LIGHT_BUFF && heavyActive)
+    if (upgradesToMerged) {
+      if (heavyActive) this.endMistwillowStance(MISTWILLOW_HEAVY_BUFF, time)
+      if (lightActive) this.endMistwillowStance(MISTWILLOW_LIGHT_BUFF, time)
+      this.applyBuff(MISTWILLOW_MERGED_BUFF, time, MISTWILLOW_BUFF_DURATION)
+    } else if (this.isBuffActive(category, time)) {
+      this.refreshMistwillowThrottled(category, time)
     } else {
       this.applyBuff(category, time, MISTWILLOW_BUFF_DURATION)
     }
+  }
+  private refreshMistwillowThrottled(id: string, time: number): void {
+    const active = this.activeBuffs.get(id)
+    if (!active || time < active.appliedAt || time >= active.expiresAt) return
+    if (time - active.appliedAt < MISTWILLOW_REFRESH_COOLDOWN) return
+    this.applyBuff(id, time, MISTWILLOW_BUFF_DURATION)
+  }
+  private endMistwillowStance(id: string, time: number): void {
+    this.applyBuff(id, time, 0)
   }
   private mistwillowBonusValue(time: number, tagSet: Set<string>): number {
     if (this.params.armorSet !== "mistwillow") return 0
@@ -665,6 +688,7 @@ export class BuffEngine {
     const isExecution = tagSet.has("prop:isExecution")
     const category = this.mistwillowBonusCategory(attackType, isExecution)
     if (!category) return 0
+    if (this.isBuffActiveAtTime(MISTWILLOW_MERGED_BUFF, time)) return MISTWILLOW_BONUS
     const heavyActive = this.isBuffActiveAtTime(MISTWILLOW_HEAVY_BUFF, time)
     const lightActive = this.isBuffActiveAtTime(MISTWILLOW_LIGHT_BUFF, time)
     if (category === "both") {
