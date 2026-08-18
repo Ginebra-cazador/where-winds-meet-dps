@@ -80,6 +80,7 @@ describe("bellstrikeUmbra — every declared ClassDef field is wired", () => {
       "insightfulStrike",
       "moraleChant",
       "bitterSeason",
+      "breakingPoint",
     ])
     expect(umbra.innerWays).toEqual([
       "swordHorizon",
@@ -87,6 +88,7 @@ describe("bellstrikeUmbra — every declared ClassDef field is wired", () => {
       "insightfulStrike",
       "moraleChant",
       "bitterSeason",
+      "breakingPoint",
     ])
   })
 
@@ -103,17 +105,19 @@ describe("bellstrikeUmbra — every declared ClassDef field is wired", () => {
       "potentRiverFlow",
       "wineGu",
       "soulShaken",
+      "disintegration",
       "bellstrikeUmbraBleedPen",
       "bellstrikeUmbraBleedingDamage",
     ])
   })
 
-  it("buffDefsForClass('bellstrikeUmbra') is the full 24-entry composition: inner-way owned, then the reordered globals, then the class's own", () => {
+  it("buffDefsForClass('bellstrikeUmbra') is the full 25-entry composition: inner-way owned, then the reordered globals, then the class's own", () => {
     expect(buffDefsForClass("bellstrikeUmbra").map((module) => module.id)).toEqual([
       "buff-bellstrikeUmbra-zenith-bar",
       "potentRiverFlow",
       "wineGu",
       "soulShaken",
+      "disintegration",
       "revelryScript",
       "fluteBoost",
       "vulnerabilityTeammate",

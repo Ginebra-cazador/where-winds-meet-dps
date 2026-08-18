@@ -534,6 +534,7 @@ export class BuffEngine {
     const perCast = module.stacks
       ? module.stacks(this.buildContext(applyTime, castEvent, 0, module))
       : 1
+    if (!module.stackRateLimit && perCast <= 0) return
     if (module.stackRateLimit) {
       let granted = 0
       for (let i = 0; i < perCast; i++) if (this.canGrantStack(module, applyTime)) granted++
@@ -551,6 +552,7 @@ export class BuffEngine {
   processDamageHit(time: number): void {
     for (const [id, module] of this.definitions) {
       if (!module.stackOnDamage || !this.gateOk(module)) continue
+      if (module.stackOnDamagePhase && this.qiPhase(time) !== module.stackOnDamagePhase) continue
       this.applyBuff(id, time, null, 1)
     }
   }

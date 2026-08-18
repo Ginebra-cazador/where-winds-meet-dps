@@ -51,6 +51,9 @@ export interface BuffMeta {
   stackRateLimit?: { count: number; window: number }
   stacksPerHit?: boolean
   stackOnDamage?: boolean
+  // Restricts `stackOnDamage` to one Qi phase; a damaging hit outside it grants
+  // no stack. Independent of `triggerPhase`, which gates the cast route only.
+  stackOnDamagePhase?: QiPhase
   // A generated (`castSkill`-triggered) attack reaches only the defs that opt
   // in; every other def still sees rotation casts alone.
   triggersFromGeneratedSkills?: boolean

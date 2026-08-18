@@ -6,6 +6,7 @@ export const INNER_WAY_ID = {
   battleAnthem: "battleAnthem",
   bitterSeason: "bitterSeason",
   blossomBarrage: "blossomBarrage",
+  breakingPoint: "breakingPoint",
   frostCladNight: "frostCladNight",
   insightfulStrike: "insightfulStrike",
   moraleChant: "moraleChant",
@@ -40,6 +41,7 @@ export const INNER_WAY_NODE = {
   bitterSeasonImprovedProcChance: "bitterSeasonImprovedProcChance",
   bitterSeasonMaxStackPenetration: "bitterSeasonMaxStackPenetration",
   blossomBarrageSpringAwayBonus: "blossomBarrageSpringAwayBonus",
+  breakingPointPerfectDodgeStacks: "breakingPointPerfectDodgeStacks",
 } as const
 
 export type InnerWayNode = (typeof INNER_WAY_NODE)[keyof typeof INNER_WAY_NODE]
