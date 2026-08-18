@@ -72,11 +72,14 @@ export const WEAPON_ART_ATTUNEMENTS = [
   {
     id: "spearSpecial",
     label: "Spear Special Skill DMG Boost",
-    labelByClass: { bellstrikeSplendor: "Nameless Spear Special Skill DMG Boost" },
+    labelByClass: {
+      bellstrikeSplendor: "Nameless Spear Special Skill DMG Boost",
+      stonesplitMight: "Stormbreaker Spear Special Skill DMG Boost",
+    },
     min: 0.036,
     max: 0.06,
     slots: ARMOR_SLOTS,
-    classIds: ["bellstrikeSplendor"],
+    classIds: ["bellstrikeSplendor", "stonesplitMight"],
     enginePath: "classSpecificAttunement.spearSpecial",
     affectsTag: "attune:spearSpecial",
   },

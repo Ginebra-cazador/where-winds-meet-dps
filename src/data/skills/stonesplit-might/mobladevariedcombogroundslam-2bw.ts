@@ -12,6 +12,8 @@ export const mobladevariedcombogroundslam2bw = defineSkill({
     PROP.abrasionImmune,
     WEAPON.moBlade,
     ATTACK.charge,
+    // Ground Slam receives the Mo Blade Charge Damage attunement: intended
+    // behavior. The live game does not apply it here — treated as a bug.
     "attune:moBladeCharge",
     "role:moBladeVariedCombo",
   ],
