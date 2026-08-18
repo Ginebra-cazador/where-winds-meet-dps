@@ -578,11 +578,6 @@ export function SkillsTab({
     [draft],
   )
 
-  const scopeSkills = useMemo(
-    () => [...builtinSkills, ...classSkills],
-    [builtinSkills, classSkills],
-  )
-
   const reachableBuffModules = useMemo(() => catalogBuffDefs(classId), [classId])
   const buffNameById = useMemo(
     () => new Map(reachableBuffModules.map((module) => [module.id, module.name] as const)),
@@ -602,13 +597,13 @@ export function SkillsTab({
   )
 
   const appliesRows = useMemo<AppliesRow[]>(
-    () => (draft ? appliesForSkill(draft, classId, scopeSkills) : []),
-    [draft, classId, scopeSkills],
+    () => (draft ? appliesForSkill(draft, classId) : []),
+    [draft, classId],
   )
 
   const receivesRows = useMemo<ReceivesRow[]>(
-    () => (draft ? receivesForSkill(draft, classId, inputs, scopeSkills) : []),
-    [draft, classId, inputs, scopeSkills],
+    () => (draft ? receivesForSkill(draft, classId, inputs) : []),
+    [draft, classId, inputs],
   )
   const specMechanicRows = useMemo(
     () => receivesRows.filter((row) => row.isSpecMechanic),
@@ -1274,11 +1269,6 @@ export function SkillsTab({
                                     {row.effect}
                                   </span>
                                 )}
-                                {row.triggeredBy && (
-                                  <span className={styles.skillsEffectsRowTriggered}>
-                                    ({row.triggeredBy})
-                                  </span>
-                                )}
                               </div>
                             ))}
                             {inactiveReceiveRows.length > 0 && (
@@ -1307,11 +1297,6 @@ export function SkillsTab({
                                       {row.requires && (
                                         <span className={styles.skillsEffectsRowRequires}>
                                           ({t("requires")} {row.requires})
-                                        </span>
-                                      )}
-                                      {row.triggeredBy && (
-                                        <span className={styles.skillsEffectsRowTriggered}>
-                                          ({row.triggeredBy})
                                         </span>
                                       )}
                                     </div>

@@ -447,7 +447,7 @@ export function TalentsTab({ inputs }: Props) {
             {t("Current")}: {formatStatValue(row.stat, current)}
           </span>
         </div>
-        <div className={styles.classBuffAffects}>
+        <div className={styles.classBuffNote}>
           {t("Scales With")}: {t(SOURCE_LABEL[row.scalesWith])}
           {row.scaleMax > 0 ? ` (${t("Cap")}: ${capDisplay})` : ""}
         </div>
@@ -476,10 +476,7 @@ export function TalentsTab({ inputs }: Props) {
         <div className={styles.classBuffHead}>
           <span className={styles.classBuffEffect}>{buff.effect}</span>
         </div>
-        <div className={styles.classBuffAffects}>
-          {t("Affects")}: {buff.affects}
-          {line.note ? ` · ${t(line.note)}` : ""}
-        </div>
+        {line.note && <div className={styles.classBuffNote}>{t(line.note)}</div>}
       </div>
     )
   }
@@ -490,7 +487,7 @@ export function TalentsTab({ inputs }: Props) {
         <div className={styles.classBuffHead}>
           <span className={styles.classBuffEffect}>{t(line.text)}</span>
         </div>
-        {line.subNote && <div className={styles.classBuffAffects}>{t(line.subNote)}</div>}
+        {line.subNote && <div className={styles.classBuffNote}>{t(line.subNote)}</div>}
       </div>
     )
   }
@@ -569,7 +566,7 @@ export function TalentsTab({ inputs }: Props) {
                           {t("Current")}: {formatStatValue(row.stat, current)}
                         </span>
                       </div>
-                      <div className={styles.classBuffAffects}>
+                      <div className={styles.classBuffNote}>
                         {t("Scales With")}: {SOURCE_LABEL[row.scalesWith]}
                         {row.scaleMax > 0 ? ` (${t("Cap")}: ${capDisplay})` : ""}
                       </div>
@@ -591,9 +588,6 @@ export function TalentsTab({ inputs }: Props) {
                       <div className={styles.classBuffHead}>
                         <span className={styles.classBuffName}>{t(buff.name)}</span>
                         <span className={styles.classBuffEffect}>{buff.effect}</span>
-                      </div>
-                      <div className={styles.classBuffAffects}>
-                        {t("Affects")}: {buff.affects}
                       </div>
                     </div>
                   ))}
