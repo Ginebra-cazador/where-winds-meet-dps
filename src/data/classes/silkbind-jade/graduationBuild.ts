@@ -55,7 +55,7 @@ export const SILKBIND_JADE_GRADUATION_BUILD: GraduationBuild = {
       attunement: "umbSpecial",
     }),
   ],
-  set: SET_ID.mistwillow,
-  bowSet: "crit",
+  set: SET_ID.rainwhisper,
+  bowSet: "precision",
   arsenal: "silkbind",
 }

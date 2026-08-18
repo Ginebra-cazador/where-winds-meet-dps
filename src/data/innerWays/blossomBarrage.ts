@@ -16,6 +16,9 @@ export const blossomBarrage: InnerWayDef = defineInnerWay({
   name: "Blossom Barrage",
   selectableTiers: [6, 5, 4],
   buffParam: PARAM.blossomBarrage,
+  panelStats: {
+    directCritRate: 0.046,
+  },
   tiers: {
     4: { nodes: [INNER_WAY_NODE.blossomBarrageSpringAwayBonus] },
   },
