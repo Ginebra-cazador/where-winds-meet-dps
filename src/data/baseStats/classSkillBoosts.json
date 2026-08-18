@@ -230,5 +230,63 @@
       "scalesWith": "silkbind.min",
       "scaleMax": 328
     }
+  ],
+  "stonesplitMight": [
+    {
+      "skill": "Critical Rate UP",
+      "stat": "critRate",
+      "maxBonus": 0.085,
+      "scalesWith": "agility",
+      "scaleMax": 280
+    },
+    {
+      "skill": "Physical Attack UP",
+      "stat": "minPhys",
+      "maxBonus": 73.9,
+      "scalesWith": "agility",
+      "scaleMax": 280
+    },
+    {
+      "skill": "Mo Blade Stonesplit Attack Min",
+      "stat": "minStonesplit",
+      "maxBonus": 98,
+      "scalesWith": "power",
+      "scaleMax": 0
+    },
+    {
+      "skill": "Mo Blade Stonesplit Attack Max",
+      "stat": "maxStonesplit",
+      "maxBonus": 196,
+      "scalesWith": "power",
+      "scaleMax": 0
+    },
+    {
+      "skill": "Thundercry Blade Stonesplit Attack Min",
+      "stat": "minStonesplit",
+      "maxBonus": 98,
+      "scalesWith": "power",
+      "scaleMax": 0
+    },
+    {
+      "skill": "Thundercry Blade Stonesplit Attack Max",
+      "stat": "maxStonesplit",
+      "maxBonus": 196,
+      "scalesWith": "power",
+      "scaleMax": 0
+    },
+    {
+      "skill": "Stonesplit Penetration Scale",
+      "stat": "stonesplitPenetration",
+      "maxBonus": 0.22,
+      "scalesWith": "stonesplit.min",
+      "scaleMax": 328
+    },
+    {
+      "skill": "Attribute Damage Scale",
+      "stat": "attributeDamage",
+      "maxBonus": 0.11,
+      "scalesWith": "stonesplit.min",
+      "scaleMax": 328
+    }
   ]
 }

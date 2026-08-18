@@ -21,6 +21,8 @@ describe("class registry — one call answers what a class is made of", () => {
       "stonesplitStrength",
       "bellstrikeSplendor",
       "silkbindJade",
+      "stonesplitMight",
+      "bellstrikeSplendor",
     ])
     expect(classDefinition("notAClass")).toBeNull()
   })

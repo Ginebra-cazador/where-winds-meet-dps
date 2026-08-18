@@ -5,11 +5,13 @@ import type { ClassDef } from "../../definitions/classes/classDef"
 import { bellstrikeSplendor } from "./bellstrike-splendor"
 import { bellstrikeUmbra } from "./bellstrike-umbra"
 import { silkbindJade } from "./silkbind-jade"
+import { stonesplitMight } from "./stonesplit-might"
 import { stonesplitStrength } from "./stonesplit-strength"
 
 export const CLASSES: readonly ClassDef[] = [
   bellstrikeUmbra,
   stonesplitStrength,
+  stonesplitMight,
   bellstrikeSplendor,
   silkbindJade,
 ]

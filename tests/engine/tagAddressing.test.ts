@@ -35,6 +35,7 @@ function receivedBuffIds(): Set<string> {
 const RECEIVES_NOTHING_BY_DESIGN = new Set([
   "mirage",
   "rainwhisperShield",
+  "stonesplitMightShield",
   "mountainsMightQiImbalance",
 ])
 

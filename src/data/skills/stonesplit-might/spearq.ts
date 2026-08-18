@@ -14,7 +14,7 @@ export const spearq = defineSkill({
   castTag: CAST.spearQ,
   castFrames: 60,
   triggerable: true,
-  triggersBuffs: [BUFF.drumbeat],
+  triggersBuffs: [BUFF.drumbeat, BUFF.jadeware],
   hits: [
     hit(0, {
       frame: 0,

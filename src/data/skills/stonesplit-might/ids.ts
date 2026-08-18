@@ -22,6 +22,8 @@ export const SKILL = {
   spearspecial: "stonesplitMight-spearspecial",
 } as const
 
-export const DEBUFF = {} as const
+export const DEBUFF = {
+  bitterSeasonTick: "debuff-stonesplitMight-bitter-season-tick",
+} as const
 
 export const STATUS = {} as const
