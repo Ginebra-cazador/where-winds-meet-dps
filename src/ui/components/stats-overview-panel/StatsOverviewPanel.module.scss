@@ -1,3 +1,5 @@
+@use "breakpoints";
+
 .statsOverview {
   display: flex;
   flex-direction: column;
@@ -20,6 +22,12 @@
   grid-template-columns: repeat(2, 1fr);
   column-gap: 12px;
   row-gap: 2px;
+}
+
+@include breakpoints.below(breakpoints.$bp-1100) {
+  .statsOverviewGrid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .statsOverviewRow {
