@@ -38,7 +38,7 @@ export const umblightcharge = defineSkill({
     PROP.hasQiBreakPhysPen,
     WEAPON.umbrella,
     ATTACK.light,
-    ATTUNE.umbCharged,
+    ATTUNE.umbFrequentProjectile,
     ROLE.umbLightCharge,
   ],
   skillType: "sustain",

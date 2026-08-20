@@ -58455,7 +58455,7 @@
           "silkbindJade-umbq",
           "silkbindJade-umbq-prepull"
         ],
-        "digest": "83dc676d38534cbcc9d8a73b4eea1877cbb49ce6fe75b758f3698198c2c880ce"
+        "digest": "bb3218ce8fe3c949fd958e75c7da8f20ed661361c1c2049ecfd305c48c70c5af"
       },
       "debuffs": {
         "count": 9,
@@ -58470,7 +58470,7 @@
           "debuff-silkbindJade-umbdrone-23hit",
           "debuff-silkbindJade-umbdrone-26hit"
         ],
-        "digest": "1d17a38b2f3455a8235d1e9f8dd4ae74b1a55a75a21cf54cd7fb69eb1e915693"
+        "digest": "ba1c03530b94c20fef93e3c5b5b4d37c060be5c2009f1f7a0f2de8a0cca2ee4f"
       },
       "buffs": [
         {

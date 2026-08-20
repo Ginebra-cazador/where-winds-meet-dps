@@ -1,5 +1,5 @@
 import { defineSkill, hit } from "../../../definitions/skills/skillDef"
-import { ATTACK, CAST, ROLE, WEAPON } from "../ids"
+import { ATTACK, ATTUNE, CAST, ROLE, WEAPON } from "../ids"
 import { BUFF } from "../buffs/ids"
 import { SKILL } from "./ids"
 
@@ -26,7 +26,7 @@ export const umbHeavylight = defineSkill({
   id: SKILL.umbHeavylight,
   classId: "silkbindJade",
   name: "Umb HeavyLight",
-  tags: [WEAPON.umbrella, ATTACK.mixed, ROLE.umbHeavyLight],
+  tags: [WEAPON.umbrella, ATTACK.mixed, ATTUNE.umbLightHeavyVariedCombo, ROLE.umbHeavyLight],
   skillType: "weapon",
   weaponOrAttribute: "Umbrella",
   attributeAttack: "Silkbind",

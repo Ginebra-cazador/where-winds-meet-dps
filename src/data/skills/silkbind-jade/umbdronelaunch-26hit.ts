@@ -13,7 +13,7 @@ export const umbdronelaunch26Hit = defineSkill({
     PROP.hasQiBreakPhysPen,
     WEAPON.umbrella,
     ATTACK.heavy,
-    ATTUNE.umbSpecial,
+    ATTUNE.umbFrequentProjectile,
     ROLE.umbDrone,
     ROLE.umbDroneLaunch,
   ],

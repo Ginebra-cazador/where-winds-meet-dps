@@ -1,8 +1,7 @@
-// Ranges are the breakthrough-16 gear-tier rolls, and each label the official
-// English Attune Effect name (in-game re-attuning preview, 2026-08-17;
-// cross-checked against the client localization, which also carries
-// "DMG Boost for Vernal Umbrella - Frequent Projectile Skill" — no roll range
-// or slot list has been captured for that one, so it is not offered yet).
+// Ranges are the breakthrough-16 gear-tier rolls — every affix rolls the same
+// range — and each label the official English Attune Effect name (in-game
+// re-attuning preview, 2026-08-17; the two Vernal Umbrella affixes from the
+// patch 2.1 note, 2026-08-20).
 import type { AttunementOption } from "../../../engine/attunements"
 import { ARMOR_SLOTS } from "../attunementSlots"
 
@@ -18,24 +17,24 @@ export const SILKBIND_JADE_ATTUNEMENTS = [
     affectsTag: "attune:umbQ",
   },
   {
-    id: "umbCharged",
-    label: "Vernal Umbrella Charged Skill DMG Boost",
+    id: "umbFrequentProjectile",
+    label: "Vernal Umbrella Frequent Projectile DMG Boost",
     min: 0.036,
     max: 0.06,
     slots: ARMOR_SLOTS,
     classIds: ["silkbindJade"],
-    enginePath: "classSpecificAttunement.umbCharged",
-    affectsTag: "attune:umbCharged",
+    enginePath: "classSpecificAttunement.umbFrequentProjectile",
+    affectsTag: "attune:umbFrequentProjectile",
   },
   {
-    id: "umbSpecial",
-    label: "Vernal Umbrella Special Skill DMG Boost",
+    id: "umbLightHeavyVariedCombo",
+    label: "Vernal Umbrella Light/Heavy Attack & Varied Combo DMG Boost",
     min: 0.036,
     max: 0.06,
     slots: ARMOR_SLOTS,
     classIds: ["silkbindJade"],
-    enginePath: "classSpecificAttunement.umbSpecial",
-    affectsTag: "attune:umbSpecial",
+    enginePath: "classSpecificAttunement.umbLightHeavyVariedCombo",
+    affectsTag: "attune:umbLightHeavyVariedCombo",
   },
   {
     id: "fanQ",

@@ -76,7 +76,8 @@ const ATTUNEMENTS = [
   "swordCharged",
   "swordQ",
   "swordSpecial",
-  "umbCharged",
+  "umbFrequentProjectile",
+  "umbLightHeavyVariedCombo",
   "umbQ",
   "umbrellaQ",
 ]

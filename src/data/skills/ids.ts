@@ -166,9 +166,9 @@ export const ATTUNE = {
   swordCharged: "attune:swordCharged",
   swordQ: "attune:swordQ",
   swordSpecial: "attune:swordSpecial",
-  umbCharged: "attune:umbCharged",
+  umbFrequentProjectile: "attune:umbFrequentProjectile",
+  umbLightHeavyVariedCombo: "attune:umbLightHeavyVariedCombo",
   umbQ: "attune:umbQ",
-  umbSpecial: "attune:umbSpecial",
 } as const
 
 // `context.ts` derives `SkillProperties`'s boolean keys from these values at
