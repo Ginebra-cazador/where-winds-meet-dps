@@ -11,15 +11,18 @@ export function ClassSelect({ value, onChange }: Props) {
   const { t } = useI18n()
   const visible = CLASS_IDS().map((id) => classDefinition(id)!)
   return (
-    <Select
-      ariaLabel={t("Class")}
-      value={value}
-      onChange={onChange}
-      options={visible.map((def) => ({
-        value: def.id,
-        label: t(def.displayName),
-        meta: def.martialArts.map((art) => t(art.weaponType)).join(" · "),
-      }))}
-    />
+    <div className="row">
+      <label>{t("Class")}</label>
+      <Select
+        ariaLabel={t("Class")}
+        value={value}
+        onChange={onChange}
+        options={visible.map((def) => ({
+          value: def.id,
+          label: t(def.displayName),
+          meta: def.martialArts.map((art) => t(art.weaponType)).join(" · "),
+        }))}
+      />
+    </div>
   )
 }

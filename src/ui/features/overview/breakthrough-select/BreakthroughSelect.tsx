@@ -13,16 +13,19 @@ export function BreakthroughSelect({ value, onChange }: Props) {
   const selected = BREAKTHROUGH_TIERS.find((tier) => tier.breakthrough === value)
   return (
     <>
-      <Select
-        ariaLabel={t("Breakthrough")}
-        value={String(value)}
-        onChange={(next) => onChange(Number(next))}
-        options={BREAKTHROUGH_TIERS.map((tier) => ({
-          value: String(tier.breakthrough),
-          label: `${t("Lv.")} ${tier.breakthrough}${tier.name ? ` · ${tier.name}` : ""}`,
-          meta: `${t("Lv.")} ${tier.levelRange} · ${t("def")} ${tier.defense} · ${t("res")} ${tier.resistance}%`,
-        }))}
-      />
+      <div className="row">
+        <label>{t("Breakthrough")}</label>
+        <Select
+          ariaLabel={t("Breakthrough")}
+          value={String(value)}
+          onChange={(next) => onChange(Number(next))}
+          options={BREAKTHROUGH_TIERS.map((tier) => ({
+            value: String(tier.breakthrough),
+            label: `${t("Lv.")} ${tier.breakthrough}${tier.name ? ` · ${tier.name}` : ""}`,
+            meta: `${t("Lv.")} ${tier.levelRange} · ${t("def")} ${tier.defense} · ${t("res")} ${tier.resistance}%`,
+          }))}
+        />
+      </div>
       {selected && (
         <div className={styles.summary}>
           <span>

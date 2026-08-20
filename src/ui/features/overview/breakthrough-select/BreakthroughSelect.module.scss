@@ -1,9 +1,10 @@
 .summary {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1px 10px;
-  font-size: 0.72em;
+  gap: 12px;
+  margin: 2px 0 4px;
+  font-size: 0.78em;
   color: var(--color-text-muted);
   letter-spacing: 0.03em;
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
