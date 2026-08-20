@@ -42,10 +42,10 @@ describe("Skill Editor — a tick source states how many times its one hit lands
     expect(screen.getByText("× 4")).toBeInTheDocument()
   })
 
-  it("says nothing on a skill that is not a tick source", () => {
+  it("shows the skill's own hit count, not a tick count, when it is not a tick source", () => {
     renderSkillsTab()
     fireEvent.click(screen.getByText("FanSpecial"))
 
-    expect(screen.queryByText(/^× /)).not.toBeInTheDocument()
+    expect(screen.getByText("× 2")).toBeInTheDocument()
   })
 })
