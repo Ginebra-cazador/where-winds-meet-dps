@@ -209,25 +209,30 @@ function round(value: number, places: number): number {
   return Number.isFinite(value) ? Number(value.toFixed(places)) : value
 }
 
+// Ten decimal places still hashed a result's last bits at these magnitudes, so
+// the comparison moved whenever the same contributions were summed in a
+// different sequence. Any real change to output is far larger than this.
+const PLACES = 2
+
 function digestOf(result: Result): string {
   const canonical = JSON.stringify(result, (_key, value) =>
-    typeof value === "number" ? round(value, 10) : value,
+    typeof value === "number" ? round(value, PLACES) : value,
   )
   return createHash("sha256").update(canonical).digest("hex")
 }
 
 function summarize(result: Result) {
   return {
-    dps: round(result.dps, 6),
-    totalDamage: round(result.totalDamage, 6),
-    rotationDuration: round(result.rotationDuration, 6),
+    dps: round(result.dps, PLACES),
+    totalDamage: round(result.totalDamage, PLACES),
+    rotationDuration: round(result.rotationDuration, PLACES),
     warnings: result.warnings,
     perSkill: result.perSkill.map((row) => ({
       name: row.name,
       breakdownName: row.breakdownName,
       type: row.type,
       count: row.count,
-      expectedDamage: round(row.expectedDamage, 6),
+      expectedDamage: round(row.expectedDamage, PLACES),
       castCount: row.castCount ?? 0,
     })),
     counts: {

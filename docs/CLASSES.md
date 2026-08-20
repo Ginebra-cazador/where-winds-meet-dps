@@ -84,8 +84,9 @@ declared as fields on its own definition, which one registry loop reads:
 | a poison/DoT extension window        | poison extensions |
 
 An inner way or a gear set declares mechanics the same way, read by its own
-registry. `declareMechanic` and the shared mechanic order are the one contract all
-three owners use.
+registry. `declareMechanic` is the one contract all three owners use, and it
+carries no ordering: a mechanic's contributions must not depend on which other
+mechanics ran first.
 
 An inner way may also declare gate buffs, display gates, buff-defs and skill
 behaviours of its own, for what it — not any one class — owns. Two of those need a
