@@ -1384,12 +1384,15 @@ function OverflowMenu({
 }) {
   const [open, setOpen] = useState(false)
   const wrapperRef = useRef<HTMLDivElement>(null)
+  const listRef = useRef<HTMLUListElement>(null)
   const position = useAnchoredDropdown(open, wrapperRef)
 
   useEffect(() => {
     if (!open) return
     function onMouseDown(event: MouseEvent) {
-      if (wrapperRef.current?.contains(event.target as Node)) return
+      const target = event.target as Node
+      if (wrapperRef.current?.contains(target)) return
+      if (listRef.current?.contains(target)) return
       setOpen(false)
     }
     function onKeyDown(event: KeyboardEvent) {
@@ -1423,6 +1426,7 @@ function OverflowMenu({
         position &&
         createPortal(
           <ul
+            ref={listRef}
             className={styles.menuList}
             style={{ left: position.left, top: position.top, bottom: position.bottom }}
           >
