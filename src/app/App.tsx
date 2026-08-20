@@ -347,6 +347,26 @@ function AppInner() {
           </div>
         </header>
 
+        <header className={styles.appTitlebarMobile}>
+          <div className={styles.appTitle}>
+            <h1>{t("Where Winds Meet DPS")}</h1>
+            <ChangelogButton />
+          </div>
+          <div className={styles.appTitlebarActions}>
+            <GithubLink />
+            <button
+              type="button"
+              className="reset-btn"
+              onClick={handleReset}
+              disabled={!isDirty || isSimulationRunning}
+              aria-label={t("Discard changes")}
+              title={t("Discard edits since the last save")}
+            >
+              {t("Discard changes")}
+            </button>
+          </div>
+        </header>
+
         <MetricsCard
           result={headerResult}
           className={styles.headerMetrics}
@@ -383,25 +403,6 @@ function AppInner() {
         </nav>
       </div>
       <div className={styles.tabPanel}>
-        <header className={styles.appTitlebarMobile}>
-          <div className={styles.appTitle}>
-            <h1>{t("Where Winds Meet DPS")}</h1>
-            <ChangelogButton />
-          </div>
-          <div className={styles.appTitlebarActions}>
-            <GithubLink />
-            <button
-              type="button"
-              className="reset-btn"
-              onClick={handleReset}
-              disabled={!isDirty || isSimulationRunning}
-              aria-label={t("Discard changes")}
-              title={t("Discard edits since the last save")}
-            >
-              {t("Discard changes")}
-            </button>
-          </div>
-        </header>
         <WarningsList result={result} />
         <fieldset className={styles.routeFields} disabled={areInputsLocked}>
           <Routes>
