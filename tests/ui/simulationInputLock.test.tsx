@@ -96,7 +96,9 @@ describe("input lock while a simulation runs", () => {
     startRunThenLeaveSimulationTab()
 
     expect(anyRouteControl()).toBeDisabled()
-    expect(screen.getByRole("button", { name: "Discard changes" })).toBeDisabled()
+    for (const button of screen.getAllByRole("button", { name: "Discard changes" })) {
+      expect(button).toBeDisabled()
+    }
   })
 
   it("gives the controls back once the runs land", () => {

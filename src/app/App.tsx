@@ -1,8 +1,17 @@
-import { useCallback, useEffect, useMemo, useState } from "react"
-import { HashRouter, NavLink, Navigate, Route, Routes, useLocation } from "react-router-dom"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import {
+  HashRouter,
+  NavLink,
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom"
 import { runEngine } from "../engine/dps"
 import { applyArmorSet, applyBowSet } from "../engine/panel"
 import { withDerivedStats } from "../engine/derivedInputs"
+import { builtinRotationsForClass, defaultRotationForClass } from "../engine/builtinLibrary"
 import type { Inputs, StoredProfile } from "../engine/types"
 import { OverviewTab } from "../ui/features/overview/overview-tab/OverviewTab"
 import { MetricsCard, WarningsList } from "../ui/layout/output-panel/OutputPanel"
@@ -20,6 +29,7 @@ import { SimulationToast, SIMULATION_PATH } from "../ui/layout/simulation-toast/
 import { DpsActivityToast } from "../ui/layout/dps-activity-toast/DpsActivityToast"
 import { GraduationBuildDialog } from "../ui/features/gear/graduation-build-dialog/GraduationBuildDialog"
 import { SetupWizard, type SetupMode } from "../ui/features/setup/setup-wizard/SetupWizard"
+import { usesCustomRotation } from "../ui/features/rotation/rotationOptions"
 import { useI18n } from "../i18n/i18nContext"
 import { I18nProvider } from "../i18n/I18nProvider"
 import { ConfirmProvider } from "../ui/components/confirm-dialog/ConfirmDialog"
@@ -49,8 +59,10 @@ function AppInner() {
   const [startedRunCount, setStartedRunCount] = useState(0)
   const [acknowledgedRunCount, setAcknowledgedRunCount] = useState(0)
   const isSimulationRunning = simulation.status === "running"
-  const isOnSimulationTab = useLocation().pathname === SIMULATION_PATH
+  const pathname = useLocation().pathname
+  const isOnSimulationTab = pathname === SIMULATION_PATH
   const areInputsLocked = isSimulationRunning && !isOnSimulationTab
+  const navigate = useNavigate()
 
   const startParseSimulation = simulation.start
   const startSimulation = useCallback(
@@ -119,6 +131,16 @@ function AppInner() {
     () => ({ ...result, graduationRate: graduation.rate }),
     [result, graduation.rate],
   )
+
+  const rotationName = useMemo(() => {
+    if (usesCustomRotation(inputs)) return inputs.activeCustomRotation!.name
+    const selectedBuiltin = builtinRotationsForClass(inputs.classId).find(
+      (rotation) => rotation.id === inputs.selectedBuiltinRotationId,
+    )
+    if (selectedBuiltin) return selectedBuiltin.name
+    return defaultRotationForClass(inputs.classId)?.name ?? null
+  }, [inputs])
+  const goToRotationTab = useCallback(() => navigate("/rotation"), [navigate])
 
   const { t } = useI18n()
   const confirm = useConfirm()
@@ -250,6 +272,11 @@ function AppInner() {
     return () => clearTimeout(id)
   }, [savedAt])
 
+  const tabRefs = useRef<Record<string, HTMLAnchorElement | null>>({})
+  useEffect(() => {
+    tabRefs.current[pathname]?.scrollIntoView({ block: "nearest", inline: "nearest" })
+  }, [pathname])
+
   const TABS: { path: string; label: string; align?: "right" }[] = [
     { path: "/overview", label: t("Overview") },
     { path: "/gear", label: t("Gear") },
@@ -259,6 +286,8 @@ function AppInner() {
     { path: "/talents", label: t("Talents & Oddities") },
     { path: "/profile", label: t("Profiles"), align: "right" },
   ]
+
+  const saveLabel = savedAt && !isDirty ? t("Saved ✓") : isDirty ? t("Save") : t("Saved")
 
   return (
     <div className={styles.app}>
@@ -303,7 +332,7 @@ function AppInner() {
               disabled={!isDirty}
               aria-label={t("Save")}
             >
-              {savedAt && !isDirty ? t("Saved ✓") : isDirty ? t("Save") : t("Saved")}
+              {saveLabel}
             </button>
             <button
               type="button"
@@ -325,6 +354,12 @@ function AppInner() {
           theoreticalDps={graduation.theoreticalDps}
           onGraduationClick={() => setGraduationDialogOpen(true)}
           graduationDisabled={isSimulationRunning}
+          rotationName={rotationName}
+          onRotationClick={goToRotationTab}
+          saveLabel={saveLabel}
+          onSave={handleSave}
+          saveDisabled={!isDirty}
+          saveDirty={isDirty}
         />
 
         <nav className={styles.tabs} role="tablist">
@@ -333,6 +368,9 @@ function AppInner() {
               key={tab.path}
               to={tab.path}
               role="tab"
+              ref={(node) => {
+                tabRefs.current[tab.path] = node
+              }}
               className={({ isActive }) =>
                 styles.tab +
                 (isActive ? ` ${styles.active}` : "") +
@@ -345,6 +383,25 @@ function AppInner() {
         </nav>
       </div>
       <div className={styles.tabPanel}>
+        <header className={styles.appTitlebarMobile}>
+          <div className={styles.appTitle}>
+            <h1>{t("Where Winds Meet DPS")}</h1>
+            <ChangelogButton />
+          </div>
+          <div className={styles.appTitlebarActions}>
+            <GithubLink />
+            <button
+              type="button"
+              className="reset-btn"
+              onClick={handleReset}
+              disabled={!isDirty || isSimulationRunning}
+              aria-label={t("Discard changes")}
+              title={t("Discard edits since the last save")}
+            >
+              {t("Discard changes")}
+            </button>
+          </div>
+        </header>
         <WarningsList result={result} />
         <fieldset className={styles.routeFields} disabled={areInputsLocked}>
           <Routes>

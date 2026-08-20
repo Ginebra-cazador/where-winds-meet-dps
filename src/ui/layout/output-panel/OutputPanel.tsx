@@ -9,6 +9,16 @@ const fmt = (n: number, digits = 2) =>
     ? n.toLocaleString("en-US", { minimumFractionDigits: digits, maximumFractionDigits: digits })
     : "—"
 
+function formatCompactDamage(value: number): string {
+  if (!Number.isFinite(value)) return "—"
+  const sign = value < 0 ? "-" : ""
+  const magnitude = Math.abs(value)
+  if (magnitude >= 1_000_000_000) return `${sign}${(magnitude / 1_000_000_000).toFixed(1)}B`
+  if (magnitude >= 1_000_000) return `${sign}${(magnitude / 1_000_000).toFixed(1)}M`
+  if (magnitude >= 1_000) return `${sign}${(magnitude / 1_000).toFixed(1)}K`
+  return fmt(value, 0)
+}
+
 interface MetricsCardProps {
   result: Result
   className?: string
@@ -16,6 +26,12 @@ interface MetricsCardProps {
   theoreticalDps?: number | null
   onGraduationClick?: () => void
   graduationDisabled?: boolean
+  rotationName?: string | null
+  onRotationClick?: () => void
+  saveLabel?: string
+  onSave?: () => void
+  saveDisabled?: boolean
+  saveDirty?: boolean
 }
 
 function OpenIcon() {
@@ -47,6 +63,12 @@ export function MetricsCard({
   theoreticalDps = null,
   onGraduationClick,
   graduationDisabled = false,
+  rotationName = null,
+  onRotationClick,
+  saveLabel,
+  onSave,
+  saveDisabled = false,
+  saveDirty = false,
 }: MetricsCardProps) {
   const { t } = useI18n()
   const graduationText =
@@ -59,11 +81,16 @@ export function MetricsCard({
     theoreticalDps === null
       ? t("Current DPS divided by the theoretical class maximum")
       : `${t("Current DPS divided by the theoretical class maximum")}: ${fmt(theoreticalDps, 2)} DPS`
+  const durationText = `${fmt(result.rotationDuration, 0)}s`
   return (
     <div className={styles.metricsCard + (className ? ` ${className}` : "")}>
       <div className={styles.dps}>
         <span className={styles.label}>{t("DPS")}</span>
         <span className={styles.value}>{fmt(result.dps, 2)}</span>
+        <span className={styles.subline}>
+          {formatCompactDamage(result.totalDamage)} · {durationText}
+          {rotationName ? ` · ${rotationName}` : ""}
+        </span>
       </div>
       <div className={styles.stat}>
         <span className={styles.label}>{t("Total Damage")}</span>
@@ -71,8 +98,19 @@ export function MetricsCard({
       </div>
       <div className={styles.stat}>
         <span className={styles.label}>{t("Duration")}</span>
-        <span className={styles.value}>{fmt(result.rotationDuration, 0)}s</span>
+        <span className={styles.value}>{durationText}</span>
       </div>
+      {rotationName && (
+        <button
+          type="button"
+          className={styles.rotationChip}
+          onClick={onRotationClick}
+          title={rotationName}
+        >
+          <span className={styles.label}>{t("Rotation")}</span>
+          <span className={styles.value}>{rotationName}</span>
+        </button>
+      )}
       <button
         type="button"
         className={`${styles.graduation}${graduationPending ? ` ${styles.pending}` : ""}`}
@@ -91,6 +129,17 @@ export function MetricsCard({
         </span>
         <OpenIcon />
       </button>
+      {onSave && (
+        <button
+          type="button"
+          className={`save-btn ${styles.mobileSave}${saveDirty ? " dirty" : ""}`}
+          onClick={onSave}
+          disabled={saveDisabled}
+          aria-label={t("Save")}
+        >
+          {saveLabel}
+        </button>
+      )}
     </div>
   )
 }

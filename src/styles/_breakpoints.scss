@@ -12,3 +12,9 @@ $bp-560: 560px;
     @content;
   }
 }
+
+@mixin hoverable {
+  @media (hover: hover) {
+    @content;
+  }
+}
