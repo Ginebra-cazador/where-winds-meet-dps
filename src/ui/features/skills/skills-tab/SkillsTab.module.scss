@@ -388,7 +388,7 @@ input.castField {
   font-weight: 600;
 }
 input.cellInput {
-  width: 48px;
+  width: 84px;
   background: transparent;
   border: 1px solid transparent;
   border-radius: 3px;
@@ -578,39 +578,4 @@ input.cellInput.changedValue {
 }
 .effectsRow.isOff {
   opacity: 0.5;
-}
-
-.menu {
-  position: relative;
-  display: inline-flex;
-}
-.menuList {
-  position: fixed;
-  z-index: 1300;
-  margin: 0;
-  padding: 4px 0;
-  list-style: none;
-  min-width: 120px;
-  background: var(--color-surface-alt);
-  border: 1px solid var(--color-border-hover);
-  border-radius: 4px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-}
-.menuList button {
-  display: block;
-  width: 100%;
-  text-align: left;
-  background: none;
-  border: none;
-  color: var(--color-text-dim);
-  padding: 6px 12px;
-  font-size: 0.85em;
-  cursor: pointer;
-}
-.menuList button:hover {
-  background: var(--color-surface-raised);
-  color: var(--color-text);
-}
-.menuDanger:hover {
-  color: var(--color-negative);
 }

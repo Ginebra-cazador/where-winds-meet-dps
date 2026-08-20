@@ -1,5 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react"
-import { createPortal } from "react-dom"
+import { useMemo, useRef, useState } from "react"
 import type { Inputs } from "../../../../engine/types"
 import type { Skill, SkillHit, HitTrigger, HitVariant, TriggerKind } from "../../../../engine/skill"
 import {
@@ -37,7 +36,6 @@ import { useI18n } from "../../../../i18n/i18nContext"
 import { useConfirm } from "../../../components/confirm-dialog/confirmContext"
 import { NumInput, PercentInput } from "../../../components/number-inputs/NumberInputs"
 import { Combobox, type ComboboxOption } from "../../../components/combobox/Combobox"
-import { useAnchoredDropdown } from "../../../hooks/useAnchoredDropdown"
 import { HelpHint } from "../../../components/help-hint/HelpHint"
 import { SubTabs } from "../../../components/sub-tabs/SubTabs"
 import { FPS } from "../../../../engine/timeline"
@@ -331,6 +329,14 @@ export function SkillsTab({
     const seeded = seedSkillFromBuiltin(classId, skill)
     setSelectedKey(`builtin:${skill.id}`)
     loadDraft(seeded)
+  }
+
+  if (!draft) {
+    const firstListedSkill = filteredClassSkills[0] ?? filteredBuiltins[0]
+    if (firstListedSkill) {
+      if (filteredClassSkills[0]) selectSkill(firstListedSkill)
+      else seedFromBuiltin(firstListedSkill)
+    }
   }
 
   function patchDraft(patch: Partial<Skill>) {
@@ -870,12 +876,19 @@ export function SkillsTab({
                 <button type="button" className="reset-btn" onClick={handleReset}>
                   {t("Reset")}
                 </button>
-                <OverflowMenu
-                  t={t}
-                  onDelete={handleDelete}
-                  onExport={handleExport}
-                  onImport={() => fileRef.current?.click()}
-                />
+                <button type="button" className="reset-btn" onClick={handleExport}>
+                  {t("Export")}
+                </button>
+                <button
+                  type="button"
+                  className="reset-btn"
+                  onClick={() => fileRef.current?.click()}
+                >
+                  {t("Import")}
+                </button>
+                <button type="button" className="reset-btn" onClick={handleDelete}>
+                  {t("Delete")}
+                </button>
                 <input
                   ref={fileRef}
                   type="file"
@@ -1367,87 +1380,6 @@ function PropRow({
         {children}
         {unit && <span className={styles.propUnit}>{unit}</span>}
       </span>
-    </div>
-  )
-}
-
-function OverflowMenu({
-  t,
-  onDelete,
-  onExport,
-  onImport,
-}: {
-  t: (text: string) => string
-  onDelete(): void
-  onExport(): void
-  onImport(): void
-}) {
-  const [open, setOpen] = useState(false)
-  const wrapperRef = useRef<HTMLDivElement>(null)
-  const listRef = useRef<HTMLUListElement>(null)
-  const position = useAnchoredDropdown(open, wrapperRef)
-
-  useEffect(() => {
-    if (!open) return
-    function onMouseDown(event: MouseEvent) {
-      const target = event.target as Node
-      if (wrapperRef.current?.contains(target)) return
-      if (listRef.current?.contains(target)) return
-      setOpen(false)
-    }
-    function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") setOpen(false)
-    }
-    document.addEventListener("mousedown", onMouseDown)
-    document.addEventListener("keydown", onKeyDown)
-    return () => {
-      document.removeEventListener("mousedown", onMouseDown)
-      document.removeEventListener("keydown", onKeyDown)
-    }
-  }, [open])
-
-  function choose(action: () => void) {
-    setOpen(false)
-    action()
-  }
-
-  return (
-    <div ref={wrapperRef} className={styles.menu}>
-      <button
-        type="button"
-        className="reset-btn"
-        aria-label={t("More actions")}
-        title={`${t("Delete")} · ${t("Export")} · ${t("Import")}`}
-        onClick={() => setOpen((prev) => !prev)}
-      >
-        ⋯
-      </button>
-      {open &&
-        position &&
-        createPortal(
-          <ul
-            ref={listRef}
-            className={styles.menuList}
-            style={{ left: position.left, top: position.top, bottom: position.bottom }}
-          >
-            <li>
-              <button type="button" onClick={() => choose(onExport)}>
-                {t("Export")}
-              </button>
-            </li>
-            <li>
-              <button type="button" onClick={() => choose(onImport)}>
-                {t("Import")}
-              </button>
-            </li>
-            <li>
-              <button type="button" className={styles.menuDanger} onClick={() => choose(onDelete)}>
-                {t("Delete")}
-              </button>
-            </li>
-          </ul>,
-          document.body,
-        )}
     </div>
   )
 }
