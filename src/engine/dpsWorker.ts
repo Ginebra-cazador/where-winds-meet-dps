@@ -6,10 +6,14 @@ import { poolForClass } from "../definitions/classes/registry"
 import { annotatePoolForSlot, rerollableSlots } from "./retunement"
 import { attunementsFor } from "./attunements"
 import { ftDpsWhenEquipped, ftDpsWithSlotEmpty } from "./fullPotential"
+import { withCustomContent } from "./customContent"
 import { withDerivedStats } from "./derivedInputs"
 import { applyArmorSet, applyBowSet, ARMOR_SET_OPTIONS, swapArsenal } from "./panel"
 import { graduationInputs } from "./graduation"
 import type { Rotation } from "./rotation"
+import type { Skill } from "./skill"
+import type { Buff } from "./buff"
+import type { Debuff } from "./debuff"
 import { RUN_SEED_STRIDE } from "./rng"
 import type { HitOutcome } from "./formula"
 import { GEAR_SLOTS } from "./types"
@@ -567,6 +571,44 @@ async function computeParseSimulation(
   }
 }
 
+export interface ProfileMetricsWorkerRequest {
+  reqId: number
+  profiles: { id: string; inputs: Inputs }[]
+  customSkills: Skill[]
+  customBuffs: Buff[]
+  customDebuffs: Debuff[]
+}
+
+export interface ProfileMetrics {
+  dps: number
+  totalDamage: number
+  rotationDuration: number
+}
+
+export interface ProfileMetricsWorkerResponse {
+  reqId: number
+  metricsByProfileId: Record<string, ProfileMetrics>
+}
+
+function computeProfileMetrics(req: ProfileMetricsWorkerRequest): ProfileMetricsWorkerResponse {
+  const metricsByProfileId: Record<string, ProfileMetrics> = {}
+  for (const { id, inputs } of req.profiles) {
+    const configured = withCustomContent(
+      inputs,
+      req.customSkills,
+      req.customBuffs,
+      req.customDebuffs,
+    )
+    const result = runEngine(applyBowSet(applyArmorSet(withDerivedStats(configured))))
+    metricsByProfileId[id] = {
+      dps: result.dps,
+      totalDamage: result.totalDamage,
+      rotationDuration: result.rotationDuration,
+    }
+  }
+  return { reqId: req.reqId, metricsByProfileId }
+}
+
 export interface GraduationWorkerRequest {
   reqId: number
   inputs: Inputs
@@ -641,6 +683,7 @@ export type WorkerRequest =
   | ({ kind: "gearAnalysis" } & GearAnalysisWorkerRequest)
   | ({ kind: "setTiles" } & SetTilesWorkerRequest)
   | ({ kind: "rotationDps" } & RotationDpsWorkerRequest)
+  | ({ kind: "profileMetrics" } & ProfileMetricsWorkerRequest)
   | ({ kind: "parseSimulation" } & ParseSimulationWorkerRequest)
   | ({ kind: "parseSimulationCancel" } & ParseSimulationCancelRequest)
   | ({ kind: "graduation" } & GraduationWorkerRequest)
@@ -655,6 +698,7 @@ export type WorkerResponse =
   | ({ kind: "gearAnalysis" } & GearAnalysisWorkerResponse)
   | ({ kind: "setTiles" } & SetTilesWorkerResponse)
   | ({ kind: "rotationDps" } & RotationDpsWorkerResponse)
+  | ({ kind: "profileMetrics" } & ProfileMetricsWorkerResponse)
   | ({ kind: "parseSimulation" } & ParseSimulationWorkerResponse)
   | ({ kind: "parseSimulationProgress" } & ParseSimulationProgressResponse)
   | ({ kind: "graduation" } & GraduationWorkerResponse)
@@ -690,6 +734,9 @@ self.onmessage = (e: MessageEvent<WorkerRequest>) => {
   } else if (req.kind === "rotationDps") {
     const res = computeRotationDps(req)
     ;(self as unknown as Worker).postMessage({ kind: "rotationDps", ...res })
+  } else if (req.kind === "profileMetrics") {
+    const res = computeProfileMetrics(req)
+    ;(self as unknown as Worker).postMessage({ kind: "profileMetrics", ...res })
   } else if (req.kind === "parseSimulationCancel") {
     cancelledReqIds.add(req.reqId)
   } else if (req.kind === "parseSimulation") {
@@ -723,6 +770,7 @@ export {
   computeGearAnalysisRequest,
   computeSetTiles,
   computeRotationDps,
+  computeProfileMetrics,
   computeParseSimulation,
   computeGraduation,
 }
