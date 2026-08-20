@@ -64,6 +64,9 @@ describe("V5 step — v4 → v5 in isolation", () => {
       "V11__setIdsWithoutDisplayName",
       "V12__gearWordIds",
       "V13__gearWordCurrentLabels",
+      "V14__dropUnimplementedArmorSets",
+      "V15__dropSwallowcallSet",
+      "V16__mergeVernalUmbrellaAttunements",
     ])
     expect(result.blob.v).toBe(LATEST_PROFILES_VERSION)
   })

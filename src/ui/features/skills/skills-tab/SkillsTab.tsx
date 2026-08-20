@@ -37,6 +37,7 @@ import { useConfirm } from "../../../components/confirm-dialog/confirmContext"
 import { NumInput, PercentInput } from "../../../components/number-inputs/NumberInputs"
 import { Combobox, type ComboboxOption } from "../../../components/combobox/Combobox"
 import { FPS } from "../../../../engine/timeline"
+import { dotTicksPerWindow, tickSourceSkillId } from "../../../../engine/dot"
 import { formatConditions, statusTooltip } from "../statusText"
 import { TextInput } from "../../../components/text-input/TextInput"
 import styles from "./SkillsTab.module.scss"
@@ -75,7 +76,8 @@ const ATTUNEMENTS = [
   "swordCharged",
   "swordQ",
   "swordSpecial",
-  "umbCharged",
+  "umbFrequentProjectile",
+  "umbLightHeavyVariedCombo",
   "umbQ",
   "umbrellaQ",
 ]
@@ -431,6 +433,20 @@ export function SkillsTab({
     }
   }
 
+  // A tick source authors ONE hit: the shape. How often it lands and how many
+  // times belong to the debuff that ticks from it, so the count is read back
+  // from there rather than restated as extra hits nothing fires.
+  const tickSourceNote = useMemo(() => {
+    if (!draft) return null
+    const ticksFrom = (debuff: Debuff) =>
+      debuff.dot != null && tickSourceSkillId(debuff) === draft.id
+    // A user copy shadows the built-in it was seeded from, so it is asked first.
+    const owner = classDebuffs.find(ticksFrom) ?? builtinDebuffs.find(ticksFrom)
+    if (!owner?.dot) return null
+    const ticks = dotTicksPerWindow(owner)
+    if (ticks <= 1) return null
+    return { ticks, everySec: owner.dot.tickIntervalFrames / FPS, debuffName: owner.name }
+  }, [draft, classDebuffs, builtinDebuffs])
   const effectiveHitIndex = draft && activeHitIndex < draft.hits.length ? activeHitIndex : 0
   const effectiveHit = draft?.hits[effectiveHitIndex]
   const effectiveVariantId =
@@ -563,11 +579,6 @@ export function SkillsTab({
     [draft],
   )
 
-  const scopeSkills = useMemo(
-    () => [...builtinSkills, ...classSkills],
-    [builtinSkills, classSkills],
-  )
-
   const reachableBuffModules = useMemo(() => catalogBuffDefs(classId), [classId])
   const buffNameById = useMemo(
     () => new Map(reachableBuffModules.map((module) => [module.id, module.name] as const)),
@@ -587,13 +598,13 @@ export function SkillsTab({
   )
 
   const appliesRows = useMemo<AppliesRow[]>(
-    () => (draft ? appliesForSkill(draft, classId, scopeSkills) : []),
-    [draft, classId, scopeSkills],
+    () => (draft ? appliesForSkill(draft, classId) : []),
+    [draft, classId],
   )
 
   const receivesRows = useMemo<ReceivesRow[]>(
-    () => (draft ? receivesForSkill(draft, classId, inputs, scopeSkills) : []),
-    [draft, classId, inputs, scopeSkills],
+    () => (draft ? receivesForSkill(draft, classId, engineInputs) : []),
+    [draft, classId, engineInputs],
   )
   const specMechanicRows = useMemo(
     () => receivesRows.filter((row) => row.isSpecMechanic),
@@ -782,6 +793,9 @@ export function SkillsTab({
                     valueClassName={styles.isAffinity}
                     value={preview ? fmtDmg(preview.affinity) : "—"}
                   />
+                  {tickSourceNote && (
+                    <div className={styles.skillsPreviewTicks}>× {tickSourceNote.ticks}</div>
+                  )}
                 </div>
               </div>
 
@@ -1256,11 +1270,6 @@ export function SkillsTab({
                                     {row.effect}
                                   </span>
                                 )}
-                                {row.triggeredBy && (
-                                  <span className={styles.skillsEffectsRowTriggered}>
-                                    ({row.triggeredBy})
-                                  </span>
-                                )}
                               </div>
                             ))}
                             {inactiveReceiveRows.length > 0 && (
@@ -1289,11 +1298,6 @@ export function SkillsTab({
                                       {row.requires && (
                                         <span className={styles.skillsEffectsRowRequires}>
                                           ({t("requires")} {row.requires})
-                                        </span>
-                                      )}
-                                      {row.triggeredBy && (
-                                        <span className={styles.skillsEffectsRowTriggered}>
-                                          ({row.triggeredBy})
                                         </span>
                                       )}
                                     </div>

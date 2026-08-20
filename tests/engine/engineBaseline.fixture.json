@@ -1,7 +1,7 @@
 {
   "anchor": {
-    "dps": 74643.538626,
-    "totalDamage": 4300711.883848,
+    "dps": 75079.8386,
+    "totalDamage": 4325850.034013,
     "rotationDuration": 57.616667,
     "warnings": [],
     "perSkill": [
@@ -154,7 +154,7 @@
         "breakdownName": "Flute Chanting a Thousand Waves",
         "type": "sustain",
         "count": 5,
-        "expectedDamage": 88020.035106,
+        "expectedDamage": 93159.955638,
         "castCount": 0
       },
       {
@@ -170,7 +170,7 @@
         "breakdownName": "Smolder",
         "type": "sustain",
         "count": 110,
-        "expectedDamage": 380923.32896,
+        "expectedDamage": 400921.558592,
         "castCount": 0
       },
       {
@@ -187,11 +187,11 @@
       "buffWindows": 129,
       "casts": 69
     },
-    "digest": "6dbfe5e3c9e498e7f3d878d3cc2d7d8994273affc918badf0d26442a861aa72c"
+    "digest": "87cb4b1983e43ab32eba1c57292754a926ef07cff3c011362d14afabc616b939"
   },
   "anchor:noAttunement": {
-    "dps": 67046.997624,
-    "totalDamage": 3863024.513125,
+    "dps": 67483.297598,
+    "totalDamage": 3888162.66329,
     "rotationDuration": 57.616667,
     "warnings": [],
     "perSkill": [
@@ -344,7 +344,7 @@
         "breakdownName": "Flute Chanting a Thousand Waves",
         "type": "sustain",
         "count": 5,
-        "expectedDamage": 88020.035106,
+        "expectedDamage": 93159.955638,
         "castCount": 0
       },
       {
@@ -360,7 +360,7 @@
         "breakdownName": "Smolder",
         "type": "sustain",
         "count": 110,
-        "expectedDamage": 380923.32896,
+        "expectedDamage": 400921.558592,
         "castCount": 0
       },
       {
@@ -377,11 +377,11 @@
       "buffWindows": 129,
       "casts": 69
     },
-    "digest": "fefc55fecb095e9ac8c6934f128a832b59b9dc48e444256f28ba72398be57bb8"
+    "digest": "d44bc8beaac786e0d6cc6a07eb327e8b0867c6660cd2774d40f5ffba1ef3d4d2"
   },
   "anchor:dummyOff": {
-    "dps": 79804.44908,
-    "totalDamage": 4598066.341142,
+    "dps": 80270.372829,
+    "totalDamage": 4624911.314521,
     "rotationDuration": 57.616667,
     "warnings": [],
     "perSkill": [
@@ -534,7 +534,7 @@
         "breakdownName": "Flute Chanting a Thousand Waves",
         "type": "sustain",
         "count": 5,
-        "expectedDamage": 94809.174044,
+        "expectedDamage": 100347.362362,
         "castCount": 0
       },
       {
@@ -550,7 +550,7 @@
         "breakdownName": "Smolder",
         "type": "sustain",
         "count": 110,
-        "expectedDamage": 405836.011918,
+        "expectedDamage": 427142.796978,
         "castCount": 0
       },
       {
@@ -567,11 +567,11 @@
       "buffWindows": 129,
       "casts": 69
     },
-    "digest": "638ad1e3851683dc5d859a9c62ec72f8cb76f70e9ead828cd43112f9a0a58ea4"
+    "digest": "edd693e0c9f4ea167bb85e56eae4b0be54d7af148caa77b46350a3c35edecff6"
   },
   "anchor:noQiBreak": {
-    "dps": 67751.670218,
-    "totalDamage": 3903625.399037,
+    "dps": 68185.208165,
+    "totalDamage": 3928604.410437,
     "rotationDuration": 57.616667,
     "warnings": [],
     "perSkill": [
@@ -724,7 +724,7 @@
         "breakdownName": "Flute Chanting a Thousand Waves",
         "type": "sustain",
         "count": 5,
-        "expectedDamage": 88020.035106,
+        "expectedDamage": 93159.955638,
         "castCount": 0
       },
       {
@@ -740,7 +740,7 @@
         "breakdownName": "Smolder",
         "type": "sustain",
         "count": 110,
-        "expectedDamage": 377911.166403,
+        "expectedDamage": 397750.25727,
         "castCount": 0
       },
       {
@@ -757,11 +757,11 @@
       "buffWindows": 129,
       "casts": 69
     },
-    "digest": "4e22ef6aba606226673146d2fe4fe8d1b3d1daa37a8c73a5d9cbacbb8b88417f"
+    "digest": "2b48581d37d149e141c70805f086f82889396c34b205738c17ac2d66d5026a44"
   },
   "anchor:healerBuff": {
-    "dps": 81923.66873,
-    "totalDamage": 4720168.713319,
+    "dps": 82400.848085,
+    "totalDamage": 4747662.197152,
     "rotationDuration": 57.616667,
     "warnings": [],
     "perSkill": [
@@ -914,7 +914,7 @@
         "breakdownName": "Flute Chanting a Thousand Waves",
         "type": "sustain",
         "count": 5,
-        "expectedDamage": 97072.220357,
+        "expectedDamage": 102743.164604,
         "castCount": 0
       },
       {
@@ -930,7 +930,7 @@
         "breakdownName": "Smolder",
         "type": "sustain",
         "count": 110,
-        "expectedDamage": 415646.320849,
+        "expectedDamage": 437468.860435,
         "castCount": 0
       },
       {
@@ -947,11 +947,11 @@
       "buffWindows": 129,
       "casts": 69
     },
-    "digest": "09544c6ac54bf24979565d7148a8f2fd51a810a517f88ebc57cf53aa4e4a86dd"
+    "digest": "36abf3009967b7ceaa837fc4531659d5c6175889d81a5fa97b2ccaf048e20f43"
   },
   "anchor:revelryScript": {
-    "dps": 84965.359533,
-    "totalDamage": 4895420.798435,
+    "dps": 85460.907059,
+    "totalDamage": 4923972.595029,
     "rotationDuration": 57.616667,
     "warnings": [],
     "perSkill": [
@@ -1104,7 +1104,7 @@
         "breakdownName": "Flute Chanting a Thousand Waves",
         "type": "sustain",
         "count": 5,
-        "expectedDamage": 101598.312982,
+        "expectedDamage": 107534.769086,
         "castCount": 0
       },
       {
@@ -1120,7 +1120,7 @@
         "breakdownName": "Smolder",
         "type": "sustain",
         "count": 110,
-        "expectedDamage": 430748.694876,
+        "expectedDamage": 453364.035365,
         "castCount": 0
       },
       {
@@ -1137,11 +1137,11 @@
       "buffWindows": 129,
       "casts": 69
     },
-    "digest": "3d395aa3beb061013fd2e2a7c5fe8980823ad66a7ede2bab16f295d15ba34831"
+    "digest": "0cd0e959186cbbe2d42d80f280879554ccd58c3f11992faebd7fe4df45de6e33"
   },
   "anchor:breakExtension": {
-    "dps": 75752.103238,
-    "totalDamage": 4364583.681588,
+    "dps": 76193.374897,
+    "totalDamage": 4390008.283655,
     "rotationDuration": 57.616667,
     "warnings": [],
     "perSkill": [
@@ -1294,7 +1294,7 @@
         "breakdownName": "Flute Chanting a Thousand Waves",
         "type": "sustain",
         "count": 5,
-        "expectedDamage": 88020.035106,
+        "expectedDamage": 93159.955638,
         "castCount": 0
       },
       {
@@ -1310,7 +1310,7 @@
         "breakdownName": "Smolder",
         "type": "sustain",
         "count": 110,
-        "expectedDamage": 386399.078986,
+        "expectedDamage": 406683.760521,
         "castCount": 0
       },
       {
@@ -1327,11 +1327,11 @@
       "buffWindows": 129,
       "casts": 69
     },
-    "digest": "2364c13d4213b3c31b53c97bdca299b02ab94ccc163eb1429f4b7d798ad0465c"
+    "digest": "93c5fe257ed8d11b2695365e6987fd42b740cf0c68e66728e59d61311a4bf1c7"
   },
   "anchor:swordHorizonT1": {
-    "dps": 52571.939125,
-    "totalDamage": 3029019.892584,
+    "dps": 52729.073713,
+    "totalDamage": 3038073.463758,
     "rotationDuration": 57.616667,
     "warnings": [],
     "perSkill": [
@@ -1484,7 +1484,7 @@
         "breakdownName": "Flute Chanting a Thousand Waves",
         "type": "sustain",
         "count": 5,
-        "expectedDamage": 88020.035106,
+        "expectedDamage": 93159.955638,
         "castCount": 0
       },
       {
@@ -1500,7 +1500,7 @@
         "breakdownName": "Smolder",
         "type": "sustain",
         "count": 23,
-        "expectedDamage": 74119.807562,
+        "expectedDamage": 78033.458204,
         "castCount": 0
       },
       {
@@ -1517,11 +1517,11 @@
       "buffWindows": 126,
       "casts": 69
     },
-    "digest": "f2df6c255563cff480c754b035b20e562869d7d53c4b4e5fce096ba43f487cd7"
+    "digest": "1dd425e847fc32e56f5b27d755066c45a117858f9afad95a8ddcc1fbe116eeca"
   },
   "anchor:noSwordHorizon": {
-    "dps": 45771.374548,
-    "totalDamage": 2637194.030235,
+    "dps": 45927.038894,
+    "totalDamage": 2646162.890953,
     "rotationDuration": 57.616667,
     "warnings": [],
     "perSkill": [
@@ -1674,7 +1674,7 @@
         "breakdownName": "Flute Chanting a Thousand Waves",
         "type": "sustain",
         "count": 5,
-        "expectedDamage": 84797.196285,
+        "expectedDamage": 89889.360664,
         "castCount": 0
       },
       {
@@ -1690,7 +1690,7 @@
         "breakdownName": "Smolder",
         "type": "sustain",
         "count": 23,
-        "expectedDamage": 71392.223681,
+        "expectedDamage": 75268.92002,
         "castCount": 0
       },
       {
@@ -1707,11 +1707,11 @@
       "buffWindows": 122,
       "casts": 69
     },
-    "digest": "d0194a2337bb00c4a5662a99ce983ef08c42717a192fb1ebc61b2f1916d22de4"
+    "digest": "d726c83388688ca189da4ec6cad6e3c66a575b7d97bd3569e89b8c45bf3d28d6"
   },
   "anchor:noInsightfulStrike": {
-    "dps": 63817.598977,
-    "totalDamage": 3676957.327704,
+    "dps": 64204.815029,
+    "totalDamage": 3699267.425947,
     "rotationDuration": 57.616667,
     "warnings": [],
     "perSkill": [
@@ -1864,7 +1864,7 @@
         "breakdownName": "Flute Chanting a Thousand Waves",
         "type": "sustain",
         "count": 5,
-        "expectedDamage": 76002.777679,
+        "expectedDamage": 80560.95005,
         "castCount": 0
       },
       {
@@ -1880,7 +1880,7 @@
         "breakdownName": "Smolder",
         "type": "sustain",
         "count": 110,
-        "expectedDamage": 327849.141789,
+        "expectedDamage": 345601.06766,
         "castCount": 0
       },
       {
@@ -1897,11 +1897,11 @@
       "buffWindows": 129,
       "casts": 69
     },
-    "digest": "e1f8f1f0bfbb8b5c7d33048f1150dae3781c2290553e0524100bdf86c960382e"
+    "digest": "9eeee429fd5a4b6addb02bac8d7e054c7083c943dbaf37fe49ce35fd06d84b1c"
   },
   "anchor:noMoraleChant": {
-    "dps": 68353.047872,
-    "totalDamage": 3938274.774901,
+    "dps": 68758.096357,
+    "totalDamage": 3961612.318448,
     "rotationDuration": 57.616667,
     "warnings": [],
     "perSkill": [
@@ -2054,7 +2054,7 @@
         "breakdownName": "Flute Chanting a Thousand Waves",
         "type": "sustain",
         "count": 5,
-        "expectedDamage": 82036.310026,
+        "expectedDamage": 86852.920855,
         "castCount": 0
       },
       {
@@ -2070,7 +2070,7 @@
         "breakdownName": "Smolder",
         "type": "sustain",
         "count": 110,
-        "expectedDamage": 351339.453249,
+        "expectedDamage": 369860.385967,
         "castCount": 0
       }
     ],
@@ -2079,11 +2079,11 @@
       "buffWindows": 129,
       "casts": 69
     },
-    "digest": "bae49eb67b2bf4c572805c1284fdda5a68a5f800391385127861e80654410981"
+    "digest": "922981bcef65050dd6c1b2ff22108a21c784d35366dcf78f451b019d453bcbfb"
   },
   "anchor:spearHeavyNoWolfchasersArt": {
-    "dps": 43279.778252,
-    "totalDamage": 2629246.52878,
+    "dps": 43616.940317,
+    "totalDamage": 2649729.124251,
     "rotationDuration": 60.75,
     "warnings": [],
     "perSkill": [
@@ -2244,7 +2244,7 @@
         "breakdownName": "Flute Chanting a Thousand Waves",
         "type": "sustain",
         "count": 10,
-        "expectedDamage": 120305.792523,
+        "expectedDamage": 127407.230558,
         "castCount": 0
       },
       {
@@ -2260,7 +2260,7 @@
         "breakdownName": "Smolder",
         "type": "sustain",
         "count": 114,
-        "expectedDamage": 252155.228689,
+        "expectedDamage": 265536.386124,
         "castCount": 0
       },
       {
@@ -2277,11 +2277,11 @@
       "buffWindows": 145,
       "casts": 80
     },
-    "digest": "3ade372825cf49b00f473fc5ce8eb7329ac719e02914f3dec7eb82c22ec536ae"
+    "digest": "e38ff38080360e02d57bd174590be32d2d907159bf69233c4235709a87dcc446"
   },
   "anchor:bitterSeasonT6": {
-    "dps": 54275.937254,
-    "totalDamage": 3127198.584794,
+    "dps": 54566.248754,
+    "totalDamage": 3143925.365722,
     "rotationDuration": 57.616667,
     "warnings": [],
     "perSkill": [
@@ -2434,7 +2434,7 @@
         "breakdownName": "Flute Chanting a Thousand Waves",
         "type": "sustain",
         "count": 5,
-        "expectedDamage": 58102.254129,
+        "expectedDamage": 61544.187885,
         "castCount": 0
       },
       {
@@ -2450,7 +2450,7 @@
         "breakdownName": "Smolder",
         "type": "sustain",
         "count": 110,
-        "expectedDamage": 250352.814471,
+        "expectedDamage": 263637.661643,
         "castCount": 0
       },
       {
@@ -2475,11 +2475,11 @@
       "buffWindows": 130,
       "casts": 69
     },
-    "digest": "4b213fc9ce2ff4679f330e178f62ec5dec9c1a9d917edc82a17fe3cd797f1028"
+    "digest": "38cb34756b2ce1eed6446ce60e8d8995077d7fb5a8150e7864a0d11d23f40e6a"
   },
   "anchor:bitterSeasonT4": {
-    "dps": 53262.65868,
-    "totalDamage": 3068816.850949,
+    "dps": 53545.889412,
+    "totalDamage": 3085135.661611,
     "rotationDuration": 57.616667,
     "warnings": [],
     "perSkill": [
@@ -2632,7 +2632,7 @@
         "breakdownName": "Flute Chanting a Thousand Waves",
         "type": "sustain",
         "count": 5,
-        "expectedDamage": 56921.663273,
+        "expectedDamage": 60279.647425,
         "castCount": 0
       },
       {
@@ -2648,7 +2648,7 @@
         "breakdownName": "Smolder",
         "type": "sustain",
         "count": 110,
-        "expectedDamage": 245248.768863,
+        "expectedDamage": 258209.595373,
         "castCount": 0
       },
       {
@@ -2673,11 +2673,11 @@
       "buffWindows": 130,
       "casts": 69
     },
-    "digest": "6cb32e46fa1b93ca0cc718d2ea668e4e753fd5c249b95ad47c65617c6de31df5"
+    "digest": "843a3fc0af03b59066b1c8809fe98d2f36e994022ac9eb2e95f15fcff013c4ad"
   },
   "anchor:bitterSeasonT1": {
-    "dps": 52807.72982,
-    "totalDamage": 3042605.366466,
+    "dps": 53089.600414,
+    "totalDamage": 3058845.810506,
     "rotationDuration": 57.616667,
     "warnings": [],
     "perSkill": [
@@ -2830,7 +2830,7 @@
         "breakdownName": "Flute Chanting a Thousand Waves",
         "type": "sustain",
         "count": 5,
-        "expectedDamage": 56234.186254,
+        "expectedDamage": 59575.909907,
         "castCount": 0
       },
       {
@@ -2846,7 +2846,7 @@
         "breakdownName": "Smolder",
         "type": "sustain",
         "count": 110,
-        "expectedDamage": 242359.919458,
+        "expectedDamage": 255258.639845,
         "castCount": 0
       },
       {
@@ -2871,11 +2871,11 @@
       "buffWindows": 130,
       "casts": 69
     },
-    "digest": "556f39831de58249244798ffd5752c5fed3452d2cace979ec0358ef5e5dbc229"
+    "digest": "5301595535b4c8081cf713ab24df9e379e23f4001db623cc6740763af3b24f15"
   },
   "anchor:noSet": {
-    "dps": 68205.509152,
-    "totalDamage": 3929774.085626,
+    "dps": 68638.263236,
+    "totalDamage": 3954707.933423,
     "rotationDuration": 57.616667,
     "warnings": [],
     "perSkill": [
@@ -3028,7 +3028,7 @@
         "breakdownName": "Flute Chanting a Thousand Waves",
         "type": "sustain",
         "count": 5,
-        "expectedDamage": 79777.856542,
+        "expectedDamage": 84873.77829,
         "castCount": 0
       },
       {
@@ -3044,7 +3044,7 @@
         "breakdownName": "Smolder",
         "type": "sustain",
         "count": 110,
-        "expectedDamage": 343317.321813,
+        "expectedDamage": 363155.247862,
         "castCount": 0
       },
       {
@@ -3061,11 +3061,11 @@
       "buffWindows": 129,
       "casts": 69
     },
-    "digest": "4f28a671cf123cb3a097395a22a09b2fb52a4d6c3a4ecaa6648392bd7f72175e"
+    "digest": "ab7fb62a60e107b22efccd95d99ef005b6ace34d906912a134a9f03bee992d64"
   },
   "anchor:set-Jadeware": {
-    "dps": 70487.966311,
-    "totalDamage": 4061281.658956,
+    "dps": 70926.291257,
+    "totalDamage": 4086536.48128,
     "rotationDuration": 57.616667,
     "warnings": [],
     "perSkill": [
@@ -3218,7 +3218,7 @@
         "breakdownName": "Flute Chanting a Thousand Waves",
         "type": "sustain",
         "count": 5,
-        "expectedDamage": 81136.296778,
+        "expectedDamage": 86232.218526,
         "castCount": 0
       },
       {
@@ -3234,7 +3234,7 @@
         "breakdownName": "Smolder",
         "type": "sustain",
         "count": 110,
-        "expectedDamage": 358834.142014,
+        "expectedDamage": 378993.04259,
         "castCount": 0
       },
       {
@@ -3251,11 +3251,11 @@
       "buffWindows": 129,
       "casts": 69
     },
-    "digest": "5878c6c867df11532757ca5e50adaac3926b85cd4240d9f6b5d469971cd76cb6"
+    "digest": "3090bacc11bc0dc56ad124900cb8d46d97115a1ddb43843f23b41d681e863856"
   },
   "anchor:set-Mistwillow": {
-    "dps": 68205.509152,
-    "totalDamage": 3929774.085626,
+    "dps": 69245.948552,
+    "totalDamage": 3989720.735725,
     "rotationDuration": 57.616667,
     "warnings": [],
     "perSkill": [
@@ -3280,7 +3280,7 @@
         "breakdownName": "Second Track Slash",
         "type": "weapon",
         "count": 4,
-        "expectedDamage": 9979.344846,
+        "expectedDamage": 10116.451209,
         "castCount": 1
       },
       {
@@ -3288,7 +3288,7 @@
         "breakdownName": "Dragon's Breath",
         "type": "mystic",
         "count": 3,
-        "expectedDamage": 32826.66463,
+        "expectedDamage": 33298.948078,
         "castCount": 1
       },
       {
@@ -3296,7 +3296,7 @@
         "breakdownName": "Sober Sorrow",
         "type": "weapon",
         "count": 5,
-        "expectedDamage": 12846.731972,
+        "expectedDamage": 13021.881304,
         "castCount": 1
       },
       {
@@ -3312,7 +3312,7 @@
         "breakdownName": "Inner Balance Strike III",
         "type": "weapon",
         "count": 27,
-        "expectedDamage": 67255.67754,
+        "expectedDamage": 68107.206874,
         "castCount": 9
       },
       {
@@ -3320,7 +3320,7 @@
         "breakdownName": "Blood Burst",
         "type": "sustain",
         "count": 33,
-        "expectedDamage": 1969596.233966,
+        "expectedDamage": 1987666.807716,
         "castCount": 0
       },
       {
@@ -3328,7 +3328,7 @@
         "breakdownName": "Crisscross - Inner Balance III",
         "type": "weapon",
         "count": 9,
-        "expectedDamage": 56252.969918,
+        "expectedDamage": 57003.465135,
         "castCount": 9
       },
       {
@@ -3336,7 +3336,7 @@
         "breakdownName": "Sweep All",
         "type": "weapon",
         "count": 4,
-        "expectedDamage": 45420.901895,
+        "expectedDamage": 45990.858386,
         "castCount": 4
       },
       {
@@ -3344,7 +3344,7 @@
         "breakdownName": "Inner Balance Strike III",
         "type": "weapon",
         "count": 16,
-        "expectedDamage": 45439.678988,
+        "expectedDamage": 46013.089678,
         "castCount": 4
       },
       {
@@ -3352,7 +3352,7 @@
         "breakdownName": "Second Track Slash",
         "type": "weapon",
         "count": 9,
-        "expectedDamage": 32635.754701,
+        "expectedDamage": 33043.496621,
         "castCount": 3
       },
       {
@@ -3360,7 +3360,7 @@
         "breakdownName": "Crisscross - Second Track",
         "type": "weapon",
         "count": 3,
-        "expectedDamage": 12659.322206,
+        "expectedDamage": 12827.646968,
         "castCount": 3
       },
       {
@@ -3368,7 +3368,7 @@
         "breakdownName": "Inner Track Slash",
         "type": "weapon",
         "count": 4,
-        "expectedDamage": 25776.112096,
+        "expectedDamage": 26098.017712,
         "castCount": 4
       },
       {
@@ -3376,7 +3376,7 @@
         "breakdownName": "Inner Track Slash",
         "type": "weapon",
         "count": 16,
-        "expectedDamage": 103108.999542,
+        "expectedDamage": 104396.603152,
         "castCount": 4
       },
       {
@@ -3384,7 +3384,7 @@
         "breakdownName": "Crisscross - Inner Track",
         "type": "weapon",
         "count": 8,
-        "expectedDamage": 51555.865319,
+        "expectedDamage": 52199.661468,
         "castCount": 4
       },
       {
@@ -3392,7 +3392,7 @@
         "breakdownName": "Sober Sorrow",
         "type": "weapon",
         "count": 18,
-        "expectedDamage": 72208.908054,
+        "expectedDamage": 73111.921128,
         "castCount": 3
       },
       {
@@ -3408,7 +3408,7 @@
         "breakdownName": "Flute Chanting a Thousand Waves",
         "type": "sustain",
         "count": 5,
-        "expectedDamage": 79777.856542,
+        "expectedDamage": 86015.98429,
         "castCount": 0
       },
       {
@@ -3416,7 +3416,7 @@
         "breakdownName": "Bleeding",
         "type": "sustain",
         "count": 57,
-        "expectedDamage": 251346.36004,
+        "expectedDamage": 254475.177184,
         "castCount": 0
       },
       {
@@ -3424,7 +3424,7 @@
         "breakdownName": "Smolder",
         "type": "sustain",
         "count": 110,
-        "expectedDamage": 343317.321813,
+        "expectedDamage": 367958.168561,
         "castCount": 0
       },
       {
@@ -3432,7 +3432,7 @@
         "breakdownName": "Morale Chant",
         "type": "mindMethod",
         "count": 5,
-        "expectedDamage": 44410.381566,
+        "expectedDamage": 45016.350268,
         "castCount": 0
       }
     ],
@@ -3441,11 +3441,11 @@
       "buffWindows": 129,
       "casts": 69
     },
-    "digest": "0e33e5e5716c43b9026844e41bc82c7e05c22c365057b5ca52b3e23b290c9e22"
+    "digest": "a14ad5cc306f57b04404e0005dec673b08862204b9e24d58303d109513e00282"
   },
-  "anchor:set-StarsAlign": {
-    "dps": 68205.509152,
-    "totalDamage": 3929774.085626,
+  "anchor:set-Rainwhisper": {
+    "dps": 70235.631194,
+    "totalDamage": 4046742.950646,
     "rotationDuration": 57.616667,
     "warnings": [],
     "perSkill": [
@@ -3470,7 +3470,7 @@
         "breakdownName": "Second Track Slash",
         "type": "weapon",
         "count": 4,
-        "expectedDamage": 9979.344846,
+        "expectedDamage": 10296.210641,
         "castCount": 1
       },
       {
@@ -3478,7 +3478,7 @@
         "breakdownName": "Dragon's Breath",
         "type": "mystic",
         "count": 3,
-        "expectedDamage": 32826.66463,
+        "expectedDamage": 33881.220959,
         "castCount": 1
       },
       {
@@ -3486,7 +3486,7 @@
         "breakdownName": "Sober Sorrow",
         "type": "weapon",
         "count": 5,
-        "expectedDamage": 12846.731972,
+        "expectedDamage": 13249.827124,
         "castCount": 1
       },
       {
@@ -3502,7 +3502,7 @@
         "breakdownName": "Inner Balance Strike III",
         "type": "weapon",
         "count": 27,
-        "expectedDamage": 67255.67754,
+        "expectedDamage": 69245.418186,
         "castCount": 9
       },
       {
@@ -3510,7 +3510,7 @@
         "breakdownName": "Blood Burst",
         "type": "sustain",
         "count": 33,
-        "expectedDamage": 1969596.233966,
+        "expectedDamage": 2010836.563376,
         "castCount": 0
       },
       {
@@ -3518,7 +3518,7 @@
         "breakdownName": "Crisscross - Inner Balance III",
         "type": "weapon",
         "count": 9,
-        "expectedDamage": 56252.969918,
+        "expectedDamage": 57936.527702,
         "castCount": 9
       },
       {
@@ -3526,7 +3526,7 @@
         "breakdownName": "Sweep All",
         "type": "weapon",
         "count": 4,
-        "expectedDamage": 45420.901895,
+        "expectedDamage": 46760.984355,
         "castCount": 4
       },
       {
@@ -3534,7 +3534,7 @@
         "breakdownName": "Inner Balance Strike III",
         "type": "weapon",
         "count": 16,
-        "expectedDamage": 45439.678988,
+        "expectedDamage": 46781.310322,
         "castCount": 4
       },
       {
@@ -3542,7 +3542,7 @@
         "breakdownName": "Second Track Slash",
         "type": "weapon",
         "count": 9,
-        "expectedDamage": 32635.754701,
+        "expectedDamage": 33596.668298,
         "castCount": 3
       },
       {
@@ -3550,7 +3550,7 @@
         "breakdownName": "Crisscross - Second Track",
         "type": "weapon",
         "count": 3,
-        "expectedDamage": 12659.322206,
+        "expectedDamage": 13037.445902,
         "castCount": 3
       },
       {
@@ -3558,7 +3558,7 @@
         "breakdownName": "Inner Track Slash",
         "type": "weapon",
         "count": 4,
-        "expectedDamage": 25776.112096,
+        "expectedDamage": 26534.75849,
         "castCount": 4
       },
       {
@@ -3566,7 +3566,7 @@
         "breakdownName": "Inner Track Slash",
         "type": "weapon",
         "count": 16,
-        "expectedDamage": 103108.999542,
+        "expectedDamage": 106143.576224,
         "castCount": 4
       },
       {
@@ -3574,7 +3574,7 @@
         "breakdownName": "Crisscross - Inner Track",
         "type": "weapon",
         "count": 8,
-        "expectedDamage": 51555.865319,
+        "expectedDamage": 53073.150991,
         "castCount": 4
       },
       {
@@ -3582,7 +3582,7 @@
         "breakdownName": "Sober Sorrow",
         "type": "weapon",
         "count": 18,
-        "expectedDamage": 72208.908054,
+        "expectedDamage": 74334.68063,
         "castCount": 3
       },
       {
@@ -3590,7 +3590,7 @@
         "breakdownName": "Dragon Head - Plus",
         "type": "mystic",
         "count": 1,
-        "expectedDamage": 673358.999992,
+        "expectedDamage": 685452.006295,
         "castCount": 1
       },
       {
@@ -3598,7 +3598,7 @@
         "breakdownName": "Flute Chanting a Thousand Waves",
         "type": "sustain",
         "count": 5,
-        "expectedDamage": 79777.856542,
+        "expectedDamage": 87450.980953,
         "castCount": 0
       },
       {
@@ -3606,7 +3606,7 @@
         "breakdownName": "Bleeding",
         "type": "sustain",
         "count": 57,
-        "expectedDamage": 251346.36004,
+        "expectedDamage": 258374.603939,
         "castCount": 0
       },
       {
@@ -3614,7 +3614,7 @@
         "breakdownName": "Smolder",
         "type": "sustain",
         "count": 110,
-        "expectedDamage": 343317.321813,
+        "expectedDamage": 374010.372578,
         "castCount": 0
       },
       {
@@ -3622,7 +3622,7 @@
         "breakdownName": "Morale Chant",
         "type": "mindMethod",
         "count": 5,
-        "expectedDamage": 44410.381566,
+        "expectedDamage": 45746.643681,
         "castCount": 0
       }
     ],
@@ -3631,11 +3631,11 @@
       "buffWindows": 129,
       "casts": 69
     },
-    "digest": "4f28a671cf123cb3a097395a22a09b2fb52a4d6c3a4ecaa6648392bd7f72175e"
+    "digest": "d29c1268dcefec2dcf657a3aeb4a89abd81378ef2c347bfa0e9e21852d8b6a22"
   },
   "anchor:set-ShatteredRidge": {
-    "dps": 70138.95337,
-    "totalDamage": 4041172.696668,
+    "dps": 70581.502547,
+    "totalDamage": 4066670.905109,
     "rotationDuration": 57.616667,
     "warnings": [],
     "perSkill": [
@@ -3788,7 +3788,7 @@
         "breakdownName": "Flute Chanting a Thousand Waves",
         "type": "sustain",
         "count": 5,
-        "expectedDamage": 82428.880603,
+        "expectedDamage": 87656.459088,
         "castCount": 0
       },
       {
@@ -3804,7 +3804,7 @@
         "breakdownName": "Smolder",
         "type": "sustain",
         "count": 110,
-        "expectedDamage": 353289.709962,
+        "expectedDamage": 373560.339918,
         "castCount": 0
       },
       {
@@ -3821,391 +3821,11 @@
       "buffWindows": 129,
       "casts": 69
     },
-    "digest": "c51f02aa551ea23e311cec9c0e7c536312ef01dc55d110874f695e481e4b88fe"
-  },
-  "anchor:set-Swallowcall": {
-    "dps": 68205.509152,
-    "totalDamage": 3929774.085626,
-    "rotationDuration": 57.616667,
-    "warnings": [],
-    "perSkill": [
-      {
-        "name": "DrunkenPoet Prepull",
-        "breakdownName": "DrunkenPoet Prepull",
-        "type": "mystic",
-        "count": 1,
-        "expectedDamage": 0,
-        "castCount": 1
-      },
-      {
-        "name": "Flute of the Tides Prepull",
-        "breakdownName": "Flute Chanting a Thousand Waves",
-        "type": "mystic",
-        "count": 1,
-        "expectedDamage": 0,
-        "castCount": 1
-      },
-      {
-        "name": "Sword Charge Stage 1, 4-Hit",
-        "breakdownName": "Second Track Slash",
-        "type": "weapon",
-        "count": 4,
-        "expectedDamage": 9979.344846,
-        "castCount": 1
-      },
-      {
-        "name": "Dragon's Breath: Smolder 2 Hits",
-        "breakdownName": "Dragon's Breath",
-        "type": "mystic",
-        "count": 3,
-        "expectedDamage": 32826.66463,
-        "castCount": 1
-      },
-      {
-        "name": "SpearQ 5-Hit Cancel",
-        "breakdownName": "Sober Sorrow",
-        "type": "weapon",
-        "count": 5,
-        "expectedDamage": 12846.731972,
-        "castCount": 1
-      },
-      {
-        "name": "Deflect Cancel",
-        "breakdownName": "Deflect Cancel",
-        "type": "weapon",
-        "count": 16,
-        "expectedDamage": 0,
-        "castCount": 16
-      },
-      {
-        "name": "SwordSpecial 3-Hit",
-        "breakdownName": "Inner Balance Strike III",
-        "type": "weapon",
-        "count": 27,
-        "expectedDamage": 67255.67754,
-        "castCount": 9
-      },
-      {
-        "name": "Blood Burst",
-        "breakdownName": "Blood Burst",
-        "type": "sustain",
-        "count": 33,
-        "expectedDamage": 1969596.233966,
-        "castCount": 0
-      },
-      {
-        "name": "Crosswind Blade",
-        "breakdownName": "Crisscross - Inner Balance III",
-        "type": "weapon",
-        "count": 9,
-        "expectedDamage": 56252.969918,
-        "castCount": 9
-      },
-      {
-        "name": "Spear Special (1 Hit Cancel)",
-        "breakdownName": "Sweep All",
-        "type": "weapon",
-        "count": 4,
-        "expectedDamage": 45420.901895,
-        "castCount": 4
-      },
-      {
-        "name": "SwordSpecial 4-Hit",
-        "breakdownName": "Inner Balance Strike III",
-        "type": "weapon",
-        "count": 16,
-        "expectedDamage": 45439.678988,
-        "castCount": 4
-      },
-      {
-        "name": "Sword Charge Stage 1, 3-Hit",
-        "breakdownName": "Second Track Slash",
-        "type": "weapon",
-        "count": 9,
-        "expectedDamage": 32635.754701,
-        "castCount": 3
-      },
-      {
-        "name": "Sword R Charge - Follow Up 1-Hit[cancel]",
-        "breakdownName": "Crisscross - Second Track",
-        "type": "weapon",
-        "count": 3,
-        "expectedDamage": 12659.322206,
-        "castCount": 3
-      },
-      {
-        "name": "Sword Martial Q",
-        "breakdownName": "Inner Track Slash",
-        "type": "weapon",
-        "count": 4,
-        "expectedDamage": 25776.112096,
-        "castCount": 4
-      },
-      {
-        "name": "Sword Martial QQ",
-        "breakdownName": "Inner Track Slash",
-        "type": "weapon",
-        "count": 16,
-        "expectedDamage": 103108.999542,
-        "castCount": 4
-      },
-      {
-        "name": "Sword Martial QQQ",
-        "breakdownName": "Crisscross - Inner Track",
-        "type": "weapon",
-        "count": 8,
-        "expectedDamage": 51555.865319,
-        "castCount": 4
-      },
-      {
-        "name": "SpearQ",
-        "breakdownName": "Sober Sorrow",
-        "type": "weapon",
-        "count": 18,
-        "expectedDamage": 72208.908054,
-        "castCount": 3
-      },
-      {
-        "name": "Dragon Head - Plus",
-        "breakdownName": "Dragon Head - Plus",
-        "type": "mystic",
-        "count": 1,
-        "expectedDamage": 673358.999992,
-        "castCount": 1
-      },
-      {
-        "name": "Flute Ripple (DoT)",
-        "breakdownName": "Flute Chanting a Thousand Waves",
-        "type": "sustain",
-        "count": 5,
-        "expectedDamage": 79777.856542,
-        "castCount": 0
-      },
-      {
-        "name": "Bleeding (DoT)",
-        "breakdownName": "Bleeding",
-        "type": "sustain",
-        "count": 57,
-        "expectedDamage": 251346.36004,
-        "castCount": 0
-      },
-      {
-        "name": "Smolder (DoT)",
-        "breakdownName": "Smolder",
-        "type": "sustain",
-        "count": 110,
-        "expectedDamage": 343317.321813,
-        "castCount": 0
-      },
-      {
-        "name": "Yi River",
-        "breakdownName": "Morale Chant",
-        "type": "mindMethod",
-        "count": 5,
-        "expectedDamage": 44410.381566,
-        "castCount": 0
-      }
-    ],
-    "counts": {
-      "timeline": 355,
-      "buffWindows": 129,
-      "casts": 69
-    },
-    "digest": "4f28a671cf123cb3a097395a22a09b2fb52a4d6c3a4ecaa6648392bd7f72175e"
-  },
-  "anchor:set-SwayingHeights": {
-    "dps": 69384.612765,
-    "totalDamage": 3997710.105503,
-    "rotationDuration": 57.616667,
-    "warnings": [],
-    "perSkill": [
-      {
-        "name": "DrunkenPoet Prepull",
-        "breakdownName": "DrunkenPoet Prepull",
-        "type": "mystic",
-        "count": 1,
-        "expectedDamage": 0,
-        "castCount": 1
-      },
-      {
-        "name": "Flute of the Tides Prepull",
-        "breakdownName": "Flute Chanting a Thousand Waves",
-        "type": "mystic",
-        "count": 1,
-        "expectedDamage": 0,
-        "castCount": 1
-      },
-      {
-        "name": "Sword Charge Stage 1, 4-Hit",
-        "breakdownName": "Second Track Slash",
-        "type": "weapon",
-        "count": 4,
-        "expectedDamage": 10278.223645,
-        "castCount": 1
-      },
-      {
-        "name": "Dragon's Breath: Smolder 2 Hits",
-        "breakdownName": "Dragon's Breath",
-        "type": "mystic",
-        "count": 3,
-        "expectedDamage": 33742.321488,
-        "castCount": 1
-      },
-      {
-        "name": "SpearQ 5-Hit Cancel",
-        "breakdownName": "Sober Sorrow",
-        "type": "weapon",
-        "count": 5,
-        "expectedDamage": 13244.52649,
-        "castCount": 1
-      },
-      {
-        "name": "Deflect Cancel",
-        "breakdownName": "Deflect Cancel",
-        "type": "weapon",
-        "count": 16,
-        "expectedDamage": 0,
-        "castCount": 16
-      },
-      {
-        "name": "SwordSpecial 3-Hit",
-        "breakdownName": "Inner Balance Strike III",
-        "type": "weapon",
-        "count": 27,
-        "expectedDamage": 68811.536975,
-        "castCount": 9
-      },
-      {
-        "name": "Blood Burst",
-        "breakdownName": "Blood Burst",
-        "type": "sustain",
-        "count": 33,
-        "expectedDamage": 2002191.196492,
-        "castCount": 0
-      },
-      {
-        "name": "Crosswind Blade",
-        "breakdownName": "Crisscross - Inner Balance III",
-        "type": "weapon",
-        "count": 9,
-        "expectedDamage": 57554.134579,
-        "castCount": 9
-      },
-      {
-        "name": "Spear Special (1 Hit Cancel)",
-        "breakdownName": "Sweep All",
-        "type": "weapon",
-        "count": 4,
-        "expectedDamage": 46522.546101,
-        "castCount": 4
-      },
-      {
-        "name": "SwordSpecial 4-Hit",
-        "breakdownName": "Inner Balance Strike III",
-        "type": "weapon",
-        "count": 16,
-        "expectedDamage": 46481.931236,
-        "castCount": 4
-      },
-      {
-        "name": "Sword Charge Stage 1, 3-Hit",
-        "breakdownName": "Second Track Slash",
-        "type": "weapon",
-        "count": 9,
-        "expectedDamage": 33397.375414,
-        "castCount": 3
-      },
-      {
-        "name": "Sword R Charge - Follow Up 1-Hit[cancel]",
-        "breakdownName": "Crisscross - Second Track",
-        "type": "weapon",
-        "count": 3,
-        "expectedDamage": 12954.740001,
-        "castCount": 3
-      },
-      {
-        "name": "Sword Martial Q",
-        "breakdownName": "Inner Track Slash",
-        "type": "weapon",
-        "count": 4,
-        "expectedDamage": 26363.902813,
-        "castCount": 4
-      },
-      {
-        "name": "Sword Martial QQ",
-        "breakdownName": "Inner Track Slash",
-        "type": "weapon",
-        "count": 16,
-        "expectedDamage": 105460.254903,
-        "castCount": 4
-      },
-      {
-        "name": "Sword Martial QQQ",
-        "breakdownName": "Crisscross - Inner Track",
-        "type": "weapon",
-        "count": 8,
-        "expectedDamage": 52731.520751,
-        "castCount": 4
-      },
-      {
-        "name": "SpearQ",
-        "breakdownName": "Sober Sorrow",
-        "type": "weapon",
-        "count": 18,
-        "expectedDamage": 73938.478259,
-        "castCount": 3
-      },
-      {
-        "name": "Dragon Head - Plus",
-        "breakdownName": "Dragon Head - Plus",
-        "type": "mystic",
-        "count": 1,
-        "expectedDamage": 682412.866653,
-        "castCount": 1
-      },
-      {
-        "name": "Flute Ripple (DoT)",
-        "breakdownName": "Flute Chanting a Thousand Waves",
-        "type": "sustain",
-        "count": 5,
-        "expectedDamage": 81321.503108,
-        "castCount": 0
-      },
-      {
-        "name": "Bleeding (DoT)",
-        "breakdownName": "Bleeding",
-        "type": "sustain",
-        "count": 57,
-        "expectedDamage": 255875.189939,
-        "castCount": 0
-      },
-      {
-        "name": "Smolder (DoT)",
-        "breakdownName": "Smolder",
-        "type": "sustain",
-        "count": 110,
-        "expectedDamage": 348932.355478,
-        "castCount": 0
-      },
-      {
-        "name": "Yi River",
-        "breakdownName": "Morale Chant",
-        "type": "mindMethod",
-        "count": 5,
-        "expectedDamage": 45495.501177,
-        "castCount": 0
-      }
-    ],
-    "counts": {
-      "timeline": 355,
-      "buffWindows": 129,
-      "casts": 69
-    },
-    "digest": "10ce7a6262d7169041cdb2165f9b0975232434b89bb3bd087172a462a426b6ec"
+    "digest": "9adc07791893124293c51909fdcf239f26d1aee39d406c0f68049bef88b38e0f"
   },
   "defaults:umbra": {
-    "dps": 11120.690575,
-    "totalDamage": 658900.916543,
+    "dps": 11256.794225,
+    "totalDamage": 666965.057824,
     "rotationDuration": 59.25,
     "warnings": [],
     "perSkill": [
@@ -4358,7 +3978,7 @@
         "breakdownName": "Flute Chanting a Thousand Waves",
         "type": "sustain",
         "count": 10,
-        "expectedDamage": 61570.697321,
+        "expectedDamage": 67626.4944,
         "castCount": 0
       },
       {
@@ -4374,7 +3994,7 @@
         "breakdownName": "Smolder",
         "type": "sustain",
         "count": 23,
-        "expectedDamage": 22320.332256,
+        "expectedDamage": 24328.676458,
         "castCount": 0
       }
     ],
@@ -4383,6 +4003,6 @@
       "buffWindows": 137,
       "casts": 79
     },
-    "digest": "e385c108a8c4f0d12becfa500130aa0706d46f24f8f50ba826e20b2d4833dc1a"
+    "digest": "bf608bd5e0936e9b2e1061a562f01fdd0b2bc2b74124ceb08d9f5386203dca16"
   }
 }
