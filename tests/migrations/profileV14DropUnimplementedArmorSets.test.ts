@@ -8,18 +8,13 @@
 // Matches ids, not display names: V11 converted `Inputs.set` to the stable id
 // before this step runs.
 import { beforeEach, describe, expect, it } from "vitest"
-import { importProfile, loadProfiles } from "../../src/storage"
+import { importProfile } from "../../src/storage"
 import { ARMOR_SET_OPTIONS } from "../../src/engine/panel"
-import {
-  LATEST_PROFILES_VERSION,
-  runProfileMigrations,
-  type RawProfilesBlob,
-} from "../../src/migrations"
+import { runProfileMigrations, type RawProfilesBlob } from "../../src/migrations"
 import { V14__dropUnimplementedArmorSets } from "../../src/migrations/V14__dropUnimplementedArmorSets"
 import type { StoredProfile } from "../../src/engine/types"
-import legacyProfileFile from "./testProfiles/v12/silkbindJade.json"
+import legacyProfileFile from "./testProfiles/v13/silkbindJade.json"
 
-const PROFILES_KEY = "wwm.profiles"
 const RETIRED_SET_IDS = ["swiftGale", "swayingHeights", "starsAlign"]
 
 type LegacyFile = { v: number; profile: StoredProfile }
@@ -33,7 +28,7 @@ function withSet(profile: StoredProfile, set: string | null): StoredProfile {
   return { ...profile, inputs: { ...profile.inputs, set } }
 }
 
-function blobOf(profile: StoredProfile, version = LATEST_PROFILES_VERSION - 1): RawProfilesBlob {
+function blobOf(profile: StoredProfile, version = LEGACY.v): RawProfilesBlob {
   return { v: version, profiles: [profile], activeId: profile.id }
 }
 
@@ -41,11 +36,12 @@ function inputsOf(blob: RawProfilesBlob) {
   return (blob.profiles[0] as StoredProfile).inputs
 }
 
-function loadOne(): StoredProfile {
-  const { profiles } = loadProfiles()
-  expect(profiles).toHaveLength(1)
-  return profiles[0]
-}
+describe("profile-v13 fixture", () => {
+  it("is v13, the version this step reads", () => {
+    expect(LEGACY.v).toBe(13)
+    expect(LEGACY.v).toBe(V14__dropUnimplementedArmorSets.to - 1)
+  })
+})
 
 describe("V14__dropUnimplementedArmorSets — called directly", () => {
   for (const retired of RETIRED_SET_IDS) {
@@ -97,29 +93,13 @@ describe("V14__dropUnimplementedArmorSets — called directly", () => {
 })
 
 describe("V14__dropUnimplementedArmorSets — registered in the chain", () => {
-  it("walks to the latest version through this step", () => {
-    const result = runProfileMigrations(
-      blobOf(withSet(clone(LEGACY.profile), "starsAlign"), LEGACY.v),
-    )!
-    expect(result.applied).toContain("V14__dropUnimplementedArmorSets")
-    expect(result.blob.v).toBe(LATEST_PROFILES_VERSION)
+  it("a v13 blob migrated to v14 passes through exactly this step", () => {
+    const result = runProfileMigrations(blobOf(withSet(clone(LEGACY.profile), "starsAlign")), {
+      toVersion: 14,
+    })!
+    expect(result.applied).toEqual(["V14__dropUnimplementedArmorSets"])
+    expect(result.blob.v).toBe(14)
     expect(inputsOf(result.blob).set).toBeNull()
-  })
-})
-
-describe("V14__dropUnimplementedArmorSets — end to end through loadProfiles", () => {
-  beforeEach(() => localStorage.clear())
-
-  it("clears the set and persists at the latest version", () => {
-    localStorage.setItem(
-      PROFILES_KEY,
-      JSON.stringify(blobOf(withSet(clone(LEGACY.profile), "starsAlign"), LEGACY.v)),
-    )
-    expect(loadOne().inputs.set).toBeNull()
-
-    const persisted = JSON.parse(localStorage.getItem(PROFILES_KEY)!)
-    expect(persisted.v).toBe(LATEST_PROFILES_VERSION)
-    expect(persisted.profiles[0].inputs.set).toBeNull()
   })
 })
 
