@@ -1,9 +1,19 @@
-# Stonesplit Might — buffs & talents working notes
+# Stonesplit Might — buffs & talents RESEARCH NOTES
 
-Companion to `stonesplit-might-coefficients.md`. Goes in `reference/` (never `docs/` — the
-`docsStayGeneral` gate forbids specific skill/class names there). This is the source of truth for
-the Section 4/5 (buffs/debuffs) and Section 8 (class wiring) work. Values are lvl 100, talents
-assumed maxed (100%).
+> **⚠ RESEARCH NOTES — NOT the source of truth.** This file is the raw evidence trail (screenshots,
+> reasoning, dead ends) gathered while designing the class. It contains superseded values and
+> mid-investigation contradictions. **For authoritative values use:**
+> - **`stonesplit-might-buff-sheet.md`** — canonical for buffs/debuffs.
+> - **`stonesplit-might-coefficients.md`** — canonical for skill coefficients.
+>
+> Where this file disagrees with those, **they win.** Known stale statements in here: any "+15%" or
+> "+5% + +10%" reading of Art of Resistance (canonical: **+10%**); any suggestion that
+> `resistanceResolve` is the while-shielded AoR effect (it is **Hardened Foe**, post-shield); any
+> reference to `rainwhisperShield` as Might's shield (Might uses **`stonesplitMightShield`**). The
+> inner-way per-tier tables below give **T6 values only** — sufficient for the fixed T6 meta build, not
+> for selectable Tier 0–6.
+
+Companion to the two canonical sheets. Goes in `reference/`. Values are lvl 100, talents assumed maxed.
 
 ## Corrections applied (from in-game screenshots)
 

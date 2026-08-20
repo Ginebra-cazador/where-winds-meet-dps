@@ -1,5 +1,11 @@
 # Stonesplit Might — lvl-100 coefficient sheet (source of truth for Code)
 
+**Confidence per row** (added per audit): most rows are **verified** against in-game screenshots. The
+exceptions, flagged inline in the notes column: `spearq` is **config-only** (no screenshot cross-check);
+`spearspecial-cancel` is **screenshot-derived** (the game's first-hit "Hitting Boss" value, replacing the
+legacy 30% — a reasoned interpretation of the cancel mechanic, not a raw port). The prepull damage rows
+are **verified** — confirmed in-game that pre-pulled Spear Special lands its hit and applies Vulnerable.
+
 This is the authoritative mapping for porting the `reference/classes/skills/stonesplit-power/*.json`
 files into `defineSkill` modules under `src/data/skills/stonesplit-might/`. Every number here is
 the **lvl-100 (Max Level)** value, verified against in-game screenshots and the WWMath-Add-on
@@ -49,8 +55,8 @@ For each reference file listed below:
 | `mobladevariedcombo-2bw-cancel` | 2.6343 | 3.9514 | 729 | 397 | 1 | same coeff as base; faster castFrames |
 | `mobladevariedcombogroundslam-2bw` | 1.6464 | 2.4696 | 455 | 248 | 1 | fired as a follow-up of Varied Combo |
 | `spearspecial` | 1.13 | 1.695 | 313 | 171 | 1 | full hit ("Hit on Boss", PVE value) |
-| `spearspecial-cancel` | 0.4843 | 0.7264 | 134 | 73 | 1 | **first-hit value, NOT the old 30%** — see §Spear cancel |
-| `spearq` | 0.3151 | 0.4726 | 88 | 48 | 1 | config-only (no screenshot cross-check) |
+| `spearspecial-cancel` | 0.4843 | 0.7264 | 134 | 73 | 1 | **[screenshot-derived]** first-hit value, NOT the old 30% — see §Spear cancel |
+| `spearq` | 0.3151 | 0.4726 | 88 | 48 | 1 | **[config-only]** no screenshot cross-check |
 | `spearspecial-prepull` | 1.13 | 1.695 | 313 | 171 | 1 | **keep castFrames 0** — mirrors `spearspecial`; see §Prepull |
 | `spearspecial-cancel-prepull` | 0.4843 | 0.7264 | 134 | 73 | 1 | **keep castFrames 0** — mirrors `spearspecial-cancel`; see §Prepull |
 

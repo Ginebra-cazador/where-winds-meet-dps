@@ -1,7 +1,17 @@
-# Stonesplit Might — buff spec sheet (v2, post-refactor model)
+# Stonesplit Might — buff spec sheet (v3)
 
-Rewritten for the buff-inversion refactor (upstream PR #69). Goes in `reference/`. All values lvl 100,
-build = Formbend armor + Rainwhisper weapon + AoR T6.
+**Canonical implementation spec for the buffs.** (The coefficient sheet is canonical for skill numbers;
+`-buffs-and-talents.md` is research notes, not authoritative.) Goes in `reference/`. All values lvl 100,
+build = Formbend armor + Rainwhisper weapon + AoR T6. Rewritten for the buff-inversion refactor (PR #69).
+
+> **Two audit fixes required (both DPS-affecting, both `src/data`):**
+> 1. **Shield-conditional buffs are inert** — `artOfResistanceShielded` and `rainwhisperShieldedCrit`
+>    gate on the shield but nothing triggers them. Mo Blade Q must `triggersBuffs` all three (§3b).
+> 2. **Rainwhisper base +10% crit DMG is unimplemented** — only the +15% shielded exists (§3).
+
+Canonical values (supersede any conflicting statement in the research notes): **AoR = +10%**
+while-shielded; **`resistanceResolve` = Hardened Foe** (post-shield, separate); Might's shield is
+**`stonesplitMightShield`** (not the shared `rainwhisperShield`); **Drumbeat triggers off Spear Q**.
 
 ## The new authoring model (read first)
 
@@ -34,7 +44,8 @@ Charged skills (8 heavy-charge + 2 varied-combo + ground-slam) declare
 
 Reference lists spear Q + spear Heavy casts (not spear Special). Only `spearQ`/`spearQPrepull` match
 Might skills, so Code wired Drumbeat to `spearq`/`spearq-prepull`. **Confirm the rotation actually
-procs Drumbeat off spear Q, not spear Special.** If Special, add `spearSpecial` to its `triggersBuffs`.
+procs Drumbeat off spear Q, not spear Special.** **CONFIRMED (in-game): Spear Q.** Code wired
+`spearq`/`spearq-prepull` → `triggersBuffs: [drumbeat]`. Settled — not provisional.
 
 ## Pass 2 — remaining buff work
 
@@ -55,16 +66,27 @@ Drain-either / re-grant handles both upgrade and refresh; no double-count. Set `
 Edge: if a spear skill is cast during an active Breakthrough it re-adds Drumbeat — only a concern if the
 rotation casts spear inside the Breakthrough window (pending §Drumbeat answer).
 
-### 2. AoR while-shielded — +10% all damage (NEW buff)
-`resistanceResolve.ts` is the post-shield **Hardened Foe** (+10%, `activeAfterBuffEnds`), NOT this —
-leave it alone. Create a new buff: `affectsAll: true`, `allDamageBoost 0.10`,
-`requires: { param: artOfResistance, minTier: 6 }`, `requiresBuffActive: rainwhisperShield`. (AoR is +10%,
-not 15% — earlier 15% was a translation artifact.) Hardened Foe barely fires (shield is maintained) —
-out of scope.
+### 2. AoR while-shielded — +10% all damage (`artOfResistanceShielded`)
+**AoR is +10% (canonical). The "+5% + 10% = 15%" reading was a translation artifact — discard it.**
+`resistanceResolve.ts` is a SEPARATE mechanic: the post-shield **Hardened Foe** (+10%,
+`activeAfterBuffEnds`), active *after* the shield ends — leave it untouched. This buff is the
+*while-shielded* effect: `affectsAll: true`, `allDamageBoost 0.10`,
+`requires: { param: artOfResistance, minTier: 6 }`, `requiresBuffActive: BUFF.stonesplitMightShield`.
+Hardened Foe barely fires in a maintained-shield rotation — out of scope for DPS.
 
-### 3. Rainwhisper while-shielded — +15% crit DMG (NEW buff)
-Rainwhisper is the weapon set, modeled as buffs (not a formal set), so gate on the shield:
-`critDamageBoost 0.15`, `requiresBuffActive: rainwhisperShield`. Reaches all skills → `affectsAll: true`.
+### 3. Rainwhisper crit — base +10% always, +15% more while shielded (two buffs)
+Rainwhisper is the weapon set, modeled as buffs (not a formal set). It has **two** parts:
+- **Base +10% crit DMG (unconditional):** an always-active buff — `affectsAll: true`,
+  `alwaysActive: true`, `critDamageBoost 0.10`. **This must exist or the model undercounts.**
+- **+15% crit DMG while shielded (`rainwhisperShieldedCrit`):** `affectsAll: true`,
+  `critDamageBoost 0.15`, `requiresBuffActive: BUFF.stonesplitMightShield`.
+
+### 3b. Shield triggering — REQUIRED for the conditional buffs to fire
+`requiresBuffActive` is a **gate, not a trigger**. The two shield-conditional buffs
+(`artOfResistanceShielded`, `rainwhisperShieldedCrit`) only *apply* while the shield is up, but they
+still need their own trigger to activate. So **Mo Blade Q and `mobladeq-prepull` must list all three in
+`triggersBuffs`:** `[stonesplitMightShield, artOfResistanceShielded, rainwhisperShieldedCrit]`. Without
+this the two conditionals are inert (a silent DPS undercount).
 
 ### 4. Throat-Pierce Might variant (NEW buff)
 The shared `throatPierceBuffs/throatPierced.ts` is strength-shaped — do NOT branch it. Create a separate
@@ -72,22 +94,24 @@ Might-scoped buff: self physPen + crit DMG, Varied Combo enhances, Deflect maxes
 gated on the `throatPierced` inner-way param. Self-buff (player), not a boss debuff.
 
 ### 5. Conditional durations (function duration, no baking)
-`rainwhisperShield` already uses a function duration — extend it:
+The duration extension lives on the **Might-scoped `stonesplitMightShield`** (NOT the shared
+`rainwhisperShield`, which stays untouched at its original 8s/12s to avoid regressing other classes) and
+on `breakthrough` (Might-only):
 ```ts
-// rainwhisperShield (shared — run buff-equivalence tests after):
-duration: (ctx) => 8 + (ctx.build.paramTier(PARAM.artOfResistance) >= 6 ? 6 : 0) + FORMBEND_2
-// breakthrough (Might-only, safe):
-duration: (ctx) => 12 + (ctx.build.paramTier(PARAM.artOfResistance) >= 6 ? 6 : 0) + FORMBEND_2
+// stonesplitMightShield (Might-scoped) and breakthrough:
+duration: (ctx) => BASE + (ctx.build.paramTier(PARAM.artOfResistance) >= 6 ? 6 : 0) + 2  // BASE 8 / 12
 ```
-- **AoR +6**: `ctx.build.paramTier(artOfResistance) >= 6` — clean.
-- **Formbend +2**: Formbend is the armor set. If the calc reads the armor set (`ctx.build.armorSet ===
-  <formbend>`), gate on it; **but Formbend must first exist as a selectable armor set** (Section 8). If
-  the calc doesn't distinguish set slots, **hardcode +2** (user-approved fallback) — Formbend is fixed in
-  the meta build. Keep AoR conditional either way.
+- **AoR +6**: `ctx.build.paramTier(artOfResistance) >= 6` — conditional, correct across gear swaps.
+- **Formbend +2**: **hardcoded — TEMPORARY FIXED-BUILD ASSUMPTION: Formbend 4-piece is always equipped.**
+  Formbend is the armor set; the repo's context can read `armorSet`, but since the calc doesn't cleanly
+  distinguish armor-vs-weapon set slots, the +2 is baked in. Correct for the meta build; would need a
+  real `armorSet` read to support dropping Formbend.
 
 ## Class-def wiring (Section 8 — resolves the orphaned-buff test)
-- `classBuffDefs`: `drumbeat`, `breakthrough`, `stonesplitMightChargedCrit`, the AoR buff, the Rainwhisper
-  buff, the consume def. `vulnerability`/`vulnerabilityWeapon` too (they're `defineClassBuff`).
+- `classBuffDefs`: `drumbeat`, `breakthrough`, `breakthroughConsume`, `stonesplitMightChargedCrit`,
+  `vulnerability`, `vulnerabilityWeapon`, `artOfResistanceShielded`, `rainwhisperShieldedCrit`,
+  `stonesplitMightShield`, `throatPiercedMight`, **and the Rainwhisper base +10% crit buff (§3)**. Every
+  one must be listed or the buff-orphan / undercount problems return.
 - Throat-Pierce Might variant attaches via the `throatPierce` inner way.
 - This is what clears `classModuleBoundaries` (every class buff must be listed by a class).
 
