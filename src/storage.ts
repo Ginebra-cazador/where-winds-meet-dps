@@ -40,6 +40,8 @@ import {
   migrateGearWordId,
   migrateCurrentGearWordLabel,
   migrateSetId,
+  migrateAttunementId,
+  migrateAttuneTag,
 } from "./migrations"
 
 export { migrateClassId, migrateEntityId } from "./migrations"
@@ -241,7 +243,7 @@ function hydrateInputs(inputs: Inputs): Inputs {
       ...(rest as unknown as typeof piece),
       ...(words !== undefined ? { words: words as typeof piece.words } : {}),
       relayed: typeof p.relayed === "boolean" ? p.relayed : false,
-      attunement: typeof p.attunement === "string" ? p.attunement : "",
+      attunement: typeof p.attunement === "string" ? migrateAttunementId(p.attunement) : "",
       attunementValue: typeof p.attunementValue === "number" ? p.attunementValue : 0,
       ...(isNew ? { isNew: true } : {}),
     }
@@ -586,10 +588,13 @@ function builtinTagsFor(id: string): string[] {
 }
 
 function healSkillTags(id: string, tags: string[]): string[] {
-  const healed = new Set(tags)
+  const renamed = tags.map(migrateAttuneTag)
+  const healed = new Set(renamed)
   for (const tag of builtinTagsFor(id)) healed.add(tag)
   if (id.endsWith("-dragon-head-plus")) healed.add(QI_BREAK_DOUBLE_TAG)
-  return healed.size === tags.length ? tags : [...healed]
+  const unchanged =
+    healed.size === tags.length && renamed.every((tag, index) => tag === tags[index])
+  return unchanged ? tags : [...healed]
 }
 
 // Additive, no version bump — see CLAUDE.md → "localStorage migrations". Before

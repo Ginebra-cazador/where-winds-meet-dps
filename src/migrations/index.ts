@@ -10,6 +10,7 @@ import { V12__gearWordIds } from "./V12__gearWordIds"
 import { V13__gearWordCurrentLabels } from "./V13__gearWordCurrentLabels"
 import { V14__dropUnimplementedArmorSets } from "./V14__dropUnimplementedArmorSets"
 import { V15__dropSwallowcallSet } from "./V15__dropSwallowcallSet"
+import { V16__mergeVernalUmbrellaAttunements } from "./V16__mergeVernalUmbrellaAttunements"
 
 export type { Migration, MigrationRunResult, RawProfilesBlob } from "./types"
 export {
@@ -20,6 +21,7 @@ export {
 export { migrateSetId } from "./V11__setIdsWithoutDisplayName"
 export { migrateGearWordId } from "./V12__gearWordIds"
 export { migrateCurrentGearWordLabel } from "./V13__gearWordCurrentLabels"
+export { migrateAttunementId, migrateAttuneTag } from "./V16__mergeVernalUmbrellaAttunements"
 
 export const PROFILE_MIGRATIONS: readonly Migration[] = [
   V5__englishIdsWithoutSitePrefix,
@@ -33,6 +35,7 @@ export const PROFILE_MIGRATIONS: readonly Migration[] = [
   V13__gearWordCurrentLabels,
   V14__dropUnimplementedArmorSets,
   V15__dropSwallowcallSet,
+  V16__mergeVernalUmbrellaAttunements,
 ]
 
 const VERSION_BEFORE_THIS_FOLDER = 4
