@@ -8,7 +8,13 @@ import { attunementsFor } from "./attunements"
 import { ftDpsWhenEquipped, ftDpsWithSlotEmpty } from "./fullPotential"
 import { withCustomContent } from "./customContent"
 import { withDerivedStats } from "./derivedInputs"
-import { applyArmorSet, applyBowSet, ARMOR_SET_OPTIONS, swapArsenal } from "./panel"
+import {
+  applyArmorSet,
+  applyBowSet,
+  ARMOR_SET_OPTIONS,
+  defaultArsenalForClass,
+  swapArsenal,
+} from "./panel"
 import { graduationInputs } from "./graduation"
 import type { Rotation } from "./rotation"
 import type { Skill } from "./skill"
@@ -627,8 +633,6 @@ function dpsFor(inputs: Inputs): number {
   return runEngine(applyBowSet(applyArmorSet(derived))).dps
 }
 
-const ARSENAL_CHOICES: Arsenal[] = ["general", "bellstrike", "stonesplit", "silkbind", "bamboocut"]
-
 function computeSetTiles(req: SetTilesWorkerRequest): SetTilesWorkerResponse {
   const { inputs } = req
 
@@ -645,8 +649,13 @@ function computeSetTiles(req: SetTilesWorkerRequest): SetTilesWorkerResponse {
     none: bowChoice(null),
   }
 
+  const arsenalChoices = new Set<Arsenal>([
+    "general",
+    defaultArsenalForClass(inputs.classId),
+    inputs.arsenal,
+  ])
   const arsenalDpsByChoice: Record<string, number> = {}
-  for (const choice of ARSENAL_CHOICES) {
+  for (const choice of arsenalChoices) {
     arsenalDpsByChoice[choice] = dpsFor(swapArsenal(inputs, choice))
   }
 

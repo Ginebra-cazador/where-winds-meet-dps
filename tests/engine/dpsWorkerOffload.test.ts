@@ -21,7 +21,13 @@ import { runEngine } from "../../src/engine/dps"
 import { withCustomContent } from "../../src/engine/customContent"
 import { withDerivedStats } from "../../src/engine/derivedInputs"
 import type { Skill } from "../../src/engine/skill"
-import { applyArmorSet, applyBowSet, ARMOR_SET_OPTIONS, swapArsenal } from "../../src/engine/panel"
+import {
+  applyArmorSet,
+  applyBowSet,
+  ARMOR_SET_OPTIONS,
+  defaultArsenalForClass,
+  swapArsenal,
+} from "../../src/engine/panel"
 import { defaultInputs } from "../../src/engine/defaults"
 import { GEAR_SLOTS } from "../../src/engine/types"
 import type { GearPiece, Inputs } from "../../src/engine/types"
@@ -89,9 +95,26 @@ describe("computeSetTiles", () => {
     expect(res.bowDpsByChoice.none).toBe(dpsFor({ ...umbraInputs, bowSet: null }))
   })
 
-  it("arsenalDpsByChoice matches the reference pipeline for two choices", () => {
+  it("arsenalDpsByChoice contains exactly general, the class default and the active choice", () => {
+    const classDefault = defaultArsenalForClass(umbraInputs.classId)
+    expect(Object.keys(res.arsenalDpsByChoice).sort()).toEqual(
+      [...new Set(["general", classDefault, umbraInputs.arsenal])].sort(),
+    )
+  })
+
+  it("arsenalDpsByChoice matches the reference pipeline for general and the class default", () => {
+    const classDefault = defaultArsenalForClass(umbraInputs.classId)
     expect(res.arsenalDpsByChoice.general).toBe(dpsFor(swapArsenal(umbraInputs, "general")))
-    expect(res.arsenalDpsByChoice.bellstrike).toBe(dpsFor(swapArsenal(umbraInputs, "bellstrike")))
+    expect(res.arsenalDpsByChoice[classDefault]).toBe(
+      dpsFor(swapArsenal(umbraInputs, classDefault)),
+    )
+  })
+
+  it("arsenalDpsByChoice matches the reference pipeline for the active off-attribute choice", () => {
+    expect(defaultArsenalForClass(umbraInputs.classId)).not.toBe(umbraInputs.arsenal)
+    expect(res.arsenalDpsByChoice[umbraInputs.arsenal]).toBe(
+      dpsFor(swapArsenal(umbraInputs, umbraInputs.arsenal)),
+    )
   })
 })
 
