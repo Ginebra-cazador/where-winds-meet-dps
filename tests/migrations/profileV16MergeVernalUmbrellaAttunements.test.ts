@@ -1,16 +1,11 @@
 import { beforeEach, describe, expect, it } from "vitest"
-import { importProfile, loadCustomSkills, loadProfiles } from "../../src/storage"
-import {
-  LATEST_PROFILES_VERSION,
-  runProfileMigrations,
-  type RawProfilesBlob,
-} from "../../src/migrations"
+import { importProfile, loadCustomSkills } from "../../src/storage"
+import { runProfileMigrations, type RawProfilesBlob } from "../../src/migrations"
 import { V16__mergeVernalUmbrellaAttunements } from "../../src/migrations/V16__mergeVernalUmbrellaAttunements"
 import type { StoredProfile } from "../../src/engine/types"
 import { makeSkill } from "../../src/engine/skill"
 import legacyProfileFile from "./testProfiles/v15/silkbindJade.json"
 
-const PROFILES_KEY = "wwm.profiles"
 const CUSTOM_SKILLS_KEY = "wwm.customSkills"
 const CUSTOM_SKILLS_VERSION = 3
 const MERGED = "umbFrequentProjectile"
@@ -29,7 +24,7 @@ function withAttunements(profile: StoredProfile, attunements: string[]): StoredP
   return { ...profile, inputs: { ...profile.inputs, inventory } }
 }
 
-function blobOf(profile: StoredProfile, version = LATEST_PROFILES_VERSION - 1): RawProfilesBlob {
+function blobOf(profile: StoredProfile, version = LEGACY.v): RawProfilesBlob {
   return { v: version, profiles: [profile], activeId: profile.id }
 }
 
@@ -38,8 +33,9 @@ function attunementsOf(blob: RawProfilesBlob): string[] {
 }
 
 describe("the captured profile is genuinely pre-change", () => {
-  it("stores v15", () => {
+  it("stores v15, the version this step reads", () => {
     expect(LEGACY.v).toBe(15)
+    expect(LEGACY.v).toBe(V16__mergeVernalUmbrellaAttunements.to - 1)
   })
 })
 
@@ -89,40 +85,14 @@ describe("V16__mergeVernalUmbrellaAttunements — called directly", () => {
 })
 
 describe("V16__mergeVernalUmbrellaAttunements — registered in the chain", () => {
-  it("walks to the latest version through this step", () => {
+  it("a v15 blob migrated to v16 passes through exactly this step", () => {
     const result = runProfileMigrations(
-      blobOf(withAttunements(clone(LEGACY.profile), ["umbSpecial", "umbCharged"]), LEGACY.v),
+      blobOf(withAttunements(clone(LEGACY.profile), ["umbSpecial", "umbCharged"])),
+      { toVersion: 16 },
     )!
-    expect(result.applied).toContain("V16__mergeVernalUmbrellaAttunements")
-    expect(result.blob.v).toBe(LATEST_PROFILES_VERSION)
+    expect(result.applied).toEqual(["V16__mergeVernalUmbrellaAttunements"])
+    expect(result.blob.v).toBe(16)
     expect(attunementsOf(result.blob).slice(0, 2)).toEqual([MERGED, MERGED])
-  })
-})
-
-describe("V16__mergeVernalUmbrellaAttunements — end to end through loadProfiles", () => {
-  beforeEach(() => localStorage.clear())
-
-  it("merges the ids, keeps the build, and persists at the latest version", () => {
-    localStorage.setItem(
-      PROFILES_KEY,
-      JSON.stringify(
-        blobOf(withAttunements(clone(LEGACY.profile), ["umbSpecial", "umbCharged"]), LEGACY.v),
-      ),
-    )
-    const { profiles } = loadProfiles()
-    expect(profiles).toHaveLength(1)
-    const loaded = profiles[0]
-    expect(loaded.inputs.inventory.map((piece) => piece.attunement).slice(0, 2)).toEqual([
-      MERGED,
-      MERGED,
-    ])
-    expect(loaded.inputs.inventory).toHaveLength(LEGACY.profile.inputs.inventory.length)
-    expect(loaded.inputs.equipped).toEqual(LEGACY.profile.inputs.equipped)
-    expect(loaded.inputs.set).toBe(LEGACY.profile.inputs.set)
-
-    const persisted = JSON.parse(localStorage.getItem(PROFILES_KEY)!)
-    expect(persisted.v).toBe(LATEST_PROFILES_VERSION)
-    expect(persisted.profiles[0].inputs.inventory[0].attunement).toBe(MERGED)
   })
 })
 

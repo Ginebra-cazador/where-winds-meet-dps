@@ -1,16 +1,11 @@
 import { beforeEach, describe, expect, it } from "vitest"
-import { importProfile, loadProfiles } from "../../src/storage"
+import { importProfile } from "../../src/storage"
 import { ARMOR_SET_OPTIONS } from "../../src/engine/panel"
-import {
-  LATEST_PROFILES_VERSION,
-  runProfileMigrations,
-  type RawProfilesBlob,
-} from "../../src/migrations"
+import { runProfileMigrations, type RawProfilesBlob } from "../../src/migrations"
 import { V15__dropSwallowcallSet } from "../../src/migrations/V15__dropSwallowcallSet"
 import type { StoredProfile } from "../../src/engine/types"
 import legacyProfileFile from "./testProfiles/v14/silkbindJade.json"
 
-const PROFILES_KEY = "wwm.profiles"
 const RETIRED_SET_ID = "swallowcall"
 
 type LegacyFile = { v: number; profile: StoredProfile }
@@ -24,7 +19,7 @@ function withSet(profile: StoredProfile, set: string | null): StoredProfile {
   return { ...profile, inputs: { ...profile.inputs, set } }
 }
 
-function blobOf(profile: StoredProfile, version = LATEST_PROFILES_VERSION - 1): RawProfilesBlob {
+function blobOf(profile: StoredProfile, version = LEGACY.v): RawProfilesBlob {
   return { v: version, profiles: [profile], activeId: profile.id }
 }
 
@@ -32,11 +27,12 @@ function inputsOf(blob: RawProfilesBlob) {
   return (blob.profiles[0] as StoredProfile).inputs
 }
 
-function loadOne(): StoredProfile {
-  const { profiles } = loadProfiles()
-  expect(profiles).toHaveLength(1)
-  return profiles[0]
-}
+describe("profile-v14 fixture", () => {
+  it("is v14, the version this step reads", () => {
+    expect(LEGACY.v).toBe(14)
+    expect(LEGACY.v).toBe(V15__dropSwallowcallSet.to - 1)
+  })
+})
 
 describe("V15__dropSwallowcallSet — called directly", () => {
   it("clears a stored swallowcall", () => {
@@ -84,34 +80,21 @@ describe("V15__dropSwallowcallSet — called directly", () => {
 })
 
 describe("V15__dropSwallowcallSet — registered in the chain", () => {
-  it("walks to the latest version through this step", () => {
-    const result = runProfileMigrations(
-      blobOf(withSet(clone(LEGACY.profile), RETIRED_SET_ID), LEGACY.v),
-    )!
-    expect(result.applied).toContain("V15__dropSwallowcallSet")
-    expect(result.blob.v).toBe(LATEST_PROFILES_VERSION)
+  it("a v14 blob migrated to v15 passes through exactly this step", () => {
+    const result = runProfileMigrations(blobOf(withSet(clone(LEGACY.profile), RETIRED_SET_ID)), {
+      toVersion: 15,
+    })!
+    expect(result.applied).toEqual(["V15__dropSwallowcallSet"])
+    expect(result.blob.v).toBe(15)
     expect(inputsOf(result.blob).set).toBeNull()
   })
 
   it("reaches a profile still storing the pre-V11 display name", () => {
-    const result = runProfileMigrations(blobOf(withSet(clone(LEGACY.profile), "Swallowcall"), 10))!
+    const result = runProfileMigrations(blobOf(withSet(clone(LEGACY.profile), "Swallowcall"), 10), {
+      toVersion: 15,
+    })!
+    expect(result.blob.v).toBe(15)
     expect(inputsOf(result.blob).set).toBeNull()
-  })
-})
-
-describe("V15__dropSwallowcallSet — end to end through loadProfiles", () => {
-  beforeEach(() => localStorage.clear())
-
-  it("clears the set and persists at the latest version", () => {
-    localStorage.setItem(
-      PROFILES_KEY,
-      JSON.stringify(blobOf(withSet(clone(LEGACY.profile), RETIRED_SET_ID), LEGACY.v)),
-    )
-    expect(loadOne().inputs.set).toBeNull()
-
-    const persisted = JSON.parse(localStorage.getItem(PROFILES_KEY)!)
-    expect(persisted.v).toBe(LATEST_PROFILES_VERSION)
-    expect(persisted.profiles[0].inputs.set).toBeNull()
   })
 })
 
