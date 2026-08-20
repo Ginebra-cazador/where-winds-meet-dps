@@ -12,7 +12,7 @@ export const fanqcancel = defineSkill({
   weaponOrAttribute: "Fan",
   attributeAttack: "Silkbind",
   castTag: CAST.fanQCancel,
-  triggersBuffs: [BUFF.jadeware, BUFF.windWall, BUFF.windWallPursuit],
+  triggersBuffs: [BUFF.jadeware, BUFF.windWall, BUFF.windWallPursuit, BUFF.springThunder],
   castFrames: 6,
   triggerable: true,
   hits: [

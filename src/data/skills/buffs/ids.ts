@@ -47,6 +47,7 @@ export const BUFF = {
   resistanceResolve: "resistanceResolve",
   revelryScript: "revelryScript",
   soulShaken: "soulShaken",
+  springThunder: "springThunder",
   starReacher: "starReacher",
   surgingWaves: "surgingWaves",
   swordEnergyEnhancement: "swordEnergyEnhancement",

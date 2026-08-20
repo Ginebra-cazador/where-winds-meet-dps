@@ -17,7 +17,7 @@ export const fanqPrepull = defineSkill({
   weaponOrAttribute: "Fan",
   attributeAttack: "Silkbind",
   castTag: CAST.fanQPrepull,
-  triggersBuffs: [BUFF.jadeware, BUFF.windWall, BUFF.windWallPursuit],
+  triggersBuffs: [BUFF.jadeware, BUFF.windWall, BUFF.windWallPursuit, BUFF.springThunder],
   castFrames: 0,
   triggerable: true,
   hits: [

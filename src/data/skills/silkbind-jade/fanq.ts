@@ -12,7 +12,7 @@ export const fanq = defineSkill({
   weaponOrAttribute: "Fan",
   attributeAttack: "Silkbind",
   castTag: CAST.fanQ,
-  triggersBuffs: [BUFF.jadeware, BUFF.windWall, BUFF.windWallPursuit],
+  triggersBuffs: [BUFF.jadeware, BUFF.windWall, BUFF.windWallPursuit, BUFF.springThunder],
   castFrames: 66,
   triggerable: true,
   hits: [

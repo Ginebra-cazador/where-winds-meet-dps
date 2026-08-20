@@ -33,6 +33,7 @@ export const umbHeavylight = defineSkill({
   castTag: CAST.umbHeavyLight,
   receives: [
     BUFF.thunderousBloom,
+    BUFF.springThunder,
     BUFF.mistwillowHeavyBuff,
     BUFF.mistwillowLightBuff,
     BUFF.mistwillowBuff,

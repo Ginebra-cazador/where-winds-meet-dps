@@ -49,6 +49,7 @@ export const fanheavypursuit5Hit = defineSkill({
     BUFF.windWallPursuit,
     BUFF.lowQiFollowUp,
     BUFF.thunderousBloom,
+    BUFF.springThunder,
     BUFF.mistwillowLightBuff,
     BUFF.mistwillowBuff,
   ],

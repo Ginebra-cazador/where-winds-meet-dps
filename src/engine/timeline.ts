@@ -304,7 +304,7 @@ export function simulateTimeline(inputs: Inputs, options?: EngineRunOptions): Re
         generated: false,
         inheritedBuffIds: [],
       }))
-      const damageFrames: number[] = []
+      const damageHits: { frame: number; skill: Skill }[] = []
 
       let processed = 0
       while (pending.length > 0 && processed < EVENT_CAP) {
@@ -328,7 +328,7 @@ export function simulateTimeline(inputs: Inputs, options?: EngineRunOptions): Re
         }
         for (const hit of cast.skill.hits) {
           const hitFrame = cast.frame + hit.frame
-          if (hitDealsDamage(hit)) damageFrames.push(hitFrame)
+          if (hitDealsDamage(hit)) damageHits.push({ frame: hitFrame, skill: cast.skill })
           for (const trigger of hit.triggers) {
             if (trigger.kind !== "castSkill") continue
             if (!triggerConditions(trigger).every((c) => conditionHolds(c, hitFrame))) continue
@@ -346,8 +346,8 @@ export function simulateTimeline(inputs: Inputs, options?: EngineRunOptions): Re
         }
       }
 
-      damageFrames.sort((left, right) => left - right)
-      for (const frame of damageFrames) engine.processDamageHit(frame / FPS)
+      damageHits.sort((left, right) => left.frame - right.frame)
+      for (const { frame, skill } of damageHits) engine.processDamageHit(frame / FPS, skill)
       return engine
     } catch {
       return null

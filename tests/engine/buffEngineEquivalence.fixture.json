@@ -58455,7 +58455,7 @@
           "silkbindJade-umbq",
           "silkbindJade-umbq-prepull"
         ],
-        "digest": "09a7869a09b266cbf23527fb3e82a419524ffbd589c0f60c46f1df731c4ee4d0"
+        "digest": "83dc676d38534cbcc9d8a73b4eea1877cbb49ce6fe75b758f3698198c2c880ce"
       },
       "debuffs": {
         "count": 9,
@@ -58559,14 +58559,41 @@
           "summary": "physBoost +7.5% (normal), +15% (<30% Qi), +25% (Qi exhausted)"
         },
         {
-          "id": "thunderousBloom",
-          "name": "Thunderous Bloom",
+          "id": "springThunder",
+          "name": "Spring Thunder",
           "classBuff": false,
           "requires": {
             "param": "thunderousBloom"
           },
           "affectsAll": false,
-          "alwaysActive": true,
+          "alwaysActive": false,
+          "buffAppliesOnCastEnd": true,
+          "cooldown": null,
+          "rateLimit": {
+            "count": 1,
+            "window": 15
+          },
+          "stackRateLimit": null,
+          "stacksPerHit": false,
+          "seedAtStart": false,
+          "refreshOnAnyCast": false,
+          "requiresBuffActive": null,
+          "activeAfterBuffEnds": null,
+          "hasStacksFn": true,
+          "duration": 12,
+          "maxStacks": 5,
+          "effects": [],
+          "summary": null
+        },
+        {
+          "id": "thunderousBloom",
+          "name": "Spring Thunder DMG Boost",
+          "classBuff": false,
+          "requires": {
+            "param": "thunderousBloom"
+          },
+          "affectsAll": false,
+          "alwaysActive": false,
           "buffAppliesOnCastEnd": false,
           "cooldown": null,
           "rateLimit": null,
@@ -58577,7 +58604,7 @@
           "requiresBuffActive": null,
           "activeAfterBuffEnds": null,
           "hasStacksFn": false,
-          "duration": 9999,
+          "duration": 2,
           "maxStacks": null,
           "effects": [
             {
@@ -59160,7 +59187,7 @@
       ]
     },
     "dynamic": {
-      "digest": "1fe13454aace1ebdeb2f277f11cfae53d0c01e65c0e3ed367a67f64a39b00926"
+      "digest": "4f68279988fd37696186bb3bed342da0296a8ccd01832c0895cba0f67afa7f73"
     }
   }
 }

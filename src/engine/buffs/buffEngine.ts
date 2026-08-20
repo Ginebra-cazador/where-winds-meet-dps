@@ -546,15 +546,91 @@ export class BuffEngine {
   }
 
   // Every damaging hit stacks these, wherever the hit came from — the scope on
-  // such a def says who RECEIVES its bonus, never what grants it a stack. The
-  // timeline drives this over the prepass's sorted damage frames, so the stack
-  // history is complete before the first damage query reads it.
-  processDamageHit(time: number): void {
+  // such a def says who RECEIVES its bonus, never what grants it a stack, and
+  // a def that wants the hit's origin to matter opts in via
+  // `stackOnDamageScoped` / `perHitConsume`, both of which go through the same
+  // `reaches` the damage query uses. The timeline drives this over the
+  // prepass's sorted damage frames, so the stack history is complete before
+  // the first damage query reads it — which is also why every read and write
+  // here is history-indexed rather than against the live map: the cast walk
+  // has already run in full, so the live map holds only each id's last window.
+  processDamageHit(time: number, skill?: Skill): void {
+    const tagSet = skill ? skillTagsOf(skill) : undefined
     for (const [id, module] of this.definitions) {
-      if (!module.stackOnDamage || !this.gateOk(module)) continue
-      if (module.stackOnDamagePhase && this.qiPhase(time) !== module.stackOnDamagePhase) continue
-      this.applyBuff(id, time, null, 1)
+      if (!this.gateOk(module)) continue
+      if (module.perHitConsume) this.processPerHitConsume(module, time, tagSet)
+      if (!module.stackOnDamage) continue
+      if (!this.stackOnDamagePhaseHolds(module, time)) continue
+      if (module.stackOnDamageScoped && !(tagSet && reaches(tagSet, module))) continue
+      if (module.stackOnDamageOnlyWhileActive) this.restoreStackIntoWindow(module, time)
+      else if (this.canGrantDamageStack(module, time)) this.applyBuff(id, time, null, 1)
     }
+  }
+
+  private stackOnDamagePhaseHolds(module: BuffModule, time: number): boolean {
+    const phase = module.stackOnDamagePhase
+    if (!phase) return true
+    const current = this.qiPhase(time)
+    return Array.isArray(phase) ? phase.includes(current) : phase === current
+  }
+
+  private canGrantDamageStack(module: BuffModule, time: number): boolean {
+    if (!module.stackOnDamageRateLimit) return true
+    const { count, window } = module.stackOnDamageRateLimit
+    const key = "damageStack:" + module.id
+    let times = this.grantTimes.get(key)
+    if (!times) {
+      times = []
+      this.grantTimes.set(key, times)
+    }
+    const cutoff = time - window
+    while (times.length > 0 && times[0] <= cutoff) times.shift()
+    if (times.length >= count) return false
+    times.push(time)
+    return true
+  }
+
+  // A stack buff whose last stack was spent counts as ended, not as an empty
+  // live window — so a top-up needs a surviving stack, exactly like a spend.
+  private restoreStackIntoWindow(module: BuffModule, time: number): void {
+    const window = this.latestApplyAt(module.id, time)
+    if (!window || time >= window.expiresAt) return
+    const before = window.stacks ?? 1
+    if (before <= 0 || before >= (module.maxStacks ?? 1)) return
+    if (!this.canGrantDamageStack(module, time)) return
+    this.buffHistory.push({
+      time,
+      buffType: module.id,
+      action: "apply",
+      expiresAt: window.expiresAt,
+      stacks: before + 1,
+    })
+  }
+
+  private processPerHitConsume(
+    module: BuffModule,
+    time: number,
+    tagSet: ReadonlySet<string> | undefined,
+  ): void {
+    if (!tagSet || !reaches(tagSet, module)) return
+    if (this.isBuffActiveAtTime(module.id, time)) return
+    if (!this.spendStackInWindow(module.perHitConsume!.from, time)) return
+    this.applyBuff(module.id, time, null, 1)
+  }
+
+  private spendStackInWindow(id: string, time: number): boolean {
+    const window = this.latestApplyAt(id, time)
+    if (!window || time >= window.expiresAt) return false
+    const before = window.stacks ?? 1
+    if (before <= 0) return false
+    this.buffHistory.push({
+      time,
+      buffType: id,
+      action: "apply",
+      expiresAt: window.expiresAt,
+      stacks: before - 1,
+    })
+    return true
   }
 
   // Resolves one cast's consumption against the live pools and spends them.

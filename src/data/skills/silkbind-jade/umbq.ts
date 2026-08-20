@@ -13,7 +13,7 @@ export const umbq = defineSkill({
   attributeAttack: "Silkbind",
   castTag: CAST.umbQ,
   receives: [BUFF.combo, BUFF.windWall, BUFF.trajectorySkill],
-  triggersBuffs: [BUFF.jadeware, BUFF.combo, BUFF.comboUmbLightBonus],
+  triggersBuffs: [BUFF.jadeware, BUFF.combo, BUFF.comboUmbLightBonus, BUFF.springThunder],
   castFrames: 75,
   triggerable: true,
   hits: [

@@ -22,6 +22,7 @@ export const fanlightcharged = defineSkill({
     BUFF.windWall,
     BUFF.pursuitChargedBoost,
     BUFF.thunderousBloom,
+    BUFF.springThunder,
     BUFF.mistwillowHeavyBuff,
     BUFF.mistwillowBuff,
   ],
