@@ -77,6 +77,14 @@ export function EncounterSettingsPanel({ inputs, onChange }: Props) {
 
   return (
     <div className={styles.encounterSettings}>
+      <div className={styles.dummyToggle}>
+        <Switch
+          checked={inputs.dummyMode}
+          label={t("Enable Dummy")}
+          onChange={(value) => set("dummyMode", value)}
+        />
+      </div>
+
       <Section title={t("Consumables & Self")}>
         <div className={styles.switchGrid}>
           <SwitchRow
