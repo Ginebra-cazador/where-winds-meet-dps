@@ -1,4 +1,4 @@
-import { defineClassBuff } from "../../definitions/skills/buffDef"
+import { defineBuff } from "../../definitions/skills/buffDef"
 import { BUFF, PARAM } from "../skills/buffs/ids"
 import { stat } from "../../engine/effects/effect"
 
@@ -7,7 +7,7 @@ import { stat } from "../../engine/effects/effect"
 // sim has no resource model — exactly like stamina consumption is already
 // left out — so charges are treated as always available, and reach is scoped
 // by `receives` on the skills that would consume one instead.
-export const thunderousBloomBuffDef = defineClassBuff({
+export const thunderousBloomBuffDef = defineBuff({
   id: BUFF.thunderousBloom,
   name: "Thunderous Bloom",
   requires: { param: PARAM.thunderousBloom },

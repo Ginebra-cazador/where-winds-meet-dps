@@ -1,4 +1,4 @@
-import { defineClassBuff } from "../../definitions/skills/buffDef"
+import { defineBuff } from "../../definitions/skills/buffDef"
 import { BUFF, PARAM } from "../skills/buffs/ids"
 import { stat } from "../../engine/effects/effect"
 
@@ -8,7 +8,7 @@ import { stat } from "../../engine/effects/effect"
 // and its lifesteal alternative (no HP model in the sim), and the guide's
 // "targets with lingering bone" wording — the reference defs carry no such
 // condition, so the two sources disagree and neither is picked.
-export const starReacherBuffDef = defineClassBuff({
+export const starReacherBuffDef = defineBuff({
   id: BUFF.starReacher,
   name: "Star Reacher",
   requires: { param: PARAM.starReacher },

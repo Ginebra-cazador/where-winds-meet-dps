@@ -74,7 +74,7 @@
         {
           "id": "buff-bellstrikeUmbra-zenith-bar",
           "name": "Zenith Bar",
-          "classBuff": true,
+          "classBuff": false,
           "requires": {
             "param": "swordHorizon"
           },
@@ -104,7 +104,7 @@
         {
           "id": "potentRiverFlow",
           "name": "Potent River Flow",
-          "classBuff": true,
+          "classBuff": false,
           "requires": {
             "param": "wolfchasersArt"
           },
@@ -134,7 +134,7 @@
         {
           "id": "wineGu",
           "name": "Wine Gu",
-          "classBuff": true,
+          "classBuff": false,
           "requires": {
             "param": "wolfchasersArt",
             "minTier": 6
@@ -165,7 +165,7 @@
         {
           "id": "soulShaken",
           "name": "Soul Shaken",
-          "classBuff": true,
+          "classBuff": false,
           "requires": {
             "param": "wolfchasersArt",
             "minTier": 6
@@ -190,7 +190,7 @@
         {
           "id": "disintegration",
           "name": "Disintegration",
-          "classBuff": true,
+          "classBuff": false,
           "requires": {
             "param": "breakingPoint"
           },
@@ -56696,7 +56696,7 @@
         {
           "id": "innerPassion",
           "name": "Inner Passion",
-          "classBuff": true,
+          "classBuff": false,
           "requires": null,
           "affectsAll": true,
           "alwaysActive": false,
@@ -56718,7 +56718,7 @@
         {
           "id": "frostCladSnowbreak",
           "name": "Frost-Clad Night (Snowbreak)",
-          "classBuff": true,
+          "classBuff": false,
           "requires": {
             "param": "frostCladNight"
           },
@@ -56742,7 +56742,7 @@
         {
           "id": "frostCladSnowbreakT6",
           "name": "Frost-Clad Night T6 (Snowbreak)",
-          "classBuff": true,
+          "classBuff": false,
           "requires": {
             "param": "frostCladNight",
             "minTier": 6
@@ -56767,7 +56767,7 @@
         {
           "id": "frostCladSnowbreakIPConsume",
           "name": "Frost-Clad Night T4 (IP Consume)",
-          "classBuff": true,
+          "classBuff": false,
           "requires": {
             "param": "frostCladNight",
             "minTier": 4
@@ -56792,7 +56792,7 @@
         {
           "id": "forgetfulness",
           "name": "Forgetfulness",
-          "classBuff": true,
+          "classBuff": false,
           "requires": {
             "param": "frostCladNight",
             "minTier": 6
@@ -56817,7 +56817,7 @@
         {
           "id": "mountainSplitter",
           "name": "Mountain Splitter",
-          "classBuff": true,
+          "classBuff": false,
           "requires": {
             "param": "steadfastDevotion",
             "minTier": 3
@@ -56842,7 +56842,7 @@
         {
           "id": "chargeEnhancement",
           "name": "Charge Enhancement",
-          "classBuff": true,
+          "classBuff": false,
           "requires": {
             "param": "steadfastDevotion",
             "minTier": 6
@@ -56870,7 +56870,7 @@
         {
           "id": "burningHeartIPConsume",
           "name": "Burning Heart (IP Consume)",
-          "classBuff": true,
+          "classBuff": false,
           "requires": {
             "param": "steadfastDevotion",
             "minTier": 4
@@ -56895,7 +56895,7 @@
         {
           "id": "throatPierced",
           "name": "Throat-Pierced",
-          "classBuff": true,
+          "classBuff": false,
           "requires": {
             "param": "throatPierced"
           },
@@ -56919,7 +56919,7 @@
         {
           "id": "disintegration",
           "name": "Disintegration",
-          "classBuff": true,
+          "classBuff": false,
           "requires": {
             "param": "breakingPoint"
           },
@@ -57598,7 +57598,7 @@
         {
           "id": "battleAnthemChargedDamage",
           "name": "Battle Anthem (Charged Skills)",
-          "classBuff": true,
+          "classBuff": false,
           "requires": {
             "param": "battleAnthem"
           },
@@ -57622,7 +57622,7 @@
         {
           "id": "battleAnthemEnduranceBoost",
           "name": "Battle Anthem (Endurance consumed)",
-          "classBuff": true,
+          "classBuff": false,
           "requires": {
             "param": "battleAnthem",
             "minTier": 6
@@ -57647,7 +57647,7 @@
         {
           "id": "mountainsMight",
           "name": "Mountain's Might",
-          "classBuff": true,
+          "classBuff": false,
           "requires": {
             "param": "mountainsMight"
           },
@@ -57677,7 +57677,7 @@
         {
           "id": "mountainsMightQiImbalance",
           "name": "Qi Imbalance (Splendor path)",
-          "classBuff": true,
+          "classBuff": false,
           "requires": {
             "param": "mountainsMight"
           },
@@ -57708,7 +57708,7 @@
         {
           "id": "swordMorphEnduranceBoost",
           "name": "Extra Endurance",
-          "classBuff": true,
+          "classBuff": false,
           "requires": {
             "param": "swordMorph"
           },
@@ -57732,7 +57732,7 @@
         {
           "id": "disintegration",
           "name": "Disintegration",
-          "classBuff": true,
+          "classBuff": false,
           "requires": {
             "param": "breakingPoint"
           },
@@ -58476,7 +58476,7 @@
         {
           "id": "combo",
           "name": "Combo",
-          "classBuff": true,
+          "classBuff": false,
           "requires": {
             "param": "blossomBarrage"
           },
@@ -58506,7 +58506,7 @@
         {
           "id": "comboUmbLightBonus",
           "name": "Combo (UmbLight)",
-          "classBuff": true,
+          "classBuff": false,
           "requires": {
             "param": "blossomBarrage",
             "minTier": 4
@@ -58537,7 +58537,7 @@
         {
           "id": "starReacher",
           "name": "Star Reacher",
-          "classBuff": true,
+          "classBuff": false,
           "requires": {
             "param": "starReacher"
           },
@@ -58561,7 +58561,7 @@
         {
           "id": "thunderousBloom",
           "name": "Thunderous Bloom",
-          "classBuff": true,
+          "classBuff": false,
           "requires": {
             "param": "thunderousBloom"
           },
@@ -58591,7 +58591,7 @@
         {
           "id": "disintegration",
           "name": "Disintegration",
-          "classBuff": true,
+          "classBuff": false,
           "requires": {
             "param": "breakingPoint"
           },

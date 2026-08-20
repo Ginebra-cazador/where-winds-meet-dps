@@ -1,4 +1,4 @@
-import { defineClassBuff } from "../../definitions/skills/buffDef"
+import { defineBuff } from "../../definitions/skills/buffDef"
 import { BUFF, PARAM } from "../skills/buffs/ids"
 import { stat } from "../../engine/effects/effect"
 import { requireInnerWayNodeTier } from "../../definitions/innerWays/innerWayDef"
@@ -17,7 +17,7 @@ import { breakingPoint } from "./breakingPoint"
 let perfectDodgeTier: number | undefined
 
 export function disintegrationBuffDef(): BuffModule {
-  return defineClassBuff({
+  return defineBuff({
     id: BUFF.disintegration,
     name: "Disintegration",
     requires: { param: PARAM.breakingPoint },

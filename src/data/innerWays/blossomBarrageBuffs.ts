@@ -1,4 +1,4 @@
-import { defineClassBuff } from "../../definitions/skills/buffDef"
+import { defineBuff } from "../../definitions/skills/buffDef"
 import { BUFF, PARAM } from "../skills/buffs/ids"
 import { stat } from "../../engine/effects/effect"
 import { requireInnerWayNodeTier } from "../../definitions/innerWays/innerWayDef"
@@ -11,7 +11,7 @@ import { blossomBarrage } from "./blossomBarrage"
 // tier lookup — so every export below is a hoisted function, never a `const`,
 // matching `wolfchasersArtBuffs.ts`'s own load-order workaround.
 export function comboBuffDef(): BuffModule {
-  return defineClassBuff({
+  return defineBuff({
     id: BUFF.combo,
     name: "Combo",
     requires: { param: PARAM.blossomBarrage },
@@ -23,7 +23,7 @@ export function comboBuffDef(): BuffModule {
 let comboUmbLightBonusMinTier: number | undefined
 
 export function comboUmbLightBonusBuffDef(): BuffModule {
-  return defineClassBuff({
+  return defineBuff({
     id: BUFF.comboUmbLightBonus,
     name: "Combo (UmbLight)",
     requires: {
