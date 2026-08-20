@@ -28,10 +28,6 @@ interface MetricsCardProps {
   graduationDisabled?: boolean
   rotationName?: string | null
   onRotationClick?: () => void
-  saveLabel?: string
-  onSave?: () => void
-  saveDisabled?: boolean
-  saveDirty?: boolean
 }
 
 function OpenIcon() {
@@ -65,10 +61,6 @@ export function MetricsCard({
   graduationDisabled = false,
   rotationName = null,
   onRotationClick,
-  saveLabel,
-  onSave,
-  saveDisabled = false,
-  saveDirty = false,
 }: MetricsCardProps) {
   const { t } = useI18n()
   const graduationText =
@@ -96,20 +88,28 @@ export function MetricsCard({
         <span className={styles.label}>{t("Total Damage")}</span>
         <span className={styles.value}>{fmt(result.totalDamage, 0)}</span>
       </div>
-      <div className={styles.stat}>
-        <span className={styles.label}>{t("Duration")}</span>
-        <span className={styles.value}>{durationText}</span>
-      </div>
-      {rotationName && (
+      {rotationName ? (
         <button
           type="button"
           className={styles.rotationChip}
           onClick={onRotationClick}
           title={rotationName}
         >
-          <span className={styles.label}>{t("Rotation")}</span>
-          <span className={styles.value}>{rotationName}</span>
+          <span className={styles.stat}>
+            <span className={styles.label}>{t("Duration")}</span>
+            <span className={styles.value}>{durationText}</span>
+          </span>
+          <span className={`${styles.stat} ${styles.rotationStat}`}>
+            <span className={styles.label}>{t("Rotation")}</span>
+            <span className={styles.value}>{rotationName}</span>
+          </span>
+          <OpenIcon />
         </button>
+      ) : (
+        <div className={styles.stat}>
+          <span className={styles.label}>{t("Duration")}</span>
+          <span className={styles.value}>{durationText}</span>
+        </div>
       )}
       <button
         type="button"
@@ -129,17 +129,6 @@ export function MetricsCard({
         </span>
         <OpenIcon />
       </button>
-      {onSave && (
-        <button
-          type="button"
-          className={`save-btn ${styles.mobileSave}${saveDirty ? " dirty" : ""}`}
-          onClick={onSave}
-          disabled={saveDisabled}
-          aria-label={t("Save")}
-        >
-          {saveLabel}
-        </button>
-      )}
     </div>
   )
 }

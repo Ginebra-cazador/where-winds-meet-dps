@@ -112,34 +112,41 @@
 .rotationChip {
   flex: 0 0 auto;
   display: flex;
-  flex-direction: column;
-  gap: 2px;
-  max-width: 160px;
-  background: transparent;
-  border: none;
-  padding: 0;
+  align-items: center;
+  gap: 10px;
+  max-width: 260px;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 6px;
+  padding: 6px 10px;
   font: inherit;
   text-align: left;
   cursor: pointer;
+  transition: border-color 120ms ease;
 }
 
-.rotationChip .label {
-  font-size: 0.72em;
-  color: var(--color-text-muted);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+@include breakpoints.hoverable {
+  .rotationChip:hover {
+    border-color: var(--color-border-hover);
+  }
+  .rotationChip:hover .graduationIcon {
+    color: var(--color-text);
+  }
 }
 
-.rotationChip .value {
-  font-size: 1em;
-  color: var(--color-accent-bright);
-  white-space: nowrap;
+.rotationChip:focus-visible {
+  border-color: var(--color-border-hover);
+  background: var(--color-bg);
+}
+
+.rotationStat {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.rotationStat .value {
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.mobileSave {
-  display: none;
 }
 
 @include breakpoints.below(breakpoints.$bp-720) {
@@ -166,10 +173,5 @@
   }
   .subline {
     display: block;
-  }
-  .mobileSave {
-    display: inline-flex;
-    padding: 6px 10px;
-    font-size: 0.8em;
   }
 }
