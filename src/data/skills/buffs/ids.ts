@@ -64,6 +64,7 @@ export const BUFF = {
   breakthrough: "breakthrough",
   breakthroughConsume: "breakthroughConsume",
   drumbeat: "drumbeat",
+  rainwhisperBaseCrit: "rainwhisperBaseCrit",
   rainwhisperShieldedCrit: "rainwhisperShieldedCrit",
   stonesplitMightShield: "stonesplitMightShield",
   stonesplitMightChargedCrit: "stonesplitMightChargedCrit",

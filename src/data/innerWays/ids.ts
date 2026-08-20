@@ -3,10 +3,13 @@
 // `MindMethodSlot.id`; renaming a value here changes what a saved profile
 // resolves to (see `docs/MIGRATIONS.md`).
 export const INNER_WAY_ID = {
+  adaptiveSteel: "adaptiveSteel",
+  artOfResistance: "artOfResistance",
   battleAnthem: "battleAnthem",
   bitterSeason: "bitterSeason",
   blossomBarrage: "blossomBarrage",
   breakingPoint: "breakingPoint",
+  exquisiteScenery: "exquisiteScenery",
   frostCladNight: "frostCladNight",
   insightfulStrike: "insightfulStrike",
   moraleChant: "moraleChant",

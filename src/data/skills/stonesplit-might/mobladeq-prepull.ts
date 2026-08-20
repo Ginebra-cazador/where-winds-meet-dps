@@ -14,7 +14,11 @@ export const mobladeqPrepull = defineSkill({
   castTag: CAST.moBladeQPrepull,
   castFrames: 0,
   triggerable: true,
-  triggersBuffs: [BUFF.stonesplitMightShield],
+  triggersBuffs: [
+    BUFF.stonesplitMightShield,
+    BUFF.artOfResistanceShielded,
+    BUFF.rainwhisperShieldedCrit,
+  ],
   hits: [
     hit(0, {
       frame: 0,

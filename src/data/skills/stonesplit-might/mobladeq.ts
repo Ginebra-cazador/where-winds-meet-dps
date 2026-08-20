@@ -14,7 +14,11 @@ export const mobladeq = defineSkill({
   castTag: CAST.moBladeQ,
   castFrames: 60,
   triggerable: true,
-  triggersBuffs: [BUFF.stonesplitMightShield],
+  triggersBuffs: [
+    BUFF.stonesplitMightShield,
+    BUFF.artOfResistanceShielded,
+    BUFF.rainwhisperShieldedCrit,
+  ],
   hits: [
     hit(0, {
       frame: 0,

@@ -19,9 +19,6 @@ export const MARTIAL_ARTS: readonly MartialArtDef[] = [
   snowpartingBlade,
   stormbreakerSpear,
   strategicSword,
-<<<<<<< HEAD
   vernalUmbrella,
-=======
   thundercryBlade,
->>>>>>> 1ac71c6 (feat(stonesplit-might): martial arts, attunements, graduation build (Section 8 prereqs))
 ]

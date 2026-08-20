@@ -57590,7 +57590,7 @@
           "stonesplitMight-spearspecial-prepull",
           "stonesplitMight-toad-cancel"
         ],
-        "digest": "6fdd6d2c81423a645103441dadadf9d99a48782e6eb582fcb1dcfb443b216dc4"
+        "digest": "2a9260961b4109428d127689c35b97c965ac3c5415b60469162d013ceb8104b7"
       },
       "debuffs": {
         "count": 1,
@@ -57598,6 +57598,37 @@
         "digest": "8137876f6cc9e0e5c4c6b8e62b3f2bd7f1316754a38f9569f1de70002aad4cc8"
       },
       "buffs": [
+        {
+          "id": "artOfResistanceShielded",
+          "name": "Art of Resistance (Shielded)",
+          "classBuff": true,
+          "requires": {
+            "param": "artOfResistance",
+            "minTier": 6
+          },
+          "affectsAll": true,
+          "alwaysActive": false,
+          "buffAppliesOnCastEnd": false,
+          "cooldown": null,
+          "rateLimit": null,
+          "stackRateLimit": null,
+          "stacksPerHit": false,
+          "seedAtStart": false,
+          "refreshOnAnyCast": false,
+          "requiresBuffActive": "stonesplitMightShield",
+          "activeAfterBuffEnds": null,
+          "hasStacksFn": false,
+          "duration": 16,
+          "maxStacks": null,
+          "effects": [
+            {
+              "kind": "stat",
+              "statKey": "allDamageBoost",
+              "amount": 0.1
+            }
+          ],
+          "summary": null
+        },
         {
           "id": "battleAnthemChargedDamage",
           "name": "Battle Anthem (Charged Skills)",
@@ -58101,15 +58132,12 @@
           "summary": "allDamageBoost +8%"
         },
         {
-          "id": "artOfResistanceShielded",
-          "name": "Art of Resistance (Shielded)",
+          "id": "rainwhisperBaseCrit",
+          "name": "Rainwhisper (Base)",
           "classBuff": true,
-          "requires": {
-            "param": "artOfResistance",
-            "minTier": 6
-          },
+          "requires": null,
           "affectsAll": true,
-          "alwaysActive": false,
+          "alwaysActive": true,
           "buffAppliesOnCastEnd": false,
           "cooldown": null,
           "rateLimit": null,
@@ -58117,15 +58145,15 @@
           "stacksPerHit": false,
           "seedAtStart": false,
           "refreshOnAnyCast": false,
-          "requiresBuffActive": "stonesplitMightShield",
+          "requiresBuffActive": null,
           "activeAfterBuffEnds": null,
           "hasStacksFn": false,
-          "duration": 16,
+          "duration": 9999,
           "maxStacks": null,
           "effects": [
             {
               "kind": "stat",
-              "statKey": "allDamageBoost",
+              "statKey": "critDamageBoost",
               "amount": 0.1
             }
           ],
@@ -58232,7 +58260,7 @@
       ]
     },
     "dynamic": {
-      "digest": "7f6e47fe86d616d6a6bfe8a2e9de6daee21e7ef43e106717f4819c51cbe9ad37"
+      "digest": "5f741170f849ca260f64e082f2f585aa4e1fee35846e7f13c7c95b8073a1fbdf"
     }
   },
   "bellstrikeSplendor": {

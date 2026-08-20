@@ -12,7 +12,7 @@ import { breakthroughConsume } from "../../skills/stonesplit-might/buffs/breakth
 import { stonesplitMightChargedCrit } from "../../skills/stonesplit-might/buffs/stonesplitMightChargedCrit"
 import { vulnerability } from "../../skills/stonesplit-might/buffs/vulnerability"
 import { vulnerabilityWeapon } from "../../skills/stonesplit-might/buffs/vulnerabilityWeapon"
-import { artOfResistanceShielded } from "../../skills/stonesplit-might/buffs/artOfResistanceShielded"
+import { rainwhisperBaseCrit } from "../../skills/stonesplit-might/buffs/rainwhisperBaseCrit"
 import { rainwhisperShieldedCrit } from "../../skills/stonesplit-might/buffs/rainwhisperShieldedCrit"
 import { stonesplitMightShield } from "../../skills/stonesplit-might/buffs/stonesplitMightShield"
 import { throatPiercedMight } from "../../innerWays/throatPierceBuffs/throatPiercedMight"
@@ -24,11 +24,15 @@ export const stonesplitMight = defineClass({
   spec: "stonesplit_might",
   primaryAttribute: "Stonesplit",
   attributeMultiplier: 51.5,
-  classMindGroup: "",
+  classMindGroup: INNER_WAY_ID.exquisiteScenery,
   allowedMindMethods: [
     INNER_WAY_ID.moraleChant,
+    INNER_WAY_ID.exquisiteScenery,
+    INNER_WAY_ID.artOfResistance,
     INNER_WAY_ID.throatPierce,
     INNER_WAY_ID.battleAnthem,
+    INNER_WAY_ID.adaptiveSteel,
+    INNER_WAY_ID.breakingPoint,
     INNER_WAY_ID.bitterSeason,
   ],
   classSpecificAttunements: ["moBladeChargeDamage", "spearMartial"],
@@ -45,7 +49,7 @@ export const stonesplitMight = defineClass({
     stonesplitMightChargedCrit,
     vulnerability,
     vulnerabilityWeapon,
-    artOfResistanceShielded,
+    rainwhisperBaseCrit,
     rainwhisperShieldedCrit,
     stonesplitMightShield,
     throatPiercedMight,
