@@ -27,16 +27,19 @@ export function BreakthroughSelect({ value, onChange }: Props) {
         />
       </div>
       {selected && (
-        <div className={styles.summary}>
-          <span>
-            {t("Lv.")} {selected.levelRange}
-          </span>
-          <span>
-            {t("def")} {selected.defense}
-          </span>
-          <span>
-            {t("res")} {selected.resistance}%
-          </span>
+        <div className="row">
+          <span />
+          <div className={styles.summary}>
+            <span>
+              {t("Lv.")} {selected.levelRange}
+            </span>
+            <span>
+              {t("def")} {selected.defense}
+            </span>
+            <span>
+              {t("res")} {selected.resistance}%
+            </span>
+          </div>
         </div>
       )}
     </>
