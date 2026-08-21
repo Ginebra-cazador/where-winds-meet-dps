@@ -15,6 +15,7 @@ export const spearspecialPrepull = defineSkill({
   castFrames: 0,
   triggerable: true,
   triggersBuffs: [BUFF.vulnerability, BUFF.vulnerabilityWeapon],
+  receives: [BUFF.battleAnthemEnduranceBoost],
   hits: [
     hit(0, {
       frame: 0,

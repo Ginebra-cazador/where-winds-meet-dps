@@ -23,7 +23,14 @@ export const mobladevariedcombogroundslam2bw = defineSkill({
   castTag: "cast:moBladeVariedComboGroundSlam2BW",
   castFrames: 0,
   triggerable: true,
-  receives: [BUFF.drumbeat, BUFF.breakthrough, BUFF.stonesplitMightChargedCrit],
+  triggersBuffs: [BUFF.throatPiercedMight],
+  receives: [
+    BUFF.drumbeat,
+    BUFF.breakthrough,
+    BUFF.stonesplitMightChargedCrit,
+    BUFF.battleAnthemChargedDamage,
+    BUFF.battleAnthemEnduranceBoost,
+  ],
   hits: [
     hit(0, {
       frame: 0,

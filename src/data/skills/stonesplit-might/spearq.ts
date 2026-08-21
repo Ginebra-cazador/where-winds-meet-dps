@@ -15,6 +15,7 @@ export const spearq = defineSkill({
   castFrames: 60,
   triggerable: true,
   triggersBuffs: [BUFF.drumbeat, BUFF.jadeware],
+  receives: [BUFF.battleAnthemEnduranceBoost],
   hits: [
     hit(0, {
       frame: 0,

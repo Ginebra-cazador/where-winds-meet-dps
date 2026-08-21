@@ -23,7 +23,13 @@ export const mobladevariedcombo2bw = defineSkill({
   castFrames: 60,
   triggerable: true,
   triggersBuffs: [BUFF.throatPiercedMight],
-  receives: [BUFF.drumbeat, BUFF.breakthrough, BUFF.stonesplitMightChargedCrit],
+  receives: [
+    BUFF.drumbeat,
+    BUFF.breakthrough,
+    BUFF.stonesplitMightChargedCrit,
+    BUFF.battleAnthemChargedDamage,
+    BUFF.battleAnthemEnduranceBoost,
+  ],
   hits: [
     hit(0, {
       frame: 0,

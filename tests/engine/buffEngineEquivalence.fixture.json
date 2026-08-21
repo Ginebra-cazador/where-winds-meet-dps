@@ -57590,7 +57590,7 @@
           "stonesplitMight-spearspecial-prepull",
           "stonesplitMight-toad-cancel"
         ],
-        "digest": "2a9260961b4109428d127689c35b97c965ac3c5415b60469162d013ceb8104b7"
+        "digest": "c604431e07b3f8746f8336039fad7a3aface2696a6e239121ef7ffb93971dec4"
       },
       "debuffs": {
         "count": 1,
@@ -57983,13 +57983,7 @@
           "hasStacksFn": false,
           "duration": 6,
           "maxStacks": 1,
-          "effects": [
-            {
-              "kind": "stat",
-              "statKey": "allDamageBoost",
-              "amount": 0.15
-            }
-          ],
+          "effects": "[fn]",
           "summary": "charged: allDamageBoost +15%"
         },
         {
@@ -58040,7 +58034,7 @@
           "duration": 0,
           "maxStacks": null,
           "effects": [],
-          "summary": "Mo Blade Q consumes Drumbeat/Breakthrough and (re)grants Breakthrough"
+          "summary": "Mo Blade Q drains Drumbeat so it doesn't stack with Breakthrough"
         },
         {
           "id": "stonesplitMightChargedCrit",
@@ -58231,7 +58225,7 @@
           "duration": 12,
           "maxStacks": 5,
           "effects": "[fn]",
-          "summary": "per stack: physPen +3 / critDmg +3% on Varied Combo, +2 / +2% elsewhere"
+          "summary": "per stack: physPen +3 / critDmg +3% (max 5)"
         }
       ],
       "group": [
@@ -58260,7 +58254,7 @@
       ]
     },
     "dynamic": {
-      "digest": "5f741170f849ca260f64e082f2f585aa4e1fee35846e7f13c7c95b8073a1fbdf"
+      "digest": "e2bbb1a813464ccb6cf8fd8d9ff311f67623c4c24c8c1090d193893261d98fe6"
     }
   },
   "bellstrikeSplendor": {

@@ -15,6 +15,7 @@ export const spearspecialCancel = defineSkill({
   castFrames: 49,
   triggerable: true,
   triggersBuffs: [BUFF.vulnerability, BUFF.vulnerabilityWeapon],
+  receives: [BUFF.battleAnthemEnduranceBoost],
   hits: [
     hit(0, {
       frame: 0,

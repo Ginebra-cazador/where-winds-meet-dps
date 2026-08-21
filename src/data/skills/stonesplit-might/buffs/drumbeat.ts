@@ -8,5 +8,5 @@ export const drumbeat = defineClassBuff({
   duration: 6,
   maxStacks: 1,
   summary: "charged: allDamageBoost +15%",
-  effects: [stat("allDamageBoost", 0.15)],
+  effects: (ctx) => (ctx.self.stacks > 0 ? [stat("allDamageBoost", 0.15)] : []),
 })

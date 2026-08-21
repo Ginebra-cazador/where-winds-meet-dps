@@ -20,7 +20,13 @@ export const mobladeheavycharge2bwCancel = defineSkill({
   castTag: "cast:moBladeHeavyCharge2BWCancel",
   castFrames: 176,
   triggerable: true,
-  receives: [BUFF.drumbeat, BUFF.breakthrough, BUFF.stonesplitMightChargedCrit],
+  receives: [
+    BUFF.drumbeat,
+    BUFF.breakthrough,
+    BUFF.stonesplitMightChargedCrit,
+    BUFF.battleAnthemChargedDamage,
+    BUFF.battleAnthemEnduranceBoost,
+  ],
   hits: [
     hit(0, {
       frame: 0,

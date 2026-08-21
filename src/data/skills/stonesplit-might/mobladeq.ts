@@ -18,6 +18,7 @@ export const mobladeq = defineSkill({
     BUFF.stonesplitMightShield,
     BUFF.artOfResistanceShielded,
     BUFF.rainwhisperShieldedCrit,
+    BUFF.breakthrough,
   ],
   hits: [
     hit(0, {

@@ -20,7 +20,13 @@ export const mobladeheavycharge2bw = defineSkill({
   castTag: "cast:moBladeHeavyCharge2BW",
   castFrames: 226,
   triggerable: true,
-  receives: [BUFF.drumbeat, BUFF.breakthrough, BUFF.stonesplitMightChargedCrit],
+  receives: [
+    BUFF.drumbeat,
+    BUFF.breakthrough,
+    BUFF.stonesplitMightChargedCrit,
+    BUFF.battleAnthemChargedDamage,
+    BUFF.battleAnthemEnduranceBoost,
+  ],
   hits: [
     hit(0, {
       frame: 0,
