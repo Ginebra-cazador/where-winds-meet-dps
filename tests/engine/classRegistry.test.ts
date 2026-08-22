@@ -19,10 +19,9 @@ describe("class registry — one call answers what a class is made of", () => {
     expect(CLASS_IDS()).toEqual([
       "bellstrikeUmbra",
       "stonesplitStrength",
-      "bellstrikeSplendor",
-      "silkbindJade",
       "stonesplitMight",
       "bellstrikeSplendor",
+      "silkbindJade",
     ])
     expect(classDefinition("notAClass")).toBeNull()
   })

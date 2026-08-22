@@ -236,14 +236,14 @@
       "skill": "Critical Rate UP",
       "stat": "critRate",
       "maxBonus": 0.085,
-      "scalesWith": "agility",
+      "scalesWith": "power",
       "scaleMax": 280
     },
     {
       "skill": "Physical Attack UP",
-      "stat": "minPhys",
+      "stat": "maxPhys",
       "maxBonus": 73.9,
-      "scalesWith": "agility",
+      "scalesWith": "power",
       "scaleMax": 280
     },
     {

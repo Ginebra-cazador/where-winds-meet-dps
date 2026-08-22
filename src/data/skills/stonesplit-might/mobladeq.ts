@@ -17,7 +17,7 @@ export const mobladeq = defineSkill({
   triggersBuffs: [
     BUFF.stonesplitMightShield,
     BUFF.artOfResistanceShielded,
-    BUFF.rainwhisperShieldedCrit,
+    BUFF.rainwhisperShield,
     BUFF.breakthrough,
   ],
   hits: [

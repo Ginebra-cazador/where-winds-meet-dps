@@ -2,6 +2,7 @@ import { defineInnerWay } from "../../definitions/innerWays/innerWayDef"
 import { INNER_WAY_ID } from "./ids"
 import { PARAM } from "../skills/buffs/ids"
 import { throatPierced } from "./throatPierceBuffs/throatPierced"
+import { throatPiercedMight } from "./throatPierceBuffs/throatPiercedMight"
 
 export const throatPierce = defineInnerWay({
   id: INNER_WAY_ID.throatPierce,
@@ -13,5 +14,5 @@ export const throatPierce = defineInnerWay({
     "primaryAttr.min": 12.7,
     "primaryAttr.penetration": 0.06,
   },
-  buffDefs: [throatPierced],
+  buffDefs: [throatPierced, throatPiercedMight],
 })

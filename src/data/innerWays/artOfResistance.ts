@@ -1,7 +1,7 @@
 import { defineInnerWay } from "../../definitions/innerWays/innerWayDef"
 import { INNER_WAY_ID } from "./ids"
 import { PARAM } from "../skills/buffs/ids"
-import { artOfResistanceShielded } from "../skills/stonesplit-might/buffs/artOfResistanceShielded"
+import { artOfResistanceShielded } from "./artOfResistanceBuffs"
 
 export const artOfResistance = defineInnerWay({
   id: INNER_WAY_ID.artOfResistance,

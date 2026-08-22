@@ -56917,6 +56917,30 @@
           "summary": "per stack: physPen +3 / critDmg +3% on the applying skills, +2 / +2% elsewhere"
         },
         {
+          "id": "throatPiercedMight",
+          "name": "Throat-Pierced (Might)",
+          "classBuff": false,
+          "requires": {
+            "param": "throatPierced"
+          },
+          "affectsAll": true,
+          "alwaysActive": false,
+          "buffAppliesOnCastEnd": false,
+          "cooldown": null,
+          "rateLimit": null,
+          "stackRateLimit": null,
+          "stacksPerHit": false,
+          "seedAtStart": false,
+          "refreshOnAnyCast": false,
+          "requiresBuffActive": null,
+          "activeAfterBuffEnds": null,
+          "hasStacksFn": true,
+          "duration": 12,
+          "maxStacks": 5,
+          "effects": "[fn]",
+          "summary": "per stack: physPen +3 / critDmg +3% (max 5)"
+        },
+        {
           "id": "disintegration",
           "name": "Disintegration",
           "classBuff": false,
@@ -57534,7 +57558,7 @@
       ]
     },
     "dynamic": {
-      "digest": "86b2e861bb96ebf47f33e24d4dc58b98a1082d72c6f7a174021b177c94ca2b6b"
+      "digest": "80d75c8dce07ff61f9c5210c36c64bcb537a4808d7daded6fd596cc7047b820e"
     }
   },
   "stonesplitMight": {
@@ -57590,7 +57614,7 @@
           "stonesplitMight-spearspecial-prepull",
           "stonesplitMight-toad-cancel"
         ],
-        "digest": "c604431e07b3f8746f8336039fad7a3aface2696a6e239121ef7ffb93971dec4"
+        "digest": "842babd9594fc4549a6df8d5e3e582e3eb240551bc498d8a32dafbd64d4d759a"
       },
       "debuffs": {
         "count": 1,
@@ -57599,9 +57623,133 @@
       },
       "buffs": [
         {
+          "id": "battleAnthemChargedDamage",
+          "name": "Battle Anthem (Charged Skills)",
+          "classBuff": false,
+          "requires": {
+            "param": "battleAnthem"
+          },
+          "affectsAll": false,
+          "alwaysActive": true,
+          "buffAppliesOnCastEnd": false,
+          "cooldown": null,
+          "rateLimit": null,
+          "stackRateLimit": null,
+          "stacksPerHit": false,
+          "seedAtStart": false,
+          "refreshOnAnyCast": false,
+          "requiresBuffActive": null,
+          "activeAfterBuffEnds": null,
+          "hasStacksFn": false,
+          "duration": 9999,
+          "maxStacks": null,
+          "effects": "[fn]",
+          "summary": "allDamageBoost +10%, +15% from tier 4"
+        },
+        {
+          "id": "battleAnthemEnduranceBoost",
+          "name": "Battle Anthem (Endurance consumed)",
+          "classBuff": false,
+          "requires": {
+            "param": "battleAnthem",
+            "minTier": 6
+          },
+          "affectsAll": false,
+          "alwaysActive": true,
+          "buffAppliesOnCastEnd": false,
+          "cooldown": null,
+          "rateLimit": null,
+          "stackRateLimit": null,
+          "stacksPerHit": false,
+          "seedAtStart": false,
+          "refreshOnAnyCast": false,
+          "requiresBuffActive": null,
+          "activeAfterBuffEnds": null,
+          "hasStacksFn": false,
+          "duration": 9999,
+          "maxStacks": null,
+          "effects": "[fn]",
+          "summary": "allDamageBoost +10%"
+        },
+        {
+          "id": "throatPierced",
+          "name": "Throat-Pierced",
+          "classBuff": false,
+          "requires": {
+            "param": "throatPierced"
+          },
+          "affectsAll": true,
+          "alwaysActive": false,
+          "buffAppliesOnCastEnd": false,
+          "cooldown": null,
+          "rateLimit": null,
+          "stackRateLimit": null,
+          "stacksPerHit": true,
+          "seedAtStart": false,
+          "refreshOnAnyCast": false,
+          "requiresBuffActive": null,
+          "activeAfterBuffEnds": null,
+          "hasStacksFn": false,
+          "duration": 15,
+          "maxStacks": 5,
+          "effects": "[fn]",
+          "summary": "per stack: physPen +3 / critDmg +3% on the applying skills, +2 / +2% elsewhere"
+        },
+        {
+          "id": "throatPiercedMight",
+          "name": "Throat-Pierced (Might)",
+          "classBuff": false,
+          "requires": {
+            "param": "throatPierced"
+          },
+          "affectsAll": true,
+          "alwaysActive": false,
+          "buffAppliesOnCastEnd": false,
+          "cooldown": null,
+          "rateLimit": null,
+          "stackRateLimit": null,
+          "stacksPerHit": false,
+          "seedAtStart": false,
+          "refreshOnAnyCast": false,
+          "requiresBuffActive": null,
+          "activeAfterBuffEnds": null,
+          "hasStacksFn": true,
+          "duration": 12,
+          "maxStacks": 5,
+          "effects": "[fn]",
+          "summary": "per stack: physPen +3 / critDmg +3% (max 5)"
+        },
+        {
+          "id": "disintegration",
+          "name": "Disintegration",
+          "classBuff": false,
+          "requires": {
+            "param": "breakingPoint"
+          },
+          "affectsAll": true,
+          "alwaysActive": false,
+          "buffAppliesOnCastEnd": false,
+          "cooldown": null,
+          "rateLimit": {
+            "count": 1,
+            "window": 15
+          },
+          "stackRateLimit": null,
+          "stacksPerHit": false,
+          "seedAtStart": false,
+          "refreshOnAnyCast": false,
+          "requiresBuffActive": null,
+          "activeAfterBuffEnds": null,
+          "hasStacksFn": true,
+          "duration": 5,
+          "maxStacks": 5,
+          "effects": "[fn]",
+          "summary": "phys.penetration +5/stack, critDamageBoost +5%/stack, up to 5 stacks; a Perfect Dodge grants 5 stacks once per 15s at the Perfect Dodge tier"
+        },
+        {
           "id": "artOfResistanceShielded",
           "name": "Art of Resistance (Shielded)",
-          "classBuff": true,
+          "classBuff": false,
           "requires": {
             "param": "artOfResistance",
             "minTier": 6
@@ -57628,79 +57776,6 @@
             }
           ],
           "summary": null
-        },
-        {
-          "id": "battleAnthemChargedDamage",
-          "name": "Battle Anthem (Charged Skills)",
-          "classBuff": true,
-          "requires": {
-            "param": "battleAnthem"
-          },
-          "affectsAll": false,
-          "alwaysActive": true,
-          "buffAppliesOnCastEnd": false,
-          "cooldown": null,
-          "rateLimit": null,
-          "stackRateLimit": null,
-          "stacksPerHit": false,
-          "seedAtStart": false,
-          "refreshOnAnyCast": false,
-          "requiresBuffActive": null,
-          "activeAfterBuffEnds": null,
-          "hasStacksFn": false,
-          "duration": 9999,
-          "maxStacks": null,
-          "effects": "[fn]",
-          "summary": "allDamageBoost +10%, +15% from tier 4"
-        },
-        {
-          "id": "battleAnthemEnduranceBoost",
-          "name": "Battle Anthem (Endurance consumed)",
-          "classBuff": true,
-          "requires": {
-            "param": "battleAnthem",
-            "minTier": 6
-          },
-          "affectsAll": false,
-          "alwaysActive": true,
-          "buffAppliesOnCastEnd": false,
-          "cooldown": null,
-          "rateLimit": null,
-          "stackRateLimit": null,
-          "stacksPerHit": false,
-          "seedAtStart": false,
-          "refreshOnAnyCast": false,
-          "requiresBuffActive": null,
-          "activeAfterBuffEnds": null,
-          "hasStacksFn": false,
-          "duration": 9999,
-          "maxStacks": null,
-          "effects": "[fn]",
-          "summary": "allDamageBoost +10%"
-        },
-        {
-          "id": "throatPierced",
-          "name": "Throat-Pierced",
-          "classBuff": true,
-          "requires": {
-            "param": "throatPierced"
-          },
-          "affectsAll": true,
-          "alwaysActive": false,
-          "buffAppliesOnCastEnd": false,
-          "cooldown": null,
-          "rateLimit": null,
-          "stackRateLimit": null,
-          "stacksPerHit": true,
-          "seedAtStart": false,
-          "refreshOnAnyCast": false,
-          "requiresBuffActive": null,
-          "activeAfterBuffEnds": null,
-          "hasStacksFn": false,
-          "duration": 15,
-          "maxStacks": 5,
-          "effects": "[fn]",
-          "summary": "per stack: physPen +3 / critDmg +3% on the applying skills, +2 / +2% elsewhere"
         },
         {
           "id": "revelryScript",
@@ -57857,6 +57932,30 @@
           "summary": null
         },
         {
+          "id": "rainwhisperCritDamage",
+          "name": "Rainwhisper",
+          "classBuff": false,
+          "requires": {
+            "set": "rainwhisper"
+          },
+          "affectsAll": true,
+          "alwaysActive": true,
+          "buffAppliesOnCastEnd": false,
+          "cooldown": null,
+          "rateLimit": null,
+          "stackRateLimit": null,
+          "stacksPerHit": false,
+          "seedAtStart": false,
+          "refreshOnAnyCast": false,
+          "requiresBuffActive": null,
+          "activeAfterBuffEnds": null,
+          "hasStacksFn": false,
+          "duration": 9999,
+          "maxStacks": null,
+          "effects": "[fn]",
+          "summary": "critDamage +10%, +25% while a self-applied HP shield is up"
+        },
+        {
           "id": "rainwhisperShield",
           "name": "HP Shield",
           "classBuff": false,
@@ -57963,6 +58062,194 @@
             }
           ],
           "summary": null
+        },
+        {
+          "id": "windWall",
+          "name": "Wind Wall",
+          "classBuff": false,
+          "requires": null,
+          "affectsAll": false,
+          "alwaysActive": false,
+          "buffAppliesOnCastEnd": false,
+          "cooldown": null,
+          "rateLimit": null,
+          "stackRateLimit": null,
+          "stacksPerHit": false,
+          "seedAtStart": false,
+          "refreshOnAnyCast": false,
+          "requiresBuffActive": null,
+          "activeAfterBuffEnds": null,
+          "hasStacksFn": false,
+          "duration": 15,
+          "maxStacks": null,
+          "effects": [
+            {
+              "kind": "stat",
+              "statKey": "allDamageBoost",
+              "amount": 0.4
+            }
+          ],
+          "summary": null
+        },
+        {
+          "id": "windWallPursuit",
+          "name": "Wind Wall (Pursuit)",
+          "classBuff": false,
+          "requires": null,
+          "affectsAll": false,
+          "alwaysActive": false,
+          "buffAppliesOnCastEnd": false,
+          "cooldown": null,
+          "rateLimit": null,
+          "stackRateLimit": null,
+          "stacksPerHit": false,
+          "seedAtStart": false,
+          "refreshOnAnyCast": false,
+          "requiresBuffActive": null,
+          "activeAfterBuffEnds": null,
+          "hasStacksFn": false,
+          "duration": 15,
+          "maxStacks": null,
+          "effects": [
+            {
+              "kind": "stat",
+              "statKey": "allDamageBoost",
+              "amount": 0.1
+            }
+          ],
+          "summary": null
+        },
+        {
+          "id": "pursuitChargedBoost",
+          "name": "Spring Shock",
+          "classBuff": false,
+          "requires": null,
+          "affectsAll": false,
+          "alwaysActive": false,
+          "buffAppliesOnCastEnd": false,
+          "cooldown": null,
+          "rateLimit": null,
+          "stackRateLimit": null,
+          "stacksPerHit": true,
+          "seedAtStart": false,
+          "refreshOnAnyCast": false,
+          "requiresBuffActive": null,
+          "activeAfterBuffEnds": null,
+          "hasStacksFn": false,
+          "duration": 15,
+          "maxStacks": 5,
+          "effects": "[fn]",
+          "summary": "+4.0% all/stack"
+        },
+        {
+          "id": "lingeringBone",
+          "name": "Lingering Bone",
+          "classBuff": false,
+          "requires": null,
+          "affectsAll": false,
+          "alwaysActive": false,
+          "buffAppliesOnCastEnd": false,
+          "cooldown": null,
+          "rateLimit": null,
+          "stackRateLimit": null,
+          "stacksPerHit": false,
+          "seedAtStart": false,
+          "refreshOnAnyCast": false,
+          "requiresBuffActive": null,
+          "activeAfterBuffEnds": null,
+          "hasStacksFn": false,
+          "duration": 2,
+          "maxStacks": null,
+          "effects": [
+            {
+              "kind": "damageMultiplier",
+              "factor": 2
+            }
+          ],
+          "summary": null
+        },
+        {
+          "id": "mistwillowBuff",
+          "name": "Mistwillow",
+          "classBuff": false,
+          "requires": {
+            "set": "mistwillow"
+          },
+          "affectsAll": false,
+          "alwaysActive": false,
+          "buffAppliesOnCastEnd": false,
+          "cooldown": 2,
+          "rateLimit": null,
+          "stackRateLimit": null,
+          "stacksPerHit": false,
+          "seedAtStart": false,
+          "refreshOnAnyCast": false,
+          "requiresBuffActive": null,
+          "activeAfterBuffEnds": null,
+          "hasStacksFn": false,
+          "duration": 15,
+          "maxStacks": null,
+          "effects": [
+            {
+              "kind": "stat",
+              "statKey": "physBoost",
+              "amount": 0.1
+            },
+            {
+              "kind": "stat",
+              "statKey": "attributeDamageBoost",
+              "amount": 0.1
+            }
+          ],
+          "summary": null
+        },
+        {
+          "id": "mistwillowHeavyBuff",
+          "name": "Mistwillow (Heavy)",
+          "classBuff": false,
+          "requires": {
+            "set": "mistwillow"
+          },
+          "affectsAll": false,
+          "alwaysActive": false,
+          "buffAppliesOnCastEnd": false,
+          "cooldown": 2,
+          "rateLimit": null,
+          "stackRateLimit": null,
+          "stacksPerHit": false,
+          "seedAtStart": false,
+          "refreshOnAnyCast": false,
+          "requiresBuffActive": null,
+          "activeAfterBuffEnds": null,
+          "hasStacksFn": false,
+          "duration": 15,
+          "maxStacks": null,
+          "effects": "[fn]",
+          "summary": "phys +10%, attribute damage +10% — half on a mixed light/heavy skill"
+        },
+        {
+          "id": "mistwillowLightBuff",
+          "name": "Mistwillow (Light)",
+          "classBuff": false,
+          "requires": {
+            "set": "mistwillow"
+          },
+          "affectsAll": false,
+          "alwaysActive": false,
+          "buffAppliesOnCastEnd": false,
+          "cooldown": 2,
+          "rateLimit": null,
+          "stackRateLimit": null,
+          "stacksPerHit": false,
+          "seedAtStart": false,
+          "refreshOnAnyCast": false,
+          "requiresBuffActive": null,
+          "activeAfterBuffEnds": null,
+          "hasStacksFn": false,
+          "duration": 15,
+          "maxStacks": null,
+          "effects": "[fn]",
+          "summary": "phys +10%, attribute damage +10% — half on a mixed light/heavy skill"
         },
         {
           "id": "drumbeat",
@@ -58126,62 +58413,6 @@
           "summary": "allDamageBoost +8%"
         },
         {
-          "id": "rainwhisperBaseCrit",
-          "name": "Rainwhisper (Base)",
-          "classBuff": true,
-          "requires": null,
-          "affectsAll": true,
-          "alwaysActive": true,
-          "buffAppliesOnCastEnd": false,
-          "cooldown": null,
-          "rateLimit": null,
-          "stackRateLimit": null,
-          "stacksPerHit": false,
-          "seedAtStart": false,
-          "refreshOnAnyCast": false,
-          "requiresBuffActive": null,
-          "activeAfterBuffEnds": null,
-          "hasStacksFn": false,
-          "duration": 9999,
-          "maxStacks": null,
-          "effects": [
-            {
-              "kind": "stat",
-              "statKey": "critDamageBoost",
-              "amount": 0.1
-            }
-          ],
-          "summary": null
-        },
-        {
-          "id": "rainwhisperShieldedCrit",
-          "name": "Rainwhisper (Shielded)",
-          "classBuff": true,
-          "requires": null,
-          "affectsAll": true,
-          "alwaysActive": false,
-          "buffAppliesOnCastEnd": false,
-          "cooldown": null,
-          "rateLimit": null,
-          "stackRateLimit": null,
-          "stacksPerHit": false,
-          "seedAtStart": false,
-          "refreshOnAnyCast": false,
-          "requiresBuffActive": "stonesplitMightShield",
-          "activeAfterBuffEnds": null,
-          "hasStacksFn": false,
-          "duration": 16,
-          "maxStacks": null,
-          "effects": [
-            {
-              "kind": "stat",
-              "statKey": "critDamageBoost",
-              "amount": 0.15
-            }
-          ],
-          "summary": null
-        },
-        {
           "id": "stonesplitMightShield",
           "name": "Stonesplit Might Shield",
           "classBuff": true,
@@ -58202,30 +58433,6 @@
           "maxStacks": null,
           "effects": [],
           "summary": null
-        },
-        {
-          "id": "throatPiercedMight",
-          "name": "Throat-Pierced (Might)",
-          "classBuff": true,
-          "requires": {
-            "param": "throatPierced"
-          },
-          "affectsAll": true,
-          "alwaysActive": false,
-          "buffAppliesOnCastEnd": false,
-          "cooldown": null,
-          "rateLimit": null,
-          "stackRateLimit": null,
-          "stacksPerHit": false,
-          "seedAtStart": false,
-          "refreshOnAnyCast": false,
-          "requiresBuffActive": null,
-          "activeAfterBuffEnds": null,
-          "hasStacksFn": true,
-          "duration": 12,
-          "maxStacks": 5,
-          "effects": "[fn]",
-          "summary": "per stack: physPen +3 / critDmg +3% (max 5)"
         }
       ],
       "group": [
@@ -58254,7 +58461,7 @@
       ]
     },
     "dynamic": {
-      "digest": "e2bbb1a813464ccb6cf8fd8d9ff311f67623c4c24c8c1090d193893261d98fe6"
+      "digest": "0265753facf8dd572dde6280223dc80d0294f1dbc976dd6aa74ed219da1aa9ab"
     }
   },
   "bellstrikeSplendor": {

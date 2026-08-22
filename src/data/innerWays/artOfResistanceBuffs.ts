@@ -1,8 +1,8 @@
-import { defineClassBuff } from "../../../../definitions/skills/buffDef"
-import { BUFF, PARAM } from "../../buffs/ids"
-import { stat } from "../../../../engine/effects/effect"
+import { defineBuff } from "../../definitions/skills/buffDef"
+import { BUFF, PARAM } from "../skills/buffs/ids"
+import { stat } from "../../engine/effects/effect"
 
-export const artOfResistanceShielded = defineClassBuff({
+export const artOfResistanceShielded = defineBuff({
   id: BUFF.artOfResistanceShielded,
   name: "Art of Resistance (Shielded)",
   affectsAll: true,

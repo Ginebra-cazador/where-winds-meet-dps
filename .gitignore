@@ -12,3 +12,5 @@ tsconfig.tsbuildinfo
 .idea/
 scripts/
 
+
+.pnpm-store/

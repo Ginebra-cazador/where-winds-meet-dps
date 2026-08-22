@@ -1,4 +1,4 @@
-import { defineClassBuff } from "../../../definitions/skills/buffDef"
+import { defineBuff } from "../../../definitions/skills/buffDef"
 import { BUFF, PARAM } from "../../skills/buffs/ids"
 import { CAST } from "../../skills/ids"
 import { stat } from "../../../engine/effects/effect"
@@ -9,7 +9,7 @@ import { stat } from "../../../engine/effects/effect"
 // (hence `triggersFromGeneratedSkills`). The reference's once-per-15s gate on the
 // Deflect refresh is unmodeled: no data field limits one trigger source without
 // also throttling the others.
-export const throatPiercedMight = defineClassBuff({
+export const throatPiercedMight = defineBuff({
   id: BUFF.throatPiercedMight,
   name: "Throat-Pierced (Might)",
   requires: { param: PARAM.throatPierced },

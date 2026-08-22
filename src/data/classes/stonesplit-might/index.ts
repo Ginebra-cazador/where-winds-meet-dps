@@ -12,11 +12,12 @@ import { breakthroughConsume } from "../../skills/stonesplit-might/buffs/breakth
 import { stonesplitMightChargedCrit } from "../../skills/stonesplit-might/buffs/stonesplitMightChargedCrit"
 import { vulnerability } from "../../skills/stonesplit-might/buffs/vulnerability"
 import { vulnerabilityWeapon } from "../../skills/stonesplit-might/buffs/vulnerabilityWeapon"
-import { rainwhisperBaseCrit } from "../../skills/stonesplit-might/buffs/rainwhisperBaseCrit"
-import { rainwhisperShieldedCrit } from "../../skills/stonesplit-might/buffs/rainwhisperShieldedCrit"
 import { stonesplitMightShield } from "../../skills/stonesplit-might/buffs/stonesplitMightShield"
-import { throatPiercedMight } from "../../innerWays/throatPierceBuffs/throatPiercedMight"
 
+// Might's max-HP-scaling martial-arts talent is a deliberate omission: no `maxHp`
+// scalesWith channel exists in `classSkillBoosts.json`, and adding one for a
+// single low-impact talent is not worth the engine surface. Revisit if a max-HP
+// scaling source is ever introduced.
 export const stonesplitMight = defineClass({
   id: CLASS_ID,
   displayName: "Stonesplit Might",
@@ -49,10 +50,7 @@ export const stonesplitMight = defineClass({
     stonesplitMightChargedCrit,
     vulnerability,
     vulnerabilityWeapon,
-    rainwhisperBaseCrit,
-    rainwhisperShieldedCrit,
     stonesplitMightShield,
-    throatPiercedMight,
   ],
   gateBuffs: [],
   mechanics: [],
